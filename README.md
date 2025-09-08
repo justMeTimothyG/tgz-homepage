@@ -1,3 +1,27 @@
+# tgz-lol
+
+## Lokales Directus für Blog-Posts
+
+1. Docker starten und Directus + Postgres hochfahren:
+
+```bash
+docker compose up -d
+```
+
+2. Directus öffnen (`http://localhost:8055`), Admin ist vordefiniert (`admin@example.com` / `adminadmin`). Erstelle eine Collection `posts` mit Feldern: `title` (string), `slug` (string, unique), `description` (text), `published_at` (datetime), `status` (string, z. B. `draft`/`published`). Lege ein paar veröffentlichte Einträge an (`status=published`).
+
+3. Frontend mit Directus verbinden: optional `.env.local` anlegen:
+
+```bash
+NEXT_PUBLIC_DIRECTUS_URL=http://localhost:8055
+```
+
+4. Dev-Server starten:
+
+```bash
+npm run dev
+```
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
