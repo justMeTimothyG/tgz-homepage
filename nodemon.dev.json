@@ -1,0 +1,7 @@
+{
+  "exec": "next dev --turbopack",
+  "signal": "SIGTERM",
+  "watch": [],
+  "ext": "noop"
+}
+

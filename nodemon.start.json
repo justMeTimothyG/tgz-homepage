@@ -1,0 +1,9 @@
+{
+  "exec": "next start",
+  "signal": "SIGTERM",
+  "watch": [
+    ".next/BUILD_ID"
+  ],
+  "delay": "200ms"
+}
+
