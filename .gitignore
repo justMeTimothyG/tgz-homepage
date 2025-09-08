@@ -1,3 +1,14 @@
+.env
+.env.*
+drizzle/*.sqlite
+drizzle/*.db
+drizzle/*.json
+drizzle/meta/*
+drizzle/*.png
+drizzle/*.svg
+drizzle/*.html
+drizzle/migrations/*-journal.json
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies

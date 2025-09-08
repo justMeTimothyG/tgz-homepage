@@ -1,0 +1,21 @@
+{
+  // Ensure VS Code ESLint uses the repo's flat config (ESLint v9)
+  "eslint.useFlatConfig": true,
+  // For older ESLint VS Code extensions, keep the experimental flag as well
+  "eslint.experimental.useFlatConfig": true,
+  // Validate TS/TSX files so rules like no-explicit-any show inline
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  // Run fixes on save (optional)
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // Use workspace ESLint
+  "eslint.runtime": "node",
+  "eslint.packageManager": "npm"
+}
+
