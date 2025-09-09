@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import LatestPostsSkeleton from './LatestPostsSkeleton';
 
 type Post = {
   id: string;
@@ -45,8 +46,7 @@ export default function LatestPostsClient({ limit = 5 }: { limit?: number }) {
   }, [limit]);
 
   if (posts === null) {
-    // Let Suspense fallback handle initial state; keep minimal placeholder for SSR safety
-    return null;
+    return <LatestPostsSkeleton />;
   }
 
   if (posts.length === 0) {
@@ -64,6 +64,15 @@ export default function LatestPostsClient({ limit = 5 }: { limit?: number }) {
           <Link href={`/blog/${post.slug ?? post.id}`} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline">
             {post.title}
           </Link>
+          {post.publishedAt && (
+            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+              {new Date(post.publishedAt).toLocaleDateString('de-DE', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </p>
+          )}
           {post.excerpt && (
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{post.excerpt}</p>
           )}
