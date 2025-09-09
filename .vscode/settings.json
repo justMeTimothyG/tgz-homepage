@@ -12,10 +12,9 @@
   ],
   // Run fixes on save (optional)
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": "explicit"
   },
   // Use workspace ESLint
   "eslint.runtime": "node",
   "eslint.packageManager": "npm"
 }
-
