@@ -7,13 +7,18 @@ import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 
 const navigation = [
-  { name: 'Über mich', href: '/about' },
+  { name: 'Über mich', href: '/ueber-mich' },
   { name: 'Blog', href: '/blog' },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Hide navigation on admin routes
+  if (pathname?.startsWith('/admin')) {
+    return null;
+  }
 
   return (
     <nav className="bg-transparent border-b border-gray-200 dark:border-gray-800">

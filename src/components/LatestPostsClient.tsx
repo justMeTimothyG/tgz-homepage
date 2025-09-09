@@ -59,23 +59,40 @@ export default function LatestPostsClient({ limit = 5 }: { limit?: number }) {
 
   return (
     <ul className="space-y-4">
-      {posts.map((post) => (
-        <li key={post.id} className="border-b border-gray-200 dark:border-gray-700 pb-4">
-          <Link href={`/blog/${post.slug ?? post.id}`} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-            {post.title}
-          </Link>
-          {post.publishedAt && (
-            <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-              {new Date(post.publishedAt).toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </p>
-          )}
-          {post.excerpt && (
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{post.excerpt}</p>
-          )}
+      {posts.map((post, index) => (
+        <li key={post.id} className={`pb-4 ${index < posts.length - 1 ? 'border-b border-gray-200 dark:border-gray-700' : ''}`}>
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+            <div className="flex-1">
+              <Link href={`/blog/${post.slug ?? post.id}`} className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                {post.title}
+              </Link>
+              {/* Date below title on mobile */}
+              {post.publishedAt && (
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1 sm:hidden">
+                  {new Date(post.publishedAt).toLocaleDateString('de-DE', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </p>
+              )}
+              {post.excerpt && (
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{post.excerpt}</p>
+              )}
+            </div>
+            {/* Date on right side on desktop */}
+            {post.publishedAt && (
+              <div className="hidden sm:block flex-shrink-0">
+                <p className="text-xs text-gray-500 dark:text-gray-500">
+                  {new Date(post.publishedAt).toLocaleDateString('de-DE', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </p>
+              </div>
+            )}
+          </div>
         </li>
       ))}
     </ul>

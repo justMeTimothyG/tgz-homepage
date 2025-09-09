@@ -194,3 +194,4 @@ The database is designed for a **comprehensive educational content platform** wi
 
 - Core Web Vitals: LCP <2.5s, FID <100ms, CLS <0.1
 - Build times: <5 minutes consistently
+- Prefer Linting checks and TSC Checking instead of complete building after smaller changes. do builds only when making comprehensive changes to multiple interacting elements of the web app.
