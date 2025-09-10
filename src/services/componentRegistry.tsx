@@ -25,11 +25,6 @@ interface ComponentCache {
   };
 }
 
-interface ComponentModule {
-  default: ComponentType<any>;
-  [exportName: string]: any;
-}
-
 class ComponentRegistry {
   private cache: ComponentCache = {};
   private loading = new Set<string>();
@@ -67,14 +62,9 @@ class ComponentRegistry {
           component = await this.loadBuiltinComponent(definition);
           break;
         case 'custom':
-          component = await this.loadCustomComponent(definition);
-          break;
         case 'npm':
-          component = await this.loadNpmComponent(definition);
-          break;
         case 'remote':
-          component = await this.loadRemoteComponent(definition);
-          break;
+          throw new Error(`${definition.sourceType} component loading temporarily disabled due to Turbopack issues`);
         default:
           throw new Error(`Unknown source type: ${definition.sourceType}`);
       }
@@ -117,115 +107,36 @@ class ComponentRegistry {
    * Load built-in components from the registry
    */
   private async loadBuiltinComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
+    console.log(`🏗️ Loading builtin component: ${definition.name}`);
     try {
       // Try to import from the built-in registry first
+      console.log(`📦 Importing from: @/components/registry/${definition.name}`);
       const module = await import(`@/components/registry/${definition.name}`);
-      return module.default || module[definition.name];
+      console.log(`📦 Module loaded:`, !!module, !!module.default);
+      const component = module.default || module[definition.name];
+      if (!component) {
+        throw new Error(`No default export or named export found for ${definition.name}`);
+      }
+      console.log(`✅ Successfully loaded builtin component: ${definition.name}`);
+      return component;
     } catch (error) {
+      console.warn(`❌ Component ${definition.name} not found in registry:`, error);
+      
       // Fallback to markdown components
       try {
+        console.log(`🔄 Trying fallback for ${definition.name}...`);
         const module = await import(`@/components/markdown/CustomComponents`);
-        return (module as any)[definition.name];
+        if ((module as any)[definition.name]) {
+          console.log(`✅ Found ${definition.name} in markdown components`);
+          return (module as any)[definition.name];
+        }
       } catch (fallbackError) {
-        throw new Error(`Built-in component ${definition.name} not found`);
+        console.warn(`❌ Component ${definition.name} not found in markdown components:`, fallbackError);
       }
+      
+      // Final fallback - create a placeholder component that shows the error
+      throw new Error(`Built-in component ${definition.name} not found in any location`);
     }
-  }
-
-  /**
-   * Load custom components from source code
-   */
-  private async loadCustomComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
-    if (!definition.sourceCode) {
-      throw new Error('Custom component requires source code');
-    }
-
-    // In a production environment, you would compile this server-side
-    // For now, we'll use a simple eval approach (NOT recommended for production)
-    try {
-      // This is a simplified approach - in production, use a proper bundler
-      const compiledCode = this.compileCustomComponent(definition.sourceCode, definition.dependencies);
-      const module = this.executeComponentCode(compiledCode);
-      return module.default || module[definition.name];
-    } catch (error) {
-      throw new Error(`Failed to compile custom component: ${error}`);
-    }
-  }
-
-  /**
-   * Load components from NPM packages
-   */
-  private async loadNpmComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
-    if (!definition.npmPackage) {
-      throw new Error('NPM component requires package name');
-    }
-
-    try {
-      // In production, you'd want to pre-bundle these or use a CDN
-      const module = await import(definition.npmPackage);
-      return module.default || module[definition.name];
-    } catch (error) {
-      // Fallback to CDN loading
-      return this.loadFromCDN(definition.npmPackage, definition.npmVersion);
-    }
-  }
-
-  /**
-   * Load remote components from URLs
-   */
-  private async loadRemoteComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
-    if (!definition.remoteUrl) {
-      throw new Error('Remote component requires URL');
-    }
-
-    try {
-      const module = await import(/* webpackIgnore: true */ definition.remoteUrl);
-      return module.default || module[definition.name];
-    } catch (error) {
-      throw new Error(`Failed to load remote component: ${error}`);
-    }
-  }
-
-  /**
-   * Compile custom component source code
-   */
-  private compileCustomComponent(sourceCode: string, dependencies: string[] = []): string {
-    // This is a simplified compilation - in production, use Babel/SWC
-    let compiledCode = sourceCode;
-
-    // Add necessary imports
-    const imports = [
-      "import React from 'react';",
-      ...dependencies.map(dep => `import * as ${this.getModuleName(dep)} from '${dep}';`)
-    ].join('\n');
-
-    compiledCode = `${imports}\n${compiledCode}`;
-
-    return compiledCode;
-  }
-
-  /**
-   * Execute component code safely
-   */
-  private executeComponentCode(code: string): ComponentModule {
-    // This is a simplified execution - in production, use a proper sandbox
-    // WARNING: This is dangerous and should not be used in production
-    const exports: any = {};
-    const module = { exports };
-    
-    // Create a safe execution context
-    const func = new Function('exports', 'module', 'React', code);
-    func(exports, module, React);
-    
-    return module.exports;
-  }
-
-  /**
-   * Load component from CDN
-   */
-  private async loadFromCDN(packageName: string, version?: string): Promise<ComponentType<any>> {
-    const cdnUrl = `https://esm.sh/${packageName}${version ? `@${version}` : ''}`;
-    return this.loadRemoteComponent({ remoteUrl: cdnUrl } as ComponentDefinition);
   }
 
   /**
@@ -289,13 +200,6 @@ class ComponentRegistry {
         </div>
       </div>
     );
-  }
-
-  /**
-   * Get module name from package name
-   */
-  private getModuleName(packageName: string): string {
-    return packageName.replace(/[@\/\-]/g, '_');
   }
 
   /**
