@@ -127,7 +127,9 @@ export const blogPosts = pgTable('blog_posts', {
   slug: varchar('slug', { length: 255 }).notNull().unique(),
   title: varchar('title', { length: 255 }).notNull(),
   excerpt: text('excerpt'),
-  content: text('content').notNull(), // MDX content
+  content: text('content').notNull(), // MDX content (legacy)
+  contentBlocks: jsonb('content_blocks'), // Block editor structure
+  editorVersion: varchar('editor_version', { length: 10 }).default('classic'), // 'classic' or 'blocks'
   components: jsonb('components'), // ['MatrixVisualizer', 'SortingAnimation'] etc.
   featuredImageUrl: text('featured_image_url'),
   status: contentStatusEnum('status').default('draft'),
@@ -324,8 +326,12 @@ export const blogPostSkills = pgTable('blog_post_skills', {
 });
 
 // ============================================
-// COMPONENTS CATALOG (for Storybook-like interface)
+// DYNAMIC COMPONENTS SYSTEM
 // ============================================
+
+// Enhanced component registry for dynamic loading
+export const componentTypeEnum = pgEnum('component_type', ['custom', 'npm', 'remote', 'builtin']);
+export const componentStatusEnum = pgEnum('component_status', ['draft', 'published', 'deprecated']);
 
 export const componentCatalog = pgTable('component_catalog', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -333,17 +339,90 @@ export const componentCatalog = pgTable('component_catalog', {
   displayName: varchar('display_name', { length: 100 }).notNull(),
   description: text('description'),
   category: varchar('category', { length: 50 }), // 'math', 'algorithms', 'data-viz'
-  props: jsonb('props'), // prop definitions for documentation
+  
+  // Component source and type
+  sourceType: componentTypeEnum('source_type').notNull().default('custom'),
+  sourceCode: text('source_code'), // For custom components
+  npmPackage: varchar('npm_package', { length: 100 }), // e.g., 'recharts'
+  npmVersion: varchar('npm_version', { length: 20 }), // e.g., '^2.8.0'
+  remoteUrl: text('remote_url'), // CDN or ESM URL
+  
+  // Component metadata
+  version: varchar('version', { length: 20 }).notNull().default('1.0.0'),
+  status: componentStatusEnum('status').notNull().default('draft'),
+  props: jsonb('props'), // prop definitions schema
+  config: jsonb('config'), // component configuration
   exampleCode: text('example_code'),
   thumbnailUrl: text('thumbnail_url'),
+  
+  // Capabilities and requirements
   isInteractive: boolean('is_interactive').default(true),
+  requiresSandbox: boolean('requires_sandbox').default(false),
   dependencies: jsonb('dependencies'), // ['recharts', 'framer-motion']
+  bundleSize: integer('bundle_size'), // estimated size in bytes
+  
+  // Usage and performance
+  usageCount: integer('usage_count').default(0),
+  lastUsedAt: timestamp('last_used_at'),
+  
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 }, (table) => {
   return {
     nameIdx: index('component_name_idx').on(table.name),
     categoryIdx: index('component_category_idx').on(table.category),
+    sourceTypeIdx: index('component_source_type_idx').on(table.sourceType),
+    statusIdx: index('component_status_idx').on(table.status),
+  };
+});
+
+// Component version history
+export const componentVersions = pgTable('component_versions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  componentId: uuid('component_id').notNull().references(() => componentCatalog.id, { onDelete: 'cascade' }),
+  version: varchar('version', { length: 20 }).notNull(),
+  sourceCode: text('source_code'),
+  props: jsonb('props'),
+  config: jsonb('config'),
+  changeNotes: text('change_notes'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => {
+  return {
+    componentIdx: index('version_component_idx').on(table.componentId),
+    versionIdx: index('version_version_idx').on(table.componentId, table.version),
+  };
+});
+
+// Junction table for better tracking of component usage in posts
+export const blogPostComponents = pgTable('blog_post_components', {
+  blogPostId: uuid('blog_post_id').notNull().references(() => blogPosts.id, { onDelete: 'cascade' }),
+  componentId: uuid('component_id').notNull().references(() => componentCatalog.id, { onDelete: 'cascade' }),
+  componentVersion: varchar('component_version', { length: 20 }).notNull(),
+  usageCount: integer('usage_count').default(1), // how many times used in post
+  props: jsonb('props'), // specific props used in this post
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => {
+  return {
+    pk: primaryKey({ columns: [table.blogPostId, table.componentId] }),
+    blogPostIdx: index('blog_component_post_idx').on(table.blogPostId),
+    componentIdx: index('blog_component_component_idx').on(table.componentId),
+  };
+});
+
+// Component compilation cache
+export const componentCache = pgTable('component_cache', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  componentId: uuid('component_id').notNull().references(() => componentCatalog.id, { onDelete: 'cascade' }),
+  version: varchar('version', { length: 20 }).notNull(),
+  compiledCode: text('compiled_code'), // transpiled/bundled code
+  sourceMap: text('source_map'),
+  bundleHash: varchar('bundle_hash', { length: 64 }).notNull(), // for cache invalidation
+  expiresAt: timestamp('expires_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => {
+  return {
+    componentVersionIdx: index('cache_component_version_idx').on(table.componentId, table.version),
+    hashIdx: index('cache_hash_idx').on(table.bundleHash),
   };
 });
 
@@ -376,6 +455,7 @@ export const blogPostsRelations = relations(blogPosts, ({ one, many }) => ({
   comments: many(comments),
   reactions: many(reactions),
   skills: many(blogPostSkills),
+  components: many(blogPostComponents),
 }));
 
 export const tagsRelations = relations(tags, ({ one, many }) => ({
@@ -429,6 +509,38 @@ export const accountRelations = relations(account, ({ one }) => ({
   user: one(user, {
     fields: [account.userId],
     references: [user.id],
+  }),
+}));
+
+// Component system relations
+export const componentCatalogRelations = relations(componentCatalog, ({ many }) => ({
+  versions: many(componentVersions),
+  blogPosts: many(blogPostComponents),
+  cache: many(componentCache),
+}));
+
+export const componentVersionsRelations = relations(componentVersions, ({ one }) => ({
+  component: one(componentCatalog, {
+    fields: [componentVersions.componentId],
+    references: [componentCatalog.id],
+  }),
+}));
+
+export const blogPostComponentsRelations = relations(blogPostComponents, ({ one }) => ({
+  blogPost: one(blogPosts, {
+    fields: [blogPostComponents.blogPostId],
+    references: [blogPosts.id],
+  }),
+  component: one(componentCatalog, {
+    fields: [blogPostComponents.componentId],
+    references: [componentCatalog.id],
+  }),
+}));
+
+export const componentCacheRelations = relations(componentCache, ({ one }) => ({
+  component: one(componentCatalog, {
+    fields: [componentCache.componentId],
+    references: [componentCatalog.id],
   }),
 }));
 
