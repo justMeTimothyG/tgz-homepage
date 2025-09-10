@@ -69,7 +69,14 @@ export default function Markdown({ children, className }: Props) {
     <div className={className}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeSlug, rehypeKatex]}
+        rehypePlugins={[
+          rehypeSlug, 
+          [rehypeKatex, { 
+            output: 'html', 
+            strict: false, 
+            throwOnError: false 
+          }]
+        ]}
         components={components}
       >
         {children}

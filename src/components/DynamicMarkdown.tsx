@@ -1,6 +1,9 @@
 "use client";
 
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { evaluate } from "@mdx-js/mdx";
+import * as runtime from 'react/jsx-runtime';
+import * as runtimeDev from 'react/jsx-dev-runtime';
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
@@ -17,115 +20,231 @@ interface DynamicMarkdownProps {
   postId?: string;
 }
 
-interface ComponentProviderProps {
-  components: ComponentDefinition[];
-  children: React.ReactNode;
-}
-
-// Component provider to inject dynamic components
-function ComponentProvider({ components, children }: ComponentProviderProps) {
-  const [loadedComponents, setLoadedComponents] = useState<Record<string, React.ComponentType<any>>>({});
-  const [loading, setLoading] = useState(true);
+export default function DynamicMarkdown({ 
+  children, 
+  className = "prose dark:prose-invert max-w-none",
+  components = [],
+  postId
+}: DynamicMarkdownProps) {
+  const [renderState, setRenderState] = useState<'loading' | 'mdx' | 'fallback'>('loading');
+  const [MDXComponent, setMDXComponent] = useState<React.ComponentType | null>(null);
+  const [componentScope, setComponentScope] = useState<Record<string, React.ComponentType<any>>>({});
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadComponents = async () => {
-      if (!components?.length) {
-        setLoading(false);
-        return;
-      }
+    let isMounted = true;
 
+    const setupMDXRendering = async () => {
       try {
-        const componentMap: Record<string, React.ComponentType<any>> = {};
+        // Validate content before MDX evaluation to prevent feedback loops
+        if (!children || typeof children !== 'string') {
+          throw new Error('Invalid content provided');
+        }
+        
+        // Skip MDX compilation if content appears to be error messages
+        if (children.includes('MDX setup failed:') || children.includes('Unexpected character')) {
+          throw new Error('Content appears to be error messages, falling back to ReactMarkdown');
+        }
 
-        // Load all components in parallel
-        await Promise.all(
-          components.map(async (definition) => {
-            try {
-              const Component = componentRegistry.getComponent(definition);
-              componentMap[definition.name.toLowerCase()] = Component;
-            } catch (error) {
-              console.error(`Failed to load component ${definition.name}:`, error);
-              // Create error component
-              componentMap[definition.name.toLowerCase()] = () => (
-                <div className="border border-red-300 bg-red-50 p-2 rounded text-red-700 text-sm">
-                  Failed to load component: {definition.name}
-                </div>
-              );
-            }
-          })
-        );
+        // Load component scope first
+        const scope = await loadComponentScope(components);
+        
+        if (!isMounted) return;
+        setComponentScope(scope);
 
-        setLoadedComponents(componentMap);
-      } catch (error) {
-        console.error('Error loading components:', error);
-      } finally {
-        setLoading(false);
+        // Evaluate MDX with the component scope
+        const compiledMDX = await evaluate(children, {
+          ...runtime,
+          ...(process.env.NODE_ENV === 'development' ? runtimeDev : {}),
+          remarkPlugins: [remarkGfm, remarkMath],
+          rehypePlugins: [
+            rehypeSlug, 
+            [rehypeKatex, { 
+              output: 'html', 
+              strict: false, 
+              throwOnError: false 
+            }]
+          ],
+          development: process.env.NODE_ENV === 'development'
+        });
+
+        if (!isMounted) return;
+
+        // Create component that receives the scope as props
+        const MDXWithScope = (props: any) => {
+          return React.createElement(compiledMDX.default, {
+            ...props,
+            components: scope
+          });
+        };
+
+        setMDXComponent(() => MDXWithScope);
+        setRenderState('mdx');
+
+      } catch (err) {
+        console.error('MDX setup failed:', err);
+        console.error('Content length:', children.length);
+        console.error('Content starts with:', children.substring(0, 200));
+        console.error('Components:', components.map(c => c.name));
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : 'MDX compilation failed');
+          setRenderState('fallback');
+        }
       }
     };
 
-    loadComponents();
-  }, [components]);
+    setupMDXRendering();
 
-  if (loading) {
+    return () => {
+      isMounted = false;
+    };
+  }, [children, components]);
+
+  // Loading state
+  if (renderState === 'loading') {
     return (
-      <div className="flex items-center justify-center p-4">
-        <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2"></div>
-        <span className="text-gray-600 dark:text-gray-400">Loading components...</span>
+      <div className={className}>
+        <div className="flex items-center justify-center p-4">
+          <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-2"></div>
+          <span className="text-gray-600 dark:text-gray-400 text-sm">Loading content...</span>
+        </div>
       </div>
     );
   }
 
-  return (
-    <ComponentContext.Provider value={loadedComponents}>
-      {children}
-    </ComponentContext.Provider>
-  );
-}
-
-// Context for component access
-const ComponentContext = React.createContext<Record<string, React.ComponentType<any>>>({});
-
-export default function DynamicMarkdown({ 
-  children, 
-  className,
-  components = [],
-  postId
-}: DynamicMarkdownProps) {
-  // Memoize markdown components to prevent unnecessary re-renders
-  const markdownComponents = useMemo(() => {
-    return createMarkdownComponents();
-  }, []);
-
-  return (
-    <ComponentProvider components={components}>
+  // MDX success - render with components
+  if (renderState === 'mdx' && MDXComponent) {
+    return (
       <div className={className}>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeSlug, rehypeKatex]}
-          components={markdownComponents}
-        >
-          {children}
-        </ReactMarkdown>
+        <ErrorBoundary fallback={<FallbackContent content={children} error="Component render error" />}>
+          <MDXComponent />
+        </ErrorBoundary>
       </div>
-    </ComponentProvider>
+    );
+  }
+
+  // Fallback - render markdown with component placeholders
+  return (
+    <div className={className}>
+      <FallbackContent content={children} error={error} />
+    </div>
   );
 }
 
-// Create markdown component mappings
-function createMarkdownComponents() {
-  return {
-    // Dynamic component resolver
-    div: ({ node, ...props }: any) => {
-      const className = props.className || '';
-      
-      // Check if this is a component wrapper
-      if (className.includes('component-wrapper')) {
-        return <DynamicComponentWrapper {...props} />;
-      }
-      
-      return <div {...props} />;
-    },
+// Error boundary component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode; fallback: React.ReactNode },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
 
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('MDX Error Boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+// Fallback content renderer
+function FallbackContent({ content, error }: { content: string; error?: string | null }) {
+  return (
+    <>
+      {error && (
+        <div className="border border-amber-300 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg mb-4">
+          <h4 className="text-amber-800 dark:text-amber-200 font-semibold mb-1 text-sm">
+            ⚠️ Interactive Components Unavailable
+          </h4>
+          <p className="text-amber-700 dark:text-amber-300 text-xs mb-2">
+            Content shown with component placeholders instead.
+          </p>
+          {process.env.NODE_ENV === 'development' && (
+            <details>
+              <summary className="text-amber-600 dark:text-amber-400 text-xs cursor-pointer">
+                Error details
+              </summary>
+              <pre className="text-xs bg-amber-100 dark:bg-amber-900/30 p-2 rounded mt-1 overflow-auto">
+                {error}
+              </pre>
+            </details>
+          )}
+        </div>
+      )}
+      <FallbackMarkdownRenderer content={content} />
+    </>
+  );
+}
+
+// Load component scope with error handling
+async function loadComponentScope(components: ComponentDefinition[]): Promise<Record<string, React.ComponentType<any>>> {
+  const baseComponents = createBaseComponents();
+  
+  if (!components || components.length === 0) {
+    return baseComponents;
+  }
+
+  console.log(`🔍 Loading ${components.length} components:`, components.map(c => c.name));
+
+  const scope: Record<string, React.ComponentType<any>> = { ...baseComponents };
+
+  // Load each component individually with error handling
+  for (const definition of components) {
+    try {
+      console.log(`🔧 Loading component: ${definition.name} (${definition.sourceType})`);
+      const Component = await componentRegistry.getComponent(definition);
+      if (Component) {
+        // Wrap dynamic components to escape parent `.prose` styles
+        // and avoid typography plugin overriding internal Tailwind classes.
+        const Wrapped = (props: any) => (
+          <div className="not-prose">
+            <Component {...props} />
+          </div>
+        );
+        scope[definition.name] = Wrapped;
+        console.log(`✅ Successfully loaded: ${definition.name}`);
+      } else {
+        throw new Error('Component returned null/undefined');
+      }
+    } catch (error) {
+      console.error(`❌ Failed to load component ${definition.name}:`, error);
+      
+      // Create error placeholder component
+      scope[definition.name] = (props: any) => (
+        <div className="border border-orange-200 bg-orange-50 dark:bg-orange-900/20 p-2 rounded my-2">
+          <div className="flex items-center text-orange-800 dark:text-orange-200 text-sm">
+            <span className="mr-2">⚠️</span>
+            <span>Component "{definition.name}" failed to load</span>
+          </div>
+          {process.env.NODE_ENV === 'development' && Object.keys(props).length > 0 && (
+            <details className="mt-1">
+              <summary className="text-xs cursor-pointer">Props</summary>
+              <pre className="text-xs bg-orange-100 dark:bg-orange-900/30 p-1 rounded mt-1">
+                {JSON.stringify(props, null, 2)}
+              </pre>
+            </details>
+          )}
+        </div>
+      );
+    }
+  }
+
+  return scope;
+}
+
+// Create base components that are always available
+function createBaseComponents() {
+  return {
     // Enhanced links with external link detection
     a: ({ href, children, ...props }: any) => {
       if (href?.startsWith('http')) {
@@ -147,103 +266,61 @@ function createMarkdownComponents() {
 
     // Enhanced code blocks with copy functionality
     pre: ({ children, ...props }: any) => {
-      const child = React.Children.only(children);
-      
-      if (React.isValidElement(child) && (child.props as any).className) {
-        const language = (child.props as any).className?.replace('language-', '');
-        return (
-          <EnhancedCodeBlock language={language} {...props}>
-            {(child.props as any).children}
-          </EnhancedCodeBlock>
-        );
-      }
-      
-      return <pre {...props}>{children}</pre>;
+      return <EnhancedCodeBlock {...props}>{children}</EnhancedCodeBlock>;
     },
 
-    // Custom component tags (converted to lowercase for HTML compatibility)
-    // These will be dynamically loaded based on the components array
-    ...createDynamicComponentMappings(),
+    // Math block wrapper - use span to avoid div-in-p issues
+    math: ({ children, ...props }: any) => (
+      <span className="katex-display" {...props}>
+        {children}
+      </span>
+    ),
+
+    // Inline math wrapper
+    inlineMath: ({ children, ...props }: any) => (
+      <span className="katex-inline mx-1" {...props}>
+        {children}
+      </span>
+    )
   };
-}
-
-// Create mappings for dynamic components
-function createDynamicComponentMappings() {
-  // This will be populated with actual component names when components are loaded
-  // For now, return a generic resolver that looks up components from context
-  return new Proxy({}, {
-    get: (target, prop: string | symbol) => {
-      if (typeof prop === 'string') {
-        return (props: any) => <DynamicComponentResolver componentName={prop} {...props} />;
-      }
-      return undefined;
-    }
-  });
-}
-
-// Component resolver that looks up components from context
-function DynamicComponentResolver({ componentName, ...props }: { componentName: string; [key: string]: any }) {
-  const components = React.useContext(ComponentContext);
-  const Component = components[componentName.toLowerCase()];
-  
-  if (!Component) {
-    // Check if it's a standard HTML element
-    if (isValidHTMLElement(componentName)) {
-      return React.createElement(componentName, props);
-    }
-    
-    // Return unknown component warning
-    return (
-      <div className="border border-amber-300 bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg my-2">
-        <div className="flex items-center text-amber-800 dark:text-amber-200">
-          <span className="mr-2">⚠️</span>
-          <span className="text-sm">Unknown component: &lt;{componentName}&gt;</span>
-        </div>
-      </div>
-    );
-  }
-  
-  return <Component {...props} />;
-}
-
-// Dynamic component wrapper for custom syntax
-function DynamicComponentWrapper({ 'data-component': componentName, ...props }: any) {
-  const components = React.useContext(ComponentContext);
-  const Component = components[componentName?.toLowerCase()];
-  
-  if (!Component) {
-    return (
-      <div className="border border-red-300 bg-red-50 p-2 rounded text-red-700 text-sm">
-        Component not found: {componentName}
-      </div>
-    );
-  }
-  
-  return <Component {...props} />;
 }
 
 // Enhanced code block with copy functionality
 function EnhancedCodeBlock({ 
   children, 
-  language,
+  className,
   title,
   ...props 
 }: { 
   children: React.ReactNode; 
-  language?: string;
+  className?: string;
   title?: string;
 }) {
   const [copied, setCopied] = useState(false);
+  const language = className?.replace('language-', '') || '';
   
   const copyToClipboard = async () => {
-    if (typeof children === 'string') {
-      try {
-        await navigator.clipboard.writeText(children);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      } catch (error) {
-        console.error('Failed to copy:', error);
+    // Extract text content from children
+    const getTextContent = (node: React.ReactNode): string => {
+      if (typeof node === 'string') return node;
+      if (typeof node === 'number') return String(node);
+      if (React.isValidElement(node)) {
+        return React.Children.toArray(node.props.children).map(getTextContent).join('');
       }
+      if (Array.isArray(node)) {
+        return node.map(getTextContent).join('');
+      }
+      return '';
+    };
+
+    const text = getTextContent(children);
+    
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
     }
   };
 
@@ -264,9 +341,7 @@ function EnhancedCodeBlock({
           }`} 
           {...props}
         >
-          <code className={language ? `language-${language}` : ''}>
-            {children}
-          </code>
+          {children}
         </pre>
         <button
           onClick={copyToClipboard}
@@ -280,31 +355,57 @@ function EnhancedCodeBlock({
   );
 }
 
-// Check if a string is a valid HTML element
-function isValidHTMLElement(tagName: string): boolean {
-  const htmlElements = [
-    'div', 'span', 'p', 'a', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'ul', 'ol', 'li', 'table', 'tr', 'td', 'th', 'thead', 'tbody',
-    'form', 'input', 'button', 'label', 'select', 'option', 'textarea',
-    'article', 'section', 'nav', 'header', 'footer', 'main', 'aside',
-    'figure', 'figcaption', 'blockquote', 'details', 'summary'
-  ];
+// Fallback markdown renderer with component placeholders
+function FallbackMarkdownRenderer({ content }: { content: string }) {
+  // Replace component syntax with placeholders
+  // More precise regex: only match self-closing tags or properly paired tags
+  // Exclude common HTML tags by checking for known HTML elements
+  const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
   
-  return htmlElements.includes(tagName.toLowerCase());
+  const contentWithPlaceholders = content.replace(
+    /<([A-Z][a-zA-Z0-9]*)\s*([^>]*?)\s*\/?>/g,
+    (match, componentName, props) => {
+      // Skip if it's a known HTML tag
+      if (htmlTags.has(componentName.toUpperCase())) {
+        return match; // Keep original content
+      }
+      
+      // Only replace if it looks like a React component (starts with capital letter, not HTML)
+      return `\n\n---\n**📦 Component: ${componentName}**\n\n*Interactive component would render here${props ? ` with props: ${props.trim()}` : ''}.*\n\n---\n\n`;
+    }
+  );
+
+  return (
+    <ReactMarkdown
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[
+        rehypeSlug, 
+        [rehypeKatex, { 
+          output: 'html', 
+          strict: false, 
+          throwOnError: false 
+        }]
+      ]}
+      components={createBaseComponents()}
+    >
+      {contentWithPlaceholders}
+    </ReactMarkdown>
+  );
 }
 
-// Hook for accessing loaded components
-export function useMarkdownComponents() {
-  return React.useContext(ComponentContext);
-}
-
-// Utility function to extract component names from markdown content
+// Utility functions
 export function extractComponentsFromMarkdown(content: string): string[] {
+  // More precise regex: only match React components, not HTML tags
+  const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
   const componentMatches = content.match(/<([A-Z][a-zA-Z0-9]*)/g) || [];
-  return [...new Set(componentMatches.map(match => match.slice(1)))];
+  
+  return [...new Set(
+    componentMatches
+      .map(match => match.slice(1))
+      .filter(name => !htmlTags.has(name.toUpperCase()))
+  )];
 }
 
-// Utility function to validate component usage in content
 export function validateComponentUsage(content: string, availableComponents: ComponentDefinition[]): {
   valid: boolean;
   missingComponents: string[];
