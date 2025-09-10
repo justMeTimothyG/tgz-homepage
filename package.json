@@ -17,12 +17,17 @@
     "drizzle:studio": "drizzle-kit studio --port 4983"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "better-auth": "^1.3.9",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
     "dotenv": "^17.2.2",
     "drizzle-orm": "^0.44.5",
     "katex": "^0.16.22",
     "lucide-react": "^0.542.0",
+    "nanoid": "^5.1.5",
     "next": "15.5.0",
     "pg": "^8.16.3",
     "postgres": "^3.4.7",
@@ -34,7 +39,8 @@
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "server-only": "^0.0.1",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
