@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "predev": "tsx scripts/generate-tailwind-safelist.ts || true",
     "dev:resilient": "nodemon --config nodemon.dev.json",
     "build": "next build",
+    "prebuild": "tsx scripts/generate-tailwind-safelist.ts || true",
     "start": "next start",
     "start:watch": "nodemon --config nodemon.start.json",
     "lint": "eslint .",
@@ -14,12 +16,22 @@
     "db:status": "docker compose ps | cat",
     "drizzle:generate": "drizzle-kit generate",
     "drizzle:migrate": "drizzle-kit migrate",
-    "drizzle:studio": "drizzle-kit studio --port 4983"
+    "drizzle:studio": "drizzle-kit studio --port 4983",
+    "sync:components": "tsx scripts/component-sync.ts",
+    "components:status": "tsx scripts/component-sync.ts status",
+    "components:push": "tsx scripts/component-sync.ts push",
+    "components:version": "tsx scripts/component-sync.ts version",
+    "components:init": "tsx scripts/component-sync.ts init",
+    "tailwind:safelist": "tsx scripts/generate-tailwind-safelist.ts",
+    "reprocess:components": "tsx scripts/reprocess-post-components.ts"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@mdx-js/mdx": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@types/mdast": "^4.0.4",
     "better-auth": "^1.3.9",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -38,8 +50,11 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
     "server-only": "^0.0.1",
     "tailwind-merge": "^3.3.1",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+/* Include additional sources for Tailwind to scan (database-derived classes) */
+@source "../../.tailwind/safelist.txt";
 
 @theme inline {
   --font-sans: var(--font-geist-sans);
