@@ -350,6 +350,7 @@ export const componentCatalog = pgTable('component_catalog', {
   // Component metadata
   version: varchar('version', { length: 20 }).notNull().default('1.0.0'),
   status: componentStatusEnum('status').notNull().default('draft'),
+  isPublished: boolean('is_published').default(false), // Separate from status for public access
   props: jsonb('props'), // prop definitions schema
   config: jsonb('config'), // component configuration
   exampleCode: text('example_code'),
