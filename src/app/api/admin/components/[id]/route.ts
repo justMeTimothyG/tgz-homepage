@@ -3,6 +3,25 @@ import { getDb, schema } from '@/db/client';
 import { eq, desc, count } from 'drizzle-orm';
 import { z } from 'zod';
 
+function getAdminTokenFromRequest(req: NextRequest): string | null {
+  const header = req.headers.get('authorization');
+  const bearer = header?.startsWith('Bearer ') ? header.slice('Bearer '.length) : null;
+  const xToken = req.headers.get('x-admin-token');
+  const query = req.nextUrl.searchParams.get('adminToken');
+  return bearer || xToken || query;
+}
+
+function verifyAdminAuth(req: NextRequest): NextResponse | null {
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (adminToken) {
+    const provided = getAdminTokenFromRequest(req);
+    if (provided !== adminToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+  }
+  return null;
+}
+
 const { componentCatalog, componentVersions, componentCache, blogPostComponents } = schema;
 
 const updateComponentSchema = z.object({
@@ -17,6 +36,7 @@ const updateComponentSchema = z.object({
   remoteUrl: z.string().url().optional(),
   version: z.string().max(20).optional(),
   status: z.enum(['draft', 'published', 'deprecated']).optional(),
+  isPublished: z.boolean().optional(),
   props: z.record(z.string(), z.unknown()).optional(),
   config: z.record(z.string(), z.unknown()).optional(),
   exampleCode: z.string().optional(),
@@ -33,6 +53,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { id } = await params;
     const db = getDb();
 
@@ -99,6 +122,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { id } = await params;
     const body = await request.json();
     const validatedData = updateComponentSchema.parse(body);
@@ -216,6 +242,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { id } = await params;
     const db = getDb();
 
@@ -270,6 +299,9 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { id } = await params;
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');

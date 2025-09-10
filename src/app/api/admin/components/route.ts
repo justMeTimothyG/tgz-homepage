@@ -3,6 +3,25 @@ import { getDb, schema } from '@/db/client';
 import { eq, desc, count, sql, and } from 'drizzle-orm';
 import { z } from 'zod';
 
+function getAdminTokenFromRequest(req: NextRequest): string | null {
+  const header = req.headers.get('authorization');
+  const bearer = header?.startsWith('Bearer ') ? header.slice('Bearer '.length) : null;
+  const xToken = req.headers.get('x-admin-token');
+  const query = req.nextUrl.searchParams.get('adminToken');
+  return bearer || xToken || query;
+}
+
+function verifyAdminAuth(req: NextRequest): NextResponse | null {
+  const adminToken = process.env.ADMIN_TOKEN;
+  if (adminToken) {
+    const provided = getAdminTokenFromRequest(req);
+    if (provided !== adminToken) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+  }
+  return null;
+}
+
 const { componentCatalog, componentVersions, blogPostComponents } = schema;
 
 // Validation schemas
@@ -18,6 +37,7 @@ const createComponentSchema = z.object({
   remoteUrl: z.string().url().optional(),
   version: z.string().max(20).default('1.0.0'),
   status: z.enum(['draft', 'published', 'deprecated']).default('draft'),
+  isPublished: z.boolean().default(false),
   props: z.record(z.string(), z.unknown()).optional(),
   config: z.record(z.string(), z.unknown()).optional(),
   exampleCode: z.string().optional(),
@@ -33,6 +53,9 @@ const updateComponentSchema = createComponentSchema.partial();
 // GET /api/admin/components - List components with pagination and filtering
 export async function GET(request: NextRequest) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const db = getDb();
     const { searchParams } = new URL(request.url);
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
@@ -72,6 +95,7 @@ export async function GET(request: NextRequest) {
       sourceType: componentCatalog.sourceType,
       version: componentCatalog.version,
       status: componentCatalog.status,
+      isPublished: componentCatalog.isPublished,
       thumbnailUrl: componentCatalog.thumbnailUrl,
       isInteractive: componentCatalog.isInteractive,
       requiresSandbox: componentCatalog.requiresSandbox,
@@ -126,6 +150,9 @@ export async function GET(request: NextRequest) {
 // POST /api/admin/components - Create new component
 export async function POST(request: NextRequest) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const body = await request.json();
     const validatedData = createComponentSchema.parse(body);
 
@@ -203,6 +230,9 @@ export async function POST(request: NextRequest) {
 // PUT /api/admin/components - Bulk update components
 export async function PUT(request: NextRequest) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { searchParams } = new URL(request.url);
     const action = searchParams.get('action');
     const body = await request.json();
@@ -244,6 +274,9 @@ export async function PUT(request: NextRequest) {
 // DELETE /api/admin/components - Bulk delete components
 export async function DELETE(request: NextRequest) {
   try {
+    const authError = verifyAdminAuth(request);
+    if (authError) return authError;
+
     const { searchParams } = new URL(request.url);
     const idsParam = searchParams.get('ids');
     

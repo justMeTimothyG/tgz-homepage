@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, schema } from '@/db/client';
-import { desc, eq, ilike, or, and } from 'drizzle-orm';
+import { desc, eq, ilike, or, and, inArray, sql } from 'drizzle-orm';
 
 function getAdminTokenFromRequest(req: NextRequest): string | null {
   const header = req.headers.get('authorization');
@@ -19,6 +19,22 @@ function verifyAdminAuth(req: NextRequest): NextResponse | null {
     }
   }
   return null;
+}
+
+// Extract component names from markdown content
+function extractComponentsFromContent(content: string): string[] {
+  const componentRegex = /<([A-Z][a-zA-Z0-9]*)[^>]*\/?>|<([A-Z][a-zA-Z0-9]*)[^>]*>[\s\S]*?<\/\2>/g;
+  const components = new Set<string>();
+  let match;
+  
+  while ((match = componentRegex.exec(content)) !== null) {
+    const componentName = match[1] || match[2];
+    if (componentName) {
+      components.add(componentName);
+    }
+  }
+  
+  return Array.from(components);
 }
 
 // Get all posts with filtering and search
@@ -208,7 +224,71 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, slug, id: postId });
+    // Extract and link components used in the post
+    let components: any[] = [];
+    if (postId) {
+      const componentNames = extractComponentsFromContent(content);
+      
+      if (componentNames.length > 0) {
+        // Find component IDs from names
+        components = await db
+          .select({ id: schema.componentCatalog.id, name: schema.componentCatalog.name, version: schema.componentCatalog.version })
+          .from(schema.componentCatalog)
+          .where(and(
+            inArray(schema.componentCatalog.name, componentNames),
+            eq(schema.componentCatalog.status, 'published'),
+            eq(schema.componentCatalog.isPublished, true)
+          ));
+
+        if (components.length > 0) {
+          // Remove existing component links for this post
+          await db
+            .delete(schema.blogPostComponents)
+            .where(eq(schema.blogPostComponents.blogPostId, postId));
+
+          // Add new component links
+          await db
+            .insert(schema.blogPostComponents)
+            .values(components.map(comp => ({
+              blogPostId: postId,
+              componentId: comp.id,
+              componentVersion: comp.version,
+              usageCount: 1,
+              props: null,
+              renderOrder: 0,
+              createdAt: now
+            })))
+            .onConflictDoNothing();
+
+          // Update component usage counts
+          for (const comp of components) {
+            await db
+              .update(schema.componentCatalog)
+              .set({ 
+                usageCount: sql`${schema.componentCatalog.usageCount} + 1`,
+                lastUsedAt: now,
+                updatedAt: now 
+              })
+              .where(eq(schema.componentCatalog.id, comp.id));
+          }
+        }
+      }
+    }
+
+    // Extract component information for response
+    const detectedComponents = extractComponentsFromContent(content);
+    const linkedComponents = components.map(comp => comp.name);
+    
+    return NextResponse.json({ 
+      ok: true, 
+      slug, 
+      id: postId,
+      components: {
+        detected: detectedComponents,
+        linked: linkedComponents,
+        missing: detectedComponents.filter(name => !linkedComponents.includes(name))
+      }
+    });
   } catch (error: unknown) {
     console.error('Admin posts POST error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

@@ -28,6 +28,7 @@ interface ComponentItem {
   sourceType: 'custom' | 'npm' | 'remote' | 'builtin';
   version: string;
   status: 'draft' | 'published' | 'deprecated';
+  isPublished: boolean;
   thumbnailUrl?: string;
   usageCount: number;
   lastUsedAt?: string;
@@ -78,7 +79,10 @@ export default function ComponentStudioPage() {
         ...(statusFilter && { status: statusFilter }),
       });
 
-      const response = await fetch(`/api/admin/components?${params}`);
+      const adminToken = typeof window !== 'undefined' ? localStorage.getItem('admin_auth_token') : null;
+      const response = await fetch(`/api/admin/components?${params}`, {
+        headers: adminToken ? { 'x-admin-token': adminToken } : {},
+      });
       const data: ComponentsResponse = await response.json();
 
       if (!data.success) {
@@ -109,8 +113,10 @@ export default function ComponentStudioPage() {
     if (!confirm('Are you sure you want to delete this component?')) return;
 
     try {
+      const adminToken = typeof window !== 'undefined' ? localStorage.getItem('admin_auth_token') : null;
       const response = await fetch(`/api/admin/components/${componentId}`, {
         method: 'DELETE',
+        headers: adminToken ? { 'x-admin-token': adminToken } : {},
       });
 
       if (response.ok) {
@@ -129,9 +135,15 @@ export default function ComponentStudioPage() {
     if (selectedComponents.length === 0) return;
 
     try {
+      const adminToken = typeof window !== 'undefined' ? localStorage.getItem('admin_auth_token') : null;
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (adminToken) {
+        headers['x-admin-token'] = adminToken;
+      }
+
       const response = await fetch('/api/admin/components?action=bulk-status', {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         body: JSON.stringify({
           componentIds: selectedComponents,
           status,
