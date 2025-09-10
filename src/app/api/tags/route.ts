@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     const db = getDb();
     
     // Base query - get tags with post counts
-    let query = db
+    let query: any = db
       .select({
         id: schema.tags.id,
         name: schema.tags.name,

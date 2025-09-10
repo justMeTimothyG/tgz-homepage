@@ -328,7 +328,7 @@ export default function PostEditor({ isNewPost = false }: PostEditorProps) {
             </div>
           </div>
 
-          {/* Content Editor/Preview */}
+          {/* Content Editor */}
           <div className="lg:col-span-2">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Content *

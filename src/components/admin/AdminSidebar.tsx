@@ -10,7 +10,8 @@ import {
   Plus, 
   List,
   Home,
-  Tag
+  Tag,
+  Package
 } from 'lucide-react';
 
 export default function AdminSidebar() {
@@ -35,6 +36,12 @@ export default function AdminSidebar() {
       icon: Tag,
       label: 'Tags',
       href: '/admin/tags'
+    },
+    {
+      id: 'components',
+      icon: Package,
+      label: 'Components',
+      href: '/admin/components'
     },
     {
       id: 'home',
@@ -75,7 +82,8 @@ export default function AdminSidebar() {
           const Icon = item.icon;
           const isActive = pathname === item.href || 
             (item.id === 'posts' && pathname === '/admin') ||
-            (item.id === 'posts' && pathname.startsWith('/admin/posts') && pathname !== '/admin/posts/new');
+            (item.id === 'posts' && pathname.startsWith('/admin/posts') && pathname !== '/admin/posts/new') ||
+            (item.id === 'components' && pathname.startsWith('/admin/components'));
           
           if (item.external) {
             return (

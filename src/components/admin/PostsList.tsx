@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAdmin, BlogPost } from '@/contexts/AdminContext';
 import { formatDistanceToNow } from '@/lib/utils';
 import StatusBadge from './StatusBadge';
@@ -15,6 +16,7 @@ import {
 } from 'lucide-react';
 
 export default function PostsList() {
+  const router = useRouter();
   const {
     posts,
     loading,
@@ -22,7 +24,6 @@ export default function PostsList() {
     searchQuery,
     statusFilter,
     refreshPosts,
-    selectPostBySlug,
     showToast
   } = useAdmin();
 
@@ -70,6 +71,10 @@ export default function PostsList() {
 
   const handleViewPost = (post: BlogPost) => {
     window.open(`/blog/${post.slug}`, '_blank');
+  };
+
+  const handleEditPost = (post: BlogPost) => {
+    router.push(`/admin/posts/${post.slug}`);
   };
 
   if (loading && posts.length === 0) {
@@ -218,7 +223,7 @@ export default function PostsList() {
                       <Eye className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => selectPostBySlug(post.slug)}
+                      onClick={() => handleEditPost(post)}
                       className="p-2 text-blue-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
                       title="Edit Post"
                     >

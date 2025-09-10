@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { Tag, Search, Hash, Calendar, TrendingUp, Users } from 'lucide-react';
 
 interface TagData {
@@ -23,7 +24,7 @@ export default function TagsPage() {
   const [orderBy, setOrderBy] = useState<'usage' | 'name' | 'recent'>('usage');
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTags = async () => {
+  const fetchTags = useCallback(async () => {
     setLoading(true);
     setError(null);
     
@@ -47,7 +48,7 @@ export default function TagsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [search, orderBy]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,7 +56,7 @@ export default function TagsPage() {
     }, search ? 300 : 0);
 
     return () => clearTimeout(timer);
-  }, [search, orderBy]);
+  }, [search, orderBy, fetchTags]);
 
   const totalPosts = tags.reduce((sum, tag) => sum + tag.postCount, 0);
 
@@ -166,9 +167,12 @@ export default function TagsPage() {
                     
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-medium text-gray-900 dark:text-gray-100">
+                        <Link 
+                          href={`/admin/tags/${tag.slug}`}
+                          className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+                        >
                           {tag.name}
-                        </h3>
+                        </Link>
                         {tag.level > 0 && (
                           <span className="text-xs text-gray-500 dark:text-gray-400">
                             Level {tag.level}
