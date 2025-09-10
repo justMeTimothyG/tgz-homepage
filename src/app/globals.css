@@ -39,3 +39,23 @@ body {
 .drop-shadow-2xl {
   box-shadow: none !important;
 }
+
+/* Custom intermittent float animation */
+@keyframes intermittent-float {
+  0%, 92%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  2% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  4% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  6% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
