@@ -3,6 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import type { Heading as UnistHeading } from 'mdast';
+import GithubSlugger from 'github-slugger';
 
 export type TocHeading = {
   id: string;
@@ -28,13 +29,19 @@ function stripLeadingEmoji(text: string): string {
   }
 }
 
-function textToId(text: string): string {
-  return stripLeadingEmoji(text)
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Collapse multiple hyphens
-    .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+function textToId(text: string, slugger: GithubSlugger): string {
+  // Use the same github-slugger that rehype-slug uses to ensure perfect ID matching
+  try {
+    return slugger.slug(text);
+  } catch (error) {
+    // Fallback to a basic slug implementation if there's an issue
+    console.warn('Slugger failed, using fallback:', error);
+    return text
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-äöüß]/g, '') // Keep German chars
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
 }
 
 export function extractTocFromMarkdown(
@@ -43,6 +50,7 @@ export function extractTocFromMarkdown(
   maxLevel: number = 4
 ): { headings: TocHeading[]; sections: TocSection[] } {
   const headings: TocHeading[] = [];
+  const slugger = new GithubSlugger();
   
   const processor = unified()
     .use(remarkParse)
@@ -69,7 +77,7 @@ export function extractTocFromMarkdown(
     
     if (!text.trim()) return;
     
-    const id = textToId(text);
+    const id = textToId(text, slugger);
     headings.push({
       id,
       text: stripLeadingEmoji(text.trim()),
