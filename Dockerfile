@@ -48,7 +48,7 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src ./src
 COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
-COPY --from=builder /app/.env* ./
+# Note: .env files are not copied as they're git-ignored and environment variables are injected at runtime
 
 USER nextjs
 

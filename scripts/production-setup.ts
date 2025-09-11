@@ -16,6 +16,8 @@ const DOMAIN = process.env.COOLIFY_FQDN
 const SETUP_TOKEN = process.env.ADMIN_SETUP_TOKEN || '***REMOVED***';
 
 console.log('🚀 Starting production setup for:', DOMAIN);
+console.log('Environment:', process.env.NODE_ENV || 'development');
+console.log('Database URL available:', !!process.env.DATABASE_URL);
 console.log('================================================');
 
 async function runMigrations() {
