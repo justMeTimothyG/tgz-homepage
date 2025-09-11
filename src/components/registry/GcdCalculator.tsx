@@ -247,7 +247,7 @@ export default function GcdCalculator({
               </div>
               
               {steps.map((step, index) => {
-                const getHighlightColor = (value: number, type: 'a' | 'b' | 'remainder') => {
+                const getHighlightColor = (value: number, _type: 'a' | 'b' | 'remainder') => {
                   if (hoveredStep === null) return '';
                   
                   const colors = {

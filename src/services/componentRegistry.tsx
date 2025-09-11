@@ -115,7 +115,7 @@ class ComponentRegistry {
       console.log(`📦 Registry loaded, available components:`, Object.keys(registry.registeredComponents || {}));
       
       // Get component from registered components
-      const component = registry.registeredComponents?.[definition.name];
+      const component = (registry.registeredComponents as any)?.[definition.name];
       
       if (!component) {
         throw new Error(`Component ${definition.name} not found in registeredComponents`);

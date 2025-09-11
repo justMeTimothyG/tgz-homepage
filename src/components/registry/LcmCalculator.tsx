@@ -373,7 +373,7 @@ export default function LcmCalculator({
                       {stepIndex === 0 && gcdSteps.length > 0 && (
                         <div className="space-y-2 mb-3">
                           {gcdSteps.map((gcdStep, gcdIndex) => {
-                            const getHighlightColor = (value: number, type: 'a' | 'b' | 'remainder') => {
+                            const getHighlightColor = (value: number, _type: 'a' | 'b' | 'remainder') => {
                               if (hoveredStep === null) return '';
                               
                               const colors = {
