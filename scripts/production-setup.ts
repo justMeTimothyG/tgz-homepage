@@ -8,6 +8,7 @@
 import { execSync } from 'child_process';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import { join } from 'path';
 
 const DOMAIN = process.env.COOLIFY_FQDN 
   ? `https://${process.env.COOLIFY_FQDN}` 
@@ -22,14 +23,29 @@ async function runMigrations() {
   console.log('================================================');
   
   try {
-    execSync('npx drizzle-kit migrate', { 
+    // Check if drizzle.config.ts exists
+    const configPath = join(process.cwd(), 'drizzle.config.ts');
+    console.log('Looking for config at:', configPath);
+    
+    execSync('npx drizzle-kit migrate --config=drizzle.config.ts', { 
       stdio: 'inherit',
-      cwd: process.cwd()
+      cwd: process.cwd(),
+      env: { ...process.env, NODE_ENV: 'production' }
     });
     console.log('✅ Database migrations completed');
     return true;
   } catch (error) {
     console.error('❌ Migration failed:', error);
+    
+    // Try to give more helpful information
+    try {
+      const files = execSync('ls -la', { encoding: 'utf8' });
+      console.log('Files in current directory:');
+      console.log(files);
+    } catch (lsError) {
+      console.log('Could not list directory contents');
+    }
+    
     return false;
   }
 }
@@ -90,10 +106,15 @@ async function syncComponents() {
       await client`SELECT 1`;
       await client.end();
       
-      // Run component sync
+      // Run component sync with NODE_PATH to help with module resolution
       execSync('npx tsx scripts/deploy-components.ts', { 
         stdio: 'inherit',
-        cwd: process.cwd()
+        cwd: process.cwd(),
+        env: { 
+          ...process.env, 
+          NODE_PATH: join(process.cwd(), 'src'),
+          NODE_ENV: 'production' 
+        }
       });
       console.log('✅ Component sync completed');
       return true;
