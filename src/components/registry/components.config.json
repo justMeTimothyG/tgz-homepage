@@ -5,7 +5,7 @@
       "displayName": "Alert Component",
       "description": "A versatile alert component with multiple styles (info, warning, success, error, tip, note). Perfect for displaying important messages and notifications.",
       "category": "Feedback",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {
@@ -71,7 +71,7 @@
       "displayName": "Code Comparison",
       "description": "A sophisticated before/after code comparison component with tabbed interface, syntax highlighting, and copy functionality. Great for tutorials and documentation.",
       "category": "Content",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": true,
       "requiresSandbox": false,
       "dependencies": {
@@ -134,7 +134,7 @@
       "displayName": "Interactive Demo",
       "description": "An interactive demonstration component with sliders, progress visualization, and history tracking. Perfect for educational content and interactive tutorials.",
       "category": "Interactive",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": true,
       "requiresSandbox": false,
       "dependencies": {},
@@ -185,7 +185,7 @@
       "displayName": "GcdCalculator",
       "description": "GcdCalculator component",
       "category": "General",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -199,7 +199,7 @@
       "displayName": "LcmCalculator",
       "description": "LcmCalculator component",
       "category": "General",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -213,7 +213,7 @@
       "displayName": "Exercise Component",
       "description": "An interactive exercise component with task, hints, steps, and solution sections. Perfect for educational content with progressive disclosure of help and answers.",
       "category": "Educational",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": true,
       "requiresSandbox": false,
       "dependencies": {
@@ -256,7 +256,7 @@
       "displayName": "Exercise Task",
       "description": "Task component for use within Exercise. Contains the main exercise description and requirements.",
       "category": "Educational",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -282,7 +282,7 @@
       "displayName": "Exercise Hint",
       "description": "Hint component for use within Exercise. Provides progressive hints to help solve the exercise.",
       "category": "Educational",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -308,7 +308,7 @@
       "displayName": "Exercise Step",
       "description": "Step component for use within Exercise. Provides step-by-step solution guidance.",
       "category": "Educational",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -334,7 +334,7 @@
       "displayName": "Exercise Solution",
       "description": "Solution component for use within Exercise. Contains the complete solution to the exercise.",
       "category": "Educational",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "isInteractive": false,
       "requiresSandbox": false,
       "dependencies": {},
@@ -356,5 +356,5 @@
       }
     }
   },
-  "lastSync": "2025-09-11T13:35:43.123Z"
+  "lastSync": "2025-09-11T14:12:27.992Z"
 }
