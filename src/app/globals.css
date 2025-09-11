@@ -23,7 +23,12 @@ body {
 
 /* Improve anchor scrolling for headings (TOC offset) */
 .prose :where(h2, h3, h4, h5, h6) {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 1rem;
+}
+
+/* Enable smooth scrolling globally */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Remove default shadows across components */
