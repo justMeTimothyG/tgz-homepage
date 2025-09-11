@@ -65,20 +65,15 @@ export default function DynamicMarkdown({
               throwOnError: false 
             }]
           ],
-          development: process.env.NODE_ENV === 'development'
+          development: process.env.NODE_ENV === 'development',
+          // Provide components as globals for MDX evaluation
+          ...scope
         });
 
         if (!isMounted) return;
 
-        // Create component that receives the scope as props
-        const MDXWithScope = (props: any) => {
-          return React.createElement(compiledMDX.default, {
-            ...props,
-            components: scope
-          });
-        };
-
-        setMDXComponent(() => MDXWithScope);
+        // Set the compiled MDX component directly (components are already available as globals)
+        setMDXComponent(() => compiledMDX.default);
         setRenderState('mdx');
 
       } catch (err) {
