@@ -1,0 +1,70 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local development
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js
+.next/
+out/
+
+# Testing
+coverage
+.nyc_output
+
+# IDEs and editors
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+.dockerignore
+
+# Documentation and configs (keep only necessary ones)
+README.md
+*.md
+!CLAUDE.md
+
+# Development scripts and test files
+nodemon*.json
+scripts/test-*.ts
+scripts/seed-*.ts
+scripts/reprocess-*.ts
+scripts/component-sync.ts
+
+# Components with missing dependencies
+src/components/kokonutui/bento-grid.tsx
+
+# Build output that will be regenerated
+dist
+build
+
+# Temporary files
+*.tmp
+*.temp
