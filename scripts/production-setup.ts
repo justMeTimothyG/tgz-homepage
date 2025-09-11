@@ -29,6 +29,19 @@ async function runMigrations() {
     const configPath = join(process.cwd(), 'drizzle.config.ts');
     console.log('Looking for config at:', configPath);
     
+    // Check if migration files exist
+    try {
+      const drizzleFiles = execSync('ls -la drizzle/', { encoding: 'utf8' });
+      console.log('Drizzle folder contents:');
+      console.log(drizzleFiles);
+      
+      const metaFiles = execSync('ls -la drizzle/meta/', { encoding: 'utf8' });
+      console.log('Drizzle meta folder contents:');
+      console.log(metaFiles);
+    } catch (lsError) {
+      console.log('Could not list drizzle folder contents');
+    }
+    
     execSync('npx drizzle-kit migrate --config=drizzle.config.ts', { 
       stdio: 'inherit',
       cwd: process.cwd(),
