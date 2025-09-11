@@ -2,8 +2,6 @@
 .env.*
 drizzle/*.sqlite
 drizzle/*.db
-drizzle/*.json
-drizzle/meta/*
 drizzle/*.png
 drizzle/*.svg
 drizzle/*.html
