@@ -6,11 +6,13 @@ import Alert from './Alert';
 import CodeComparison from './CodeComparison';
 import GcdCalculator from './GcdCalculator';
 import LcmCalculator from './LcmCalculator';
+import Exercise from './Exercise';
 
 export const registeredComponents = {
   InteractiveDemo,
   Alert,
   CodeComparison,
   GcdCalculator,
-  LcmCalculator
+  LcmCalculator,
+  Exercise
 };

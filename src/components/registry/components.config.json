@@ -207,7 +207,50 @@
       "config": {
         "examples": []
       }
+    },
+    "Exercise": {
+      "name": "Exercise",
+      "displayName": "Exercise Component",
+      "description": "An interactive exercise component with task, hints, steps, and solution sections. Perfect for educational content with progressive disclosure of help and answers.",
+      "category": "Educational",
+      "version": "1.0.0",
+      "isInteractive": true,
+      "requiresSandbox": false,
+      "dependencies": {
+        "lucide-react": "^0.542.0"
+      },
+      "props": {
+        "title": {
+          "type": "string",
+          "default": "Aufgabe",
+          "description": "Title of the exercise"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": [
+            "easy",
+            "medium",
+            "hard"
+          ],
+          "default": "medium",
+          "description": "Exercise difficulty level"
+        },
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "Exercise content including Task, Hint, Step, and Solution components"
+        }
+      },
+      "config": {
+        "examples": [
+          {
+            "title": "Math Exercise",
+            "description": "Interactive math exercise with progressive hints",
+            "code": "<Exercise title=\"Quadratische Gleichung\" difficulty=\"medium\">\n  <Task>\n    Löse die Gleichung: x² - 5x + 6 = 0\n  </Task>\n  <Hint>\n    Verwende die Faktorisierung oder die p-q-Formel.\n  </Hint>\n  <Solution>\n    x₁ = 2, x₂ = 3\n  </Solution>\n</Exercise>"
+          }
+        ]
+      }
     }
   },
-  "lastSync": "2025-09-10T13:06:17.907Z"
+  "lastSync": "2025-09-11T12:08:44.346Z"
 }
