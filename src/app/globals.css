@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 /* Include additional sources for Tailwind to scan (database-derived classes) */
 @source "../../.tailwind/safelist.txt";
