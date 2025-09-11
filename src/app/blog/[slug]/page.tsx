@@ -83,7 +83,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       <div className="grid grid-cols-12 gap-8">
         {/* TOC - left side on desktop */}
         <aside className="hidden lg:col-span-3 lg:block">
-          <div className="sticky top-24 max-h-[calc(100vh-6rem)] overflow-auto pr-4">
+          <div className="sticky top-6 max-h-[calc(100vh-2rem)] overflow-auto pr-4">
             {tocData.hasContent && (
               <ServerTableOfContents 
                 headings={tocData.headings}
