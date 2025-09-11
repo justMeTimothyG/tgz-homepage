@@ -109,13 +109,28 @@ class ComponentRegistry {
   private async loadBuiltinComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
     console.log(`🏗️ Loading builtin component: ${definition.name}`);
     try {
-      // Try to import from the built-in registry first
-      console.log(`📦 Importing from: @/components/registry/${definition.name}`);
-      const module = await import(`@/components/registry/${definition.name}`);
+      // Handle sub-components that are exported from parent components
+      const subComponentMap: Record<string, string> = {
+        'Task': 'Exercise',
+        'Hint': 'Exercise', 
+        'Step': 'Exercise',
+        'Solution': 'Exercise'
+      };
+
+      const moduleToImport = subComponentMap[definition.name] || definition.name;
+      
+      // Try to import from the built-in registry
+      console.log(`📦 Importing from: @/components/registry/${moduleToImport}`);
+      const module = await import(`@/components/registry/${moduleToImport}`);
       console.log(`📦 Module loaded:`, !!module, !!module.default);
-      const component = module.default || module[definition.name];
+      
+      // If it's a sub-component, look for named export, otherwise use default
+      const component = subComponentMap[definition.name] 
+        ? module[definition.name] 
+        : (module.default || module[definition.name]);
+        
       if (!component) {
-        throw new Error(`No default export or named export found for ${definition.name}`);
+        throw new Error(`No ${subComponentMap[definition.name] ? 'named' : 'default'} export found for ${definition.name}`);
       }
       console.log(`✅ Successfully loaded builtin component: ${definition.name}`);
       return component;

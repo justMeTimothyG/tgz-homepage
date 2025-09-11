@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, schema } from '@/db/client';
 import { desc, eq, ilike, or, and, inArray, sql } from 'drizzle-orm';
+import { extractComponentsFromMarkdown } from '@/lib/mdx-utils';
 
 function getAdminTokenFromRequest(req: NextRequest): string | null {
   const header = req.headers.get('authorization');
@@ -21,21 +22,6 @@ function verifyAdminAuth(req: NextRequest): NextResponse | null {
   return null;
 }
 
-// Extract component names from markdown content
-function extractComponentsFromContent(content: string): string[] {
-  const componentRegex = /<([A-Z][a-zA-Z0-9]*)[^>]*\/?>|<([A-Z][a-zA-Z0-9]*)[^>]*>[\s\S]*?<\/\2>/g;
-  const components = new Set<string>();
-  let match;
-  
-  while ((match = componentRegex.exec(content)) !== null) {
-    const componentName = match[1] || match[2];
-    if (componentName) {
-      components.add(componentName);
-    }
-  }
-  
-  return Array.from(components);
-}
 
 // Get all posts with filtering and search
 export async function GET(req: NextRequest) {
@@ -227,7 +213,7 @@ export async function POST(req: NextRequest) {
     // Extract and link components used in the post
     let components: any[] = [];
     if (postId) {
-      const componentNames = extractComponentsFromContent(content);
+      const componentNames = await extractComponentsFromMarkdown(content);
       
       if (componentNames.length > 0) {
         // Find component IDs from names
@@ -276,7 +262,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Extract component information for response
-    const detectedComponents = extractComponentsFromContent(content);
+    const detectedComponents = await extractComponentsFromMarkdown(content);
     const linkedComponents = components.map(comp => comp.name);
     
     return NextResponse.json({ 

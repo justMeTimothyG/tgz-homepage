@@ -62,7 +62,8 @@ export default function PostsList() {
         throw new Error('Failed to delete post');
       }
 
-      showToast('Post deleted successfully. Click refresh to update the list.', 'success');
+      showToast('Post deleted successfully.', 'success');
+      refreshPosts();
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to delete post';
       showToast(errorMessage, 'error');
