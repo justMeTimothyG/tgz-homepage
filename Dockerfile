@@ -33,9 +33,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Install production dependencies only
+# Install all dependencies (including tsx for scripts)
 COPY package.json package-lock.json* ./
-RUN npm ci --omit=dev && npm cache clean --force
+RUN npm ci && npm cache clean --force
 
 # Copy built application
 COPY --from=builder /app/public ./public
