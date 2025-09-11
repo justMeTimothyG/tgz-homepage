@@ -22,6 +22,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Run migrations**: `npm run drizzle:migrate`
 - **Database GUI**: `npm run drizzle:studio` (opens on port 4983)
 
+### Component Management
+
+- **Check component status**: `npm run components:status`
+- **Push local components to database**: `npm run components:push`
+- **Version bump and sync**: `npm run components:version [patch|minor|major]`
+- **Initialize component manifest**: `npm run components:init`
+
 ## Architecture Overview
 
 This is a **full-stack Next.js 15 personal website** for Timothy Lüdtke, featuring sophisticated content management for educational content, AI-powered blog generation, and interactive components. The site is primarily in German and designed as a content-rich platform for technical education.
@@ -152,6 +159,76 @@ The database is designed for a **comprehensive educational content platform** wi
 - Animations → `motion` (Framer Motion alternative)
 - HTTP → `node-fetch` + `@tanstack/react-query`
 - Styling → `tailwindcss` + utility packages
+
+### Component Deployment Workflow
+
+**⚠️ IMPORTANT: Components are database-driven, not just file-based!**
+
+#### Complete Development → Production Flow:
+
+1. **Local Development**
+   ```bash
+   # Create component in /src/components/registry/ComponentName.tsx
+   # Add to /src/components/registry/index.ts exports
+   # Update /src/components/registry/components.config.json with metadata
+   ```
+
+2. **Test Sync Locally**
+   ```bash
+   npm run components:status    # Check sync status
+   npm run components:push      # Sync to local database
+   ```
+
+3. **Deploy to Production**
+   ```bash
+   git push                     # Deploy code changes
+   # Components are automatically synced during build process!
+   # No manual intervention needed - the build will:
+   # 1. Check for component changes
+   # 2. Automatically sync if changes detected
+   # 3. Continue with normal deployment
+   ```
+
+4. **Verify Deployment**
+   - Components appear in admin interface at `/admin`
+   - API endpoint `/api/components` returns updated components
+   - Components are available for use in blog posts and content
+
+#### Key Points:
+
+- **Automatic sync** - Components are automatically synced during build/deployment
+- **No manual intervention** - Changes detected and applied automatically
+- **Database-first** - Components must be in database to be available
+- **Version management** - Use `npm run components:version` for version bumps
+- **Graceful handling** - Deployment continues even if database is unavailable during build
+
+#### Initial Production Setup:
+
+```bash
+# First-time production setup
+npm run drizzle:migrate      # Ensure schema is current
+npm run components:push      # Seed components to empty production DB
+```
+
+#### Production Deployment Checklist:
+
+- [ ] Code deployed to production server (`git push`)
+- [ ] Build process completed successfully (auto-syncs components)
+- [ ] Component API accessible (`/api/components` returns expected components)
+- [ ] Admin interface shows components (`/admin` with proper auth)
+- [ ] Components load correctly in blog content
+
+#### Manual Commands (if needed):
+
+- **Manual component sync**: `npm run deploy:components`
+- **Check component status**: `npm run components:status`
+- **Force component push**: `npm run components:push`
+
+#### Component Structure:
+- `/src/components/registry/` - Component source files (.tsx)
+- `/src/components/registry/components.config.json` - Component metadata
+- `/src/components/registry/index.ts` - Component exports
+- Components sync to `component_catalog` database table
 
 ## Important Context Awareness
 
