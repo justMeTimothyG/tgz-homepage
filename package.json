@@ -24,6 +24,7 @@
     "components:version": "tsx scripts/component-sync.ts version",
     "components:init": "tsx scripts/component-sync.ts init",
     "deploy:components": "tsx scripts/deploy-components.ts",
+    "setup:production": "bash scripts/production-setup.sh",
     "tailwind:safelist": "tsx scripts/generate-tailwind-safelist.ts",
     "reprocess:components": "tsx scripts/reprocess-post-components.ts"
   },
