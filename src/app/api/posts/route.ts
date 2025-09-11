@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getDb, schema } from '@/db/client';
 import { desc, eq, inArray, and, sql } from 'drizzle-orm';
+import { extractComponentsFromMarkdown } from '@/lib/mdx-utils';
 
 type UpsertPostRequest = {
   slug: string;
@@ -20,21 +21,6 @@ function getAdminTokenFromRequest(req: NextRequest): string | null {
   return bearer || xToken || query;
 }
 
-// Extract component names from markdown content
-function extractComponentsFromContent(content: string): string[] {
-  const componentRegex = /<([A-Z][a-zA-Z0-9]*)[^>]*\/?>|<([A-Z][a-zA-Z0-9]*)[^>]*>[\s\S]*?<\/\2>/g;
-  const components = new Set<string>();
-  let match;
-  
-  while ((match = componentRegex.exec(content)) !== null) {
-    const componentName = match[1] || match[2];
-    if (componentName) {
-      components.add(componentName);
-    }
-  }
-  
-  return Array.from(components);
-}
 
 export async function POST(req: NextRequest) {
   try {
@@ -124,8 +110,9 @@ export async function POST(req: NextRequest) {
     }
 
     // Extract and link components used in the post
+    let linkedComponentNames: string[] = [];
     if (postId) {
-      const componentNames = extractComponentsFromContent(body.content);
+      const componentNames = await extractComponentsFromMarkdown(body.content);
       
       if (componentNames.length > 0) {
         // Find component IDs from names
@@ -139,6 +126,8 @@ export async function POST(req: NextRequest) {
           ));
 
         if (components.length > 0) {
+          linkedComponentNames = components.map(comp => comp.name);
+          
           // Remove existing component links for this post
           await db
             .delete(schema.blogPostComponents)
@@ -174,8 +163,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Extract component information for response
-    const detectedComponents = extractComponentsFromContent(body.content);
-    const linkedComponents = components.map(comp => comp.name);
+    const detectedComponents = await extractComponentsFromMarkdown(body.content);
     
     return NextResponse.json({ 
       ok: true, 
@@ -183,8 +171,8 @@ export async function POST(req: NextRequest) {
       id: postId,
       components: {
         detected: detectedComponents,
-        linked: linkedComponents,
-        missing: detectedComponents.filter(name => !linkedComponents.includes(name))
+        linked: linkedComponentNames,
+        missing: detectedComponents.filter(name => !linkedComponentNames.includes(name))
       }
     });
   } catch (error: unknown) {

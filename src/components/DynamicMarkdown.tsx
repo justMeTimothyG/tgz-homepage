@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { evaluate } from "@mdx-js/mdx";
+import { evaluate, compile } from "@mdx-js/mdx";
 import * as runtime from 'react/jsx-runtime';
 import * as runtimeDev from 'react/jsx-dev-runtime';
 import ReactMarkdown from "react-markdown";
@@ -305,7 +305,7 @@ function EnhancedCodeBlock({
       if (typeof node === 'string') return node;
       if (typeof node === 'number') return String(node);
       if (React.isValidElement(node)) {
-        return React.Children.toArray(node.props.children).map(getTextContent).join('');
+        return React.Children.toArray((node.props as any).children).map(getTextContent).join('');
       }
       if (Array.isArray(node)) {
         return node.map(getTextContent).join('');
@@ -394,24 +394,64 @@ function FallbackMarkdownRenderer({ content }: { content: string }) {
 }
 
 // Utility functions
-export function extractComponentsFromMarkdown(content: string): string[] {
-  // More precise regex: only match React components, not HTML tags
-  const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
-  const componentMatches = content.match(/<([A-Z][a-zA-Z0-9]*)/g) || [];
-  
-  return [...new Set(
-    componentMatches
-      .map(match => match.slice(1))
-      .filter(name => !htmlTags.has(name.toUpperCase()))
-  )];
+export async function extractComponentsFromMarkdown(content: string): Promise<string[]> {
+  try {
+    // Use MDX compiler to get proper AST-based component detection
+    const compiledCode = await compile(content, {
+      remarkPlugins: [],
+      rehypePlugins: [],
+      development: false
+    });
+    
+    // Extract components from the compiled code by looking for both createElement and _jsx calls
+    const codeString = String(compiledCode);
+    const createElementMatches = codeString.match(/createElement\(["']?([A-Z][a-zA-Z0-9]*)["']?/g) || [];
+    const jsxMatches = codeString.match(/_jsx\(([A-Z][a-zA-Z0-9]*),/g) || [];
+    
+    const allMatches = [
+      // Extract from createElement calls
+      ...createElementMatches.map(match => {
+        const nameMatch = match.match(/createElement\(["']?([A-Z][a-zA-Z0-9]*)["']?/);
+        return nameMatch ? nameMatch[1] : null;
+      }),
+      // Extract from _jsx calls (modern JSX runtime)
+      ...jsxMatches.map(match => {
+        const nameMatch = match.match(/_jsx\(([A-Z][a-zA-Z0-9]*),/);
+        return nameMatch ? nameMatch[1] : null;
+      })
+    ];
+    
+    const components = [...new Set(
+      allMatches
+        .filter(Boolean)
+        .filter(name => {
+          // Filter out known React built-ins and MDX wrappers
+          const builtins = new Set(['Fragment', 'Suspense', 'StrictMode', 'Profiler', 'MDXLayout']);
+          return !builtins.has(name!);
+        })
+    )] as string[];
+    
+    return components;
+  } catch (error) {
+    // Fallback to regex-based detection if MDX compilation fails
+    console.warn('MDX compilation failed for component detection, falling back to regex:', error);
+    const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
+    const componentMatches = content.match(/<([A-Z][a-zA-Z0-9]*)/g) || [];
+    
+    return [...new Set(
+      componentMatches
+        .map(match => match.slice(1))
+        .filter(name => !htmlTags.has(name.toUpperCase()))
+    )];
+  }
 }
 
-export function validateComponentUsage(content: string, availableComponents: ComponentDefinition[]): {
+export async function validateComponentUsage(content: string, availableComponents: ComponentDefinition[]): Promise<{
   valid: boolean;
   missingComponents: string[];
   usedComponents: string[];
-} {
-  const usedComponents = extractComponentsFromMarkdown(content);
+}> {
+  const usedComponents = await extractComponentsFromMarkdown(content);
   const availableNames = availableComponents.map(c => c.name);
   const missingComponents = usedComponents.filter(name => !availableNames.includes(name));
   
