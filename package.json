@@ -24,7 +24,8 @@
     "components:version": "tsx scripts/component-sync.ts version",
     "components:init": "tsx scripts/component-sync.ts init",
     "deploy:components": "tsx scripts/deploy-components.ts",
-    "setup:production": "bash scripts/production-setup.sh",
+    "setup:production": "tsx scripts/production-setup.ts",
+    "check:tools": "node scripts/check-tools.js",
     "tailwind:safelist": "tsx scripts/generate-tailwind-safelist.ts",
     "reprocess:components": "tsx scripts/reprocess-post-components.ts"
   },
@@ -58,7 +59,9 @@
     "tailwind-merge": "^3.3.1",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
-    "zustand": "^5.0.8"
+    "zustand": "^5.0.8",
+    "tsx": "^4.20.5",
+    "drizzle-kit": "^0.31.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -68,12 +71,10 @@
     "@types/pg": "^8.15.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
     "nodemon": "^3.1.10",
     "tailwindcss": "^4",
-    "tsx": "^4.20.5",
     "typescript": "^5"
   },
   "type": "module"
