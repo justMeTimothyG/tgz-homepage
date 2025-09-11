@@ -53,6 +53,7 @@ interface LocalComponent extends ComponentConfig {
   filePath: string;
   sourceCode: string;
   hash: string;
+  parentComponent?: string; // For sub-components, indicates the parent file
 }
 
 interface ComponentManifest {
@@ -86,39 +87,119 @@ function scanLocalComponents(): LocalComponent[] {
   const components: LocalComponent[] = [];
   const manifest = loadManifest();
   
-  // Scan TypeScript files in registry
+  // Read registry index.ts to understand what components are exported
+  const indexPath = join(REGISTRY_PATH, 'index.ts');
+  const indexContent = readFileSync(indexPath, 'utf8');
+  
+  // Parse exported component names from index.ts
+  const exportedComponents = parseExportsFromIndex(indexContent);
+  console.log(`📦 Found ${exportedComponents.length} exported components:`, exportedComponents.map(c => c.name));
+  
+  // Map of component names to their source files for hash calculation
+  const fileHashes = new Map<string, string>();
   const files = readdirSync(REGISTRY_PATH)
     .filter((file: string) => file.endsWith('.tsx') && file !== 'index.ts');
-  
+    
   for (const file of files) {
     const filePath = join(REGISTRY_PATH, file);
     const sourceCode = readFileSync(filePath, 'utf8');
     const hash = calculateHash(sourceCode);
     const componentName = file.replace('.tsx', '');
+    fileHashes.set(componentName, hash);
+  }
+  
+  // Create component entries based on exports, not files
+  for (const exportInfo of exportedComponents) {
+    const { name: componentName, sourceFile } = exportInfo;
     
-    // Get config from manifest or create default
-    const config = manifest.components[componentName] || {
-      name: componentName,
-      displayName: componentName,
-      description: `${componentName} component`,
-      category: 'General',
-      version: '1.0.0',
-      isInteractive: false,
-      requiresSandbox: false,
-      dependencies: {},
-      props: {},
-      config: { examples: [] }
-    };
+    // Get config from manifest
+    const config = manifest.components[componentName];
+    if (!config) {
+      console.warn(`⚠️ No configuration found for exported component: ${componentName}`);
+      continue;
+    }
+    
+    // Get source code and hash from the source file
+    const sourceFilePath = join(REGISTRY_PATH, `${sourceFile}.tsx`);
+    const sourceCode = readFileSync(sourceFilePath, 'utf8');
+    const hash = fileHashes.get(sourceFile) || calculateHash(sourceCode);
     
     components.push({
       ...config,
-      filePath,
+      filePath: sourceFilePath,
       sourceCode,
-      hash
+      hash,
+      parentComponent: exportInfo.isSubComponent ? sourceFile : undefined
     });
+    
+    console.log(`✅ Registered component: ${componentName} (from ${sourceFile}.tsx)${exportInfo.isSubComponent ? ' [sub-component]' : ''}`);
   }
   
   return components;
+}
+
+// Parse component exports from registry index.ts
+function parseExportsFromIndex(indexContent: string): Array<{
+  name: string;
+  sourceFile: string;
+  isSubComponent: boolean;
+}> {
+  const exports: Array<{ name: string; sourceFile: string; isSubComponent: boolean }> = [];
+  
+  // Parse import statements to understand component relationships
+  const importRegex = /import\s+(?:(\w+)(?:,\s*)?)?(?:\{\s*([^}]+)\s*\})?\s+from\s+['"]\.\/(\w+)['"];?/g;
+  const imports = new Map<string, { defaultExport?: string; namedExports: string[] }>();
+  
+  let match;
+  while ((match = importRegex.exec(indexContent)) !== null) {
+    const [, defaultExport, namedExportsList, sourceFile] = match;
+    const namedExports = namedExportsList ? 
+      namedExportsList.split(',').map(exp => exp.trim()).filter(Boolean) : [];
+    
+    imports.set(sourceFile, {
+      defaultExport: defaultExport?.trim(),
+      namedExports
+    });
+  }
+  
+  // Parse registeredComponents object to understand what's exported
+  const registeredComponentsRegex = /export\s+const\s+registeredComponents\s*=\s*\{([^}]+)\}/s;
+  const registeredMatch = registeredComponentsRegex.exec(indexContent);
+  
+  if (registeredMatch) {
+    const componentsList = registeredMatch[1];
+    const componentEntries = componentsList.split(',').map(entry => entry.trim()).filter(Boolean);
+    
+    for (const entry of componentEntries) {
+      const componentName = entry.replace(/[,\s]/g, '');
+      if (!componentName) continue;
+      
+      // Find which file this component comes from
+      let sourceFile = componentName; // Default assumption
+      let isSubComponent = false;
+      
+      // Check if it's a default export
+      for (const [file, importInfo] of imports) {
+        if (importInfo.defaultExport === componentName) {
+          sourceFile = file;
+          break;
+        }
+        if (importInfo.namedExports.includes(componentName)) {
+          sourceFile = file;
+          isSubComponent = true; // Named exports are typically sub-components
+          break;
+        }
+      }
+      
+      exports.push({
+        name: componentName,
+        sourceFile,
+        isSubComponent
+      });
+    }
+  }
+  
+  return exports;
 }
 
 // Get components from database

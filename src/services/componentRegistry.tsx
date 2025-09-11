@@ -109,28 +109,16 @@ class ComponentRegistry {
   private async loadBuiltinComponent(definition: ComponentDefinition): Promise<ComponentType<any>> {
     console.log(`🏗️ Loading builtin component: ${definition.name}`);
     try {
-      // Handle sub-components that are exported from parent components
-      const subComponentMap: Record<string, string> = {
-        'Task': 'Exercise',
-        'Hint': 'Exercise', 
-        'Step': 'Exercise',
-        'Solution': 'Exercise'
-      };
-
-      const moduleToImport = subComponentMap[definition.name] || definition.name;
+      // Import from centralized registry index instead of individual files
+      console.log(`📦 Importing from centralized registry index`);
+      const registry = await import(`@/components/registry`);
+      console.log(`📦 Registry loaded, available components:`, Object.keys(registry.registeredComponents || {}));
       
-      // Try to import from the built-in registry
-      console.log(`📦 Importing from: @/components/registry/${moduleToImport}`);
-      const module = await import(`@/components/registry/${moduleToImport}`);
-      console.log(`📦 Module loaded:`, !!module, !!module.default);
+      // Get component from registered components
+      const component = registry.registeredComponents?.[definition.name];
       
-      // If it's a sub-component, look for named export, otherwise use default
-      const component = subComponentMap[definition.name] 
-        ? module[definition.name] 
-        : (module.default || module[definition.name]);
-        
       if (!component) {
-        throw new Error(`No ${subComponentMap[definition.name] ? 'named' : 'default'} export found for ${definition.name}`);
+        throw new Error(`Component ${definition.name} not found in registeredComponents`);
       }
       console.log(`✅ Successfully loaded builtin component: ${definition.name}`);
       return component;

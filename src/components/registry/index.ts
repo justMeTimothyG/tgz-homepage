@@ -6,7 +6,7 @@ import Alert from './Alert';
 import CodeComparison from './CodeComparison';
 import GcdCalculator from './GcdCalculator';
 import LcmCalculator from './LcmCalculator';
-import Exercise from './Exercise';
+import Exercise, { Task, Hint, Step, Solution } from './Exercise';
 
 export const registeredComponents = {
   InteractiveDemo,
@@ -14,5 +14,9 @@ export const registeredComponents = {
   CodeComparison,
   GcdCalculator,
   LcmCalculator,
-  Exercise
+  Exercise,
+  Task,
+  Hint,
+  Step,
+  Solution
 };

@@ -173,8 +173,8 @@ export default function PostsList() {
                         <Calendar className="w-4 h-4" />
                         <span>
                           {post.publishedAt 
-                            ? `Published ${formatDistanceToNow(new Date(post.publishedAt))} ago`
-                            : `Updated ${formatDistanceToNow(new Date(post.updatedAt))} ago`
+                            ? `Veröffentlicht ${formatDistanceToNow(new Date(post.publishedAt))}`
+                            : `Aktualisiert ${formatDistanceToNow(new Date(post.updatedAt))}`
                           }
                         </span>
                       </div>

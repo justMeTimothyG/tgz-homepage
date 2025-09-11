@@ -15,7 +15,7 @@ export default function Footer() {
 
   const quickLinks = [
     { name: 'Startseite', href: '/' },
-    { name: 'Über mich', href: '/about' },
+    { name: 'Über mich', href: '/ueber-mich' },
     { name: 'Blog', href: '/blog' },
   ];
 

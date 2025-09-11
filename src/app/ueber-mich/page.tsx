@@ -5,13 +5,22 @@ import {
   Code, 
   MessageCircle, 
   Palette, 
-  Microscope, 
   Camera, 
-  Target,
   ExternalLink,
-  Mail
+  Mail,
+  CheckCircle2,
+  Calendar
 } from 'lucide-react';
-import { BentoGrid, BentoCard } from '@/components/BentoGrid';
+import { 
+  NextJSLogo, 
+  ReactLogo, 
+  TypeScriptLogo, 
+  PythonLogo, 
+  PostgreSQLLogo, 
+  TailwindLogo, 
+  NodeJSLogo, 
+  DockerLogo 
+} from '@/components/TechLogos';
 
 export const metadata: Metadata = {
   title: 'Über mich - Timothy Lüdtke',
@@ -87,64 +96,145 @@ export default function UeberMichPage() {
           Skills & Lernfelder
         </h2>
         
-        <BentoGrid>
-          <BentoCard
-            title="Coding & Tech"
-            description="Von Next.js und React über Python bis hin zu Datenbank-Design – ich liebe es, Ideen in funktionierenden Code zu verwandeln. TypeScript ist mein treuer Begleiter für typsichere Entwicklung."
-            icon={Code}
-            size="large"
-          >
-            <div className="flex flex-wrap gap-2">
-              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-md">
-                Next.js
-              </span>
-              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-md">
-                TypeScript
-              </span>
-              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-md">
-                Python
-              </span>
-              <span className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-md">
-                PostgreSQL
-              </span>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid gap-6">
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Main Tech Skills Card */}
+              <div className="md:col-span-2 group relative flex flex-col gap-4 h-full rounded-xl p-6 bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60 hover:border-neutral-300/50 dark:hover:border-neutral-700/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all duration-500 ease-out">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                      <Code className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                      Coding & Tech Stack
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    Von Next.js und React über Python bis hin zu Datenbank-Design – ich liebe es, Ideen in funktionierenden Code zu verwandeln. TypeScript ist mein treuer Begleiter für typsichere Entwicklung.
+                  </p>
+                  
+                  {/* Technology Logos Grid */}
+                  <div className="grid grid-cols-4 gap-4 mt-6">
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <NextJSLogo className="w-8 h-8 text-gray-900 dark:text-gray-100" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Next.js</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <ReactLogo className="w-8 h-8 text-blue-500" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">React</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <TypeScriptLogo className="w-8 h-8 text-blue-600" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">TypeScript</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <PythonLogo className="w-8 h-8 text-yellow-500" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Python</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <PostgreSQLLogo className="w-8 h-8 text-blue-700" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">PostgreSQL</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <TailwindLogo className="w-8 h-8 text-teal-500" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Tailwind</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <NodeJSLogo className="w-8 h-8 text-green-600" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Node.js</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
+                      <DockerLogo className="w-8 h-8 text-blue-500" />
+                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Docker</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Learning Journey */}
+              <div className="group relative flex flex-col gap-4 h-full rounded-xl p-6 bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60 hover:border-neutral-300/50 dark:hover:border-neutral-700/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all duration-500 ease-out">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                    <Calendar className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                    Lernreise
+                  </h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  Kontinuierliches Lernen und Wachstum durch praktische Projekte und neue Technologien.
+                </p>
+                
+                <div className="mt-3 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">AI & Machine Learning</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">Cloud Architecture</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">DevOps & CI/CD</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">Web3 & Blockchain</span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </BentoCard>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Communication */}
+              <div className="group relative flex flex-col gap-4 h-full rounded-xl p-6 bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60 hover:border-neutral-300/50 dark:hover:border-neutral-700/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all duration-500 ease-out">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                    <MessageCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Kommunikation
+                  </h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  Komplexe Ideen einfach erklären – das ist meine Leidenschaft. Ob in Blogposts, Präsentationen oder direkten Gesprächen.
+                </p>
+              </div>
 
-          <BentoCard
-            title="Kommunikation"
-            description="Komplexe Ideen einfach erklären – das ist meine Leidenschaft. Ob in Blogposts, Präsentationen oder direkten Gesprächen, ich finde die richtigen Worte."
-            icon={MessageCircle}
-            size="medium"
-          />
+              {/* Design & Creativity */}
+              <div className="group relative flex flex-col gap-4 h-full rounded-xl p-6 bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60 hover:border-neutral-300/50 dark:hover:border-neutral-700/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all duration-500 ease-out">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-pink-100 dark:bg-pink-900/30 rounded-lg">
+                    <Palette className="w-6 h-6 text-pink-600 dark:text-pink-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Design & UX
+                  </h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  UI/UX Design mit Fokus auf Benutzerfreundlichkeit und ästhetische, intuitive Interfaces.
+                </p>
+              </div>
 
-          <BentoCard
-            title="Kreativität & Design"
-            description="UI/UX Design mit Fokus auf Benutzerfreundlichkeit. Tailwind CSS ist mein Werkzeug der Wahl für saubere, responsive Designs."
-            icon={Palette}
-            size="medium"
-          />
-
-          <BentoCard
-            title="Wissenschaft"
-            description="Systematisches Denken und datengetriebene Entscheidungen aus meinem wissenschaftlichen Hintergrund."
-            icon={Microscope}
-            size="small"
-          />
-
-          <BentoCard
-            title="Fotografie"
-            description="Die Welt durch die Linse betrachten – ein Blick für Details und Komposition."
-            icon={Camera}
-            size="small"
-          />
-
-          <BentoCard
-            title="Projektmanagement"
-            description="Von der Idee zur Umsetzung – strukturiert und zielorientiert arbeiten."
-            icon={Target}
-            size="small"
-          />
-        </BentoGrid>
+              {/* Photography */}
+              <div className="group relative flex flex-col gap-4 h-full rounded-xl p-6 bg-gradient-to-b from-neutral-50/60 via-neutral-50/40 to-neutral-50/30 dark:from-neutral-900/60 dark:via-neutral-900/40 dark:to-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60 hover:border-neutral-300/50 dark:hover:border-neutral-700/50 shadow-[0_4px_20px_rgb(0,0,0,0.04)] dark:shadow-[0_4px_20px_rgb(0,0,0,0.2)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] dark:hover:shadow-[0_8px_30px_rgb(0,0,0,0.3)] transition-all duration-500 ease-out">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                    <Camera className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+                    Fotografie
+                  </h3>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  Die Welt durch die Linse betrachten – ein Blick für Details, Komposition und visuelles Storytelling.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Projects Section */}

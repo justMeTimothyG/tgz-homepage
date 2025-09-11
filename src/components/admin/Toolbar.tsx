@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Bold,
   Italic,
@@ -11,8 +11,12 @@ import {
   Code,
   Image,
   Save,
-  Loader2
+  Loader2,
+  Package,
+  FileText
 } from 'lucide-react';
+import ComponentSelector from './ComponentSelector';
+import BlogPostLinker from './BlogPostLinker';
 
 interface ToolbarProps {
   onInsertMarkdown: (markdown: string) => void;
@@ -22,6 +26,8 @@ interface ToolbarProps {
 }
 
 export default function Toolbar({ onInsertMarkdown, onSave, saving, hasUnsavedChanges }: ToolbarProps) {
+  const [showComponentSelector, setShowComponentSelector] = useState(false);
+  const [showBlogPostLinker, setShowBlogPostLinker] = useState(false);
   const toolbarItems = [
     {
       icon: Bold,
@@ -136,6 +142,24 @@ export default function Toolbar({ onInsertMarkdown, onSave, saving, hasUnsavedCh
               <span className="text-xs font-bold">H{level}</span>
             </button>
           ))}
+
+          {/* Advanced Tools */}
+          <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2" />
+          <button
+            onClick={() => setShowComponentSelector(true)}
+            title="Insert Component"
+            className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+          >
+            <Package className="w-4 h-4" />
+          </button>
+          
+          <button
+            onClick={() => setShowBlogPostLinker(true)}
+            title="Link to Blog Post"
+            className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+          >
+            <FileText className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Save Button */}
@@ -170,6 +194,23 @@ export default function Toolbar({ onInsertMarkdown, onSave, saving, hasUnsavedCh
         <span className="ml-3">Cmd+I Italic</span>
         <span className="ml-3">Cmd+K Link</span>
       </div>
+
+      {/* Modals */}
+      <ComponentSelector
+        isOpen={showComponentSelector}
+        onClose={() => setShowComponentSelector(false)}
+        onSelectComponent={(componentName, exampleCode) => {
+          onInsertMarkdown(exampleCode || `<${componentName} />`);
+        }}
+      />
+      
+      <BlogPostLinker
+        isOpen={showBlogPostLinker}
+        onClose={() => setShowBlogPostLinker(false)}
+        onSelectPost={(slug, title) => {
+          onInsertMarkdown(`[${title}](/blog/${slug})`);
+        }}
+      />
     </div>
   );
 }

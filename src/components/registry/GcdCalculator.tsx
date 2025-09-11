@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { ChevronDown, ChevronRight, Calculator, RotateCcw } from 'lucide-react';
+import { ChevronDown, ChevronRight, Calculator, RotateCcw, Dices } from 'lucide-react';
 
 interface GcdStep {
   step: number;
   a: number;
   b: number;
   remainder: number;
+  quotient: number;
   calculation: string;
   description: string;
 }
@@ -29,6 +30,7 @@ export default function GcdCalculator({
   const [b, setB] = useState(initialB);
   const [showSteps, setShowSteps] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const { gcd, steps } = useMemo(() => {
     if (a <= 0 || b <= 0) {
@@ -54,7 +56,8 @@ export default function GcdCalculator({
         a: currentA,
         b: currentB,
         remainder,
-        calculation: `${currentA} = ${quotient} × ${currentB} + ${remainder}`,
+        quotient,
+        calculation: `${currentA} / ${currentB} = ${quotient} + (Rest: ${remainder})`,
         description: remainder === 0 
           ? `${currentA} ist durch ${currentB} teilbar. Der ggT ist ${currentB}.`
           : `${currentA} geteilt durch ${currentB} ergibt ${quotient} Rest ${remainder}.`
@@ -81,9 +84,9 @@ export default function GcdCalculator({
     }
   };
 
-  const setExample = (exampleA: number, exampleB: number) => {
-    setA(exampleA);
-    setB(exampleB);
+  const generateRandom = () => {
+    setA(Math.floor(Math.random() * 100) + 1);
+    setB(Math.floor(Math.random() * 100) + 1);
   };
 
   const isValid = a > 0 && b > 0;
@@ -118,73 +121,86 @@ export default function GcdCalculator({
 
       {isExpanded && (
         <>
-          {/* Examples - now shown only when expanded */}
-          <div className="mb-6">
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Beispiele:</p>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => setExample(48, 18)}
-                className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                         rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                48, 18
-              </button>
-              <button
-                onClick={() => setExample(60, 24)}
-                className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                         rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                60, 24
-              </button>
-              <button
-                onClick={() => setExample(84, 36)}
-                className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                         rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                84, 36
-              </button>
-              <button
-                onClick={() => setExample(17, 19)}
-                className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                         rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
-              >
-                17, 19 (Primzahlen)
-              </button>
-            </div>
-          </div>
-      {/* Moved all content inside expanded section */}
 
       {/* Input Controls */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Erste Zahl (a)
-          </label>
-          <input
-            type="number"
-            min="1"
-            max="9999"
-            value={a}
-            onChange={(e) => setA(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Zweite Zahl (b)
-          </label>
-          <input
-            type="number"
-            min="1"
-            max="9999"
-            value={b}
-            onChange={(e) => setB(Number(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
-                     bg-white dark:bg-gray-700 text-gray-900 dark:text-white
-                     focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
+      <div className="mb-6">
+        <div className="flex items-end gap-4">
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Erste Zahl
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pr-4 bg-gray-100 dark:bg-gray-600 border-r border-gray-300 dark:border-gray-500 rounded-l-lg">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">a</span>
+              </div>
+              <input
+                type="number"
+                min="1"
+                max="9999"
+                value={a}
+                onChange={(e) => setA(Number(e.target.value))}
+                className="w-full pl-14 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
+                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
+          
+          <div className="flex-1">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Zweite Zahl
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pr-4 bg-gray-100 dark:bg-gray-600 border-r border-gray-300 dark:border-gray-500 rounded-l-lg">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">b</span>
+              </div>
+              <input
+                type="number"
+                min="1"
+                max="9999"
+                value={b}
+                onChange={(e) => setB(Number(e.target.value))}
+                className="w-full pl-14 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
+                         bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                         focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          </div>
+          
+          {/* Action Buttons - inline with inputs */}
+          <div className="flex gap-2">
+            <div className="relative group">
+              <button
+                onClick={generateRandom}
+                className="flex items-center justify-center w-10 h-10 rounded-lg
+                         bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400
+                         hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors"
+              >
+                <Dices className="w-5 h-5" />
+              </button>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 
+                            bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded
+                            opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                Zufallszahlen generieren
+              </div>
+            </div>
+            
+            <div className="relative group">
+              <button
+                onClick={reset}
+                className="flex items-center justify-center w-10 h-10 rounded-lg
+                         bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400
+                         hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              >
+                <RotateCcw className="w-5 h-5" />
+              </button>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 
+                            bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs rounded
+                            opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+                Zurücksetzen
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -230,44 +246,71 @@ export default function GcdCalculator({
                 bis der Rest 0 ist. Der letzte nicht-null Rest ist der ggT.
               </div>
               
-              {steps.map((step) => (
-                <div key={step.step} 
-                     className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 
-                                  rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 
-                                  text-sm font-semibold">
-                      {step.step}
-                    </div>
-                    <div className="flex-1">
-                      <div className="font-mono text-sm bg-white dark:bg-gray-800 
-                                    border border-gray-200 dark:border-gray-700 rounded px-3 py-2 mb-2">
-                        {step.calculation}
+              {steps.map((step, index) => {
+                const getHighlightColor = (value: number, type: 'a' | 'b' | 'remainder') => {
+                  if (hoveredStep === null) return '';
+                  
+                  const colors = {
+                    blue: 'bg-blue-200 dark:bg-blue-800 text-blue-900 dark:text-blue-100',
+                    green: 'bg-green-200 dark:bg-green-800 text-green-900 dark:text-green-100', 
+                    orange: 'bg-orange-200 dark:bg-orange-800 text-orange-900 dark:text-orange-100'
+                  };
+                  
+                  const hoveredStepData = steps[hoveredStep];
+                  
+                  // Blue: All occurrences of hovered step's dividend
+                  if (value === hoveredStepData.a) return colors.blue;
+                  
+                  // Green: All occurrences of hovered step's divisor
+                  if (value === hoveredStepData.b) return colors.green;
+                  
+                  // Orange: All occurrences of hovered step's remainder  
+                  if (value === hoveredStepData.remainder) return colors.orange;
+                  
+                  return '';
+                };
+                
+                return (
+                  <div key={step.step} 
+                       className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4 transition-colors"
+                       onMouseEnter={() => setHoveredStep(index)}
+                       onMouseLeave={() => setHoveredStep(null)}>
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-8 h-8 bg-blue-100 dark:bg-blue-900/30 
+                                    rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 
+                                    text-sm font-semibold">
+                        {step.step}
                       </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {step.description}
-                      </p>
+                      <div className="flex-1">
+                        <div className="font-mono text-sm bg-white dark:bg-gray-800 
+                                      border border-gray-200 dark:border-gray-700 rounded px-3 py-2 mb-2">
+                          <span className={`px-1 rounded transition-colors ${getHighlightColor(step.a, 'a')}`}>
+                            {step.a}
+                          </span>
+                          <span> / </span>
+                          <span className={`px-1 rounded transition-colors ${getHighlightColor(step.b, 'b')}`}>
+                            {step.b}
+                          </span>
+                          <span> = {step.quotient} + (Rest: </span>
+                          <span className={`px-1 rounded transition-colors ${getHighlightColor(step.remainder, 'remainder')}`}>
+                            {step.remainder}
+                          </span>
+                          <span>)</span>
+                          <span className="opacity-40">/{step.b}</span>
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
       )}
 
-      {/* Actions */}
-      <div className="flex gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-        <button
-          onClick={reset}
-          className="flex items-center gap-2 px-4 py-2 bg-gray-200 dark:bg-gray-700 
-                   text-gray-700 dark:text-gray-300 rounded-lg 
-                   hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm"
-        >
-          <RotateCcw className="w-4 h-4" />
-          Zurücksetzen
-        </button>
-      </div>
 
       {/* Component Info Footer */}
       <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">

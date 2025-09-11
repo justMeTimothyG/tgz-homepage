@@ -7,10 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Basic Development
 
 - **Development server**: `npm run dev` (Turbopack-powered with HMR)
-- **Resilient development**: `npm run dev:resilient` (nodemon-based auto-restart)
 - **Production build**: `npm run build`
 - **Production server**: `npm start`
-- **Production with watch**: `npm start:watch` (nodemon-based)
 - **Linting**: `npm run lint`
 
 ### Database Management
@@ -58,6 +56,7 @@ The database is designed for a **comprehensive educational content platform** wi
 ### Connection & ORM
 
 - **PostgreSQL 16** via Docker Compose (port 5433)
+- **Next.js Development Server** on port 3020
 - **Drizzle ORM** with type-safe queries and migrations
 - **Connection pooling** with singleton client pattern
 - **Environment-based configuration** (`.env.local` for local overrides)

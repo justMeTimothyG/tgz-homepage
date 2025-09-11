@@ -163,7 +163,24 @@ export default function PostEditor({ isNewPost = false }: PostEditorProps) {
         throw new Error(data?.error || 'Failed to save post');
       }
 
-      showToast(`Post ${isNewPost ? 'created' : 'updated'} successfully`, 'success');
+      // Show component detection results in toast if available
+      if (data.components) {
+        const { detected, linked, missing } = data.components;
+        let componentMessage = `Post ${isNewPost ? 'created' : 'updated'} successfully`;
+        
+        if (detected.length > 0) {
+          componentMessage += `\n\n📦 Components detected: ${detected.join(', ')}`;
+          componentMessage += `\n✅ Linked: ${linked.join(', ') || 'none'}`;
+          if (missing.length > 0) {
+            componentMessage += `\n❌ Missing from database: ${missing.join(', ')}`;
+          }
+        }
+        
+        showToast(componentMessage, 'success');
+      } else {
+        showToast(`Post ${isNewPost ? 'created' : 'updated'} successfully`, 'success');
+      }
+      
       setHasUnsavedChanges(false);
       
       // Navigate back to list (user can manually refresh if needed)

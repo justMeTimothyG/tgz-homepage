@@ -250,7 +250,111 @@
           }
         ]
       }
+    },
+    "Task": {
+      "name": "Task",
+      "displayName": "Exercise Task",
+      "description": "Task component for use within Exercise. Contains the main exercise description and requirements.",
+      "category": "Educational",
+      "version": "1.0.0",
+      "isInteractive": false,
+      "requiresSandbox": false,
+      "dependencies": {},
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The task description content"
+        }
+      },
+      "config": {
+        "examples": [
+          {
+            "title": "Basic Task",
+            "description": "Simple task description",
+            "code": "<Task>\n  Löse die Gleichung: x² - 5x + 6 = 0\n</Task>"
+          }
+        ]
+      }
+    },
+    "Hint": {
+      "name": "Hint",
+      "displayName": "Exercise Hint",
+      "description": "Hint component for use within Exercise. Provides progressive hints to help solve the exercise.",
+      "category": "Educational",
+      "version": "1.0.0",
+      "isInteractive": false,
+      "requiresSandbox": false,
+      "dependencies": {},
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The hint content"
+        }
+      },
+      "config": {
+        "examples": [
+          {
+            "title": "Basic Hint",
+            "description": "Simple hint for guidance",
+            "code": "<Hint>\n  Verwende die Faktorisierung oder die p-q-Formel.\n</Hint>"
+          }
+        ]
+      }
+    },
+    "Step": {
+      "name": "Step",
+      "displayName": "Exercise Step",
+      "description": "Step component for use within Exercise. Provides step-by-step solution guidance.",
+      "category": "Educational",
+      "version": "1.0.0",
+      "isInteractive": false,
+      "requiresSandbox": false,
+      "dependencies": {},
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The step content"
+        }
+      },
+      "config": {
+        "examples": [
+          {
+            "title": "Basic Step",
+            "description": "Simple solution step",
+            "code": "<Step>\n  Bestimme die Koeffizienten: a=1, b=-5, c=6\n</Step>"
+          }
+        ]
+      }
+    },
+    "Solution": {
+      "name": "Solution",
+      "displayName": "Exercise Solution",
+      "description": "Solution component for use within Exercise. Contains the complete solution to the exercise.",
+      "category": "Educational",
+      "version": "1.0.0",
+      "isInteractive": false,
+      "requiresSandbox": false,
+      "dependencies": {},
+      "props": {
+        "children": {
+          "type": "ReactNode",
+          "required": true,
+          "description": "The solution content"
+        }
+      },
+      "config": {
+        "examples": [
+          {
+            "title": "Basic Solution",
+            "description": "Simple solution presentation",
+            "code": "<Solution>\n  **Lösung:** x₁ = 2, x₂ = 3\n</Solution>"
+          }
+        ]
+      }
     }
   },
-  "lastSync": "2025-09-11T12:08:44.346Z"
+  "lastSync": "2025-09-11T13:35:43.123Z"
 }
