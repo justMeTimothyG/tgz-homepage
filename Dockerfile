@@ -43,9 +43,12 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 # Copy necessary configuration and source files for production operations
-COPY --from=builder /app/drizzle/ ./drizzle/
-COPY --from=builder /app/scripts/ ./scripts/
-COPY --from=builder /app/src/ ./src/
+# Create drizzle directory structure and copy all files including subdirectories
+RUN mkdir -p ./drizzle/meta
+COPY --from=builder /app/drizzle/*.sql ./drizzle/
+COPY --from=builder /app/drizzle/meta/ ./drizzle/meta/
+COPY --from=builder /app/scripts ./scripts
+COPY --from=builder /app/src ./src
 COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 # Note: .env files are not copied as they're git-ignored and environment variables are injected at runtime
