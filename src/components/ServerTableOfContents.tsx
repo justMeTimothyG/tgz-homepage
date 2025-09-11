@@ -18,21 +18,52 @@ export default function ServerTableOfContents({
   const [activeId, setActiveId] = React.useState<string>("");
   const [showAll, setShowAll] = React.useState<boolean>(false);
 
+  const handleScrollTo = React.useCallback((targetId: string) => {
+    // Use browser's native anchor scrolling with CSS scroll-margin-top
+    // This is more reliable and consistent than manual offset calculations
+    window.location.hash = targetId;
+  }, []);
+
   React.useEffect(() => {
     if (headings.length === 0) return;
 
-    // Active section tracking via scroll position
+    // Active section tracking via scroll position with improved detection
     const onScroll = () => {
-      const offset = 120; // header height + padding
+      const offset = 16; // Small offset to match scroll-margin-top (1rem = 16px)
       let current = headings[0]?.id || "";
+      
+      // Find the section that's currently most visible
+      let closestSection = null;
+      let closestDistance = Infinity;
       
       for (const h of headings) {
         const el = document.getElementById(h.id);
         if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        if (top - offset <= 0) current = h.id;
-        else break;
+        
+        const rect = el.getBoundingClientRect();
+        const elementTop = rect.top;
+        const elementBottom = rect.bottom;
+        
+        // Check if element is in viewport or just passed
+        if (elementTop <= offset) {
+          current = h.id;
+        }
+        
+        // For short sections, also check if element is visible in viewport
+        if (elementTop >= 0 && elementTop <= window.innerHeight) {
+          const distance = Math.abs(elementTop - offset);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestSection = h.id;
+          }
+        }
       }
+      
+      // If we have a section very close to the offset, prefer that over the "passed" logic
+      if (closestSection && closestDistance < 50) {
+        current = closestSection;
+      }
+      
       setActiveId(current);
     };
 
@@ -86,28 +117,28 @@ export default function ServerTableOfContents({
       <ul className="space-y-1">
         {sections.map((sec) => (
           <li key={sec.id}>
-            <a
-              href={`#${sec.id}`}
+            <button
+              onClick={() => handleScrollTo(sec.id)}
               className={
-                "block break-words hover:text-blue-600 dark:hover:text-blue-400 " +
+                "block w-full text-left break-words hover:text-blue-600 dark:hover:text-blue-400 " +
                 (activeH2Id === sec.id ? "text-blue-600 dark:text-blue-400" : "opacity-80")
               }
             >
               {sec.text}
-            </a>
+            </button>
             {showAll && sec.children.length > 0 && (
               <ul className="mt-1">
                 {sec.children.map((h) => (
                   <li key={h.id} className={indentClass(h.level, 2)}>
-                    <a
-                      href={`#${h.id}`}
+                    <button
+                      onClick={() => handleScrollTo(h.id)}
                       className={
-                        "block break-words hover:text-blue-600 dark:hover:text-blue-400 " +
+                        "block w-full text-left break-words hover:text-blue-600 dark:hover:text-blue-400 " +
                         (activeId === h.id ? "text-blue-600 dark:text-blue-400" : "opacity-80")
                       }
                     >
                       {h.text}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>
