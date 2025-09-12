@@ -1,295 +1,171 @@
 # Coolify Deployment Guide
 
-This guide will help you deploy your Next.js 15 personal website to production using Coolify.
+This guide will help you deploy your static Next.js 15 personal website to production using Coolify.
 
 ## 📋 Prerequisites
 
-- Coolify instance running on your server
+- Coolify instance running on your server  
 - Git repository access from Coolify server
 - Domain name configured (optional but recommended)
 
-## 🏗️ Architecture Decision: Database Setup
+## 🚀 Quick Start
 
-You have **two options** for PostgreSQL in Coolify:
+Since this is now a **static site** (no database required), deployment is straightforward:
 
-### Option A: Separate PostgreSQL Resource (Recommended)
-**✅ Pros:**
-- Better resource isolation
-- Independent scaling and backups
-- Easier database management and monitoring
-- Can be shared across multiple applications
-- Better security isolation
+### 1. Create New Resource in Coolify
 
-**❌ Cons:**
-- Requires managing two separate services
-- Need to configure network connectivity
+1. **Add new resource** → **Application** → **Docker Compose**
+2. **Connect Git repository**: Select your repository
+3. **Branch**: `main` (or your preferred branch)
+4. **Docker Compose file**: Use the existing `Dockerfile` (no docker-compose.yml needed)
 
-### Option B: Docker Compose with Embedded PostgreSQL
-**✅ Pros:**
-- Single service deployment
-- Simplified setup
-- Everything in one place
+### 2. Configuration
 
-**❌ Cons:**
-- Coupled application and database lifecycle
-- Harder to backup/restore database independently
-- Less flexible scaling options
+#### Environment Variables
 
-**Recommendation:** Use **Option A** for production deployments.
-
----
-
-## 🚀 Deployment Steps
-
-### 1. Prepare Your Repository
-
-Ensure these files are in your repository root:
-- ✅ `Dockerfile` (created)
-- ✅ `.dockerignore` (created) 
-- ✅ `docker-compose.yml` (existing)
-- ✅ Database migrations in `/drizzle/` (existing)
-
-### 2. Option A: Deploy with Separate PostgreSQL Resource
-
-#### Step 2A.1: Create PostgreSQL Database Resource
-
-1. In Coolify dashboard, click **"+ New Resource"**
-2. Select **"Database"** → **"PostgreSQL"**
-3. Configure the database:
-   ```
-   Name: tgz-lol-postgres
-   Version: 16
-   Database Name: tgz_lol
-   Username: postgres  
-   Password: [generate secure password]
-   Port: 5432
-   ```
-4. Click **"Deploy"**
-5. **Note the internal connection URL** (will be something like `postgresql://postgres:password@tgz-lol-postgres:5432/tgz_lol`)
-
-#### Step 2A.2: Deploy Next.js Application
-
-1. Click **"+ New Resource"** → **"Application"**
-2. Connect your Git repository
-3. Set **Build Pack** to **"Docker"**
-4. Configure **Environment Variables**:
-   ```env
-   DATABASE_URL=postgresql://postgres:[PASSWORD]@tgz-lol-postgres:5432/tgz_lol
-   BETTER_AUTH_SECRET=[generate-32-char-random-string]
-   BETTER_AUTH_URL=https://yourdomain.com
-   NODE_ENV=production
-   NEXT_TELEMETRY_DISABLED=1
-   ```
-5. Set **Port** to `3000`
-6. **Advanced Settings**:
-   - Health Check Path: `/api/health` (you might want to create this endpoint)
-   - Build Command: `npm run build`
-   - Start Command: `node server.js`
-
-#### Step 2A.3: Run Database Migrations
-
-After deployment, run migrations:
-1. Go to your application in Coolify
-2. Open **"Terminal"** or use **"Execute Command"**
-3. Run: `npm run drizzle:migrate`
-
-### 3. Option B: Deploy with Docker Compose
-
-#### Step 3.1: Update docker-compose.yml for Production
-
-Create a production docker-compose.yml:
-
-```yaml
-version: '3.8'
-
-services:
-  app:
-    build: .
-    restart: unless-stopped
-    environment:
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
-      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
-      - BETTER_AUTH_URL=${BETTER_AUTH_URL}
-      - NODE_ENV=production
-      - NEXT_TELEMETRY_DISABLED=1
-    depends_on:
-      postgres:
-        condition: service_healthy
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-
-  postgres:
-    image: postgres:16
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB:-tgz_lol}
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-tgz_lol}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    networks:
-      - app-network
-
-volumes:
-  pg_data:
-
-networks:
-  app-network:
-    driver: bridge
-```
-
-#### Step 3.2: Deploy with Docker Compose
-
-1. In Coolify: **"+ New Resource"** → **"Application"**
-2. Connect your Git repository
-3. Set **Build Pack** to **"Docker Compose"**
-4. Configure **Environment Variables**:
-   ```env
-   POSTGRES_USER=postgres
-   POSTGRES_PASSWORD=[secure-password]
-   POSTGRES_DB=tgz_lol
-   BETTER_AUTH_SECRET=[generate-32-char-random-string]
-   BETTER_AUTH_URL=https://yourdomain.com
-   ```
-5. Set **Port** to `3000`
-
----
-
-## 🔧 Configuration Details
-
-### Required Environment Variables
+The static site requires minimal environment variables:
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@host:5432/db` |
-| `BETTER_AUTH_SECRET` | Secret for auth sessions (32+ chars) | `your-super-secret-key-32-characters-long` |
-| `BETTER_AUTH_URL` | Your application URL | `https://yourdomain.com` |
-| `NODE_ENV` | Node environment | `production` |
+| `NODE_ENV` | Runtime environment | `production` |
 | `NEXT_TELEMETRY_DISABLED` | Disable Next.js telemetry | `1` |
 
-### Generating Secure Secrets
+#### Port Configuration
 
-```bash
-# Generate BETTER_AUTH_SECRET (32 characters)
-openssl rand -hex 16
+- **Internal Port**: `3000` (defined in Dockerfile)
+- **External Port**: Auto-assigned by Coolify or custom
 
-# Or use Node.js
-node -e "console.log(require('crypto').randomBytes(16).toString('hex'))"
+### 3. Deploy
+
+1. **Save configuration**
+2. **Click "Deploy"** 
+3. **Monitor build logs** for any issues
+
+## 📁 Content Management
+
+### Adding New Blog Posts
+
+Since the blog uses file-based content:
+
+1. **Create new MDX file** in `/content/blog/`
+2. **Add frontmatter** with title, date, excerpt, tags, and `published: true`
+3. **Commit and push** to your git repository
+4. **Coolify auto-deploys** the new content
+
+Example blog post structure:
+```yaml
+---
+title: "My New Post"
+date: "2025-01-12"
+excerpt: "A brief description"
+tags: ["nextjs", "blog"]
+published: true
+---
+
+# Content goes here...
 ```
 
-## 📊 Post-Deployment Checklist
+## ⚡ Performance Features
 
-### 1. Verify Database Connection
-- [ ] Application starts without database errors
-- [ ] Database migrations completed successfully
-- [ ] Database contains expected tables
+- **Static Site Generation (SSG)**: All pages pre-rendered at build time
+- **No Database**: Eliminates database queries and connection overhead
+- **Docker Multi-stage Build**: Optimized production image
+- **Turbopack**: Fast development and build times
 
-### 2. Check Application Health
-- [ ] Homepage loads correctly
-- [ ] Admin routes work (`/admin`)
-- [ ] API endpoints respond (`/api/posts`)
-- [ ] Authentication flow works
+## 🔍 Troubleshooting
 
-### 3. Performance Verification
-- [ ] Build completed successfully
-- [ ] Static assets loading
-- [ ] No console errors in browser
-- [ ] Reasonable loading times
+### Build Failures
 
-### 4. Security Check
-- [ ] HTTPS configured (if using custom domain)
-- [ ] Environment variables not exposed
-- [ ] Admin authentication working
-- [ ] Database not publicly accessible
+1. **Check build logs** in Coolify interface
+2. **Common issues**:
+   - TypeScript errors: Run `npm run lint` locally first
+   - Missing content: Ensure `/content/blog/` directory exists with valid MDX files
+   - Build cache: Clear Coolify build cache if needed
 
-## 🐛 Troubleshooting
+### Runtime Issues
 
-### Common Issues
+1. **Application not starting**:
+   - Check if port 3000 is correctly configured
+   - Verify Dockerfile `CMD` instruction
 
-#### Build Fails
-- **Issue**: npm install fails
-- **Solution**: Check Node.js version, ensure package.json is committed
+2. **404 errors**:
+   - Check Next.js static file generation
+   - Verify blog post frontmatter format
 
-#### Database Connection Errors
-- **Issue**: `ECONNREFUSED` or timeout errors
-- **Solutions**:
-  - Verify `DATABASE_URL` format
-  - Check if PostgreSQL service is running
-  - Ensure network connectivity between services
+### Performance Optimization
 
-#### Authentication Not Working
-- **Issue**: Auth redirects fail
-- **Solutions**:
-  - Verify `BETTER_AUTH_URL` matches your domain
-  - Check `BETTER_AUTH_SECRET` is set correctly
-  - Ensure HTTPS for production domains
+1. **Enable Coolify caching** if available
+2. **Monitor build times** - static builds should be fast
+3. **Check bundle size** with `npm run build` locally
 
-#### Migration Errors
-- **Issue**: Migrations fail to run
-- **Solutions**:
-  ```bash
-  # Connect to your application container
-  npm run drizzle:generate  # If schema changed
-  npm run drizzle:migrate   # Apply migrations
-  ```
+## 📊 Monitoring
 
-### Logs and Debugging
+### Health Checks
 
-Access logs in Coolify:
-1. Go to your application → **"Logs"**
-2. Check both **Application** and **Build** logs
-3. For database issues, check PostgreSQL resource logs
+Coolify can monitor the application health:
+- **Endpoint**: `/` (homepage)
+- **Expected**: HTTP 200 status
+- **Interval**: 30 seconds
 
-## 🔄 Updates and Maintenance
+### Build Optimization
+
+- **Build time**: Should be under 2 minutes for static site
+- **Image size**: Optimized with multi-stage Docker build
+- **Incremental builds**: Next.js caches unchanged files
+
+## 🔄 Updates & Maintenance
 
 ### Deploying Updates
-1. Push changes to your Git repository
-2. Coolify will automatically trigger deployment
-3. Monitor logs for any issues
-4. Run new migrations if database schema changed
 
-### Database Backups
-For **Option A** (separate PostgreSQL):
-- Use Coolify's built-in backup features
-- Access via **Database Resource** → **"Backups"**
+1. **Push to main branch** - triggers automatic deployment
+2. **Monitor deployment** in Coolify logs
+3. **Verify live site** after deployment completes
 
-For **Option B** (Docker Compose):
-- Set up manual backup scripts
-- Consider using pg_dump in scheduled tasks
+### Content Updates
+
+- **New blog posts**: Just add MDX files and push
+- **Content changes**: Edit existing MDX files and push  
+- **No database migrations** or schema changes needed
+
+### Rollbacks
+
+If needed, rollback through Coolify:
+1. **Application settings** → **Deployments**
+2. **Select previous successful deployment**
+3. **Click "Redeploy"**
+
+## 🎯 Production Checklist
+
+- [ ] Domain properly configured
+- [ ] SSL certificate working
+- [ ] All blog posts display correctly
+- [ ] Static assets loading (images, CSS, JS)
+- [ ] Math expressions rendering (if using KaTeX)
+- [ ] Dark mode toggle working
+- [ ] Mobile responsiveness verified
+- [ ] SEO meta tags present
+
+## 🚨 Troubleshooting Commands
+
+If you need to debug the production build locally:
+
+```bash
+# Test production build locally
+npm run build
+npm run start
+
+# Check for build errors
+npm run lint
+
+# Verify content parsing
+ls -la content/blog/
+```
 
 ## 📈 Scaling Considerations
 
-### Horizontal Scaling
-- Database should be separate (Option A) for multiple app instances
-- Consider Redis for session storage if scaling beyond single instance
-- Use CDN for static assets
+Since this is a static site:
+- **High traffic**: Consider adding CDN (Cloudflare, etc.)
+- **Multiple regions**: Deploy to multiple Coolify instances
+- **Build optimization**: Ensure fast build times for frequent content updates
 
-### Performance Optimization
-- Enable Next.js compression
-- Configure proper caching headers
-- Consider implementing health check endpoint at `/api/health`
-
----
-
-## 🎯 Next Steps
-
-After successful deployment:
-1. **Configure Domain**: Set up your custom domain in Coolify
-2. **SSL Certificate**: Enable automatic SSL via Let's Encrypt
-3. **Monitoring**: Set up uptime monitoring and alerts
-4. **Backups**: Configure automated database backups
-5. **Analytics**: Consider adding privacy-focused analytics (Plausible)
-
----
-
-**Questions or Issues?** 
-- Check Coolify logs first
-- Verify all environment variables are set correctly  
-- Ensure database migrations completed successfully
+This simplified deployment eliminates the complexity of database management while maintaining all the essential features of your personal blog.

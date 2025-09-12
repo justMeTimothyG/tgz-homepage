@@ -11,77 +11,61 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Production server**: `npm start`
 - **Linting**: `npm run lint`
 
-### Database Management
+### Content Management
 
-- **Start PostgreSQL**: `npm run db:up` (Docker Compose)
-- **Stop database**: `npm run db:down`
-- **Check database status**: `npm run db:status`
-- **Generate migrations**: `npm run drizzle:generate`
-- **Run migrations**: `npm run drizzle:migrate`
-- **Database GUI**: `npm run drizzle:studio` (opens on port 4983)
-
-### Component Management
-
-- **Check component status**: `npm run components:status`
-- **Push local components to database**: `npm run components:push`
-- **Version bump and sync**: `npm run components:version [patch|minor|major]`
-- **Initialize component manifest**: `npm run components:init`
+- **Tailwind safelist generation**: `npm run tailwind:safelist` - Generates safelist for dynamic Tailwind classes
 
 ## Architecture Overview
 
-This is a **full-stack Next.js 15 personal website** for Timothy Lüdtke, featuring sophisticated content management for educational content, AI-powered blog generation, and interactive components. The site is primarily in German and designed as a content-rich platform for technical education.
+This is a **static Next.js 15 personal website** for Timothy Lüdtke, featuring file-based content management for educational blog posts and interactive components. The site is primarily in German and designed as a content-rich platform for technical education.
 
 ### Tech Stack
 
 - **Framework**: Next.js 15 with App Router and React 19
 - **Language**: TypeScript with strict mode and ES modules
-- **Database**: PostgreSQL 16 with Drizzle ORM
+- **Content**: MDX files with frontmatter for blog posts
 - **Styling**: Tailwind CSS 4 with Typography plugin
-- **Content**: Markdown with math support (KaTeX) and GitHub-flavored markdown
+- **Markdown**: ReactMarkdown with math support (KaTeX) and GitHub-flavored markdown
 - **Build Tool**: Turbopack (default for dev and build)
 
-## Database Architecture
+## Content Architecture
 
-### Schema Design
+### Blog System
 
-The database is designed for a **comprehensive educational content platform** with the following key entities:
+The blog system is file-based using MDX files stored in the `/content/blog/` directory:
 
-- **Blog Posts** with versioning, status workflow (draft/published/archived), and MDX content support
-- **Series & Podcasts** for organizing AI-generated educational audio content with transcripts
-- **Hierarchical Tags** using materialized path pattern for nested categorization
-- **Skills & Progress Tracking** with proficiency levels for learning documentation
-- **Comments & Reactions** system with guest-friendly moderation
-- **Component Catalog** for documenting interactive educational elements
+- **MDX Files**: Blog posts written in MDX format with frontmatter metadata
+- **Frontmatter**: Contains title, date, excerpt, tags, and published status
+- **Static Generation**: Posts are read from filesystem during build time
+- **Math Support**: KaTeX rendering for mathematical expressions
+- **GitHub-flavored Markdown**: Enhanced markdown with tables, code blocks, etc.
 
-### Connection & ORM
+### Content Structure
 
-- **PostgreSQL 16** via Docker Compose (port 5433)
-- **Next.js Development Server** on port 3020
-- **Drizzle ORM** with type-safe queries and migrations
-- **Connection pooling** with singleton client pattern
-- **Environment-based configuration** (`.env.local` for local overrides)
+```
+/content/blog/
+├── post-slug.mdx
+├── another-post.mdx
+└── ...
+```
 
-## API Architecture & Data Flow
+Each MDX file contains:
+```yaml
+---
+title: "Post Title"
+date: "2025-01-12"
+excerpt: "Brief description"
+tags: ["tag1", "tag2"]
+published: true
+---
+```
 
-### API Patterns
+### Data Flow
 
-- **RESTful routes** following Next.js App Router conventions
-- **Type-safe requests/responses** with comprehensive TypeScript interfaces
-- **Admin authentication** via Bearer token, x-admin-token header, or query parameter
-- **Graceful error handling** with fallback empty responses for client resilience
-
-### Key API Routes
-
-- **`/api/posts`**: GET (latest posts with limit), POST (upsert with tag management)
-- **Tag auto-creation**: Automatic tag creation and association via slug matching
-- **Status management**: Draft → Published → Archived workflow with date-based publishing
-
-### Data Flow Patterns
-
-- **Client-side fetching**: `LatestPostsClient` with loading states and error handling
-- **Server-side rendering**: Blog pages with `force-dynamic` for fresh content
-- **Static generation**: Homepage with `force-static` and client-side hydration
-- **Skeleton loading**: Pixel-perfect loading states to prevent UI shifts
+- **Build-time Generation**: Blog utilities read MDX files during static generation
+- **Server-side Processing**: Posts processed on server using gray-matter for frontmatter parsing
+- **Client-side Hydration**: Interactive components hydrated after initial page load
+- **No API Routes**: All content served statically, no database queries
 
 ## Component Architecture & UI System
 
@@ -110,20 +94,20 @@ The database is designed for a **comprehensive educational content platform** wi
 
 ## Content Management & Publishing
 
-### Blog System Architecture
+### Blog System
 
 - **MDX content** with frontmatter parsing and GitHub-flavored markdown
 - **Mathematical expressions** rendered with KaTeX for educational content
-- **Version control** with complete history tracking in database
-- **Publishing workflow**: Draft → Published → Archived with scheduled publishing
+- **File-based version control** using Git for content history tracking
+- **Publishing workflow**: Published status controlled via frontmatter `published: true/false`
 - **SEO optimization** with auto-generated meta tags and Open Graph support
 
-### Admin Interface
+### Content Creation
 
-- **Live preview editor** at `/admin` route with real-time markdown rendering
-- **Tag management** with comma-separated input and auto-creation
-- **Image handling** with Next.js Image optimization
-- **Authentication**: Admin token-based access for content management
+- **Direct file editing** in IDE with TypeScript support and IntelliSense
+- **Frontmatter validation** ensures consistent metadata structure
+- **Image handling** with Next.js Image optimization for static assets
+- **No admin interface** - content managed directly through filesystem
 
 ## Path Aliases & Configuration
 
@@ -159,75 +143,6 @@ The database is designed for a **comprehensive educational content platform** wi
 - HTTP → `node-fetch` + `@tanstack/react-query`
 - Styling → `tailwindcss` + utility packages
 
-### Component Deployment Workflow
-
-**⚠️ IMPORTANT: Components are database-driven, not just file-based!**
-
-#### Complete Development → Production Flow:
-
-1. **Local Development**
-   ```bash
-   # Create component in /src/components/registry/ComponentName.tsx
-   # Add to /src/components/registry/index.ts exports
-   # Update /src/components/registry/components.config.json with metadata
-   ```
-
-2. **Test Sync Locally**
-   ```bash
-   npm run components:status    # Check sync status
-   npm run components:push      # Sync to local database
-   ```
-
-3. **Deploy to Production**
-   ```bash
-   git push                     # Deploy code changes
-   # Components are automatically synced during build process!
-   # No manual intervention needed - the build will:
-   # 1. Check for component changes
-   # 2. Automatically sync if changes detected
-   # 3. Continue with normal deployment
-   ```
-
-4. **Verify Deployment**
-   - Components appear in admin interface at `/admin`
-   - API endpoint `/api/components` returns updated components
-   - Components are available for use in blog posts and content
-
-#### Key Points:
-
-- **Automatic sync** - Components are automatically synced during build/deployment
-- **No manual intervention** - Changes detected and applied automatically
-- **Database-first** - Components must be in database to be available
-- **Version management** - Use `npm run components:version` for version bumps
-- **Graceful handling** - Deployment continues even if database is unavailable during build
-
-#### Initial Production Setup:
-
-```bash
-# First-time production setup
-npm run drizzle:migrate      # Ensure schema is current
-npm run components:push      # Seed components to empty production DB
-```
-
-#### Production Deployment Checklist:
-
-- [ ] Code deployed to production server (`git push`)
-- [ ] Build process completed successfully (auto-syncs components)
-- [ ] Component API accessible (`/api/components` returns expected components)
-- [ ] Admin interface shows components (`/admin` with proper auth)
-- [ ] Components load correctly in blog content
-
-#### Manual Commands (if needed):
-
-- **Manual component sync**: `npm run deploy:components`
-- **Check component status**: `npm run components:status`
-- **Force component push**: `npm run components:push`
-
-#### Component Structure:
-- `/src/components/registry/` - Component source files (.tsx)
-- `/src/components/registry/components.config.json` - Component metadata
-- `/src/components/registry/index.ts` - Component exports
-- Components sync to `component_catalog` database table
 
 ## Important Context Awareness
 

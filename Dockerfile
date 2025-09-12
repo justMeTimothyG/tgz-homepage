@@ -1,4 +1,4 @@
-# Multi-stage build for Next.js 15 production deployment
+# Multi-stage build for static Next.js deployment
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed
@@ -33,22 +33,16 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Install all dependencies (including tsx for scripts)
-COPY package.json package-lock.json* ./
-RUN npm ci && npm cache clean --force
-
 # Copy built application
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Copy necessary configuration and source files for production operations
-COPY --from=builder /app/drizzle ./drizzle
-COPY --from=builder /app/scripts ./scripts
-COPY --from=builder /app/src ./src
-COPY --from=builder /app/drizzle.config.ts ./drizzle.config.ts
+# Copy content files for MDX blog
+COPY --from=builder --chown=nextjs:nodejs /app/content ./content
+
+# Copy only essential configuration files
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
-# Note: .env files are not copied as they're git-ignored and environment variables are injected at runtime
 
 USER nextjs
 
