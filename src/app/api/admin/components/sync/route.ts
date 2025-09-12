@@ -265,8 +265,9 @@ async function syncComponents(): Promise<{ success: boolean; message: string; sy
 export async function POST(request: NextRequest) {
   try {
     // Check Better Auth session
+    const headersList = await headers();
     const session = await auth.api.getSession({
-      headers: headers()
+      headers: headersList
     });
 
     if (!session?.user) {
