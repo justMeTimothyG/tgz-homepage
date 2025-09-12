@@ -11,6 +11,11 @@ export async function extractComponentsFromMarkdown(content: string): Promise<st
       return [];
     }
     
+    // Basic content validation
+    if (content.length > 50000) {
+      console.warn('⚠️ Large MDX content detected:', content.length, 'characters');
+    }
+    
     // Use MDX compiler to get proper AST-based component detection
     const compiledCode = await compile(content, {
       remarkPlugins: [],
