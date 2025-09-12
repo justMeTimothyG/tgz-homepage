@@ -1,15 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { drizzle } from 'drizzle-orm/postgres-js';
-import { blogPosts, blogPostComponents, componentCatalog } from '@/db/schema';
-import postgres from 'postgres';
+import { getDb, schema } from '@/db/client';
 import { eq, and, inArray, sql } from 'drizzle-orm';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-
-// Database connection
-const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:postgres@127.0.0.1:5433/tgz_lol';
-const client = postgres(connectionString, { max: 1 });
-const db = drizzle(client);
 
 // Extract component names from markdown content
 function extractComponentsFromContent(content: string): string[] {
@@ -30,11 +23,13 @@ function extractComponentsFromContent(content: string): string[] {
 async function reprocessPost(postSlug: string): Promise<{ success: boolean; message: string; details: any }> {
   console.log(`🔄 Processing post: ${postSlug}`);
   
+  const db = getDb();
+  
   // Get the post
   const [post] = await db
     .select()
-    .from(blogPosts)
-    .where(eq(blogPosts.slug, postSlug));
+    .from(schema.blogPosts)
+    .where(eq(schema.blogPosts.slug, postSlug));
     
   if (!post) {
     return { success: false, message: `Post not found: ${postSlug}`, details: null };
@@ -57,18 +52,18 @@ async function reprocessPost(postSlug: string): Promise<{ success: boolean; mess
   // Find component IDs from names
   const components = await db
     .select({ 
-      id: componentCatalog.id, 
-      name: componentCatalog.name, 
-      version: componentCatalog.version,
-      sourceType: componentCatalog.sourceType,
-      status: componentCatalog.status,
-      isPublished: componentCatalog.isPublished
+      id: schema.componentCatalog.id, 
+      name: schema.componentCatalog.name, 
+      version: schema.componentCatalog.version,
+      sourceType: schema.componentCatalog.sourceType,
+      status: schema.componentCatalog.status,
+      isPublished: schema.componentCatalog.isPublished
     })
-    .from(componentCatalog)
+    .from(schema.componentCatalog)
     .where(and(
-      inArray(componentCatalog.name, componentNames),
-      eq(componentCatalog.status, 'published'),
-      eq(componentCatalog.isPublished, true)
+      inArray(schema.componentCatalog.name, componentNames),
+      eq(schema.componentCatalog.status, 'published'),
+      eq(schema.componentCatalog.isPublished, true)
     ));
 
   console.log(`🔗 Found ${components.length} matching components in catalog`);
@@ -87,14 +82,14 @@ async function reprocessPost(postSlug: string): Promise<{ success: boolean; mess
 
   // Remove existing component links for this post
   const deleted = await db
-    .delete(blogPostComponents)
-    .where(eq(blogPostComponents.blogPostId, post.id))
-    .returning({ count: blogPostComponents.blogPostId });
+    .delete(schema.blogPostComponents)
+    .where(eq(schema.blogPostComponents.blogPostId, post.id))
+    .returning({ count: schema.blogPostComponents.blogPostId });
 
   // Add new component links
   const now = new Date();
   const newLinks = await db
-    .insert(blogPostComponents)
+    .insert(schema.blogPostComponents)
     .values(components.map(comp => ({
       blogPostId: post.id,
       componentId: comp.id,
@@ -104,19 +99,28 @@ async function reprocessPost(postSlug: string): Promise<{ success: boolean; mess
       renderOrder: 0, 
       createdAt: now
     })))
-    .returning({ componentId: blogPostComponents.componentId });
+    .returning({ componentId: schema.blogPostComponents.componentId });
 
   // Update component usage counts
   for (const comp of components) {
     await db
-      .update(componentCatalog)
+      .update(schema.componentCatalog)
       .set({ 
-        usageCount: sql`${componentCatalog.usageCount} + 1`,
+        usageCount: sql`${schema.componentCatalog.usageCount} + 1`,
         lastUsedAt: now,
         updatedAt: now 
       })
-      .where(eq(componentCatalog.id, comp.id));
+      .where(eq(schema.componentCatalog.id, comp.id));
   }
+
+  // Update the blog post's components field
+  await db
+    .update(schema.blogPosts)
+    .set({ 
+      components: components.map(comp => comp.name),
+      updatedAt: now 
+    })
+    .where(eq(schema.blogPosts.id, post.id));
 
   return {
     success: true,
@@ -131,11 +135,13 @@ async function reprocessPost(postSlug: string): Promise<{ success: boolean; mess
 }
 
 async function reprocessAllPosts(): Promise<{ success: boolean; message: string; details: any }> {
+  const db = getDb();
+  
   // Get all published posts
   const posts = await db
-    .select({ slug: blogPosts.slug, title: blogPosts.title })
-    .from(blogPosts)
-    .where(eq(blogPosts.status, 'published'));
+    .select({ slug: schema.blogPosts.slug, title: schema.blogPosts.title })
+    .from(schema.blogPosts)
+    .where(eq(schema.blogPosts.status, 'published'));
   
   console.log(`🔄 Processing ${posts.length} published posts...`);
   
@@ -208,11 +214,5 @@ export async function POST(request: NextRequest) {
       error: 'Internal server error',
       message: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 });
-  } finally {
-    try {
-      await client.end();
-    } catch (e) {
-      // Ignore cleanup errors
-    }
   }
 }
