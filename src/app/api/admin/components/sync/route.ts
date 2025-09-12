@@ -6,6 +6,8 @@ import postgres from 'postgres';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join } from 'path';
 import crypto from 'crypto';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 // Database connection
 const connectionString = process.env.DATABASE_URL || 'postgresql://postgres:postgres@127.0.0.1:5433/tgz_lol';
@@ -262,13 +264,16 @@ async function syncComponents(): Promise<{ success: boolean; message: string; sy
 
 export async function POST(request: NextRequest) {
   try {
-    // Check admin authentication
-    const token = request.headers.get('x-admin-token') || 
-                 request.headers.get('authorization')?.replace('Bearer ', '') ||
-                 new URL(request.url).searchParams.get('token');
+    // Check Better Auth session
+    const session = await auth.api.getSession({
+      headers: headers()
+    });
 
-    if (!token || token !== process.env.ADMIN_TOKEN) {
-      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    if (!session?.user) {
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Authentication required. Please log in to access admin features.' 
+      }, { status: 401 });
     }
 
     const result = await syncComponents();

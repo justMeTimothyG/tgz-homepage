@@ -170,11 +170,10 @@ export default function ComponentStudioPage() {
 
     try {
       setIsSyncing(true);
-      const adminToken = typeof window !== 'undefined' ? localStorage.getItem('admin_auth_token') : null;
       
       const response = await fetch('/api/admin/components/sync', {
         method: 'POST',
-        headers: adminToken ? { 'x-admin-token': adminToken } : {},
+        credentials: 'include', // Include cookies for session authentication
       });
       
       const data = await response.json();
@@ -184,7 +183,14 @@ export default function ComponentStudioPage() {
         // Refresh the component list
         fetchComponents(currentPage);
       } else {
-        alert(`❌ Sync failed: ${data.message || 'Unknown error'}`);
+        // Show specific error message from server
+        const errorMsg = data.error || data.message || 'Unknown error';
+        alert(`❌ Sync failed: ${errorMsg}`);
+        
+        // If it's an auth error, suggest logging in
+        if (response.status === 401) {
+          console.log('Authentication failed. Please log in to continue.');
+        }
       }
     } catch (error) {
       console.error('Error syncing components:', error);
