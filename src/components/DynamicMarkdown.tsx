@@ -81,7 +81,7 @@ export default function DynamicMarkdown({
         console.error('Content length:', children.length);
         console.error('Content starts with:', children.substring(0, 200));
         console.error('Components expected:', components.map(c => c.name));
-        console.error('Component scope keys:', Object.keys(scope));
+        console.error('Component scope keys:', Object.keys(componentScope));
         if (isMounted) {
           setError(`MDX compilation failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
           setRenderState('fallback');
