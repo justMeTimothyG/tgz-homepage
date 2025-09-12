@@ -66,8 +66,8 @@ export default function DynamicMarkdown({
             }]
           ],
           development: process.env.NODE_ENV === 'development',
-          // Provide components as globals for MDX evaluation
-          ...scope
+          // Create a components function that returns the loaded components
+          useMDXComponents: () => scope
         });
 
         if (!isMounted) return;
@@ -80,9 +80,10 @@ export default function DynamicMarkdown({
         console.error('MDX setup failed:', err);
         console.error('Content length:', children.length);
         console.error('Content starts with:', children.substring(0, 200));
-        console.error('Components:', components.map(c => c.name));
+        console.error('Components expected:', components.map(c => c.name));
+        console.error('Component scope keys:', Object.keys(scope));
         if (isMounted) {
-          setError(err instanceof Error ? err.message : 'MDX compilation failed');
+          setError(`MDX compilation failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
           setRenderState('fallback');
         }
       }
