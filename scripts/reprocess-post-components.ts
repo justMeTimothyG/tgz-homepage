@@ -122,6 +122,15 @@ async function reprocessPost(postSlug: string) {
       .where(eq(componentCatalog.id, comp.id));
   }
 
+  // Update the blog post's components field
+  await db
+    .update(blogPosts)
+    .set({ 
+      components: components.map(comp => comp.name),
+      updatedAt: now 
+    })
+    .where(eq(blogPosts.id, post.id));
+
   console.log(`📊 Updated usage counts for components`);
   console.log(`🎉 Successfully processed post: ${postSlug}`);
 }
