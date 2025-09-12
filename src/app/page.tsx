@@ -1,12 +1,9 @@
 import Image from 'next/image';
-import LatestPostsClient from '@/components/LatestPostsClient';
-
-// Prefer static generation for the landing page
-export const dynamic = 'force-static';
-
-// Client component imported normally; it fetches on the client so SSG isn't blocked
+import LatestPosts from '@/components/LatestPosts';
+import { getLatestBlogPosts } from '@/lib/blog';
 
 export default function HomePage() {
+  const latestPosts = getLatestBlogPosts(5);
   return (
     <div className="">
       {/* Hero */}
@@ -39,7 +36,7 @@ export default function HomePage() {
       <section className="bg-gray-50 dark:bg-gray-900 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold mb-6">Neueste Beiträge</h2>
-          <LatestPostsClient />
+          <LatestPosts posts={latestPosts} />
         </div>
       </section>
     </div>
