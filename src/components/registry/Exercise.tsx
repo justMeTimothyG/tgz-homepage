@@ -86,9 +86,16 @@ export default function Exercise({
 
   // Parse based on the original MDX structure
   // We know from the MDX content: Task, Hint(s), Step(s), Solution
-  const wrappedChildren = React.Children.toArray(children).filter(child => 
-    React.isValidElement(child) && (child.type as any)?.name === 'Wrapped'
-  );
+  // In production, components are minified and the wrapper structure is different
+  // All valid React element children should be the actual sub-components
+  const wrappedChildren = React.Children.toArray(children).filter(child => {
+    if (!React.isValidElement(child)) return false;
+    
+    // In production, just accept all React elements with content
+    // Since debug shows all children have nested <p> elements, they are real components
+    const props = child.props as any;
+    return props?.children && React.Children.count(props.children) > 0;
+  });
 
   console.log(`Found ${wrappedChildren.length} wrapped components to parse`);
 
@@ -100,8 +107,8 @@ export default function Exercise({
     const content = extractContent(child);
     console.log(`Wrapped component ${index} content preview:`, content.substring(0, 50));
     
-    // Extract the inner wrapped component for rendering
-    const innerContent = (child.props as any)?.children;
+    // Extract the content directly since these are the actual components
+    const innerContent = child;
     
     // Improved content-based pattern matching
     const lowerContent = content.toLowerCase();
