@@ -16,7 +16,8 @@ import {
   Globe,
   Settings,
   Play,
-  Pause
+  Pause,
+  RefreshCw
 } from 'lucide-react';
 
 interface ComponentItem {
@@ -65,6 +66,7 @@ export default function ComponentStudioPage() {
   // UI state
   const [selectedComponents, setSelectedComponents] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [isSyncing, setIsSyncing] = useState(false);
 
   // Fetch components
   const fetchComponents = async (page = 1) => {
@@ -163,6 +165,35 @@ export default function ComponentStudioPage() {
     }
   };
 
+  const handleSyncComponents = async () => {
+    if (isSyncing) return;
+
+    try {
+      setIsSyncing(true);
+      const adminToken = typeof window !== 'undefined' ? localStorage.getItem('admin_auth_token') : null;
+      
+      const response = await fetch('/api/admin/components/sync', {
+        method: 'POST',
+        headers: adminToken ? { 'x-admin-token': adminToken } : {},
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        alert(`✅ ${data.message}`);
+        // Refresh the component list
+        fetchComponents(currentPage);
+      } else {
+        alert(`❌ Sync failed: ${data.message || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error syncing components:', error);
+      alert('❌ Sync failed: Network error');
+    } finally {
+      setIsSyncing(false);
+    }
+  };
+
   const getSourceTypeIcon = (sourceType: string) => {
     switch (sourceType) {
       case 'custom': return <Code className="w-4 h-4" />;
@@ -208,6 +239,15 @@ export default function ComponentStudioPage() {
         </div>
         
         <div className="flex gap-3">
+          <button
+            onClick={handleSyncComponents}
+            disabled={isSyncing}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin' : ''}`} />
+            {isSyncing ? 'Syncing...' : 'Sync Components'}
+          </button>
+          
           <button
             onClick={() => router.push('/admin/components/new')}
             className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
