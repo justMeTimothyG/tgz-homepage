@@ -13,6 +13,7 @@ export interface BlogPost {
   createdAt: string;
   updatedAt: string;
   views: number;
+  components: string[] | null;
   tags: Array<{
     id: string;
     name: string;

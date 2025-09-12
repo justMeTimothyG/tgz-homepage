@@ -71,6 +71,7 @@ export async function GET(req: NextRequest) {
         createdAt: schema.blogPosts.createdAt,
         updatedAt: schema.blogPosts.updatedAt,
         views: schema.blogPosts.views,
+        components: schema.blogPosts.components,
       })
       .from(schema.blogPosts)
       .where(whereClause)

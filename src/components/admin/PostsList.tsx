@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAdmin, BlogPost } from '@/contexts/AdminContext';
 import { formatDistanceToNow } from '@/lib/utils';
@@ -12,7 +12,9 @@ import {
   Eye, 
   Calendar,
   Tag,
-  RefreshCw
+  RefreshCw,
+  Cog,
+  Component
 } from 'lucide-react';
 
 export default function PostsList() {
@@ -26,6 +28,8 @@ export default function PostsList() {
     refreshPosts,
     showToast
   } = useAdmin();
+  
+  const [isReprocessing, setIsReprocessing] = useState(false);
 
   // Only fetch posts on component mount, not on every render
   useEffect(() => {
@@ -78,6 +82,35 @@ export default function PostsList() {
     router.push(`/admin/posts/${post.slug}`);
   };
 
+  const handleReprocessPosts = async () => {
+    if (isReprocessing) return;
+    
+    try {
+      setIsReprocessing(true);
+      const response = await fetch('/api/admin/posts/reprocess', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({ postSlug: 'all' })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        showToast(`${result.message}`, 'success');
+      } else {
+        throw new Error(result.error || 'Failed to reprocess posts');
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to reprocess posts';
+      showToast(errorMessage, 'error');
+    } finally {
+      setIsReprocessing(false);
+    }
+  };
+
   if (loading && posts.length === 0) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm">
@@ -109,6 +142,15 @@ export default function PostsList() {
             </h2>
             <div className="flex items-center space-x-2">
               <button
+                onClick={handleReprocessPosts}
+                disabled={isReprocessing || loading}
+                className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                title="Reprocess all blog posts to extract and link components"
+              >
+                <Cog className={`w-4 h-4 ${isReprocessing ? 'animate-spin' : ''}`} />
+                <span>Reprocess</span>
+              </button>
+              <button
                 onClick={refreshPosts}
                 disabled={loading}
                 className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -117,7 +159,7 @@ export default function PostsList() {
                 <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                 <span>Refresh</span>
               </button>
-              {loading && (
+              {(loading || isReprocessing) && (
                 <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
               )}
             </div>
@@ -190,6 +232,16 @@ export default function PostsList() {
                         <div className="flex items-center space-x-1">
                           <Tag className="w-4 h-4" />
                           <span>{post.tags.length} tags</span>
+                        </div>
+                      )}
+
+                      {post.components && post.components.length > 0 && (
+                        <div 
+                          className="flex items-center space-x-1 cursor-help"
+                          title={`Components: ${post.components.join(', ')}`}
+                        >
+                          <Component className="w-4 h-4" />
+                          <span>{post.components.length} components</span>
                         </div>
                       )}
                     </div>
