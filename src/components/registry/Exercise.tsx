@@ -233,11 +233,7 @@ export default function Exercise({
       {/* Task - always visible */}
       {taskComponents.length > 0 && (
         <div className="mb-6">
-          <div className="bg-gray-50 dark:bg-gray-900/50 rounded-lg p-4">
-            <div className="prose dark:prose-invert max-w-none">
-              {taskComponents}
-            </div>
-          </div>
+          {taskComponents}
         </div>
       )}
 
@@ -313,17 +309,8 @@ export default function Exercise({
           </h4>
           <div className="space-y-3">
             {hintComponents.slice(0, visibleHints).map((hint, index) => (
-              <div key={index} className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-amber-100 dark:bg-amber-900/30 
-                                rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 
-                                text-sm font-semibold">
-                    {index + 1}
-                  </div>
-                  <div className="flex-1">
-                    {hint}
-                  </div>
-                </div>
+              <div key={index}>
+                {hint}
               </div>
             ))}
           </div>
@@ -339,17 +326,8 @@ export default function Exercise({
           </h4>
           <div className="space-y-3">
             {stepComponents.slice(0, visibleSteps).map((step, index) => (
-              <div key={index} className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 bg-green-100 dark:bg-green-900/30 
-                                rounded-full flex items-center justify-center text-green-600 dark:text-green-400 
-                                text-sm font-semibold">
-                    {index + 1}
-                  </div>
-                  <div className="flex-1">
-                    {step}
-                  </div>
-                </div>
+              <div key={index}>
+                {step}
               </div>
             ))}
           </div>
@@ -363,7 +341,7 @@ export default function Exercise({
             <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Lösung:
           </h4>
-          <div className={`${colors.bg} border ${colors.border} rounded-lg p-4`}>
+          <div>
             {solutionComponents}
           </div>
         </div>
