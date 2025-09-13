@@ -1,0 +1,131 @@
+---
+title: "Übungs-Komponente: Funktionsdemo"
+date: "2025-09-13"
+excerpt: "Beispielseite zum Testen von Task, Hint, Step und Solution der Exercise-Komponente"
+tags: ["demo", "exercise", "komponenten"]
+published: false
+---
+
+# Übungs-Komponente: Funktionsdemo
+
+Diese Seite demonstriert alle Funktionen der Übungs-Komponente, inklusive mehrerer Hinweise (Hint), schrittweiser Lösungsschritte (Step) und ein-/ausblendbarer Lösung (Solution). Außerdem enthalten: einfache Bruchrechnung mit KaTeX.
+
+## Beispiel 1: Addition ungleichnamiger Brüche (leicht)
+
+<Exercise title="Brüche addieren" difficulty="easy">
+  <Task>
+    Berechne: $\frac{1}{4} + \frac{1}{6}$
+  </Task>
+
+{" "}
+<Hint>Finde zuerst den Hauptnenner (kgV der Nenner 4 und 6).</Hint>
+<Hint>$\text{kgV}(4,6)=12$. Erweitere beide Brüche auf den Nenner 12.</Hint>
+
+{" "}
+<Step>
+  $\frac{1}
+  {4}=\frac{3}
+  {12}$ und $\frac{1}
+  {6}=\frac{2}
+  {12}$
+</Step>
+<Step>
+  Addiere die Zähler: $\frac{3}
+  {12}+\frac{2}
+  {12}=\frac{5}
+  {12}$
+</Step>
+
+  <Solution>
+    Ergebnis: $\frac{5}{12}$
+  </Solution>
+</Exercise>
+
+## Beispiel 2: Kürzen mit ggT (mittel)
+
+<Exercise title="Bruch kürzen" difficulty="medium">
+  <Task>
+    Kürze den Bruch vollständig: $\frac{18}{24}$
+  </Task>
+
+{" "}
+<Hint>Bestimme den größten gemeinsamen Teiler (ggT) von 18 und 24.</Hint>
+<Hint>Versuch’s mit 6: $18=6\cdot3$, $24=6\cdot4$.</Hint>
+<Hint>Der ggT ist 6, also teile Zähler und Nenner durch 6.</Hint>
+
+  <Step>
+    $\frac{18}{24} = \frac{18\div 6}{24\div 6} = \frac{3}{4}$
+  </Step>
+
+  <Solution>
+    $\frac{3}{4}$ ist vollständig gekürzt.
+  </Solution>
+</Exercise>
+
+## Beispiel 3: Gemischte Reihenfolge der Unter-Komponenten (hart)
+
+Die Reihenfolge in der MDX-Datei ist hier absichtlich gemischt. Die Komponente erkennt Task/Hint/Step/Solution anhand des Typs, nicht anhand der Position.
+
+<Exercise title="Gemischte Reihenfolge" difficulty="hard">
+  <Solution>
+    Finale Aussage: $x=\frac{11}{4}=2\tfrac{3}{4}$
+  </Solution>
+
+{" "}
+<Step>
+  $\frac{11}
+  {4}$ als gemischte Zahl: $2\tfrac{3}
+  {4}$
+</Step>
+
+{" "}
+<Task>
+  Wandle $2\tfrac{3}
+  {4}$ in einen unechten Bruch um und anschließend wieder zurück.
+</Task>
+
+  <Step>
+    $2\tfrac{3}{4}=\frac{2\cdot4+3}{4}=\frac{11}{4}$
+  </Step>
+
+  <Hint>
+    Für die Umwandlung in einen unechten Bruch: ganze Zahl $\cdot$ Nenner $+$ Zähler.
+  </Hint>
+</Exercise>
+
+## Beispiel 4: Kompakt-Modus (UI reduziert)
+
+Im Kompaktmodus sind Icon, Titel und Schwierigkeits-Pill ausgeblendet, und die Buttons erscheinen als Textlinks.
+
+<Exercise compact title="Kompaktbeispiel" difficulty="medium">
+  <Task>
+    Addiere: $\frac{2}{3}+\frac{1}{6}$
+  </Task>
+
+{" "}
+<Hint>Bestimme den Hauptnenner (kgV).</Hint>
+<Hint>$\text{kgV}(3,6)=6$</Hint>
+
+{" "}
+<Step>
+  $\frac{2}
+  {3}=\frac{4}
+  {6}$
+</Step>
+<Step>
+  $\frac{4}
+  {6}+\frac{1}
+  {6}=\frac{5}
+  {6}$
+</Step>
+
+  <Solution>$\frac{5}{6}$</Solution>
+</Exercise>
+
+---
+
+Hinweis zur Bedienung:
+
+- „Lösung zeigen“ blendet die Lösung ein/aus.
+- „Tipps“ zeigt nacheinander die vorhandenen Hinweise an.
+- „Schritte“ zeigt nacheinander die vorhandenen Rechenschritte an.
