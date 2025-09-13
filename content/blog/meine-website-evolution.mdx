@@ -1,8 +1,9 @@
 ---
 title: "Von Directus zu MDX: Meine Website-Evolution"
-date: "2025-01-12"
+date: "2025-09-12"
+lastUpdated: "2025-09-11"
 excerpt: "Eine Reise von komplexer CMS-Architektur zu eleganter Einfachheit - wie ich meine Website von Directus/PostgreSQL auf reines MDX umgestellt habe."
-tags: ["nextjs", "mdx", "webentwicklung", "architektur", "simplicity"]
+tags: ["nextjs", "mdx", "webentwicklung", "architektur"]
 published: true
 ---
 
@@ -15,8 +16,9 @@ Nach monatelanger Entwicklung und ständiger Verkomplizierung meiner persönlich
 Meine Website startete als ambitioniertes Full-Stack-Projekt:
 
 ### Was ich ursprünglich hatte:
+
 - **Backend**: PostgreSQL 16 mit Drizzle ORM
-- **CMS**: Directus für Content-Management  
+- **CMS**: Directus für Content-Management
 - **Admin-Panel**: Selbstgebaute Admin-Oberfläche mit Live-Preview
 - **Komponenten-System**: Datenbankgesteuerte Komponenten-Registry
 - **API-Layer**: RESTful Routes für alle Inhalte
@@ -41,6 +43,7 @@ npm run dev                  # Endlich: Development Server
 ## 🤔 Der Wendepunkt
 
 Der Moment der Wahrheit kam, als ich merkte:
+
 - **90%** meiner Zeit ging für Infrastructure drauf
 - **10%** für tatsächlichen Content
 - Ich schrieb mehr **Migrations** als **Blogposts**
@@ -49,6 +52,7 @@ Der Moment der Wahrheit kam, als ich merkte:
 ## ⚡ Die neue Architektur: Radikal vereinfacht
 
 ### Current Tech Stack (2025):
+
 ```typescript
 // Das ist mein ganzer "CMS":
 interface BlogPost {
@@ -61,15 +65,17 @@ interface BlogPost {
 ```
 
 ### Mein neuer Stack:
+
 - **Framework**: Next.js 15 mit App Router & React 19
 - **Content**: MDX-Dateien mit Frontmatter
-- **Styling**: Tailwind CSS 4 
+- **Styling**: Tailwind CSS 4
 - **Deployment**: Single Docker Container
 - **Database**: ❌ **Keine!**
 
 ## 📝 Content Creation: Vorher vs. Nachher
 
 ### Vorher (Directus):
+
 1. Admin-Panel öffnen
 2. "Neuer Post" klicken
 3. Felder ausfüllen
@@ -78,6 +84,7 @@ interface BlogPost {
 6. **Hoffen**, dass alles funktioniert
 
 ### Jetzt (MDX):
+
 ```mdx
 ---
 title: "Mein neuer Post"
@@ -95,8 +102,9 @@ Mit **IntelliSense**, **Syntax-Highlighting** und **Git-Versionierung**.
 ## 🚀 Die Vorteile des MDX-Ansatzes
 
 ### 1. **Developer Experience**
+
 ```bash
-# Neuer Blogpost? 
+# Neuer Blogpost?
 touch content/blog/mein-post.mdx
 code content/blog/mein-post.mdx
 
@@ -105,37 +113,43 @@ git push
 ```
 
 ### 2. **Performance**
+
 - **No Database Queries**: Alles statisch generiert
-- **Fast Builds**: Turbopack + keine DB-Abhängigkeiten  
+- **Fast Builds**: Turbopack + keine DB-Abhängigkeiten
 - **CDN-Ready**: Perfekt für statisches Hosting
 
 ### 3. **Flexibilität**
+
 ```mdx
 # Ich kann direkt React-Komponenten einbauen:
+
 <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-4 rounded">
   Styled Content direkt im Markdown!
 </div>
 
 # Oder Mathematik:
+
 $$
 E = mc^2
 $$
 ```
 
 ### 4. **Versionierung**
+
 Jeder Blogpost hat **Git History**. Rollbacks, Diffs, Branches - alles da.
 
 ## 🔧 Technical Deep Dive
 
 ### Blog-System Implementation:
+
 ```typescript
 // /src/lib/blog.ts
 export function getAllBlogPosts(): BlogPost[] {
   const slugs = getAllBlogSlugs();
   return slugs
-    .map(slug => getBlogPostBySlug(slug))
+    .map((slug) => getBlogPostBySlug(slug))
     .filter((post): post is BlogPost => post !== null)
-    .filter(post => post.published)
+    .filter((post) => post.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 ```
@@ -143,13 +157,14 @@ export function getAllBlogPosts(): BlogPost[] {
 **26 Zeilen Code** ersetzen eine komplette CMS-Database.
 
 ### Deployment:
+
 ```dockerfile
 # Dockerfile (vereinfacht)
 FROM node:20-alpine AS builder
 COPY . .
 RUN npm ci && npm run build
 
-FROM node:20-alpine AS runner  
+FROM node:20-alpine AS runner
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/content ./content
 CMD ["node", "server.js"]
@@ -159,39 +174,45 @@ Ein Container. Ein Command. **Es funktioniert einfach.**
 
 ## 📊 Vorher vs. Nachher Vergleich
 
-| Aspekt | Directus + DB | MDX Static |
-|--------|---------------|------------|
-| **Setup-Zeit** | 5-10 Minuten | 30 Sekunden |
-| **Dependencies** | 15+ Services | 0 Services |
-| **Build-Zeit** | 3-5 Minuten | 30-60 Sekunden |
-| **Deployment** | Docker Compose | Single Container |
-| **Backup** | DB Dumps + Files | Git Repository |
-| **Rollback** | Complex | `git revert` |
-| **Offline-Arbeit** | Unmöglich | Problemlos |
+| Aspekt             | Directus + DB    | MDX Static       |
+| ------------------ | ---------------- | ---------------- |
+| **Setup-Zeit**     | 5-10 Minuten     | 30 Sekunden      |
+| **Dependencies**   | 15+ Services     | 0 Services       |
+| **Build-Zeit**     | 3-5 Minuten      | 30-60 Sekunden   |
+| **Deployment**     | Docker Compose   | Single Container |
+| **Backup**         | DB Dumps + Files | Git Repository   |
+| **Rollback**       | Complex          | `git revert`     |
+| **Offline-Arbeit** | Unmöglich        | Problemlos       |
 
 ## 🎯 Lessons Learned
 
 ### 1. **Premature Optimization ist real**
+
 Ich baute für **1000 Posts**, als ich **3 Posts** hatte.
 
 ### 2. **Developer Experience > Architecture Porn**
+
 Elegante Architektur nützt nichts, wenn sie mich vom Schreiben abhält.
 
 ### 3. **Static is the new Dynamic**
+
 99% meiner "dynamischen" Inhalte waren eigentlich statisch.
 
 ### 4. **Git is a CMS**
+
 Warum ein CMS bauen, wenn Git schon perfekt ist?
 
 ## 🔮 Zukunftspläne
 
 ### Was bleibt:
+
 - **MDX** für Content
 - **Next.js** für Framework
 - **Tailwind** für Styling
 - **Simplicity** als Grundprinzip
 
 ### Was kommt:
+
 - **Bessere MDX-Komponenten** für interaktive Inhalte
 - **Automatisierte Builds** bei Git-Push
 - **CDN-Integration** für globale Performance
@@ -202,8 +223,9 @@ Warum ein CMS bauen, wenn Git schon perfekt ist?
 Diese Migration hat mir gezeigt: **Komplexität ist ein Feature, das niemand braucht.**
 
 Meine Website ist jetzt:
+
 - ⚡ **Schneller** zu entwickeln
-- 🛡️ **Zuverlässiger** im Deployment  
+- 🛡️ **Zuverlässiger** im Deployment
 - 🔧 **Einfacher** zu warten
 - 📝 **Angenehmer** für Content-Creation
 
@@ -214,10 +236,11 @@ Meine Website ist jetzt:
 ## 🤓 Tech-Details für Interessierte
 
 ### Vollständiger Stack:
+
 ```json
 {
   "framework": "Next.js 15",
-  "runtime": "React 19", 
+  "runtime": "React 19",
   "language": "TypeScript (strict)",
   "styling": "Tailwind CSS 4",
   "content": "MDX + gray-matter",
@@ -229,11 +252,12 @@ Meine Website ist jetzt:
 ```
 
 ### Repository-Struktur:
+
 ```
 ├── content/blog/          # MDX blog posts
 ├── src/
 │   ├── app/              # Next.js app router
-│   ├── components/       # React components  
+│   ├── components/       # React components
 │   ├── lib/              # Blog utilities
 │   └── styles/           # Global CSS
 ├── Dockerfile           # Single-container deploy
