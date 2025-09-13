@@ -3,7 +3,7 @@ import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/blog';
 import { formatDateDE } from '@/lib/date';
 import ServerTableOfContents from '@/components/ServerTableOfContents';
 import { getTocProps } from '@/lib/toc';
-import Markdown from '@/components/Markdown';
+import ServerMDX from '@/components/ServerMDX';
 
 export async function generateStaticParams() {
   try {
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlug(slug);
 
   if (!post) return notFound();
 
@@ -65,7 +65,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </header>
             
             {/* Post content */}
-            <Markdown>{post.content}</Markdown>
+            <ServerMDX
+              source={post.content}
+              className="max-w-none"
+              basePath={process.cwd()}
+            />
           </article>
         </div>
       </div>
