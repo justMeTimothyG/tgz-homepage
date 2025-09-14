@@ -1,5 +1,6 @@
 import { compile, run } from '@mdx-js/mdx';
 import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
@@ -32,7 +33,7 @@ function remarkRemoveImports() {
 
 export async function compileMDX(source: string, options: MDXCompileOptions = {}) {
   const {
-    remarkPlugins = [remarkRemoveImports, remarkMath],
+    remarkPlugins = [remarkRemoveImports, remarkGfm, remarkMath],
     rehypePlugins = [
       rehypeSlug,
       [rehypeKatex, {
