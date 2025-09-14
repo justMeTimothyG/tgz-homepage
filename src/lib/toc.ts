@@ -32,7 +32,7 @@ function textToId(text: string, slugger: GithubSlugger): string {
   // Use the same github-slugger that rehype-slug uses to ensure perfect ID matching
   try {
     return slugger.slug(text);
-  } catch (error) {
+  } catch {
     // Fallback to a basic slug implementation if there's an issue
     return text
       .toLowerCase()

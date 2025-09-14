@@ -70,7 +70,7 @@ export async function extractComponentsFromMarkdown(content: string): Promise<st
     components = [...components, ...Array.from(parentsToAdd)];
     
     return components;
-  } catch (error) {
+  } catch {
     // Fallback to regex-based detection if MDX compilation fails
     const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
     const componentMatches = content.match(/<([A-Z][a-zA-Z0-9]*)/g) || [];

@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   try {
     const slugs = getAllBlogSlugs();
     return slugs.map((slug) => ({ slug }));
-  } catch (error) {
+  } catch {
     return [];
   }
 }

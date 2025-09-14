@@ -29,9 +29,9 @@ import {
 // Non-hook version for server-side usage
 export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
   // Wrap custom components so they don't get affected by parent prose typography
-  const withNotProse = <P,>(Comp: React.ComponentType<P>) => (props: P) => (
+  const withNotProse = <P extends object>(Comp: React.ComponentType<P>) => (props: P) => (
     <div className="not-prose">
-      {React.createElement(Comp as React.ComponentType<any>, props as any)}
+      {React.createElement<P>(Comp, props)}
     </div>
   );
 
@@ -310,9 +310,9 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
 // This function is used to provide components to MDX content
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   // Wrap custom components so they don't get affected by parent prose typography
-  const withNotProse = <P,>(Comp: React.ComponentType<P>) => (props: P) => (
+  const withNotProse = <P extends object>(Comp: React.ComponentType<P>) => (props: P) => (
     <div className="not-prose">
-      {React.createElement(Comp as React.ComponentType<any>, props as any)}
+      {React.createElement<P>(Comp, props)}
     </div>
   );
 
