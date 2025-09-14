@@ -1,6 +1,8 @@
 import type { MDXComponents } from 'mdx/types';
 import { ExternalLink } from 'lucide-react';
 import React from 'react';
+type AnyProps = Record<string, unknown>;
+type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode };
 
 // Import all custom components
 import { 
@@ -24,23 +26,320 @@ import {
   LcmCalculator
 } from '@/components/markdown/CustomComponents';
 
-// This function is used to provide components to MDX content
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+// Non-hook version for server-side usage
+export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
   // Wrap custom components so they don't get affected by parent prose typography
-  const withNotProse = (Comp: any) => (props: any) => (
+  const withNotProse = <P,>(Comp: React.ComponentType<P>) => (props: P) => (
     <div className="not-prose">
-      <Comp {...props} />
+      {React.createElement(Comp as React.ComponentType<any>, props as any)}
     </div>
   );
 
   // Provide marker-wrapped variants so parent Exercise can reliably detect subcomponents
-  const Task = (props: any) => <ImportedTask {...props} data-ex-kind="Task" />;
+  const Task = (props: AnyProps) => (
+    <ImportedTask {...props} data-ex-kind="Task">
+      {props.children as React.ReactNode}
+    </ImportedTask>
+  );
   Task.displayName = 'Task';
-  const Hint = (props: any) => <ImportedHint {...props} data-ex-kind="Hint" />;
+  const Hint = (props: AnyProps) => (
+    <ImportedHint {...props} data-ex-kind="Hint">
+      {props.children as React.ReactNode}
+    </ImportedHint>
+  );
   Hint.displayName = 'Hint';
-  const Step = (props: any) => <ImportedStep {...props} data-ex-kind="Step" />;
+  const Step = (props: AnyProps) => (
+    <ImportedStep {...props} data-ex-kind="Step">
+      {props.children as React.ReactNode}
+    </ImportedStep>
+  );
   Step.displayName = 'Step';
-  const Solution = (props: any) => <ImportedSolution {...props} data-ex-kind="Solution" />;
+  const Solution = (props: AnyProps) => (
+    <ImportedSolution {...props} data-ex-kind="Solution">
+      {props.children as React.ReactNode}
+    </ImportedSolution>
+  );
+  Solution.displayName = 'Solution';
+
+  return {
+    // Custom educational components
+    Exercise: withNotProse(Exercise),
+    // Subcomponents are marker-wrapped so Exercise can detect them via props across RSC boundaries
+    Task,
+    Hint,
+    Step,
+    Solution,
+
+    // Calculator components
+    GcdCalculator: withNotProse(GcdCalculator),
+    LcmCalculator: withNotProse(LcmCalculator),
+
+    // Layout & UI components
+    Callout: withNotProse(Callout),
+    CodeBlock: withNotProse(CodeBlock),
+    FeatureGrid: withNotProse(FeatureGrid),
+    FeatureCard: withNotProse(FeatureCard),
+    Timeline: withNotProse(Timeline),
+    TimelineItem: withNotProse(TimelineItem),
+    Tabs: withNotProse(Tabs),
+    TabPanel: withNotProse(TabPanel),
+    Stats: withNotProse(Stats),
+    Stat: withNotProse(Stat),
+    // Keep links inline; do not wrap with not-prose to avoid block divs in paragraphs
+    ExternalLinkComponent,
+
+    // Enhanced standard HTML elements
+    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
+      // Auto-detect external links
+      if (href?.startsWith('http')) {
+        return (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+            {...props}
+          >
+            {children}
+            <ExternalLink className="w-4 h-4 ml-1" />
+          </a>
+        );
+      }
+      return <a href={href} {...props}>{children}</a>;
+    },
+
+    // Enhanced headings with gradient colors (preserves emojis and KaTeX)
+    h1: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          // Split by emoji regex and wrap non-emoji parts with gradient
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              // This is an emoji, render without gradient
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              // Apply gradient to text content
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{part}</span>;
+            }
+            return part; // whitespace
+          });
+        }
+        // For React elements (like KaTeX), check if they contain math
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+          // This is a KaTeX element, preserve it completely
+        }
+        // For other React elements, wrap in gradient span
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h1 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h1>
+      );
+    },
+
+    h2: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{part}</span>;
+            }
+            return part;
+          });
+        }
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h2 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h2>
+      );
+    },
+
+    h3: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{part}</span>;
+            }
+            return part;
+          });
+        }
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h3 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h3>
+      );
+    },
+
+    h4: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{part}</span>;
+            }
+            return part;
+          });
+        }
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h4 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h4>
+      );
+    },
+
+    h5: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{part}</span>;
+            }
+            return part;
+          });
+        }
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h5 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h5>
+      );
+    },
+
+    h6: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
+        if (typeof content === 'string') {
+          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
+          const parts = content.split(emojiRegex);
+          return parts.map((part, index) => {
+            if (emojiRegex.test(part)) {
+              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
+            } else if (part.trim()) {
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{part}</span>;
+            }
+            return part;
+          });
+        }
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{content as React.ReactNode}</span>;
+      };
+
+      return (
+        <h6 {...props}>
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
+        </h6>
+      );
+    },
+
+    // Enhanced code blocks with copy functionality
+    pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement> & { children?: React.ReactNode }) => {
+      // Check if this is a code block
+      const childNode = Array.isArray(children) ? children[0] : children;
+      if (React.isValidElement(childNode)) {
+        const className = (childNode.props as Record<string, unknown>)?.['className'];
+        if (typeof className === 'string' && className.includes('language-')) {
+          const language = className.replace('language-', '');
+          const code = (childNode.props as Record<string, unknown>)?.['children'] as React.ReactNode;
+          return (
+            <CodeBlock language={language} {...props}>
+              {code}
+            </CodeBlock>
+          );
+        }
+      }
+      return <pre {...props}>{children}</pre>;
+    },
+
+    // Allow any additional components passed from parent
+    ...components,
+  };
+}
+
+// This function is used to provide components to MDX content
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  // Wrap custom components so they don't get affected by parent prose typography
+  const withNotProse = <P,>(Comp: React.ComponentType<P>) => (props: P) => (
+    <div className="not-prose">
+      {React.createElement(Comp as React.ComponentType<any>, props as any)}
+    </div>
+  );
+
+  // Provide marker-wrapped variants so parent Exercise can reliably detect subcomponents
+  const Task = (props: AnyProps) => (
+    <ImportedTask {...props} data-ex-kind="Task">
+      {props.children as React.ReactNode}
+    </ImportedTask>
+  );
+  Task.displayName = 'Task';
+  const Hint = (props: AnyProps) => (
+    <ImportedHint {...props} data-ex-kind="Hint">
+      {props.children as React.ReactNode}
+    </ImportedHint>
+  );
+  Hint.displayName = 'Hint';
+  const Step = (props: AnyProps) => (
+    <ImportedStep {...props} data-ex-kind="Step">
+      {props.children as React.ReactNode}
+    </ImportedStep>
+  );
+  Step.displayName = 'Step';
+  const Solution = (props: AnyProps) => (
+    <ImportedSolution {...props} data-ex-kind="Solution">
+      {props.children as React.ReactNode}
+    </ImportedSolution>
+  );
   Solution.displayName = 'Solution';
 
   return {
@@ -71,7 +370,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ExternalLinkComponent,
     
     // Enhanced standard HTML elements
-    a: ({ href, children, ...props }: any) => {
+    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
       // Auto-detect external links
       if (href?.startsWith('http')) {
         return (
@@ -91,8 +390,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
 
     // Enhanced headings with gradient colors (preserves emojis and KaTeX)
-    h1: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h1: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           // Split by emoji regex and wrap non-emoji parts with gradient
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
@@ -109,25 +408,25 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           });
         }
         // For React elements (like KaTeX), check if they contain math
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          // This is a KaTeX element, preserve it completely
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) {
+            return content;
+          }
         }
         // For other React elements, wrap in gradient span
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content as React.ReactNode}</span>;
       };
 
       return (
         <h1 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h1>
       );
     },
 
-    h2: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h2: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -140,23 +439,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             return part;
           });
         }
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{content as React.ReactNode}</span>;
       };
 
       return (
         <h2 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h2>
       );
     },
 
-    h3: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h3: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -169,23 +467,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             return part;
           });
         }
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{content as React.ReactNode}</span>;
       };
 
       return (
         <h3 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h3>
       );
     },
 
-    h4: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h4: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -198,23 +495,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             return part;
           });
         }
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{content as React.ReactNode}</span>;
       };
 
       return (
         <h4 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h4>
       );
     },
 
-    h5: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h5: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -227,23 +523,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             return part;
           });
         }
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{content as React.ReactNode}</span>;
       };
 
       return (
         <h5 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h5>
       );
     },
 
-    h6: ({ children, ...props }: any) => {
-      const renderWithPreservation = (content: any) => {
+    h6: ({ children, ...props }: HeadingProps) => {
+      const renderWithPreservation = (content: unknown) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -256,33 +551,35 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             return part;
           });
         }
-        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
-          return content;
+        if (React.isValidElement(content)) {
+          const className = (content.props as Record<string, unknown>)?.['className'];
+          if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{content}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{content as React.ReactNode}</span>;
       };
 
       return (
         <h6 {...props}>
-          {React.Children.map(children, (child, index) => {
-            return renderWithPreservation(child);
-          })}
+          {React.Children.map(children, (child) => renderWithPreservation(child))}
         </h6>
       );
     },
 
     // Enhanced code blocks with copy functionality
-    pre: ({ children, ...props }: any) => {
+    pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement> & { children?: React.ReactNode }) => {
       // Check if this is a code block
-      const child = Array.isArray(children) ? children[0] : children;
-      if (child && typeof child === 'object' && child.props?.className?.includes('language-')) {
-        const language = child.props.className.replace('language-', '');
-        const code = child.props.children;
-        return (
-          <CodeBlock language={language} {...props}>
-            {code}
-          </CodeBlock>
-        );
+      const childNode = Array.isArray(children) ? children[0] : children;
+      if (React.isValidElement(childNode)) {
+        const className = (childNode.props as Record<string, unknown>)?.['className'];
+        if (typeof className === 'string' && className.includes('language-')) {
+          const language = className.replace('language-', '');
+          const code = (childNode.props as Record<string, unknown>)?.['children'] as React.ReactNode;
+          return (
+            <CodeBlock language={language} {...props}>
+              {code}
+            </CodeBlock>
+          );
+        }
       }
       return <pre {...props}>{children}</pre>;
     },

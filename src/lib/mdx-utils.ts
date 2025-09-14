@@ -13,7 +13,7 @@ export async function extractComponentsFromMarkdown(content: string): Promise<st
     
     // Basic content validation
     if (content.length > 50000) {
-      console.warn('⚠️ Large MDX content detected:', content.length, 'characters');
+      // Large content detected, but proceeding without warning in production
     }
     
     // Use MDX compiler to get proper AST-based component detection
@@ -72,7 +72,6 @@ export async function extractComponentsFromMarkdown(content: string): Promise<st
     return components;
   } catch (error) {
     // Fallback to regex-based detection if MDX compilation fails
-    console.warn('MDX compilation failed for component detection, falling back to regex:', error);
     const htmlTags = new Set(['A', 'B', 'I', 'U', 'P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'SPAN', 'IMG', 'BR', 'HR']);
     const componentMatches = content.match(/<([A-Z][a-zA-Z0-9]*)/g) || [];
     

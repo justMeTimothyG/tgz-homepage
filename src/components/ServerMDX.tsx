@@ -1,6 +1,6 @@
 import 'server-only';
 import { renderMDX } from '@/lib/mdx';
-import { useMDXComponents as useSiteMDXComponents } from '@/lib/mdx-components';
+import { getSiteMDXComponents } from '@/lib/mdx-components';
 
 interface ServerMDXProps {
   source: string;
@@ -17,10 +17,11 @@ export default async function ServerMDX({ source, className, basePath }: ServerM
     );
   }
 
-  const MDXContent = await renderMDX(source, { basePath });
-  const components = useSiteMDXComponents({});
+  const components = getSiteMDXComponents({});
+  const MDXContent = await renderMDX(source, { basePath, components });
   return (
     <div className={className}>
+      {/* Pass components so MDX can resolve custom JSX like <Exercise /> */}
       <MDXContent components={components} />
     </div>
   );

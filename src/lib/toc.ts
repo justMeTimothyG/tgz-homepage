@@ -1,6 +1,5 @@
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
-import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 import type { Heading as UnistHeading } from 'mdast';
 import GithubSlugger from 'github-slugger';
@@ -35,7 +34,6 @@ function textToId(text: string, slugger: GithubSlugger): string {
     return slugger.slug(text);
   } catch (error) {
     // Fallback to a basic slug implementation if there's an issue
-    console.warn('Slugger failed, using fallback:', error);
     return text
       .toLowerCase()
       .replace(/[^a-z0-9\s-äöüß]/g, '') // Keep German chars
@@ -52,9 +50,7 @@ export function extractTocFromMarkdown(
   const headings: TocHeading[] = [];
   const slugger = new GithubSlugger();
   
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkGfm);
+  const processor = unified().use(remarkParse);
     
   const tree = processor.parse(markdown);
   

@@ -1,22 +1,25 @@
 import { compile, run } from '@mdx-js/mdx';
-import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeSlug from 'rehype-slug';
 import { visit } from 'unist-util-visit';
 import * as runtime from 'react/jsx-runtime';
-import { useMDXComponents as useSiteMDXComponents } from '@/lib/mdx-components';
 import { pathToFileURL } from 'node:url';
 
+import type { PluggableList } from 'unified';
+import type { Root } from 'mdast';
+import type { MDXComponents } from 'mdx/types';
+import type { ReactElement } from 'react';
+
 export interface MDXCompileOptions {
-  remarkPlugins?: any[];
-  rehypePlugins?: any[];
+  remarkPlugins?: PluggableList;
+  rehypePlugins?: PluggableList;
   development?: boolean;
 }
 
 // Plugin to remove import statements from MDX
 function remarkRemoveImports() {
-  return function (tree: any) {
+  return function (tree: Root) {
     visit(tree, 'mdxjsEsm', (node, index, parent) => {
       if (parent && typeof index === 'number') {
         parent.children.splice(index, 1);
@@ -29,7 +32,7 @@ function remarkRemoveImports() {
 
 export async function compileMDX(source: string, options: MDXCompileOptions = {}) {
   const {
-    remarkPlugins = [remarkRemoveImports, remarkGfm, remarkMath],
+    remarkPlugins = [remarkRemoveImports, remarkMath],
     rehypePlugins = [
       rehypeSlug,
       [rehypeKatex, {
@@ -53,14 +56,12 @@ export async function compileMDX(source: string, options: MDXCompileOptions = {}
     });
 
     const compiledSource = String(compiled);
-    console.log('MDX compiled source preview:', compiledSource.slice(0, 300) + '...');
 
     return {
       compiledSource,
       error: null,
     };
   } catch (error) {
-    console.error('MDX compilation error:', error);
     return {
       compiledSource: null,
       error: error instanceof Error ? error.message : 'Unknown compilation error',
@@ -72,29 +73,31 @@ export async function compileMDX(source: string, options: MDXCompileOptions = {}
 // Note: We intentionally strip `import` statements during compilation (see remarkRemoveImports)
 // and provide components via the MDX components mapping. Importing TS/TSX directly from MDX
 // at runtime is unreliable in a Node environment.
+type MDXContentProps = {
+  components?: MDXComponents;
+} & Record<string, unknown>;
+
+type MDXContentComponent = (props: MDXContentProps) => ReactElement;
+
 export async function renderMDX(
   source: string,
-  opts: MDXCompileOptions & { basePath?: string } = {}
+  opts: MDXCompileOptions & { basePath?: string; components?: MDXComponents } = {}
 ) {
-  const { basePath, ...compileOpts } = opts;
+  const { basePath, components = {}, ...compileOpts } = opts;
   const { compiledSource, error } = await compileMDX(source, compileOpts);
   if (!compiledSource) {
     throw new Error(error || 'MDX compilation failed');
   }
 
   // Evaluate to a component using the runtime
-  const siteComponents = useSiteMDXComponents({});
   const evaluated = await run(compiledSource, {
     ...runtime,
     // Provide MDX component resolution without importing '@mdx-js/react'
-    useMDXComponents: (components?: any) => ({
-      ...siteComponents,
-      ...(components || {}),
-    }),
+    useMDXComponents: () => components,
     // Base URL is used for resolving relative URLs if any (we do not expect imports)
     baseUrl: basePath ? pathToFileURL(basePath) : new URL('file://' + process.cwd() + '/'),
-  } as any);
+  });
 
   // evaluated.default is the MDXContent component
-  return evaluated.default as (props: Record<string, unknown>) => any;
+  return evaluated.default as MDXContentComponent;
 }

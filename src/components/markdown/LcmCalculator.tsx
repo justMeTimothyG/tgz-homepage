@@ -441,9 +441,9 @@ export default function LcmCalculator({
                     </h4>
                     <div className="space-y-2">
                       {gcdCalculation.steps.map((step, index) => (
-                        <div key={index} className="font-mono text-sm bg-white dark:bg-gray-800 
+                        <div key={index} className="font-mono text-sm bg-white dark:bg-gray-800
                                                   border border-blue-200 dark:border-blue-700 rounded px-3 py-1">
-                          {step}
+                          {step.step}. {step.a} = {step.quotient} × {step.b} + {step.remainder}
                         </div>
                       ))}
                     </div>

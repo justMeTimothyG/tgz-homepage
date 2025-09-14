@@ -190,13 +190,13 @@ export function Tabs({ children, defaultTab = 0, ...props }: {
   defaultTab?: number;
 }) {
   const [activeTab, setActiveTab] = React.useState(defaultTab);
-  const childArray = React.Children.toArray(children);
+  const childArray = React.Children.toArray(children) as React.ReactElement<{ label?: string }>[];
   
   return (
     <div className="my-6" {...props}>
       <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">
         {childArray.map((child, index) => {
-          if (React.isValidElement(child) && (child.props as any).label) {
+          if (React.isValidElement(child) && child.props.label) {
             return (
               <button
                 key={index}
@@ -207,7 +207,7 @@ export function Tabs({ children, defaultTab = 0, ...props }: {
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                 }`}
               >
-                {(child.props as any).label}
+                {child.props.label}
               </button>
             );
           }
