@@ -13,7 +13,7 @@ type Props = {
 export default function ServerTableOfContents({
   headings,
   sections,
-  containerSelector,
+  containerSelector: _containerSelector,
 }: Props) {
   const [activeId, setActiveId] = React.useState<string>("");
   const [showAll, setShowAll] = React.useState<boolean>(false);
@@ -42,7 +42,7 @@ export default function ServerTableOfContents({
         
         const rect = el.getBoundingClientRect();
         const elementTop = rect.top;
-        const elementBottom = rect.bottom;
+        // const elementBottom = rect.bottom; // not used
         
         // Check if element is in viewport or just passed
         if (elementTop <= offset) {

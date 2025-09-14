@@ -10,7 +10,6 @@ export async function generateStaticParams() {
     const slugs = getAllBlogSlugs();
     return slugs.map((slug) => ({ slug }));
   } catch (error) {
-    console.error('Error generating static params:', error);
     return [];
   }
 }

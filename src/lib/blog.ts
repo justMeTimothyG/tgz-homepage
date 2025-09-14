@@ -20,7 +20,7 @@ export interface BlogPost extends BlogPostMeta {
 
 const contentDirectory = path.join(process.cwd(), 'content');
 const blogDirectory = path.join(contentDirectory, 'blog');
-const lecturesDirectory = path.join(contentDirectory, 'lectures');
+// const lecturesDirectory = path.join(contentDirectory, 'lectures');
 
 export function getAllBlogSlugs(): string[] {
   if (!fs.existsSync(blogDirectory)) {

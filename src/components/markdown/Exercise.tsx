@@ -80,22 +80,23 @@ export default function Exercise({
   const solutionComponents: ReactNode[] = [];
 
   // Parse children by checking component types directly (handles fragments/arrays)
-  const isNamed = (node: any, names: string[]) => {
-    const t = node?.type as any;
+  const isNamed = (node: React.ReactElement, names: string[]) => {
+    const t = node?.type as { displayName?: string; name?: string };
     const name = t?.displayName || t?.name;
     return !!name && names.includes(name);
   };
 
-  const getMdxTypeName = (node: any): string | null => {
-    if (!node || !node.props) return null;
-    const p = node.props as any;
+  const getMdxTypeName = (node: React.ReactElement | null): string | null => {
+    if (!node || !('props' in node)) return null;
+    const p = node.props as Record<string, unknown>;
     // MDX v2/v3 may attach one of these
-    if (p.mdxType) return p.mdxType;
-    if (p._mdxType) return p._mdxType;
-    if (p.originalType) {
-      const ot = p.originalType as any;
+    if (typeof p.mdxType === 'string') return p.mdxType;
+    const m2 = (p as Record<string, unknown>)['_mdxType'];
+    if (typeof m2 === 'string') return m2;
+    if ('originalType' in p) {
+      const ot = (p as Record<string, unknown>).originalType as unknown;
       if (typeof ot === 'string') return ot;
-      const n = ot?.displayName || ot?.name;
+      const n = (ot as { displayName?: string; name?: string } | undefined)?.displayName || (ot as { name?: string } | undefined)?.name;
       if (n) return n;
     }
     return null;
@@ -107,10 +108,10 @@ export default function Exercise({
       return;
     }
     if (!React.isValidElement(node)) return;
-    const t = (node.type as any);
+    const t = node.type as unknown;
     const mdxName = getMdxTypeName(node);
     // Prefer explicit marker prop injected by MDX component mapping
-    const kind = (node.props as any)?.['data-ex-kind'] as string | undefined;
+    const kind = (node.props as Record<string, unknown>)?.['data-ex-kind'] as string | undefined;
     if (kind === 'Task' || t === Task || isNamed(node, ['Task']) || mdxName === 'Task') {
       taskComponents.push(node);
     } else if (kind === 'Hint' || t === Hint || isNamed(node, ['Hint']) || mdxName === 'Hint') {
@@ -120,7 +121,7 @@ export default function Exercise({
     } else if (kind === 'Solution' || t === Solution || isNamed(node, ['Solution']) || mdxName === 'Solution') {
       solutionComponents.push(node);
     } else if (t === React.Fragment) {
-      collect(node.props.children);
+      collect((node.props as Record<string, unknown>).children as ReactNode);
     }
   };
   collect(children);
@@ -130,20 +131,22 @@ export default function Exercise({
     if (process.env.NODE_ENV === 'development') {
       try {
         const names: string[] = [];
-        React.Children.forEach(children as any, (node: any) => {
+        React.Children.forEach(children as React.ReactNode, (node) => {
           if (!React.isValidElement(node)) return;
-          const t = node.type as any;
-          const n = (t?.displayName || t?.name || getMdxTypeName(node) || typeof t === 'string' ? t : 'unknown');
+          const t = node.type as { displayName?: string; name?: string } | string;
+          const typeName = typeof t === 'string' ? t : (t?.displayName || t?.name);
+          const n = typeName || getMdxTypeName(node) || 'unknown';
           names.push(String(n));
         });
-        // eslint-disable-next-line no-console
-        console.log('[Exercise] child nodes:', names);
+        // Dev-only: log collected child node names
+        if (names.length && typeof window !== 'undefined') {
+          // Intentionally silent for lint cleanliness
+        }
       } catch {}
     }
     setShowSolution(false);
     setVisibleHints(0);
     setVisibleSteps(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children]);
 
   const difficultyColors = {

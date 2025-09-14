@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { Calculator, Wrench } from 'lucide-react';
+import { Wrench } from 'lucide-react';
 import GcdCalculator from '@/components/markdown/GcdCalculator';
 import LcmCalculator from '@/components/markdown/LcmCalculator';
 
@@ -65,7 +65,7 @@ function Group({ node, level, onSelect, selected }: {
               <li key={item.id}>
                 <button
                   onClick={() => onSelect(item.id)}
-                  aria-selected={isActive}
+                  aria-pressed={isActive}
                   title={item.description}
                   className={`w-full text-left px-2 py-2 transition-colors relative group ${
                     isActive
