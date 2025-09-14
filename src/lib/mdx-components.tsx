@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
 import { ExternalLink } from 'lucide-react';
+import React from 'react';
 
 // Import all custom components
 import { 
@@ -89,10 +90,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return <a href={href} {...props}>{children}</a>;
     },
 
-    // Enhanced headings with gradient colors (emojis keep original color)
+    // Enhanced headings with gradient colors (preserves emojis and KaTeX)
     h1: ({ children, ...props }: any) => {
-      // Function to handle emoji preservation
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           // Split by emoji regex and wrap non-emoji parts with gradient
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
@@ -102,25 +102,32 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
               // This is an emoji, render without gradient
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              // This is text, apply gradient
-              return <span key={index} className={gradientClass}>{part}</span>;
+              // Apply gradient to text content
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{part}</span>;
             }
-            return part; // whitespace or empty
+            return part; // whitespace
           });
         }
-        // For non-string content (React elements), apply gradient to the whole thing
-        return <span className={gradientClass}>{content}</span>;
+        // For React elements (like KaTeX), check if they contain math
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          // This is a KaTeX element, preserve it completely
+          return content;
+        }
+        // For other React elements, wrap in gradient span
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content}</span>;
       };
 
       return (
         <h1 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h1>
       );
     },
 
     h2: ({ children, ...props }: any) => {
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -128,23 +135,28 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className={gradientClass}>{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{part}</span>;
             }
             return part;
           });
         }
-        return <span className={gradientClass}>{content}</span>;
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">{content}</span>;
       };
 
       return (
         <h2 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h2>
       );
     },
 
     h3: ({ children, ...props }: any) => {
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -152,23 +164,28 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className={gradientClass}>{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{part}</span>;
             }
             return part;
           });
         }
-        return <span className={gradientClass}>{content}</span>;
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400">{content}</span>;
       };
 
       return (
         <h3 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 dark:from-orange-400 dark:to-amber-400")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h3>
       );
     },
 
     h4: ({ children, ...props }: any) => {
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -176,23 +193,28 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className={gradientClass}>{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{part}</span>;
             }
             return part;
           });
         }
-        return <span className={gradientClass}>{content}</span>;
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{content}</span>;
       };
 
       return (
         <h4 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h4>
       );
     },
 
     h5: ({ children, ...props }: any) => {
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -200,23 +222,28 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className={gradientClass}>{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{part}</span>;
             }
             return part;
           });
         }
-        return <span className={gradientClass}>{content}</span>;
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400">{content}</span>;
       };
 
       return (
         <h5 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 dark:from-fuchsia-400 dark:to-pink-400")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h5>
       );
     },
 
     h6: ({ children, ...props }: any) => {
-      const renderWithEmojiPreservation = (content: any, gradientClass: string) => {
+      const renderWithPreservation = (content: any) => {
         if (typeof content === 'string') {
           const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
           const parts = content.split(emojiRegex);
@@ -224,17 +251,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className={gradientClass}>{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{part}</span>;
             }
             return part;
           });
         }
-        return <span className={gradientClass}>{content}</span>;
+        if (React.isValidElement(content) && content.props?.className?.includes('katex')) {
+          return content;
+        }
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400">{content}</span>;
       };
 
       return (
         <h6 {...props}>
-          {renderWithEmojiPreservation(children, "text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-emerald-300 dark:from-green-300 dark:to-emerald-400")}
+          {React.Children.map(children, (child, index) => {
+            return renderWithPreservation(child);
+          })}
         </h6>
       );
     },

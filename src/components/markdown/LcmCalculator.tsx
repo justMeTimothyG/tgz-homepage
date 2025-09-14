@@ -15,6 +15,7 @@ interface LcmCalculatorProps {
   description?: string;
   initialA?: number;
   initialB?: number;
+  defaultExpanded?: boolean;
 }
 
 interface GcdStep {
@@ -50,12 +51,13 @@ export default function LcmCalculator({
   title = "kgV-Rechner (Kleinstes gemeinsames Vielfaches)",
   description = "Berechnet das kgV zweier Zahlen mit der Formel: kgV(a,b) = (a × b) / ggT(a,b)",
   initialA = 12,
-  initialB = 8
+  initialB = 8,
+  defaultExpanded = false
 }: LcmCalculatorProps) {
   const [a, setA] = useState(initialA);
   const [b, setB] = useState(initialB);
   const [showSteps, setShowSteps] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const { lcm, gcd, steps, gcdSteps } = useMemo(() => {

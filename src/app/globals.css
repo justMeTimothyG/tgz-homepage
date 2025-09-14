@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@import "katex/dist/katex.css";
 /* Include additional sources for Tailwind to scan (database-derived classes) */
 @source "../../.tailwind/safelist.txt";
 

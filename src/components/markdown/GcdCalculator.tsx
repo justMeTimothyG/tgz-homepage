@@ -17,18 +17,20 @@ interface GcdCalculatorProps {
   description?: string;
   initialA?: number;
   initialB?: number;
+  defaultExpanded?: boolean;
 }
 
 export default function GcdCalculator({
   title = "ggT-Rechner (Größter gemeinsamer Teiler)",
   description = "Berechnet den ggT zweier Zahlen mit dem euklidischen Algorithmus.",
   initialA = 48,
-  initialB = 18
+  initialB = 18,
+  defaultExpanded = false
 }: GcdCalculatorProps) {
   const [a, setA] = useState(initialA);
   const [b, setB] = useState(initialB);
   const [showSteps, setShowSteps] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
 
   const { gcd, steps } = useMemo(() => {
