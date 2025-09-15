@@ -4,8 +4,9 @@ import React from 'react';
 import { Wrench } from 'lucide-react';
 import GcdCalculator from '@/components/markdown/GcdCalculator';
 import LcmCalculator from '@/components/markdown/LcmCalculator';
+import PascalsTriangle from '@/components/markdown/PascalsTriangle';
 
-type ToolId = 'gcd' | 'lcm';
+type ToolId = 'gcd' | 'lcm' | 'pascal';
 type ToolTree = {
   label: string;
   items?: { id: ToolId; name: string; description?: string }[];
@@ -18,6 +19,7 @@ const toolsTree: ToolTree[] = [
     items: [
       { id: 'gcd', name: 'ggT-Rechner', description: 'Größter gemeinsamer Teiler' },
       { id: 'lcm', name: 'kgV-Rechner', description: 'Kleinstes gemeinsames Vielfaches' },
+      { id: 'pascal', name: 'Pascal’sches Dreieck', description: '(a + b)^n und Binomialkoeffizienten' },
     ],
   },
 ];
@@ -38,6 +40,14 @@ function ToolPanel({ selected }: { selected: ToolId }) {
           title="kgV-Rechner (Kleinstes gemeinsames Vielfaches)"
           description="Berechnet das kgV zweier Zahlen: kgV(a,b) = (a × b) / ggT(a,b)"
           defaultExpanded
+        />
+      );
+    case 'pascal':
+      return (
+        <PascalsTriangle
+          title="Pascal’sches Dreieck & Binomische Formel"
+          description="Erkunde (a + b)^n mit dem Pascal’schen Dreieck. Setze a und b ein oder zeige die allgemeine Formel."
+          initialLevel={5}
         />
       );
     default:
@@ -99,7 +109,7 @@ export default function ToolsClient() {
   React.useEffect(() => {
     const readHash = () => {
       const id = window.location.hash.replace('#', '') as ToolId;
-      if (id === 'gcd' || id === 'lcm') setSelected(id);
+      if (id === 'gcd' || id === 'lcm' || id === 'pascal') setSelected(id);
     };
     readHash();
     window.addEventListener('hashchange', readHash);

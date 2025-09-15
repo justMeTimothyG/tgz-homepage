@@ -4,6 +4,7 @@ import React from 'react';
 import { AlertCircle, CheckCircle, Info, XCircle, ExternalLink } from 'lucide-react';
 import GcdCalculator from './GcdCalculator';
 import LcmCalculator from './LcmCalculator';
+import PascalsTriangle from './PascalsTriangle';
 import Exercise, { Task, Hint, Step, Solution } from './Exercise';
 
 // Callout/Alert Component
@@ -289,4 +290,4 @@ export function ExternalLinkComponent({ href, children, ...props }: {
 }
 
 // Export calculator and exercise components
-export { GcdCalculator, LcmCalculator, Exercise, Task, Hint, Step, Solution };
+export { GcdCalculator, LcmCalculator, PascalsTriangle, Exercise, Task, Hint, Step, Solution };

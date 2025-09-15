@@ -23,7 +23,8 @@ import {
   Step as ImportedStep,
   Solution as ImportedSolution,
   GcdCalculator,
-  LcmCalculator
+  LcmCalculator,
+  PascalsTriangle
 } from '@/components/markdown/CustomComponents';
 import PostPager from '@/components/PostPager';
 
@@ -74,6 +75,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     // Calculator components
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+    PascalsTriangle: withNotProse(PascalsTriangle),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),
@@ -355,9 +357,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Step,
     Solution,
     
-    // Calculator components  
+    // Calculator components
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+    PascalsTriangle: withNotProse(PascalsTriangle),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),
