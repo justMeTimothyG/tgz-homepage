@@ -27,19 +27,7 @@ function pascalRow(n: number): number[] {
   return Array.from({ length: n + 1 }, (_, k) => binomialCoefficient(n, k));
 }
 
-function formatTerm(coeff: number, aPow: number, bPow: number): string {
-  const parts: string[] = [];
-  if (coeff !== 1 || (aPow === 0 && bPow === 0)) {
-    parts.push(String(coeff));
-  }
-  if (aPow > 0) {
-    parts.push("a" + (aPow > 1 ? `^${aPow}` : ""));
-  }
-  if (bPow > 0) {
-    parts.push("b" + (bPow > 1 ? `^${bPow}` : ""));
-  }
-  return parts.join("·");
-}
+// formatTerm (nur Terme ohne konkrete Zahlen) wurde entfernt, da aktuell ungenutzt
 
 function formatTermWithValues(coeff: number, aPow: number, bPow: number, a: number, b: number): string {
   const parts: string[] = [];
@@ -62,11 +50,7 @@ export default function PascalsTriangle({
 
   const coeffs = useMemo(() => pascalRow(level), [level]);
 
-  const variableExpansion = useMemo(() => {
-    return coeffs
-      .map((c, k) => formatTerm(c, level - k, k))
-      .join(" + ");
-  }, [coeffs, level]);
+  // (Kein direkter Bedarf an der reinen Variablen-Expansion aktuell)
 
   // Compact pastel palette; dark mode uses softer tints for readability
   const colorPalette = useMemo(

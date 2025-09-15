@@ -10,23 +10,26 @@ type VariantLink = {
   fileName?: string;
 };
 
-type DownloadProps = (
-  | {
-      href: string; // single file URL
-      variants?: never;
-      fileType?: string; // file type label for single file
-    }
-  | {
-      href?: never;
-      variants: VariantLink[]; // multiple variants
-      fileType?: never; // use per-variant filetype
-    }
-) & {
+type SingleDownloadProps = {
+  href: string; // single file URL
+  variants?: never;
+  fileType?: string; // file type label for single file
+};
+
+type VariantsDownloadProps = {
+  href?: never;
+  variants: VariantLink[]; // multiple variants
+  fileType?: never; // use per-variant filetype
+};
+
+type CommonProps = {
   title: string;
   description?: string;
   fileName?: string; // optional override for single file
   accent?: 'blue' | 'green' | 'purple' | 'gray';
 };
+
+type DownloadProps = (SingleDownloadProps | VariantsDownloadProps) & CommonProps;
 
 function guessFileName(url: string): string {
   try {
@@ -53,11 +56,16 @@ export default function Download(props: DownloadProps) {
   const { title, description, fileName, accent = 'blue' } = props;
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const hasVariants = Array.isArray((props as any).variants) && (props as any).variants.length > 0;
-  const variants = (hasVariants ? (props as any).variants : []) as VariantLink[];
-  const activeLink = hasVariants ? undefined : (props as any).href as string | undefined;
-  const activeType = hasVariants ? undefined : (props as any).fileType as string | undefined;
-  const activeName = !hasVariants ? (fileName || guessFileName((props as any).href || '')) : undefined;
+  const isVariants = (p: DownloadProps): p is VariantsDownloadProps & CommonProps =>
+    'variants' in p && Array.isArray((p as VariantsDownloadProps).variants);
+  const isSingle = (p: DownloadProps): p is SingleDownloadProps & CommonProps =>
+    'href' in p && typeof (p as SingleDownloadProps).href === 'string';
+
+  const hasVariants = isVariants(props);
+  const variants: VariantLink[] = hasVariants ? props.variants : [];
+  const activeLink: string | undefined = isSingle(props) ? props.href : undefined;
+  const fileTypeTag: string | undefined = isSingle(props) ? props.fileType : undefined;
+  const activeName = !hasVariants ? (fileName || guessFileName(activeLink || '')) : undefined;
 
   const accentClasses = {
     blue: {
@@ -105,7 +113,7 @@ export default function Download(props: DownloadProps) {
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-    } catch (e) {
+    } catch {
       // Fallback: open in new tab
       setError('Direkter Download fehlgeschlagen. Öffne Datei in neuem Tab.');
       const linkToUse = link ?? activeLink;
@@ -130,9 +138,9 @@ export default function Download(props: DownloadProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">{title}</h3>
-              {(props as any).fileType && (
+              {fileTypeTag && (
                 <span className={`text-[10px] px-1.5 py-0.5 rounded ${accentClasses.badge} uppercase tracking-wide`}>
-                  {(props as any).fileType}
+                  {fileTypeTag}
                 </span>
               )}
             </div>
