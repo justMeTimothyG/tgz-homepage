@@ -121,7 +121,7 @@ export default function Download(props: DownloadProps) {
       <button
         onClick={() => handleDownload()}
         disabled={loading}
-        className={`w-full text-left border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors ${accentClasses.ring}`}
+        className={`w-full text-left border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/80 transition-colors cursor-pointer disabled:cursor-not-allowed ${accentClasses.ring}`}
       >
         <div className="flex items-start gap-3">
           <div className={`mt-0.5 ${accentClasses.icon}`}>
