@@ -100,10 +100,18 @@ function VennSVG({ op }: { op: Operation }) {
 
 const OP_META: Record<Operation, { expr: string; symbol: string; label: string; description: string }> = {
   union: { expr: "A ∪ B", symbol: "∪", label: "Vereinigung", description: "Alles in A oder B (oder beiden)." },
-  intersection: { expr: "A ∩ B", symbol: "∩", label: "Schnitt", description: "Elemente, die gleichzeitig in A und B liegen." },
+  intersection: { expr: "A ∩ B", symbol: "∩", label: "Schnittmenge", description: "Elemente, die gleichzeitig in A und B liegen." },
   aMinusB: { expr: "A ∖ B", symbol: "∖", label: "Differenz A∖B", description: "Elemente in A, aber nicht in B." },
   bMinusA: { expr: "B ∖ A", symbol: "∖", label: "Differenz B∖A", description: "Elemente in B, aber nicht in A." },
-  xor: { expr: "A Δ B", symbol: "Δ", label: "Symm. Differenz", description: "Elemente in genau einer der beiden Mengen." },
+  xor: { expr: "A Δ B", symbol: "Δ", label: "Symmetrische Differenz", description: "Elemente in genau einer der beiden Mengen." },
+};
+
+const OP_SUBTITLE: Record<Operation, string> = {
+  union: "Vereinigung",
+  intersection: "Schnittmenge",
+  aMinusB: "Differenz",
+  bMinusA: "Differenz",
+  xor: "Symmetrische Differenz",
 };
 
 export default function VennSets() {
@@ -186,6 +194,11 @@ export default function VennSets() {
                 )}
               </div>
               <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">B</span>
+            </div>
+
+            {/* Sub title reflecting current operator */}
+            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 text-center">
+              {OP_SUBTITLE[op]}
             </div>
 
             {/* Only explanation text (no repeating subtitle) */}
