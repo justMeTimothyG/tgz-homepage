@@ -26,7 +26,8 @@ import {
   LcmCalculator,
   GaussianElimination,
   PascalsTriangle,
-  VennSets
+  VennSets,
+  Download
 } from '@/components/markdown/CustomComponents';
 import PostPager from '@/components/PostPager';
 
@@ -80,6 +81,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     GaussianElimination: withNotProse(GaussianElimination),
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
+    Download: withNotProse(Download),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),
@@ -367,6 +369,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     GaussianElimination: withNotProse(GaussianElimination),
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
+    Download: withNotProse(Download),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),
