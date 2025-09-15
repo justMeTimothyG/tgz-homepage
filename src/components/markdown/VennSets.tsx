@@ -141,59 +141,71 @@ export default function VennSets() {
 
   return (
     <div className={cx("my-6")}> 
-      <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 md:p-10 bg-white dark:bg-gray-800 shadow-sm min-h-[380px]">
+      <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 md:p-10 bg-white dark:bg-gray-800 shadow-sm">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: header, dropdown, description */}
           <div className="self-center order-1">
             {/* Centered term A [op] B */}
             <div className="flex items-center justify-center gap-4 mb-4">
-              <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">A</span>
-              <div className="relative">
-                <button
-                  ref={btnRef}
-                  type="button"
-                  onClick={() => setOpen((v) => !v)}
-                  aria-haspopup="menu"
-                  aria-expanded={open}
-                  aria-label="Mengenoperation auswählen"
-                  className="min-w-[3rem] inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-2xl font-semibold px-3 py-1.5 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-600 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {OP_META[op].symbol}
-                </button>
-                {open && (
-                  <div
-                    ref={menuRef}
-                    role="menu"
-                    className="absolute z-20 mt-2 w-64 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg overflow-hidden"
-                  >
-                    {(
-                      ["union", "intersection", "aMinusB", "bMinusA", "xor"] as Operation[]
-                    ).map((key) => {
-                      const active = key === op;
-                      return (
-                        <button
-                          key={key}
-                          role="menuitem"
-                          onClick={() => {
-                            setOp(key);
-                            setOpen(false);
-                          }}
-                          className={cx(
-                            "w-full text-left px-3 py-2 flex items-center gap-3 transition-colors",
-                            active
-                              ? "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-100"
-                              : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
-                          )}
+              {(() => {
+                const leftLabel = op === 'bMinusA' ? 'B' : 'A';
+                const rightLabel = op === 'bMinusA' ? 'A' : 'B';
+                return (
+                  <>
+                    <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">{leftLabel}</span>
+                    <div className="relative">
+                      <button
+                        ref={btnRef}
+                        type="button"
+                        onClick={() => setOpen((v) => !v)}
+                        aria-haspopup="menu"
+                        aria-expanded={open}
+                        aria-label="Mengenoperation auswählen"
+                        className="min-w-[3rem] inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-2xl font-semibold px-3 py-1.5 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-600 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        {OP_META[op].symbol}
+                      </button>
+                      {open && (
+                        <div
+                          ref={menuRef}
+                          role="menu"
+                          className="absolute z-20 mt-2 w-64 rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg overflow-hidden"
                         >
-                          <span className="w-6 text-xl text-center select-none">{OP_META[key].symbol}</span>
-                          <span className="truncate text-sm">{OP_META[key].label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-              <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">B</span>
+                          {([
+                            'union',
+                            'intersection',
+                            'aMinusB',
+                            'bMinusA',
+                            'xor',
+                          ] as Operation[]).map((key) => {
+                            const active = key === op;
+                            return (
+                              <button
+                                key={key}
+                                role="menuitem"
+                                onClick={() => {
+                                  setOp(key);
+                                  setOpen(false);
+                                }}
+                                className={cx(
+                                  'w-full text-left px-3 py-2 flex items-center gap-3 transition-colors',
+                                  active
+                                    ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-100'
+                                    : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100'
+                                )}
+                              >
+                                <span className="w-6 text-xl text-center select-none">{OP_META[key].symbol}</span>
+                                <span className="truncate text-sm">{OP_META[key].label}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">{rightLabel}</span>
+                  </>
+                );
+              })()}
             </div>
 
             {/* Sub title reflecting current operator */}
