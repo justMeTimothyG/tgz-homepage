@@ -3,11 +3,28 @@
 import React from 'react';
 import { DownloadCloud, Loader2, File as FileIcon, AlertCircle, ExternalLink } from 'lucide-react';
 
-type DownloadProps = {
-  href: string; // S3 (or any) file URL
+type VariantLink = {
+  variant: string;
+  link: string;
+  filetype?: string; // e.g., pdf, png, zip
+  fileName?: string;
+};
+
+type DownloadProps = (
+  | {
+      href: string; // single file URL
+      variants?: never;
+      fileType?: string; // file type label for single file
+    }
+  | {
+      href?: never;
+      variants: VariantLink[]; // multiple variants
+      fileType?: never; // use per-variant filetype
+    }
+) & {
   title: string;
   description?: string;
-  fileName?: string; // optional override for downloaded file name
+  fileName?: string; // optional override for single file
   accent?: 'blue' | 'green' | 'purple' | 'gray';
 };
 
@@ -32,10 +49,19 @@ function filenameFromContentDisposition(header: string | null): string | null {
   return null;
 }
 
-export default function Download({ href, title, description, fileName, accent = 'blue' }: DownloadProps) {
+export default function Download(props: DownloadProps) {
+  const { title, description, fileName, accent = 'blue' } = props;
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
-  const derivedName = React.useMemo(() => fileName || guessFileName(href), [fileName, href]);
+  const hasVariants = Array.isArray((props as any).variants) && (props as any).variants.length > 0;
+  const variants = (hasVariants ? (props as any).variants : []) as VariantLink[];
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const activeLink = hasVariants ? variants[Math.min(selectedIndex, Math.max(0, variants.length - 1))]?.link : (props as any).href;
+  const activeType = hasVariants ? variants[Math.min(selectedIndex, Math.max(0, variants.length - 1))]?.filetype : (props as any).fileType;
+  const activeName = hasVariants
+    ? variants[Math.min(selectedIndex, Math.max(0, variants.length - 1))]?.fileName || guessFileName(activeLink || '')
+    : (fileName || guessFileName((props as any).href || ''));
 
   const accentClasses = {
     blue: {
@@ -68,14 +94,15 @@ export default function Download({ href, title, description, fileName, accent = 
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(href, { mode: 'cors' });
+      if (!activeLink) throw new Error('Kein Link verfügbar');
+      const res = await fetch(activeLink, { mode: 'cors' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const cd = filenameFromContentDisposition(res.headers.get('content-disposition'));
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = cd || derivedName;
+      a.download = cd || activeName;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -83,7 +110,7 @@ export default function Download({ href, title, description, fileName, accent = 
     } catch (e) {
       // Fallback: open in new tab
       setError('Direkter Download fehlgeschlagen. Öffne Datei in neuem Tab.');
-      window.open(href, '_blank', 'noopener,noreferrer');
+      if (activeLink) window.open(activeLink, '_blank', 'noopener,noreferrer');
     } finally {
       setLoading(false);
     }
@@ -100,11 +127,30 @@ export default function Download({ href, title, description, fileName, accent = 
             <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100 truncate">{title}</h3>
             <span className={`text-xs px-2 py-0.5 rounded ${accentClasses.badge} whitespace-nowrap flex items-center gap-1`}>
               <FileIcon className="w-3.5 h-3.5" />
-              {derivedName}
+              {activeName}
             </span>
+            {activeType && (
+              <span className={`text-[10px] px-1.5 py-0.5 rounded ${accentClasses.badge} uppercase tracking-wide`}>{activeType}</span>
+            )}
           </div>
           {description && (
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{description}</p>
+          )}
+          {hasVariants && variants.length > 0 && (
+            <div className="mb-3 flex items-center gap-2">
+              <label className="text-xs text-gray-600 dark:text-gray-400">Variante:</label>
+              <select
+                value={selectedIndex}
+                onChange={(e) => setSelectedIndex(Number(e.target.value))}
+                className="text-sm px-2 py-1 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+              >
+                {variants.map((v, i) => (
+                  <option key={v.variant + i} value={i}>
+                    {v.variant}{v.filetype ? ` · ${v.filetype}` : ''}
+                  </option>
+                ))}
+              </select>
+            </div>
           )}
           <div className="flex items-center gap-2">
             <button
@@ -116,7 +162,7 @@ export default function Download({ href, title, description, fileName, accent = 
               {loading ? 'Lade…' : 'Download'}
             </button>
             <a
-              href={href}
+              href={activeLink}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400 hover:underline"
@@ -134,4 +180,3 @@ export default function Download({ href, title, description, fileName, accent = 
     </div>
   );
 }
-
