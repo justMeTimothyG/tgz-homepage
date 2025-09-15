@@ -25,6 +25,7 @@ import {
   GcdCalculator,
   LcmCalculator
 } from '@/components/markdown/CustomComponents';
+import PostPager from '@/components/PostPager';
 
 // Non-hook version for server-side usage
 export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
@@ -73,6 +74,9 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     // Calculator components
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+
+    // Blog navigation
+    PostPager: withNotProse(PostPager),
 
     // Layout & UI components
     Callout: withNotProse(Callout),
@@ -354,6 +358,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Calculator components  
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+
+    // Blog navigation
+    PostPager: withNotProse(PostPager),
     
     // Layout & UI components
     Callout: withNotProse(Callout),
