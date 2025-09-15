@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
@@ -44,6 +45,12 @@ export default function RootLayout({
   })();
           `,
           }}
+        />
+        {/* Plausible Analytics */}
+        <Script
+          src="https://analytics.blickfangemsland.de/js/script.js"
+          data-domain="tluedtke.de"
+          strategy="afterInteractive"
         />
         {/* KaTeX is loaded via CSS in Markdown component; no runtime script needed */}
         <div className="min-h-screen flex flex-col">

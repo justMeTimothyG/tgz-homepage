@@ -5,8 +5,9 @@ import { Wrench } from 'lucide-react';
 import GcdCalculator from '@/components/markdown/GcdCalculator';
 import LcmCalculator from '@/components/markdown/LcmCalculator';
 import PascalsTriangle from '@/components/markdown/PascalsTriangle';
+import VennSets from '@/components/markdown/VennSets';
 
-type ToolId = 'gcd' | 'lcm' | 'pascal';
+type ToolId = 'gcd' | 'lcm' | 'pascal' | 'venn';
 type ToolTree = {
   label: string;
   items?: { id: ToolId; name: string; description?: string }[];
@@ -20,6 +21,7 @@ const toolsTree: ToolTree[] = [
       { id: 'gcd', name: 'ggT-Rechner', description: 'Größter gemeinsamer Teiler' },
       { id: 'lcm', name: 'kgV-Rechner', description: 'Kleinstes gemeinsames Vielfaches' },
       { id: 'pascal', name: 'Pascal’sches Dreieck', description: '(a + b)^n und Binomialkoeffizienten' },
+      { id: 'venn', name: 'Mengenlehre – Venn', description: 'A ∪ B, A ∩ B, A \\ B, B \\ A, A Δ B' },
     ],
   },
 ];
@@ -50,6 +52,8 @@ function ToolPanel({ selected }: { selected: ToolId }) {
           initialLevel={5}
         />
       );
+    case 'venn':
+      return <VennSets />;
     default:
       return null;
   }
@@ -109,7 +113,7 @@ export default function ToolsClient() {
   React.useEffect(() => {
     const readHash = () => {
       const id = window.location.hash.replace('#', '') as ToolId;
-      if (id === 'gcd' || id === 'lcm' || id === 'pascal') setSelected(id);
+      if (id === 'gcd' || id === 'lcm' || id === 'pascal' || id === 'venn') setSelected(id);
     };
     readHash();
     window.addEventListener('hashchange', readHash);
