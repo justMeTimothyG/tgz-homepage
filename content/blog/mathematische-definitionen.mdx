@@ -1,0 +1,531 @@
+---
+title: "Mathematische Definitionen"
+date: "2025-09-15"
+lastUpdated: "2025-09-15"
+excerpt: "Zahlenmengen verstehen, Gleichungen systematisch lösen, Funktionen definieren und Definitionsbereiche bestimmen"
+tags: ["mathematik", "definitionen", "zahlenmengen", "funktionen", "gleichungen"]
+published: true
+---
+
+# Grundlegende Definitionen verstehen
+
+*Von Zahlenmengen über Gleichungen bis zu Funktionen - Das mathematische Fundament für das Studium*
+
+---
+
+## Einführung
+
+<Callout type="info" title="Warum sind Definitionen so wichtig?">
+Mathematische Definitionen sind wie das Alphabet einer Sprache - ohne sie können wir die komplexeren "Sätze" der höheren Mathematik nicht verstehen oder formulieren. Dieses Kapitel legt das Fundament für Ihr gesamtes mathematisches Studium.
+</Callout>
+
+Willkommen zum dritten Kapitel unseres Mathematik-Vorkurses! Nachdem wir die Grundlagen der Arithmetik und Bruchrechnung gemeistert haben, tauchen wir nun in die Welt der mathematischen Definitionen ein.
+
+**In diesem Kapitel lernen Sie:**
+- Die wichtigsten Zahlenmengen kennen und unterscheiden
+- Gleichungen systematisch lösen
+- Funktionen definieren und verstehen
+
+## 🔢 Die Zahlenwelten - Zahlenmengen verstehen
+
+<Callout type="info" title="Merkhilfe für Zahlenmengen">
+Stellen Sie sich die Zahlenmengen wie ineinander geschachtelte Boxen vor: $\mathbb{N}$ ist in $\mathbb{Z}$ enthalten, $\mathbb{Z}$ ist in $\mathbb{Q}$ enthalten, und so weiter. Jede größere Box enthält alle Zahlen der kleineren Boxen plus zusätzliche Zahlen.
+</Callout>
+
+### Natürliche Zahlen ($\mathbb{N}$)
+
+Die natürlichen Zahlen sind unsere "Zählzahlen":
+**$\mathbb{N} = \{1, 2, 3, 4, 5, ...\}$**
+
+*Merkhilfe: "Natürlich" zählen wir von 1 aufwärts!*
+
+**Anwendungsbeispiele:**
+- "5 Äpfel im Korb"
+- "12 Studierende in der Vorlesung"
+
+### Ganze Zahlen ($\mathbb{Z}$)
+
+Erweitern wir die natürlichen Zahlen um Null und negative Zahlen:
+**$\mathbb{Z} = \{..., -3, -2, -1, 0, 1, 2, 3, ...\}$**
+
+*Merkhilfe: "Z" wie "Zahlen" - alle ganzen Zahlen!*
+
+**Anwendungsbeispiele:**
+- "-5°C" (Temperatur unter dem Gefrierpunkt)
+- "50m über dem Meeresspiegel"
+
+### Rationale Zahlen ($\mathbb{Q}$)
+
+Alle Zahlen, die als Bruch darstellbar sind:
+**$\mathbb{Q} = \{a/b \mid a \in \mathbb{Z}, b \in \mathbb{Z}, b \neq 0\}$**
+
+*Merkhilfe: "Q" wie "Quotient" - alle Brüche!*
+
+**Beispiele:**
+- 1/2 = 0,5
+- 3/4 = 0,75
+- -2/3 = -0,666...
+- 5 = 5/1 (jede ganze Zahl ist auch rational!)
+
+### Reelle Zahlen ($\mathbb{R}$)
+
+Alle Zahlen auf der Zahlengeraden, einschließlich irrationaler Zahlen:
+**$\mathbb{R} = \mathbb{Q} \cup \{\text{irrationale Zahlen}\}$**
+
+*Merkhilfe: "R" wie "Real" - alle "echten" Zahlen auf der Zahlenlinie!*
+
+<Callout type="info" title="Irrationale Zahlen">
+Irrationale Zahlen können nicht als Bruch dargestellt werden und haben unendlich viele nicht-periodische Dezimalstellen:
+- π ≈ 3,14159...
+- √2 ≈ 1,41421...
+- e ≈ 2,71828...
+</Callout>
+
+### Komplexe Zahlen ($\mathbb{C}$)
+
+Zahlen der Form a + bi (werden im Grundstudium eingeführt):
+**$\mathbb{C} = \{a + bi \mid a, b \in \mathbb{R}, i^2 = -1\}$**
+
+## 📏 Intervallnotation - Bereiche elegant beschreiben
+
+### Geschlossene Intervalle [a, b]
+**Definition:** Alle Zahlen x mit a ≤ x ≤ b  
+**Bedeutung:** Endpunkte sind enthalten
+
+**Beispiel:** [1, 5] enthält 1, 2, 3, 4, 5 und alle Zahlen dazwischen
+
+### Offene Intervalle (a, b)
+**Definition:** Alle Zahlen x mit a < x < b  
+**Bedeutung:** Endpunkte sind NICHT enthalten
+
+**Beispiel:** (0, 10) enthält alle Zahlen zwischen 0 und 10, aber nicht 0 und 10 selbst
+
+### Halboffene Intervalle
+- **[a, b):** a ist enthalten, b nicht
+- **(a, b]:** a ist nicht enthalten, b ist enthalten
+
+### Unendliche Intervalle
+- **[0, ∞):** Alle Zahlen ≥ 0
+- **(-∞, 5]:** Alle Zahlen ≤ 5  
+- **$(-\infty, \infty)$:** Alle reellen Zahlen (= $\mathbb{R}$)
+
+## ⚖️ Gleichungen verstehen und lösen
+
+### Was ist eine Gleichung?
+
+Eine **Gleichung** ist eine Aussage, dass zwei mathematische Ausdrücke gleich sind.
+
+**Beispiel:** 2x + 3 = 11
+
+<Callout type="warning" title="Häufiger Fehler beim Gleichungslösen">
+**Niemals durch eine Variable teilen!** Wenn Sie durch x teilen, können Sie Lösungen verlieren. Bringen Sie stattdessen immer alles auf eine Seite und faktorisieren Sie.
+
+**Falsch:** x² = 5x → x = 5 (x = 0 wurde vergessen!)
+**Richtig:** x² - 5x = 0 → x(x - 5) = 0 → x = 0 oder x = 5
+</Callout>
+
+### Äquivalenzumformungen - Die goldenen Regeln
+
+**Regel 1:** Gleiche Zahl zu beiden Seiten addieren/subtrahieren
+$$
+\begin{align*}
+2x+3 &= 11  &  & |-3 \\
+2x &= 8
+\end{align*}
+$$
+
+**Regel 2:** Beide Seiten mit derselben Zahl (≠ 0) multiplizieren/dividieren
+$$
+\begin{align*}
+2x &= 8  &  & | :2 \\
+x &= 4
+\end{align*}
+$$
+
+**Regel 3:** Beide Seiten potenzieren (Vorsicht bei geraden Exponenten!)
+$$
+\begin{align*}
+\sqrt{ x } &= 3  &  & | \, ()^{2} \\
+x &= 9
+\end{align*}
+$$
+
+### Lösungsschema für lineare Gleichungen
+
+<Exercise title="Systematisches Gleichungslösen" difficulty="medium">
+<Task>
+Lösen Sie die Gleichung Schritt für Schritt: $3 \cdot(x - 2) + 5 = 2x + 7$
+<br/>
+Verwenden Sie das 5-Schritte-Schema:
+<ol className="ml-4">
+<li>1. Klammern auflösen</li>
+<li>2. x-Terme auf eine Seite sammeln  </li>
+<li>3. Zahlen auf die andere Seite sammeln</li>
+<li>4. Durch den Koeffizienten von x teilen</li>
+<li>5. Probe machen</li>
+</ol>
+</Task>
+
+<Hint>
+Beginnen Sie mit dem Auflösen der Klammern: 3(x - 2) = 3x - 6
+</Hint>
+
+<Step>
+**Schritt 1: Klammern auflösen**
+$$
+\begin{align*}
+3\cdot (x-2)+5 &= 2x + 7 \\
+3x - 6 + 5 &= 2x + 7 \\
+3x -1 &= 2x+7
+\end{align*}
+$$
+</Step>
+
+<Step>
+**Schritt 2 & 3: Terme sammeln**
+$$
+\begin{align*}
+3x - 2x &= 7 + 1 \\
+x &= 8
+\end{align*}
+$$
+</Step>
+
+<Solution>
+**Lösung:** x = 8
+<br/>
+**Schritt 5: Probe**
+Linke Seite: 
+$$
+\begin{align*}
+3 (8-2) + 5 &=  \\
+3 \cdot 6 + 5 &=  \\
+18 + 5 &= \\
+23 &= 
+\end{align*}
+$$
+
+Rechte Seite: 
+$$
+\begin{align*}
+&= 2 \cdot  8 + 7  \\
+&= 16 + 7 \\
+&= 23
+\end{align*}
+$$
+
+✓ Die Gleichung ist korrekt gelöst!
+</Solution>
+</Exercise>
+
+## 📈 Funktionen - Mathematische Maschinen
+
+### Was ist eine Funktion?
+
+<Callout type="info" title="Funktionen verstehen">
+Eine **Funktion** ist wie eine mathematische Maschine: Sie stopfen einen Wert x hinein (Input), die Funktion verarbeitet ihn nach einer bestimmten Regel, und heraus kommt genau ein Wert y (Output).
+
+**Wichtig:** Zu jedem x-Wert gibt es **genau einen** y-Wert.
+</Callout>
+
+Eine **Funktion** f ordnet jedem Element x aus dem Definitionsbereich D **genau ein** Element y aus dem Wertebereich W zu.
+
+**Schreibweise:** $f: D \to W, y = f(x)$
+
+### Definitionsbereich bestimmen
+
+<Callout type="warning" title="Vorsicht bei Definitionsbereichen">
+Frage Sie sich immer: "Für welche x-Werte ist meine Funktion nicht definiert?"
+
+**Häufige Problemfälle:**
+- Division durch Null → Nenner = 0 ausschließen
+- Negative Werte unter der Wurzel → Radikand ≥ 0 fordern
+- Logarithmus von negativen Zahlen → Argument > 0 fordern
+</Callout>
+
+**Beispiele mit Erklärung:**
+
+**$f(x) = \frac{1}{x-3}$**
+- Definitionsbereich: $D = \mathbb{R} \setminus \{3\}$
+- *Begründung: Bei x = 3 würde der Nenner null werden*
+
+**$g(x) = \sqrt{x-1}$**  
+- Definitionsbereich: $D = [1, \infty)$
+- *Begründung: Unter der Wurzel muss x-1 ≥ 0 sein*
+
+**$h(x) = \ln(2x-4)$**
+- Definitionsbereich: $D = (2, \infty)$
+- *Begründung: Im Logarithmus muss 2x-4 > 0 sein*
+
+
+### Wertebereich bestimmen
+
+**Frage:** Welche y-Werte kann die Funktion annehmen?
+
+**Beispiele:**
+
+**$f(x) = x^2$ (für $x \in \mathbb{R}$)**
+- Wertebereich: $W = [0, \infty)$  
+- *Begründung: Quadratzahlen sind nie negativ*
+
+**$g(x) = \sin(x)$**
+- Wertebereich: $W = [-1, 1]$
+- *Begründung: Sinus schwankt zwischen -1 und 1*
+
+### Umkehrfunktionen - Den Prozess rückgängig machen
+
+**Idee:** Wenn $f(a) = b$, dann soll $f^{-1}(b) = a$ sein.
+
+**Voraussetzung:** Die Funktion muss **injektiv** (eineindeutig) sein.
+*Das bedeutet: Jeder y-Wert kommt höchstens einmal vor.*
+
+<Exercise title="Umkehrfunktion bestimmen" difficulty="easy">
+<Task>
+Bestimmen Sie die Umkehrfunktion von f(x) = 2x + 3
+
+Verwenden Sie das 3-Schritte-Verfahren:
+1. y = f(x) schreiben
+2. Nach x auflösen  
+3. x und y vertauschen
+</Task>
+
+<Step>
+**Schritt 1:** y = f(x) schreiben  
+y = 2x + 3
+</Step>
+
+<Step>
+**Schritt 2:** Nach x auflösen
+y = 2x + 3
+y - 3 = 2x
+x = (y - 3)/2
+</Step>
+
+<Solution>
+**Schritt 3:** x und y vertauschen
+f⁻¹(x) = (x - 3)/2
+
+**Probe:** f(f⁻¹(x)) = f((x-3)/2) = 2·(x-3)/2 + 3 = x-3+3 = x ✓
+</Solution>
+</Exercise>
+
+## 🛠️ Praktische Anwendungen
+
+### Beispiel 1: Handytarif-Vergleich
+
+**Tarif A:** 10€ Grundgebühr + 0,15€/Min  
+**Tarif B:** 5€ Grundgebühr + 0,20€/Min
+
+**Funktionen:**
+- A(x) = 10 + 0,15x
+- B(x) = 5 + 0,20x
+
+<Exercise title="Tarifvergleich" difficulty="medium">
+<Task>
+Ab wie vielen Minuten ist Tarif A günstiger als Tarif B?
+Lösen Sie die Ungleichung A(x) < B(x).
+</Task>
+
+<Hint>
+Setzen Sie A(x) < B(x) und lösen Sie nach x auf:
+10 + 0,15x < 5 + 0,20x
+</Hint>
+
+<Solution>
+**Lösung:**
+```
+A(x) < B(x)
+10 + 0,15x < 5 + 0,20x
+10 - 5 < 0,20x - 0,15x  
+5 < 0,05x
+x > 100
+```
+
+**Antwort:** Ab 100 Minuten ist Tarif A günstiger.
+</Solution>
+</Exercise>
+
+### Beispiel 2: Wassertank-Problem
+
+Ein 1000L Tank wird mit 50L/Min gefüllt.
+
+**Funktion:** V(t) = 50t (für t ≤ 20)
+- **Definitionsbereich:** [0, 20] (Tank läuft nach 20 Min über)
+- **Wertebereich:** [0, 1000]
+
+## 🔧 Häufige Fehler vermeiden
+
+### Klassischer Fehler: Division durch Variable
+**❌ Falsch:**
+$$
+\begin{align*}
+x^2 &= 5x  &  & | :x \\
+x &= 5
+\end{align*}
+$$
+**Problem:** Die Lösung x = 0 wurde "verloren"!
+
+**✅ Richtig:**
+$$
+\begin{align*}
+x^2 &= 5x  &  & | -5x \\
+x^2 - 5x &= 0  &  & | \text{Faktorisieren} \\
+x(x - 5) &= 0  &  & | \text{Nullregel} \\
+\\
+x &= 0 \\
+\text{ oder } x &= 5
+\end{align*}
+$$
+
+### Definitionsbereich nicht vergessen
+**❌ Falsch:** Bei $f(x) = \sqrt{x^2}$ ist $f(x) = x$ für alle $x \in \mathbb{R}$
+
+**Problem:** √((-2)²) = √4 = 2 ≠ -2
+
+**✅ Richtig:** f(x) = √(x²) = |x|
+
+## 📋 Cheat Sheet - Schnellreferenz
+
+### Zahlenmengen-Hierarchie
+**$\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \subset \mathbb{C}$**
+
+### Intervall-Notation
+| Notation | Bedeutung | Beispiel |
+|----------|-----------|----------|
+| [a,b] | a ≤ x ≤ b | [1,5] |
+| (a,b) | a < x < b | (0,10) |
+| [a,b) | a ≤ x < b | [0,1) |
+| (a,∞) | x > a | (5,∞) |
+
+### Definitionsbereich-Checks
+- **Bruch:** Nenner ≠ 0
+- **Wurzel:** Radikand $\geq 0$ (in $\mathbb{R}$)  
+- **Logarithmus:** Argument > 0
+
+### Umkehrfunktion finden
+1. y = f(x) schreiben
+2. Nach x auflösen
+3. x ↔ y vertauschen
+
+## 🎯 Übungsaufgaben
+
+<Exercise title="Zahlenmengen zuordnen" difficulty="easy">
+<Task>
+Ordnen Sie zu: π, -5, 2/3, √16, √2
+
+- Welche gehören zu $\mathbb{N}$?
+- Welche sind rational?  
+- Welche sind irrational?
+</Task>
+
+<Solution>
+**Zu $\mathbb{N}$ gehören:** $\sqrt{16} = 4$
+
+**Rational sind:** -5 (= -5/1), 2/3, √16 = 4
+
+**Irrational sind:** π, √2
+
+**Erklärung:** π und √2 können nicht als Bruch dargestellt werden, alle anderen schon.
+</Solution>
+</Exercise>
+
+<Exercise title="Definitionsbereiche bestimmen" difficulty="medium">
+<Task>
+Bestimmen Sie D:
+a) f(x) = 1/(x²-4)  
+b) g(x) = √(3x+6)
+c) h(x) = ln(x²-1)
+</Task>
+
+<Step>
+**Teil a):** f(x) = 1/(x²-4)
+Nenner darf nicht null sein: x² - 4 ≠ 0
+</Step>
+
+<Step>  
+**Teil b):** g(x) = √(3x+6)
+Unter der Wurzel muss ≥ 0 stehen: 3x + 6 ≥ 0
+</Step>
+
+<Solution>
+**Lösungen:**
+
+a) $D = \mathbb{R} \setminus \{-2, 2\}$  
+   (x² - 4 = (x-2)(x+2) = 0 für x = ±2)
+
+b) D = [-2, ∞)  
+   (3x + 6 ≥ 0 → x ≥ -2)
+
+c) D = (-∞, -1) ∪ (1, ∞)  
+   (x² - 1 > 0 → |x| > 1)
+</Solution>
+</Exercise>
+
+<Exercise title="Gleichungen lösen" difficulty="medium">
+<Task>
+a) 2(x-3) = 4x + 2  
+b) x² - 5x = 0  
+c) √(x+1) = 3
+</Task>
+
+<Solution>
+**Lösungen:**
+
+a) 2(x-3) = 4x + 2  
+   2x - 6 = 4x + 2  
+   -8 = 2x  
+   x = -4
+
+b) x² - 5x = 0  
+   x(x - 5) = 0  
+   x = 0 oder x = 5
+
+c) √(x+1) = 3  
+   x + 1 = 9  
+   x = 8  
+   (Probe: √(8+1) = √9 = 3 ✓)
+</Solution>
+</Exercise>
+
+<Exercise title="Umkehrfunktionen finden" difficulty="medium">
+<Task>
+Bestimmen Sie f⁻¹(x) für:  
+a) f(x) = 3x - 7  
+b) f(x) = (x+2)/4
+</Task>
+
+<Solution>
+**Lösungen:**
+
+a) f(x) = 3x - 7  
+   y = 3x - 7  
+   y + 7 = 3x  
+   x = (y + 7)/3  
+   f⁻¹(x) = (x + 7)/3
+
+b) f(x) = (x+2)/4  
+   y = (x+2)/4  
+   4y = x + 2  
+   x = 4y - 2  
+   f⁻¹(x) = 4x - 2
+</Solution>
+</Exercise>
+
+## 💡 Zusammenfassung
+
+<Callout type="success" title="Das haben Sie gelernt">
+In diesem Kapitel haben wir die mathematischen Grundbausteine kennengelernt:
+
+1. **Zahlenmengen** bilden die Struktur der Mathematik
+2. **Gleichungen lösen** ist systematisches Arbeiten mit Äquivalenzumformungen
+3. **Funktionen** sind das Werkzeug zur Beschreibung von Zusammenhängen
+4. **Definitionsbereiche** zeigen uns die Grenzen unserer Funktionen
+</Callout>
+
+Diese Konzepte sind fundamental für alle weiteren mathematischen Themen. Üben Sie diese Grundlagen intensiv - sie werden Ihr mathematisches Fundament für das gesamte Studium!
+
+Im nächsten Kapitel beschäftigen wir uns mit **Proportionalität und Prozentrechnung** - den praktischen Anwendungen dieser Konzepte im Alltag.
+
+<PostPager 
+  prev={{ href: "/blog/bruchrechnung", title: "Bruchrechnung" }} 
+/>
