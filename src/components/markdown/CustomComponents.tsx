@@ -4,6 +4,7 @@ import React from 'react';
 import { AlertCircle, CheckCircle, Info, XCircle, ExternalLink } from 'lucide-react';
 import GcdCalculator from './GcdCalculator';
 import LcmCalculator from './LcmCalculator';
+import GaussianElimination from './GaussianElimination';
 import PascalsTriangle from './PascalsTriangle';
 import VennSets from './VennSets';
 import Exercise, { Task, Hint, Step, Solution } from './Exercise';
@@ -291,4 +292,4 @@ export function ExternalLinkComponent({ href, children, ...props }: {
 }
 
 // Export calculator and exercise components
-export { GcdCalculator, LcmCalculator, PascalsTriangle, VennSets, Exercise, Task, Hint, Step, Solution };
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Exercise, Task, Hint, Step, Solution };

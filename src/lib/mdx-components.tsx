@@ -24,6 +24,7 @@ import {
   Solution as ImportedSolution,
   GcdCalculator,
   LcmCalculator,
+  GaussianElimination,
   PascalsTriangle,
   VennSets
 } from '@/components/markdown/CustomComponents';
@@ -76,6 +77,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     // Calculator components
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+    GaussianElimination: withNotProse(GaussianElimination),
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
 
@@ -362,6 +364,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Calculator components
     GcdCalculator: withNotProse(GcdCalculator),
     LcmCalculator: withNotProse(LcmCalculator),
+    GaussianElimination: withNotProse(GaussianElimination),
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
 

@@ -4,10 +4,11 @@ import React from 'react';
 import { Wrench } from 'lucide-react';
 import GcdCalculator from '@/components/markdown/GcdCalculator';
 import LcmCalculator from '@/components/markdown/LcmCalculator';
+import GaussianElimination from '@/components/markdown/GaussianElimination';
 import PascalsTriangle from '@/components/markdown/PascalsTriangle';
 import VennSets from '@/components/markdown/VennSets';
 
-type ToolId = 'gcd' | 'lcm' | 'pascal' | 'venn';
+type ToolId = 'gcd' | 'lcm' | 'gauss' | 'pascal' | 'venn';
 type ToolTree = {
   label: string;
   items?: { id: ToolId; name: string; description?: string }[];
@@ -20,6 +21,7 @@ const toolsTree: ToolTree[] = [
     items: [
       { id: 'gcd', name: 'ggT-Rechner', description: 'Größter gemeinsamer Teiler' },
       { id: 'lcm', name: 'kgV-Rechner', description: 'Kleinstes gemeinsames Vielfaches' },
+      { id: 'gauss', name: 'Gauß-Eliminationsrechner', description: 'Zeilenumformungen, RREF, LGS' },
       { id: 'pascal', name: 'Pascal’sches Dreieck', description: '(a + b)^n und Binomialkoeffizienten' },
       { id: 'venn', name: 'Mengenlehre – Venn', description: 'A ∪ B, A ∩ B, A \\ B, B \\ A, A Δ B' },
     ],
@@ -41,6 +43,14 @@ function ToolPanel({ selected }: { selected: ToolId }) {
         <LcmCalculator
           title="kgV-Rechner (Kleinstes gemeinsames Vielfaches)"
           description="Berechnet das kgV zweier Zahlen: kgV(a,b) = (a × b) / ggT(a,b)"
+          defaultExpanded
+        />
+      );
+    case 'gauss':
+      return (
+        <GaussianElimination
+          title="Gaußsches Eliminationsverfahren (Zeilenumformungen)"
+          description="Interaktiver Rechner für lineare Gleichungssysteme. Letzte Spalte ist die rechte Seite (Ergebnisspalte)."
           defaultExpanded
         />
       );
@@ -89,7 +99,7 @@ function Group({ node, level, onSelect, selected }: {
                 >
                   <span className="font-medium">{item.name}</span>
                   {item.description && (
-                    <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900 dark:bg-gray-700 text-white text-xs rounded shadow-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-10">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
                       {item.description}
                     </div>
                   )}
@@ -113,7 +123,7 @@ export default function ToolsClient() {
   React.useEffect(() => {
     const readHash = () => {
       const id = window.location.hash.replace('#', '') as ToolId;
-      if (id === 'gcd' || id === 'lcm' || id === 'pascal' || id === 'venn') setSelected(id);
+      if (id === 'gcd' || id === 'lcm' || id === 'gauss' || id === 'pascal' || id === 'venn') setSelected(id);
     };
     readHash();
     window.addEventListener('hashchange', readHash);
@@ -144,7 +154,7 @@ export default function ToolsClient() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Sidebar */}
         <aside className="lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-1">
+          <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden pr-1">
             {toolsTree.map((node) => (
               <Group key={node.label} node={node} level={0} onSelect={handleSelect} selected={selected} />
             ))}
