@@ -133,10 +133,10 @@ export default function VennSets() {
 
   return (
     <div className={cx("my-6")}> 
-      <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-6 md:p-8 bg-white dark:bg-gray-800 shadow-sm">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+      <div className="border border-gray-200 dark:border-gray-700 rounded-xl p-8 md:p-10 bg-white dark:bg-gray-800 shadow-sm min-h-[380px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left: header, dropdown, description */}
-          <div>
+          <div className="self-center order-1">
             {/* Centered term A [op] B */}
             <div className="flex items-center justify-center gap-4 mb-4">
               <span className="text-3xl font-semibold text-gray-900 dark:text-gray-100 select-none">A</span>
@@ -148,7 +148,7 @@ export default function VennSets() {
                   aria-haspopup="menu"
                   aria-expanded={open}
                   aria-label="Mengenoperation auswählen"
-                  className="min-w-[3rem] inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-2xl font-semibold px-3 py-1.5 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-650 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="min-w-[3rem] inline-flex items-center justify-center rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-2xl font-semibold px-3 py-1.5 shadow-sm hover:bg-gray-100 dark:hover:bg-gray-600 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {OP_META[op].symbol}
                 </button>
@@ -173,8 +173,8 @@ export default function VennSets() {
                           className={cx(
                             "w-full text-left px-3 py-2 flex items-center gap-3 transition-colors",
                             active
-                              ? "bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-200"
-                              : "hover:bg-gray-50 dark:hover:bg-gray-700/60 text-gray-800 dark:text-gray-100"
+                              ? "bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-100"
+                              : "hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100"
                           )}
                         >
                           <span className="w-6 text-xl text-center select-none">{OP_META[key].symbol}</span>
@@ -189,13 +189,28 @@ export default function VennSets() {
             </div>
 
             {/* Only explanation text (no repeating subtitle) */}
-            <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 text-center md:text-left">
+            <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 text-center">
               {OP_META[op].description}
             </p>
+
+            {/* Eselsbrücke (nur für aktuelle Auswahl) */}
+            <div className="mt-5 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/30 p-4">
+              <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center">Eselsbrücke</div>
+              <div className="flex items-center gap-3 justify-center text-sm text-gray-700 dark:text-gray-300">
+                <span className="w-6 text-xl text-center">{OP_META[op].symbol}</span>
+                <span>
+                  {op === 'union' && 'Vereinigung – wie eine Schale, die alles auffängt.'}
+                  {op === 'intersection' && 'Schnitt – die Überlappung „unter der Kappe“.'}
+                  {op === 'aMinusB' && 'Differenz – der Rückstrich „schneidet“ etwas heraus.'}
+                  {op === 'bMinusA' && 'Differenz – der Rückstrich „schneidet“ etwas heraus.'}
+                  {op === 'xor' && 'Symmetrische Differenz – Delta steht für Veränderung (entweder/oder).'}
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* Right: larger diagram */}
-          <div className="lg:pl-4">
+          <div className="lg:pl-4 order-2">
             <VennSVG op={op} />
           </div>
         </div>
