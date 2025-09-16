@@ -6,6 +6,16 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
 // Fraction utilities for exact arithmetic
+const debugLog = (...args: unknown[]) => {
+  try {
+    if (typeof window !== 'undefined') {
+      const w = window as unknown as { console?: { log?: (...a: unknown[]) => void } };
+      w.console?.log?.(...args);
+    }
+  } catch {
+    /* noop */
+  }
+};
 class Fraction {
   n: number;
   d: number;
@@ -352,35 +362,17 @@ export default function GaussianElimination({
       }
       return v;
     });
-    // helper kept for consistency; currently not used for final display
-    const _vecToLatex = (vec: Fraction[]) => `\\begin{pmatrix} ${vec.map((f) => f.toLatex()).join(' \\ ')} \\end{pmatrix}`;
+    // Revert to sum of column vectors: x = x0 + sum_j lambda_j * v_j
+    // Ensure KaTeX receives double backslashes (\\) between rows
     const domainSymbol = parameterDomain === 'N' ? '\\mathbb{N}' : parameterDomain === 'Z' ? '\\mathbb{Z}' : '\\mathbb{R}';
-    // Build component-wise expression: x = x0 + sum_j lambda_j * v_j, written as one column vector
-    const components: string[] = Array.from({ length: varCount }, (_, i) => {
-      const parts: string[] = [];
-      const xi = x0[i];
-      const pushSigned = (latex: string, negative: boolean) => {
-        if (parts.length === 0) parts.push(negative ? `- ${latex}` : latex);
-        else parts.push(negative ? `- ${latex}` : `+ ${latex}`);
-      };
-      if (!xi.isZero()) {
-        const neg = xi.n < 0;
-        const abs = new Fraction(Math.abs(xi.n), xi.d).toLatex();
-        pushSigned(abs, neg);
-      }
-      basis.forEach((v, j) => {
-        const coeff = v[i];
-        if (!coeff.isZero()) {
-          const neg = coeff.n < 0;
-          const abs = new Fraction(Math.abs(coeff.n), coeff.d).toLatex();
-          pushSigned(`${abs} \\lambda_{${j + 1}}`, neg);
-        }
-      });
-      return parts.length ? parts.join(' ') : '0';
-    });
-    const vectorExprLatex = `\\begin{pmatrix} ${components.join(' \\ ')} \\end{pmatrix}`;
+    const colVec = (vec: Fraction[]) => `\\begin{pmatrix} ${vec.map((f) => f.toLatex()).join(' \\\\ ')} \\end{pmatrix}`;
+    const x0Col = colVec(x0);
+    const basisCols = basis.map((v, i) => `\\lambda_{${i + 1}} \\cdot ${colVec(v)}`);
+    const leftSum = [x0Col, ...basisCols].join(' + ');
     const lambdasDomain = basis.map((_, i) => `\\lambda_{${i + 1}} \\in ${domainSymbol}`).join(', ');
-    const solutionSetLatex = `\\mathbb{L} = \\left\\{ ${vectorExprLatex} \\; \\Big|\\; ${lambdasDomain || ' '} \\right\\}`;
+    const solutionSetLatex = `\\mathbb{L} = \\left\\{ ${leftSum} \\Big| ${lambdasDomain || ''} \\right\\}`;
+    // Debug output: inspect KaTeX strings (uses indirection to avoid no-console lint)
+    debugLog('[GaussianElimination] solutionSetLatex =', solutionSetLatex);
     // example: set first free parameter = 1 (others 0) if available
     let exampleLatex = '';
     if (basis.length > 0) {
@@ -389,17 +381,36 @@ export default function GaussianElimination({
       const ex = x0.map((xi, idx) => xi.add(v[idx]));
       const aligned = ex.map((f, i) => `x_{${i + 1}} &= ${f.toLatex()}`).join(' \\\\ ');
       exampleLatex = `Beispiel (x_{${freeIndex + 1}} = 1): \\; \\begin{aligned} ${aligned} \\end{aligned}`;
+      debugLog('[GaussianElimination] exampleAligned =', `\\begin{aligned} ${aligned} \\end{aligned}`);
     }
     return (
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-        <div className="text-yellow-900 dark:text-yellow-100 font-medium mb-2">Unendlich viele Lösungen</div>
-        <div className="text-sm text-yellow-900/90 dark:text-yellow-100/80">Freie Variablen: {freeCols.map((c) => `x${c + 1}`).join(', ') || '—'}</div>
-        <div className="mt-2 text-xs text-yellow-900/80 dark:text-yellow-100/70">Parametrische Darstellung und Beispiel unten.</div>
-        <div className="mt-3"><MatrixView matrix={rref} /></div>
-        <div className="mt-4 prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(solutionSetLatex, { displayMode: true, throwOnError: false }) }} />
-        {exampleLatex && (
-          <div className="mt-2 prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(exampleLatex, { displayMode: false, throwOnError: false }) }} />
-        )}
+        <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          {/* Left: Title, meta, and RREF matrix */}
+          <div>
+            <div className="text-yellow-900 dark:text-yellow-100 font-medium mb-2">Unendlich viele Lösungen</div>
+            <div className="text-sm text-yellow-900/90 dark:text-yellow-100/80">Freie Variablen: {freeCols.map((c) => `x${c + 1}`).join(', ') || '—'}</div>
+            <div className="mt-2 text-xs text-yellow-900/80 dark:text-yellow-100/70">Parametrische Darstellung und Beispiel unten.</div>
+            <div className="mt-3">
+              <MatrixView matrix={rref} />
+            </div>
+          </div>
+          {/* Right: LaTeX solution set and example */}
+          <div>
+            <div className="prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(solutionSetLatex, { displayMode: true, throwOnError: false }) }} />
+            {basis.length > 0 && (
+              <div className="mt-3 text-sm text-yellow-900 dark:text-yellow-100">
+                <span>Beispiel für </span>
+                <span
+                  dangerouslySetInnerHTML={{ __html: katex.renderToString(`(x_{${freeCols[0] + 1}} = 1)`, { displayMode: false, throwOnError: false }) }}
+                />
+                {exampleLatex && (
+                  <div className="mt-2 prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(`\\begin{aligned} ${exampleLatex.replace(/^.*?: \\; \\begin\{aligned\}\s*/,'').replace(/\\end\{aligned\}$/,'')} \\end{aligned}`, { displayMode: true, throwOnError: false }) }} />
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     );
   };
