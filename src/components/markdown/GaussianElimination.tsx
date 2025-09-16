@@ -331,14 +331,51 @@ export default function GaussianElimination({
       );
     }
 
-    // Infinite solutions: show basic param info
+    // Infinite solutions: show parametric form and an example
     const freeCols = Array.from({ length: cols - 1 }, (_, i) => i).filter((c) => !pivotColumns.includes(c));
+    const varCount = cols - 1;
+    // particular solution x0 (free vars = 0)
+    const x0: Fraction[] = Array.from({ length: varCount }, () => Fraction.zero());
+    for (let i = 0; i < pivotColumns.length; i++) {
+      const pc = pivotColumns[i];
+      x0[pc] = rref[i][varCount];
+    }
+    // basis vectors for each free variable
+    const basis: Fraction[][] = freeCols.map((f) => {
+      const v = Array.from({ length: varCount }, () => Fraction.zero());
+      v[f] = Fraction.one();
+      for (let i = 0; i < pivotColumns.length; i++) {
+        const pc = pivotColumns[i];
+        v[pc] = rref[i][f].neg(); // move to RHS: x_pivot = ... - (coeff)*t
+      }
+      return v;
+    });
+    const vecToLatex = (vec: Fraction[]) => `\\begin{pmatrix} ${vec.map((f) => f.toLatex()).join(' \\ ')} \\end{pmatrix}`;
+    const x0Latex = vecToLatex(x0);
+    const sumLatex = basis
+      .map((v, i) => `\\lambda_{${i + 1}} \\cdot ${vecToLatex(v)}`)
+      .join(' \\; + \\; ');
+    const solutionSetLatex = basis.length > 0
+      ? `\\mathbb{L} = \\left\\{ ${x0.some((f) => !f.isZero()) ? x0Latex + (basis.length ? ' \\; + \\; ' : '') : ''}${sumLatex} \;\\Big|\; ${basis.map((_, i) => `\\lambda_{${i + 1}} \\in \\mathbb{R}`).join(', ')} \\right\\}`
+      : `\\mathbb{L} = \\left\\{ ${x0Latex} \\right\\}`;
+    // example: set first free parameter = 1 (others 0) if available
+    let exampleLatex = '';
+    if (basis.length > 0) {
+      const v = basis[0];
+      const ex = x0.map((xi, idx) => xi.add(v[idx]));
+      const aligned = ex.map((f, i) => `x_{${i + 1}} &= ${f.toLatex()}`).join(' \\\\ ');
+      exampleLatex = `Beispiel (\\lambda_{1}=1, \\; \\text{übrige } \\lambda=0): \\; \\begin{aligned} ${aligned} \\end{aligned}`;
+    }
     return (
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
         <div className="text-yellow-900 dark:text-yellow-100 font-medium mb-2">Unendlich viele Lösungen</div>
         <div className="text-sm text-yellow-900/90 dark:text-yellow-100/80">Freie Variablen: {freeCols.map((c) => `x${c + 1}`).join(', ') || '—'}</div>
-        <div className="mt-2 text-xs text-yellow-900/80 dark:text-yellow-100/70">In RREF lassen sich Pivot-Variablen in Abhängigkeit der freien Variablen ausdrücken.</div>
+        <div className="mt-2 text-xs text-yellow-900/80 dark:text-yellow-100/70">Parametrische Darstellung und Beispiel unten.</div>
         <div className="mt-3"><MatrixView matrix={rref} /></div>
+        <div className="mt-4 prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(solutionSetLatex, { displayMode: true, throwOnError: false }) }} />
+        {exampleLatex && (
+          <div className="mt-2 prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(exampleLatex, { displayMode: false, throwOnError: false }) }} />
+        )}
       </div>
     );
   };
