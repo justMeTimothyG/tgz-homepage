@@ -50,7 +50,6 @@ export default function MDXRenderer({ compiledSource, className }: MDXRendererPr
       </div>
     );
   } catch (error) {
-    console.error('MDX render error:', error);
     return (
       <div className={className}>
         <p className="text-red-500">Error rendering MDX content</p>
