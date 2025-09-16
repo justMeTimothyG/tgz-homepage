@@ -352,15 +352,35 @@ export default function GaussianElimination({
       }
       return v;
     });
-    const vecToLatex = (vec: Fraction[]) => `\\begin{pmatrix} ${vec.map((f) => f.toLatex()).join(' \\ ')} \\end{pmatrix}`;
-    const x0Latex = vecToLatex(x0);
-    const sumLatex = basis
-      .map((v, i) => `\\lambda_{${i + 1}} \\cdot ${vecToLatex(v)}`)
-      .join(' \\; + \\; ');
+    // helper kept for consistency; currently not used for final display
+    const _vecToLatex = (vec: Fraction[]) => `\\begin{pmatrix} ${vec.map((f) => f.toLatex()).join(' \\ ')} \\end{pmatrix}`;
     const domainSymbol = parameterDomain === 'N' ? '\\mathbb{N}' : parameterDomain === 'Z' ? '\\mathbb{Z}' : '\\mathbb{R}';
-    const solutionSetLatex = basis.length > 0
-      ? `\\mathbb{L} = \\left\\{ ${x0.some((f) => !f.isZero()) ? x0Latex + (basis.length ? ' \\; + \\; ' : '') : ''}${sumLatex} \;\\Big|\; ${basis.map((_, i) => `\\lambda_{${i + 1}} \\in ${domainSymbol}`).join(', ')} \\right\\}`
-      : `\\mathbb{L} = \\left\\{ ${x0Latex} \\right\\}`;
+    // Build component-wise expression: x = x0 + sum_j lambda_j * v_j, written as one column vector
+    const components: string[] = Array.from({ length: varCount }, (_, i) => {
+      const parts: string[] = [];
+      const xi = x0[i];
+      const pushSigned = (latex: string, negative: boolean) => {
+        if (parts.length === 0) parts.push(negative ? `- ${latex}` : latex);
+        else parts.push(negative ? `- ${latex}` : `+ ${latex}`);
+      };
+      if (!xi.isZero()) {
+        const neg = xi.n < 0;
+        const abs = new Fraction(Math.abs(xi.n), xi.d).toLatex();
+        pushSigned(abs, neg);
+      }
+      basis.forEach((v, j) => {
+        const coeff = v[i];
+        if (!coeff.isZero()) {
+          const neg = coeff.n < 0;
+          const abs = new Fraction(Math.abs(coeff.n), coeff.d).toLatex();
+          pushSigned(`${abs} \\lambda_{${j + 1}}`, neg);
+        }
+      });
+      return parts.length ? parts.join(' ') : '0';
+    });
+    const vectorExprLatex = `\\begin{pmatrix} ${components.join(' \\ ')} \\end{pmatrix}`;
+    const lambdasDomain = basis.map((_, i) => `\\lambda_{${i + 1}} \\in ${domainSymbol}`).join(', ');
+    const solutionSetLatex = `\\mathbb{L} = \\left\\{ ${vectorExprLatex} \\; \\Big|\\; ${lambdasDomain || ' '} \\right\\}`;
     // example: set first free parameter = 1 (others 0) if available
     let exampleLatex = '';
     if (basis.length > 0) {
