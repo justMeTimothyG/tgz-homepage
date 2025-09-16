@@ -81,6 +81,7 @@ interface Step {
   op: RowOp;
   matrix: Matrix; // snapshot after operation
   pivot?: { row: number; col: number };
+  phase: 'forward' | 'backward';
 }
 
 interface GaussianResult {
@@ -113,6 +114,7 @@ function gaussianElimination(Ain: Matrix): GaussianResult {
   let row = 0;
   let stepNum = 1;
 
+  // Phase 1: Vorwärtselfimination (Nullen unter der Hauptdiagonale)
   for (let col = 0; col < n - 1 && row < m; col++) {
     // find first nonzero pivot from current row down
     let pivot = -1;
@@ -126,9 +128,11 @@ function gaussianElimination(Ain: Matrix): GaussianResult {
         op: { kind: 'swap', i: row, j: pivot, description: `Z${row + 1} ↔ Z${pivot + 1}` },
         matrix: cloneMatrix(A),
         pivot: { row, col },
+        phase: 'forward',
       });
     }
 
+    // Normalize pivot to 1
     const pivotVal = A[row][col];
     if (!(pivotVal.d === 1 && pivotVal.n === 1)) {
       const factor = pivotVal.inv();
@@ -138,11 +142,12 @@ function gaussianElimination(Ain: Matrix): GaussianResult {
         op: { kind: 'scale', i: row, factor, description: `Z${row + 1} · ${factor.toString()}` },
         matrix: cloneMatrix(A),
         pivot: { row, col },
+        phase: 'forward',
       });
     }
 
-    for (let r = 0; r < m; r++) {
-      if (r === row) continue;
+    // Eliminate below only
+    for (let r = row + 1; r < m; r++) {
       const factor = A[r][col];
       if (!factor.isZero()) {
         for (let c = col; c < n; c++) A[r][c] = A[r][c].sub(factor.mul(A[row][c]));
@@ -151,12 +156,46 @@ function gaussianElimination(Ain: Matrix): GaussianResult {
           op: { kind: 'add', target: r, source: row, factor: factor.neg(), description: `Z${r + 1} + (${factor.neg().toString()}) · Z${row + 1}` },
           matrix: cloneMatrix(A),
           pivot: { row, col },
+          phase: 'forward',
         });
       }
     }
 
     pivotCols.push(col);
     row++;
+  }
+
+  // Phase 2: Rückwärtselfimination (Nullen über der Hauptdiagonale)
+  for (let i = pivotCols.length - 1; i >= 0; i--) {
+    const col = pivotCols[i];
+    const prow = i; // after forward phase, pivot row aligns with index
+    // ensure pivot is 1 (safety)
+    const pv = A[prow][col];
+    if (!(pv.n === 1 && pv.d === 1) && !pv.isZero()) {
+      const factor = pv.inv();
+      for (let c = col; c < n; c++) A[prow][c] = A[prow][c].mul(factor);
+      steps.push({
+        step: stepNum++,
+        op: { kind: 'scale', i: prow, factor, description: `Z${prow + 1} · ${factor.toString()}` },
+        matrix: cloneMatrix(A),
+        pivot: { row: prow, col },
+        phase: 'backward',
+      });
+    }
+    // eliminate above
+    for (let r = 0; r < prow; r++) {
+      const factor = A[r][col];
+      if (!factor.isZero()) {
+        for (let c = col; c < n; c++) A[r][c] = A[r][c].sub(factor.mul(A[prow][c]));
+        steps.push({
+          step: stepNum++,
+          op: { kind: 'add', target: r, source: prow, factor: factor.neg(), description: `Z${r + 1} + (${factor.neg().toString()}) · Z${prow + 1}` },
+          matrix: cloneMatrix(A),
+          pivot: { row: prow, col },
+          phase: 'backward',
+        });
+      }
+    }
   }
 
   const rref = A;
@@ -183,24 +222,26 @@ function gaussianElimination(Ain: Matrix): GaussianResult {
 
 function MatrixView({ matrix, pivot, highlightRow }: { matrix: Matrix; pivot?: { row: number; col: number }; highlightRow?: number }) {
   const cols = matrix[0]?.length ?? 0;
+  const varCount = Math.max(0, cols - 1);
   return (
     <div className="inline-block">
       <table className="border-separate" style={{ borderSpacing: '0.25rem 0.15rem' }}>
+        <thead>
+          <tr>
+            <th className="pr-2 text-xs text-gray-400 dark:text-gray-500 font-normal" />
+            {Array.from({ length: varCount }, (_, i) => (
+              <th key={i} className={`text-xs font-medium text-gray-500 dark:text-gray-400 px-2 ${i === varCount - 1 ? 'border-r-2 border-gray-400 dark:border-gray-500' : ''}`}>x{i + 1}</th>
+            ))}
+            <th className="text-xs font-medium text-gray-500 dark:text-gray-400 px-2">b</th>
+          </tr>
+        </thead>
         <tbody>
           {matrix.map((row, r) => (
             <tr key={r} className={highlightRow === r ? 'bg-blue-50/60 dark:bg-blue-900/20' : ''}>
-              {/* Row label */}
               <td className="pr-2 text-xs text-gray-400 dark:text-gray-500 select-none">Z{r + 1}</td>
               {row.map((val, c) => (
-                <td
-                  key={c}
-                  className={`text-sm font-mono text-gray-900 dark:text-gray-100 px-2 py-0.5 ${
-                    c === cols - 2 ? 'border-r-2 border-gray-400 dark:border-gray-500' : ''
-                  }`}
-                >
-                  <span className={`${pivot && pivot.row === r && pivot.col === c ? 'bg-yellow-100 dark:bg-yellow-900/40 px-1 rounded' : ''}`}>
-                    {val.toString()}
-                  </span>
+                <td key={c} className={`text-sm font-mono text-gray-900 dark:text-gray-100 px-2 py-0.5 ${c === varCount - 1 ? 'border-r-2 border-gray-400 dark:border-gray-500' : ''}`}>
+                  <span className={`${pivot && pivot.row === r && pivot.col === c ? 'bg-yellow-100 dark:bg-yellow-900/40 px-1 rounded' : ''}`}>{val.toString()}</span>
                 </td>
               ))}
             </tr>
@@ -279,11 +320,15 @@ export default function GaussianElimination({
       );
     }
     if (solutionType === 'unique' && solution) {
-      const items = solution.map((f) => f.toString()).join(', ');
+      const lines = solution.map((f, i) => `x_${i + 1} = ${f.toString()}`);
       return (
         <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
           <div className="text-green-800 dark:text-green-200 font-medium mb-2">Eindeutige Lösung</div>
-          <div className="font-mono text-sm bg-white dark:bg-gray-800 border border-green-200 dark:border-green-800 rounded px-3 py-2 inline-block">L = {'{'} {items} {'}'}</div>
+          <div className="font-mono text-sm bg-white dark:bg-gray-800 border border-green-200 dark:border-green-800 rounded px-3 py-2 inline-block">
+            {lines.map((ln, idx) => (
+              <div key={idx}>{ln}</div>
+            ))}
+          </div>
         </div>
       );
     }
@@ -365,6 +410,17 @@ export default function GaussianElimination({
 
             <div className="inline-block">
               <table className="border-separate" style={{ borderSpacing: '0.25rem 0.15rem' }}>
+                <thead>
+                  <tr>
+                    <th className="pr-2 text-xs text-gray-400 dark:text-gray-500 font-normal" />
+                    {Array.from({ length: Math.max(0, cols - 1) }, (_, i) => (
+                      <th key={i} className={`text-xs font-medium text-gray-500 dark:text-gray-400 px-2 ${i === cols - 2 ? 'border-r-2 border-gray-400 dark:border-gray-500' : ''}`}>
+                        x{i + 1}
+                      </th>
+                    ))}
+                    <th className="text-xs font-medium text-gray-500 dark:text-gray-400 px-2">b</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {matrixStr.map((rowArr, r) => (
                     <tr key={r}>
