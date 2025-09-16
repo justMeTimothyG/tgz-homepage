@@ -99,6 +99,7 @@ interface GaussianEliminationProps {
   initialRows?: number;
   initialCols?: number; // includes augmented/result column
   initialMatrix?: number[][]; // accepts numeric seed; editor stores strings
+  parameterDomain?: 'R' | 'N' | 'Z'; // domain for free parameters in infinite solutions
 }
 
 function cloneMatrix(A: Matrix): Matrix {
@@ -259,6 +260,7 @@ export default function GaussianElimination({
   initialRows = 3,
   initialCols = 4,
   initialMatrix,
+  parameterDomain = 'R',
 }: GaussianEliminationProps) {
   const initialStr = useMemo<string[][]>(() => {
     const rows = Math.max(1, initialRows);
@@ -355,16 +357,18 @@ export default function GaussianElimination({
     const sumLatex = basis
       .map((v, i) => `\\lambda_{${i + 1}} \\cdot ${vecToLatex(v)}`)
       .join(' \\; + \\; ');
+    const domainSymbol = parameterDomain === 'N' ? '\\mathbb{N}' : parameterDomain === 'Z' ? '\\mathbb{Z}' : '\\mathbb{R}';
     const solutionSetLatex = basis.length > 0
-      ? `\\mathbb{L} = \\left\\{ ${x0.some((f) => !f.isZero()) ? x0Latex + (basis.length ? ' \\; + \\; ' : '') : ''}${sumLatex} \;\\Big|\; ${basis.map((_, i) => `\\lambda_{${i + 1}} \\in \\mathbb{R}`).join(', ')} \\right\\}`
+      ? `\\mathbb{L} = \\left\\{ ${x0.some((f) => !f.isZero()) ? x0Latex + (basis.length ? ' \\; + \\; ' : '') : ''}${sumLatex} \;\\Big|\; ${basis.map((_, i) => `\\lambda_{${i + 1}} \\in ${domainSymbol}`).join(', ')} \\right\\}`
       : `\\mathbb{L} = \\left\\{ ${x0Latex} \\right\\}`;
     // example: set first free parameter = 1 (others 0) if available
     let exampleLatex = '';
     if (basis.length > 0) {
+      const freeIndex = freeCols[0];
       const v = basis[0];
       const ex = x0.map((xi, idx) => xi.add(v[idx]));
       const aligned = ex.map((f, i) => `x_{${i + 1}} &= ${f.toLatex()}`).join(' \\\\ ');
-      exampleLatex = `Beispiel (\\lambda_{1}=1, \\; \\text{übrige } \\lambda=0): \\; \\begin{aligned} ${aligned} \\end{aligned}`;
+      exampleLatex = `Beispiel (x_{${freeIndex + 1}} = 1): \\; \\begin{aligned} ${aligned} \\end{aligned}`;
     }
     return (
       <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
