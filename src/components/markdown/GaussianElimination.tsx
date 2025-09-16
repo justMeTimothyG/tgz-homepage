@@ -320,15 +320,13 @@ export default function GaussianElimination({
       );
     }
     if (solutionType === 'unique' && solution) {
-      const lines = solution.map((f, i) => `x_${i + 1} = ${f.toString()}`);
+      const latex = `\\begin{aligned} ${solution
+        .map((f, i) => `x_{${i + 1}} &= ${f.toLatex()}`)
+        .join(' \\\\ ')} \\end{aligned}`;
       return (
         <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
           <div className="text-green-800 dark:text-green-200 font-medium mb-2">Eindeutige Lösung</div>
-          <div className="font-mono text-sm bg-white dark:bg-gray-800 border border-green-200 dark:border-green-800 rounded px-3 py-2 inline-block">
-            {lines.map((ln, idx) => (
-              <div key={idx}>{ln}</div>
-            ))}
-          </div>
+          <div className="prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: katex.renderToString(latex, { displayMode: true, throwOnError: false }) }} />
         </div>
       );
     }
