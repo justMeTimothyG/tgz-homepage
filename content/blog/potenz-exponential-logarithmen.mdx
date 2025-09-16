@@ -1,0 +1,126 @@
+---
+title: "Potenz-, Exponential- und Logarithmengesetze – kompakt erklärt"
+date: "2025-09-16"
+tags: ["mathematik", "algebra", "potenzen", "exponentialfunktionen", "logarithmen"]
+---
+
+> Ein kompakter Überblick über die wichtigsten Rechenregeln zu Potenzen, Exponentialfunktionen und Logarithmen – mit Beispielen, typischen Stolperfallen und Mini‑Übungen.
+
+## Potenzgesetze
+
+Seien $a,b\in\mathbb{R}$, $a\neq 0$, und $m,n\in\mathbb{Z}$. Für rationale/irrationale Exponenten gelten die Regeln analog, sofern definiert.
+
+- Multiplikation gleicher Basis: $a^m\cdot a^n = a^{m+n}$
+- Division gleicher Basis: $\dfrac{a^m}{a^n} = a^{m-n}$ (für $a\neq 0$)
+- Potenz einer Potenz: $(a^m)^n = a^{mn}$
+- Potenz eines Produkts: $(ab)^n = a^n b^n$
+- Potenz eines Quotienten: $\left(\dfrac a b\right)^n = \dfrac{a^n}{b^n}$ (für $b\neq 0$)
+- Null‑ und Einsregeln: $a^0 = 1$ (für $a\neq 0$), $a^1=a$, $1^n=1$, $0^n=0$ für $n>0$
+- Negative Exponenten: $a^{-n} = \dfrac{1}{a^n}$ (für $a\neq 0$)
+- Rationale Exponenten (Wurzeln): $a^{\frac{m}{n}}=\sqrt[n]{a^m}=\left(\sqrt[n]{a}\right)^m$ (für $a\ge 0$ bei geradem $n$)
+
+Typische Stolperfallen:
+
+- FALSCH: $a^m + a^n = a^{m+n}$. Richtig ist nur die Multiplikationsregel. Beispiel: $2^3+2^2=8+4=12\neq 2^5=32$.
+- $(a+b)^n \neq a^n+b^n$ im Allgemeinen (Ausnahme: $n=1$). Hier helfen binomische Formeln bzw. der binomische Lehrsatz.
+
+### Beispiele
+
+- $2^3\cdot 2^5 = 2^{3+5}=2^8=256$
+- $\dfrac{5^9}{5^4}=5^{5}=3125$
+- $(3^2)^4 = 3^{8}=6561$
+- $16^{\tfrac34} = \sqrt[4]{16^3} = \sqrt[4]{4096} = 8$
+
+## Exponentialfunktionen
+
+Eine Exponentialfunktion hat die Form $f(x)=a\cdot b^x$ mit $a\in\mathbb{R}$, $b>0$, $b\neq 1$.
+
+- Monotonie: $b>1$ ⇒ streng wachsend; $0<b<1$ ⇒ streng fallend.
+- Wertetabelle: $f(0)=a$, $f(1)=ab$, $f(-1)=\dfrac{a}{b}$.
+- Verschiebung und Streckung: $g(x)=c\cdot b^{x}+d$ verschiebt/staucht $b^x$ vertikal.
+- Exponentialgleichungen löst man über Logarithmen: $b^x=c\iff x=\log_b(c)$ (für $b>0, b\neq 1, c>0$).
+
+Beispiel (Wachstum): $N(t)=N_0\cdot (1+r)^t$. Für $r=0{,}05$ und $t=10$:
+
+$$
+N(10)=N_0\cdot 1{,}05^{10}\approx 1{,}6289\,N_0.
+$$
+
+## Logarithmen und Logarithmengesetze
+
+Für $b>0$, $b\neq 1$ und $x>0$ ist der Logarithmus $\log_b(x)$ definiert als der Exponent, zu dem man die Basis $b$ potenzieren muss, um $x$ zu erhalten: $\log_b(x)=y\iff b^y=x$.
+
+Wichtige Gesetze (für $x,y>0$):
+
+- Produkt: $\log_b(xy)=\log_b x + \log_b y$
+- Quotient: $\log_b\!\left(\dfrac{x}{y}\right)=\log_b x - \log_b y$
+- Potenz: $\log_b(x^k)=k\cdot\log_b x$
+- Basiswechsel: $\displaystyle \log_b x=\frac{\log_a x}{\log_a b}$ (beliebige Basis $a>0, a\neq 1$)
+- Speziell: $\ln(x) = \log_e(x)$, $\log_{10}(x)$ ist der Zehnerlogarithmus.
+
+Stolperfallen:
+
+- $\log_b(x+y)\neq \log_b x + \log_b y$ im Allgemeinen.
+- $\log_b(0)$ und $\log_b(\text{negativ})$ sind nicht definiert.
+
+### Beispiele
+
+- $\log_2(32)=5$, da $2^5=32$
+- $\log_3(27)=3$, da $3^3=27$
+- $\log_{10}(1000)=3$
+- $\log_2(\tfrac{1}{8})=\log_2(2^{-3})=-3$
+
+Basiswechsel in die e‑Basis:
+
+$$
+\log_2(50)=\frac{\ln 50}{\ln 2}\approx \frac{3{,}9120}{0{,}6931}\approx 5{,}64.
+$$
+
+## Typische Aufgabenformen
+
+1) Vereinfachen mit Potenzgesetzen:
+
+$$\frac{3^5\cdot 3^{-2}}{3^4}=3^{5-2-4}=3^{-1}=\frac{1}{3}. $$
+
+2) Exponentialgleichung lösen:
+
+$$5^{2x-1}=125\;\iff\;5^{2x-1}=5^3\;\iff\;2x-1=3\;\iff\;x=2.$$ 
+
+3) Logarithmusgleichung lösen:
+
+$$\log_4(x)+\log_4(x-3)=2\;\iff\;\log_4(x(x-3))=2\;\iff\;x(x-3)=4^2=16.$$ 
+
+Quadratische Gleichung: $x^2-3x-16=0\Rightarrow x=\dfrac{3\pm\sqrt{9+64}}{2}=\dfrac{3\pm\sqrt{73}}{2}$. Wegen $x>0$ und $x-3>0$ bleibt $x=\dfrac{3+\sqrt{73}}{2}$.
+
+## Mini‑Übungen (mit Lösungen)
+
+> Probiere zuerst selbst – dann aufklappen.
+
+<Exercise>
+  <Task>
+    1) Vereinfache: $\dfrac{a^3\cdot a^{-5}}{a^{-2}}$.  
+    2) Löse: $2^{x+1}=\tfrac{1}{8}$.  
+    3) Berechne: $\log_5(\tfrac{125}{25})$.  
+    4) Schreibe $81^{\tfrac34}$ ohne Wurzelschreibweise.
+  </Task>
+  <Hint>
+    Nutze: Exponenten addieren/subtrahieren; $2^{-3}=\tfrac{1}{8}$; Quotientenregel der Logarithmen; $81=3^4$.
+  </Hint>
+  <Solution>
+    1) $\dfrac{a^3\cdot a^{-5}}{a^{-2}}=a^{3-5-(-2)}=a^0=1$ (für $a\neq 0$).  
+    2) $2^{x+1}=2^{-3}\Rightarrow x+1=-3\Rightarrow x=-4$.  
+    3) $\log_5(\tfrac{125}{25})=\log_5(5)=1$.  
+    4) $81^{\tfrac34}=(3^4)^{\tfrac34}=3^3=27$.
+  </Solution>
+</Exercise>
+
+## Zusammenfassung
+
+- Potenzen: Exponenten addieren/subtrahieren/multiplizieren (je nach Regel), negative Exponenten bedeuten Kehrwert, rationale Exponenten sind Wurzeln.
+- Exponentialfunktionen: $a\cdot b^x$, mit $b>1$ wachsend, $0<b<1$ fallend; Gleichungen via Logarithmen lösen.
+- Logarithmen: Umkehrfunktionen der Exponentialfunktionen; Produkt/Quotient/Potenz werden zu Summe/Differenz/Vielfache.
+
+<PostPager 
+  prev={{ href: "/blog/mathematische-definitionen", title: "Mathematische Definitionen" }} 
+  
+/> 
