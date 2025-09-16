@@ -14,7 +14,8 @@ export default function HomePage() {
               Timothy <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Lüdtke</span>
             </h1>
             <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
-              Software Engineer – Interaktive Bildung, Visualisierungen und KI-gestützte Inhalte
+              Ehrliches Lernen statt Hochglanz-Momente. <br /> 
+              Ich dokumentiere meine Projekte, Gedanken und Fortschritte – offen, unperfekt und transparent. Denn echter Fortschritt entsteht im Prozess, nicht im Verborgenen. Student in Wirtschaftsingenieurwesen.
             </p>
           </div>
           <div className="flex md:justify-end">
