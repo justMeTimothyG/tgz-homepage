@@ -7,8 +7,9 @@ import LcmCalculator from '@/components/markdown/LcmCalculator';
 import GaussianElimination from '@/components/markdown/GaussianElimination';
 import PascalsTriangle from '@/components/markdown/PascalsTriangle';
 import VennSets from '@/components/markdown/VennSets';
+import QuadraticSolver from '@/components/markdown/QuadraticSolver';
 
-type ToolId = 'gcd' | 'lcm' | 'gauss' | 'pascal' | 'venn';
+type ToolId = 'gcd' | 'lcm' | 'gauss' | 'pascal' | 'venn' | 'quadratic';
 type ToolTree = {
   label: string;
   items?: { id: ToolId; name: string; description?: string }[];
@@ -22,6 +23,7 @@ const toolsTree: ToolTree[] = [
       { id: 'gcd', name: 'ggT-Rechner', description: 'Größter gemeinsamer Teiler' },
       { id: 'lcm', name: 'kgV-Rechner', description: 'Kleinstes gemeinsames Vielfaches' },
       { id: 'gauss', name: 'Gauß-Eliminationsrechner', description: 'Zeilenumformungen, RREF, LGS' },
+      { id: 'quadratic', name: 'Quadratische Gleichungen (pq/abc)', description: 'Löse ax^2 + bx + c = 0' },
       { id: 'pascal', name: 'Pascal’sches Dreieck', description: '(a + b)^n und Binomialkoeffizienten' },
       { id: 'venn', name: 'Mengenlehre – Venn', description: 'A ∪ B, A ∩ B, A \\ B, B \\ A, A Δ B' },
     ],
@@ -51,6 +53,14 @@ function ToolPanel({ selected }: { selected: ToolId }) {
         <GaussianElimination
           title="Gaußsches Eliminationsverfahren (Zeilenumformungen)"
           description="Interaktiver Rechner für lineare Gleichungssysteme. Letzte Spalte ist die rechte Seite (Ergebnisspalte)."
+          defaultExpanded
+        />
+      );
+    case 'quadratic':
+      return (
+        <QuadraticSolver
+          title="Quadratische Gleichungslöser (pq / abc)"
+          description="Umschalten zwischen pq-Formel und abc-Formel. Zeigt Schritte, Diskriminante und Lösungen."
           defaultExpanded
         />
       );
@@ -123,7 +133,7 @@ export default function ToolsClient() {
   React.useEffect(() => {
     const readHash = () => {
       const id = window.location.hash.replace('#', '') as ToolId;
-      if (id === 'gcd' || id === 'lcm' || id === 'gauss' || id === 'pascal' || id === 'venn') setSelected(id);
+      if (id === 'gcd' || id === 'lcm' || id === 'gauss' || id === 'pascal' || id === 'venn' || id === 'quadratic') setSelected(id);
     };
     readHash();
     window.addEventListener('hashchange', readHash);
