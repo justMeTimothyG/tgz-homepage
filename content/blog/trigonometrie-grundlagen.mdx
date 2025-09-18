@@ -1,0 +1,135 @@
+---
+title: "Trigonometrie – Kreis, Sinus, Cosinus: Formeln kompakt"
+excerpt: "Einheitskreis, Grad- und Bogenmaß, Definition von Sinus und Cosinus, wichtige Identitäten, Additionstheoreme, Doppelwinkel, trigonometrische Gleichungen sowie Sinus- und Kosinussatz – mit Beispielen und Übungen."
+date: "2025-09-17"
+tags: ["mathematik", "trigonometrie", "geometrie", "analysis"]
+---
+
+> Die wichtigsten Ideen der Trigonometrie auf einen Blick – mit Einheitskreis, Identitäten, Winkelbeziehungen und Dreiecksformeln, dazu kompakte Beispiele und Mini‑Übungen.
+
+## Gradmaß ↔ Bogenmaß
+
+- $180^\circ = \pi$ (Radiant), $360^\circ = 2\pi$.
+- Umrechnung: $x^\circ = x\cdot \dfrac{\pi}{180}$, $\;r\,\text{rad} = r\cdot \dfrac{180}{\pi}{}^\circ$.
+
+<Callout type="info" title="Typische Werte">
+$\;30^\circ=\tfrac{\pi}{6}$, $\;45^\circ=\tfrac{\pi}{4}$, $\;60^\circ=\tfrac{\pi}{3}$, $\;90^\circ=\tfrac{\pi}{2}$.
+</Callout>
+
+## Einheitskreis-Definition
+
+Auf dem Einheitskreis ($x^2+y^2=1$) hat ein Winkel $x$ den Punkt $(\cos x,\sin x)$. Damit:
+
+- $\cos x$ ist die $x$‑Koordinate, $\sin x$ die $y$‑Koordinate.
+- Periodizität: $\sin(x+2\pi)=\sin x$, $\cos(x+2\pi)=\cos x$.
+- Symmetrien: $\sin(-x)=-\sin x$ (ungerade), $\cos(-x)=\cos x$ (gerade).
+- Verschiebungen: $\sin(x+\tfrac\pi2)=\cos x$, $\cos(x+\tfrac\pi2)=-\sin x$.
+
+## Rechteckiges Dreieck (SOH‑CAH‑TOA)
+
+Für ein rechtwinkliges Dreieck mit Winkel $\alpha$:
+
+- $\sin\alpha = \dfrac{\text{Gegenkathete}}{\text{Hypotenuse}}$
+- $\cos\alpha = \dfrac{\text{Ankathete}}{\text{Hypotenuse}}$
+- $\tan\alpha = \dfrac{\text{Gegenkathete}}{\text{Ankathete}} = \dfrac{\sin\alpha}{\cos\alpha}$
+
+## Wichtige Identitäten
+
+- Pythagoras: $\sin^2 x + \cos^2 x = 1$
+- Tangens: $\tan x = \dfrac{\sin x}{\cos x}$, definiert für $\cos x\neq 0$
+- Additionstheoreme:
+  - $\sin(a\pm b)=\sin a\cos b\pm \cos a\sin b$
+  - $\cos(a\pm b)=\cos a\cos b\mp \sin a\sin b$
+- Doppelwinkel:
+  - $\sin(2x)=2\sin x\cos x$
+  - $\cos(2x)=\cos^2 x-\sin^2 x = 1-2\sin^2 x = 2\cos^2 x-1$
+
+<Callout type="warning" title="Stolperfallen">
+- $\sin^2 x$ bedeutet $(\sin x)^2$, nicht $\sin(2x)$.
+- Perioden beachten: Lösungen trigonometrischer Gleichungen kommen oft in Familien (z. B. $+2k\pi$).
+- Vorzeichen in Quadranten: z. B. ist $\sin$ im II. Quadrant positiv, $\cos$ negativ.
+</Callout>
+
+## Spezielle Winkel (Einheitskreis)
+
+- $\sin\tfrac{\pi}{6}=\tfrac12$, $\cos\tfrac{\pi}{6}=\tfrac{\sqrt3}{2}$
+- $\sin\tfrac{\pi}{4}=\tfrac{\sqrt2}{2}$, $\cos\tfrac{\pi}{4}=\tfrac{\sqrt2}{2}$
+- $\sin\tfrac{\pi}{3}=\tfrac{\sqrt3}{2}$, $\cos\tfrac{\pi}{3}=\tfrac12$
+- $\tan\tfrac{\pi}{4}=1$
+
+## Trigonometrische Gleichungen (Beispiele)
+
+- $\sin x = a$: Lösungen $x = \arcsin(a) + 2k\pi$ oder $x=\pi-\arcsin(a)+2k\pi$
+- $\cos x = a$: Lösungen $x = \pm\arccos(a) + 2k\pi$
+- $\tan x = a$: Lösungen $x = \arctan(a) + k\pi$
+
+## Dreiecksrechnen
+
+- Sinussatz: $\displaystyle \frac{a}{\sin\alpha}=\frac{b}{\sin\beta}=\frac{c}{\sin\gamma}$
+- Kosinussatz: $\displaystyle c^2=a^2+b^2-2ab\cos\gamma$ (zyklisch für $a,b$ analog)
+- Flächeninhalt: $\displaystyle A=\tfrac12 ab\sin\gamma$
+
+## Beispiele
+
+1) Additionstheorem nutzen:
+$$
+\sin\!\left(x+\tfrac\pi6\right)=\sin x\cos\tfrac\pi6+\cos x\sin\tfrac\pi6
+= \tfrac{\sqrt3}{2}\sin x + \tfrac12\cos x
+$$
+
+2) Doppelwinkel-Umformung:
+$$
+\cos(2x)=1-2\sin^2 x \quad\Leftrightarrow\quad \sin^2 x=\tfrac{1-\cos(2x)}{2}
+$$
+
+## Mini‑Übungen (mit Lösungsknopf)
+
+<Exercise compact title="Aufgabe 1: Einheitskreiswerte" difficulty="easy">
+  <Task>
+    Bestimme exakt: $\sin\tfrac{\pi}{6}$, $\cos\tfrac{\pi}{3}$, $\tan\tfrac{\pi}{4}$
+  </Task>
+  <Solution>
+    $\sin\tfrac{\pi}{6}=\tfrac12$, $\;\cos\tfrac{\pi}{3}=\tfrac12$, $\;\tan\tfrac{\pi}{4}=1$
+  </Solution>
+</Exercise>
+
+<Exercise compact title="Aufgabe 2: Identitäten" difficulty="easy">
+  <Task>
+    Vereinfache: $\sin^2 x+\cos^2 x$ und schreibe $\cos(2x)$ in einer Form nur mit $\sin$.
+  </Task>
+  <Hint>
+    Nutze Pythagoras und Doppelwinkel.
+  </Hint>
+  <Solution>
+    $\sin^2 x+\cos^2 x=1$; $\;\cos(2x)=1-2\sin^2 x$.
+  </Solution>
+</Exercise>
+
+<Exercise compact title="Aufgabe 3: Trig-Gleichung" difficulty="medium">
+  <Task>
+    Löse: $2\sin x=\sqrt{3}$. Gib die allgemeine Lösung an.
+  </Task>
+  <Hint>
+    $\sin x=\tfrac{\sqrt{3}}{2}$ hat zwei Lösungen pro $2\pi$.
+  </Hint>
+  <Solution>
+    $\sin x=\tfrac{\sqrt{3}}{2}\Rightarrow x=\tfrac{\pi}{3}+2k\pi$ oder $x=\tfrac{2\pi}{3}+2k\pi$, $\;k\in\mathbb{Z}$.
+  </Solution>
+</Exercise>
+
+<Exercise compact title="Aufgabe 4: Kosinussatz" difficulty="medium">
+  <Task>
+    In einem Dreieck seien $a=7$, $b=5$, $\gamma=60^\circ$. Bestimme $c$.
+  </Task>
+  <Hint>
+    Nutze $c^2=a^2+b^2-2ab\cos\gamma$; $\cos 60^\circ=\tfrac12$.
+  </Hint>
+  <Step>
+    $c^2=7^2+5^2-2\cdot 7\cdot 5\cdot \tfrac12=49+25-35=39$
+  </Step>
+  <Solution>
+    $c=\sqrt{39} \approx 6{,}245$.
+  </Solution>
+</Exercise>
+
+<PostPager />

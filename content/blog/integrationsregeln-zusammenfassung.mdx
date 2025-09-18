@@ -1,0 +1,910 @@
+---
+title: "Integrationsregeln – kompakt mit Beispielen und Übungen"
+excerpt: "Grundregeln, Potenzregel, Substitution, partielle Integration, Standardintegrale, Partialbruchzerlegung, bestimmte Integrale und Hauptsatz – mit Übungen."
+date: "2025-09-17"
+tags: ["mathematik", "analysis", "integration", "integralrechnung"]
+---
+
+## Was ist Integration?
+
+Integration ist die Umkehrung der Ableitung. Eine Stammfunktion $F$ von $f$ erfüllt $F'(x) = f(x)$:
+
+$$
+\int f(x)\,dx = F(x)+C
+$$
+
+Dabei ist $C$ die Integrationskonstante.
+
+## Grundregeln
+
+| Regel | Formel | Hinweis |
+|-------|--------|---------|
+| Konstante | $\int c\,dx = cx + C$ | Konstanten werden "aufintegriert" |
+| Linearität | $\int (af + bg)\,dx = a\int f\,dx + b\int g\,dx$ | Konstanten und Summen aufteilen |
+| Potenzregel | $\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$ | Für $n \ne -1$ |
+| Spezialfall | $\int \frac{1}{x}\,dx = \ln \lvert x \rvert + C$ | Wichtige Ausnahme für $n = -1$ |
+
+## Wichtige Standardintegrale
+
+### Exponential- und Logarithmusfunktionen
+
+| Funktion | $e^x$ | $a^x$ | $\frac{1}{x}$ | $\ln x$ |
+|---|---|---|---|---|
+| Stammfunktion | $e^x + C$ | $\frac{a^x}{\ln a} + C$ | $\ln\lvert x \rvert + C$ | $x\ln x - x + C$ |
+
+### Trigonometrische Funktionen
+
+| Funktion | $\sin x$ | $\cos x$ | $\tan x$ | $\sec^2 x$ | $\frac{1}{\cos^2 x}$ |
+|---|---|---|---|---|---|
+| Stammfunktion | $-\cos x + C$ | $\sin x + C$ | $-\ln\lvert \cos x \rvert + C$ | $\tan x + C$ | $\tan x + C$ |
+
+### Weitere wichtige Integrale
+
+| Funktion | $\frac{1}{\sqrt{1-x^2}}$ | $\frac{1}{1+x^2}$ | $\frac{1}{\sqrt{x^2+a^2}}$ | $\frac{1}{x^2-a^2}$ |
+|---|---|---|---|---|
+| Stammfunktion | $\arcsin x + C$ | $\arctan x + C$ | $\ln\lvert x + \sqrt{x^2+a^2} \rvert + C$ | $\frac{1}{2a}\ln\left\lvert \frac{x-a}{x+a} \right\rvert + C$ |
+
+## Bestimmte Integrale und Hauptsatz
+
+Bestimmte Integrale sind Integrale über ein Intervall $[a,b]$. Also es wird konkret ein Wert oder Term berechnet über das untersuchte Intervall.
+Ist $F$ Stammfunktion von $f$ und $f$ stetig auf $[a,b]$, dann:
+
+$$
+\int_a^b f(x)\,dx = F(b)-F(a)
+$$
+
+Beispiel:
+
+$$
+\int_0^\pi \sin x\,dx = [-\cos x]_0^\pi = (-\cos\pi)-(-\cos0)= -(-1)-(-1)=2
+$$
+
+## Unbestimmte Integrale
+
+Unbestimmte Integrale sind Integrale ohne Grenzen. Hier wird eine allgemeine Stammfunktion bestimmt.
+
+$$
+\int f(x)\,dx = F(x) + C
+$$
+
+Wichtig hier ist die Integrationskonstante $C$, da es unendlich viele Stammfunktionen gibt, die sich nur um eine Konstante unterscheiden. Hinweis: Beim Ableiten fällt die Konstante weg und wenn wir zurück integrieren, wissen wir nicht, welche Konstante ursprünglich da war.
+
+## Integrationstechniken
+
+### Substitution: $\int f(g(x)) \cdot a \cdot g'(x)\,dx = \int f(z)\,dz$
+
+Bei verketteten Funktionen mit erkennbarer innerer Ableitung. Einer der Faktoren ist die "Ableitung" der inneren Funktion.
+Es muss nicht streng die Ableitung sein, sondern kann auch ein Vielfaches ($a \cdot g'(x)$) davon sein.
+
+#### Schritte beim Substituieren (detailiert erklärt):
+1. Substitutionsvariable wählen: $z = g(x)$
+  - Somit verschwindet unser $x$. Wir können also nicht mehr $dx$ verwenden. und müssen auf $dz$ wechseln.
+  - Funktion sieht wie folgt aus: $\int f(z) \cdot a \cdot g'(x) \,dx$, aber wir brauchen $dz$ um nach $z$ zu integrieren.
+  - Dazu brauchen wir die Ableitung der Substitutionsvariable.
+2. Ableiten: $dz = g'(x)\,dx$
+  - g'(x) ist die Ableitung der inneren Funktion.
+  - Nun haben wir $dz$ und $dx$ in einer Gleichung.
+  - Wir benötigen aber $dx$, stellen also nach dieser um.
+3. Umstellen nach $dx$: $dx = \frac{dz}{g'(x)}$
+4. Einsetzen in das Integral: $\int f(z) \cdot a \cdot g'(x) \, \frac{dz}{g'(x)}$
+  - Kürzen der $g'(x)$ ⇒ $\int f(z) \cdot a \, dz$
+  - die Konstante $a$ kann vor das Integral gezogen werden.
+  - Somit haben wir: $a \int f(z)\,dz$. Und das können wir jetzt integrieren.
+5. Integrieren: $a \int f(z)\,dz = a \cdot F(z) + C$
+6. Rücksubstitution: $a \cdot F(g(x)) + C$
+
+Beachte bei bestimmten Integralen müssen die Grenzen angepasst werden:
+- Neue Grenzen: $z_a = g(a)$ und $z_b = g(b)$
+- Bestimmtes Integral: $\int_{z_a}^{z_b} f(z)\,dz = F(z_b) - F(z_a)$
+
+#### **Beispiel:** $\int 2x \cdot \cos(x^2)\,dx$
+1. $2x$ ist die Ableitung von der inneren Funktion $g(x) = x^2$
+2. Substitution: $z = x^2 \Rightarrow dz = 2x\,dx$
+3. Umstellen: $dx = \frac{dz}{2x}$
+4. Einsetzen: $\int \cancel{2x} \cdot \cos(z) \cdot \frac{dz}{\cancel{2x}}$
+5. Integrieren: $\int \cos(z)\,dz = \sin(z) + C$
+6. Rücksubstitution: $\sin(x^2) + C$
+
+### Partielle Integration: $\int_{a}^{b} f(x) \cdot g'(x) \,dx = [f(x) \cdot g(x)]_{a}^{b} - \int_{a}^{b} f'(x) \cdot g(x) \,dx$
+
+Sieht erstmal sehr kompliziert aus, aber im Endeffekt kommt es darauf an, ob einer der beiden Faktoren durch Ableitung vereinfacht wird.
+
+#### Schritte bei der partiellen Integration:
+1. Untersuche die Faktoren:
+  - Wähle $f(x)$ und $g'(x)$ so, dass
+  - $f(x)$ einfacher wird durch Ableiten (also $f'(x)$)
+  - Oft wird daraus eine Konstante oder verschwindet ganz
+  - und $g'(x)$ ist oft einfacher zu integrieren.
+2. Bestimme $f'(x)$ und $g(x)$
+3. Setze in die Formel ein:
+  - $\int f(x) \cdot g'(x) \,dx = f(x) \cdot g(x) - \int f'(x) \cdot g(x) \,dx$
+4. Integriere den neuen Term $\int f'(x) \cdot g(x) \,dx$
+5. Fasse zusammen
+
+<Callout type="warning" title="Merke">
+- Vergesse nicht, dass du auch mehrmals partiell integrieren kannst, wenn es nötig ist.
+- So kann $f(x)$ zunächst $x^2$ sein, das durch Ableiten zu $2x$ und dann zu $2$ wird.
+- Wähle $g'(x)$ so, dass es einfacher wird durch Integrieren (z.B. $e^x$, $\sin x$, $\cos x$).
+- Bei bestimmten Integralen die Grenzen beachten und einsetzen.
+- Bei unbestimmten Integralen die Integrationskonstante $+C$ nicht vergessen. Bei mehreren Integrationen reicht eine Konstante.
+</Callout>
+
+**Beispiel:** $\int x e^x\,dx$
+1. $x$ ist einfach abzuleiten, während $e^x$ einfach zu integrieren ist.
+2. Wähle $f(x) = x \Rightarrow f'(x) = 1$ und $g'(x) = e^x \Rightarrow g(x) = e^x$
+3. Einsetzen: $\int x e^x\,dx = x \cdot e^x - \int 1 \cdot e^x\,dx$
+4. Integrieren: $\int e^x\,dx = e^x + C$
+5. Zusammenfassen:
+    $$
+    \begin{align*}
+    \int x e^x\,dx &= x e^x - e^x + C \\
+    &= e^x(x - 1) + C
+    \end{align*}
+    $$
+
+<Callout type="info" title="Anmerkung zum Studium an der HSOS">
+- Dies sind die beiden Haupttechniken, die in der Regel vorkommen werden. Es werden in der Formelsammlung noch weitere spezielle Techniken aufgeführt, die aber seltener vorkommen.
+- Wichtig ist, dass du die Grundregeln und diese beiden Techniken sicher beherrschst.
+</Callout>
+
+## Spezielle Substitutionen im Überblick
+
+Manchmal lässt sich das Integral direkt mit einer der folgenden Standard-Ersatzvariablen vereinfachen. Merke dir nicht nur die Formel – wichtiger ist, **wann** du sie anwenden kannst und wie das Vorgehen funktioniert.
+
+### 1. Lineare Substitution
+
+$$
+\int_c^d f(ax + b)\,dx = \frac{1}{a} \int_{ac+b}^{ad+b} f(z)\,dz = \frac{1}{a}\,\Bigl[F(z)\Bigr]_{z = ac+b}^{z = ad+b}, \quad z = ax + b
+$$
+
+- **Wann anwenden?** Wenn das Argument der Funktion ein linearer Term $ax+b$ ist (z. B. $\sin(3x+1)$ oder $e^{2x-5}$).
+- **Vorgehen:** Lege $z = ax + b$ fest, ersetze $dx$ durch $dz/a$ und passe bei bestimmten Integralen die Grenzen mit $z(a)$ bzw. $z(b)$ an.
+- **Vorteil:** Du musst nicht jedes Mal neu substituieren – du kannst die Formel direkt verwenden oder geistig kurz auf $z$ wechseln.
+
+### 2. Substitution bei Produkten
+
+$$
+\int_a^b f(x)\,f'(x)\,dx = \int_{f(a)}^{f(b)} z\,dz = \biggl[\tfrac{1}{2}z^2\biggr]_{z = f(a)}^{z = f(b)}, \quad z = f(x)
+$$
+
+- **Wann anwenden?** Wenn der eine Faktor die Ableitung des anderen ist. Typische Form: $g(x) = f(x)$ und daneben $f'(x)$ – also z. B. $\int x e^{x^2}\,dx$ oder $\int \ln(x)\,\tfrac{1}{x}\,dx$.
+- **Vorgehen:** Verwende $z = f(x)$ (die Funktion, die auch im Produkt vorkommt). Dadurch verwandelt sich das Integral in ein einfaches Polynom in $z$.
+- **Hinweis:** Bei unbestimmten Integralen genügt $\int f(x) f'(x)\,dx = \tfrac{1}{2} (f(x))^2 + C$.
+
+### 3. Logarithmische Integration
+
+$$
+\int_a^b \frac{f'(x)}{f(x)}\,dx = \int_{f(a)}^{f(b)} \frac{1}{z}\,dz = \bigl[\ln\lvert z \rvert\bigr]_{z=f(a)}^{z=f(b)}, \quad z = f(x)
+$$
+
+- **Wann anwenden?** Sobald du einen Quotienten aus Ableitung und Funktion siehst – klassisch bei Brüchen wie $\tfrac{2x}{x^2+1}$ oder $\tfrac{\cos x}{\sin x}$.
+- **Vorgehen:** Setze $z = f(x)$, sodass $dz = f'(x)\,dx$. Danach bleibt $\int \tfrac{1}{z}\,dz$, dessen Stammfunktion $\ln\lvert z \rvert$ ist.
+- **Vorteil:** Du musst dir keine komplizierte Substitution merken – die Form verrät dir sofort, dass das Ergebnis ein Logarithmus ist.
+
+## Zusammenfassung und typische Fehler
+
+### Zusammenfassung
+- **Grundregeln:** Beherrsche die Grundregeln der Integration (Konstante, Linearität, Potenzregel, Spezialfälle).
+- **Partielle Integration:** Zerlege das Integral in einfachere Teile, indem du $f(x)$ und $g'(x)$ wählst.
+- **Substitution:** Ersetze komplizierte Ausdrücke durch einfachere Variablen.
+- **Spezialfälle**: Nutze die vorgestellten speziellen Substitutionen, wenn du die passenden Muster erkennst.
+
+<Callout type="warning" title="Typische Fehler">
+- Integrationskonstante $+C$ nicht vergessen.
+- Bei Substitution Grenzen anpassen (bei bestimmten Integralen) oder wieder rücksubstituieren.
+- Bei Partialbruchzerlegung: Vorzeichen und Logarithmus-Beträge sorgfältig behandeln.
+</Callout>
+
+## Übungen
+
+Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Versuche, die Aufgaben selbstständig zu lösen, und nutze die Hinweise und Schritte, wenn du nicht weiterkommst.
+
+### Unbestimmte Integrale
+
+<Exercise title="Aufgabe 1" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int \frac{2x}{1+x^2}\,dx$
+  </Task>
+  <Hint>
+    Erkenne die Substitutionsform: Ein Faktor im Zähler ist die Ableitung des Nenners. Setze $u=1+x^2$ und beachte, dass $\frac{d}{dx}(1+x^2) = 2x$.
+  </Hint>
+  <Step>
+    Substitution wählen
+
+    $u = 1+x^2$
+  </Step>
+  <Step>
+    Differential bestimmen
+
+    $\frac{du}{dx} = 2x \Rightarrow du = 2x\,dx$
+  </Step>
+  <Step>
+    Einsetzen und vereinfachen
+
+    $\int \frac{2x}{1+x^2}\,dx = \int \frac{1}{u}\,du$
+  </Step>
+  <Step>
+    Integrieren
+
+    $\int \frac{1}{u}\,du = \ln|u| + C$
+  </Step>
+  <Solution>
+    $\int \frac{2x}{1+x^2}\,dx = \ln|1+x^2| + C = \ln(1+x^2) + C$
+
+    (Da $1+x^2 > 0$ für alle reellen $x$, können wir die Betragsstriche weglassen)
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int x\cos x\,dx$
+  </Task>
+  <Hint>
+    Verwende partielle Integration. Wähle $f(x) = x$ (vereinfacht sich durch Ableiten) und $g'(x) = \cos x$ (bleibt einfach beim Integrieren). Formel: $\int f(x) \cdot g'(x)\,dx = f(x) \cdot g(x) - \int f'(x) \cdot g(x)\,dx$
+  </Hint>
+  <Step>
+    Funktionen zuordnen
+
+    $f(x) = x \Rightarrow f'(x) = 1$
+
+    $g'(x) = \cos x \Rightarrow g(x) = \sin x$
+  </Step>
+  <Step>
+    Partielle Integration anwenden
+
+    $\int x\cos x\,dx = f(x) \cdot g(x) - \int f'(x) \cdot g(x)\,dx = x \cdot \sin x - \int 1 \cdot \sin x\,dx$
+  </Step>
+  <Step>
+    Verbleibendes Integral lösen
+
+    $\int \sin x\,dx = -\cos x + C$
+  </Step>
+  <Solution>
+    $\int x\cos x\,dx = x\sin x - (-\cos x) + C = x\sin x + \cos x + C$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int (3x^2 - 4x + 7)\,dx$
+  </Task>
+  <Hint>
+    Nutze die Linearität der Integration: Das Integral einer Summe ist die Summe der Integrale. Wende dann die Potenzregel $\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$ auf jeden Term an.
+  </Hint>
+  <Step>
+    Integral aufteilen
+
+    $\int (3x^2 - 4x + 7)\,dx = \int 3x^2\,dx - \int 4x\,dx + \int 7\,dx$
+  </Step>
+  <Step>
+    Konstanten herausziehen
+
+    $= 3\int x^2\,dx - 4\int x\,dx + 7\int 1\,dx$
+  </Step>
+  <Step>
+    Potenzregel anwenden
+
+    $\int x^2\,dx = \frac{x^3}{3}$, $\int x\,dx = \frac{x^2}{2}$, $\int 1\,dx = x$
+  </Step>
+  <Solution>
+    $\int (3x^2 - 4x + 7)\,dx = 3 \cdot \frac{x^3}{3} - 4 \cdot \frac{x^2}{2} + 7x + C = x^3 - 2x^2 + 7x + C$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 4" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{1} (2x+1)\,dx$
+  </Task>
+  <Hint>
+    Bestimme zuerst die Stammfunktion, dann wende den Hauptsatz der Differential- und Integralrechnung an: $\int_a^b f(x)\,dx = F(b) - F(a)$, wobei $F$ eine Stammfunktion von $f$ ist.
+  </Hint>
+  <Step>
+    Stammfunktion bestimmen
+
+    $\int (2x+1)\,dx = \int 2x\,dx + \int 1\,dx = x^2 + x + C$
+
+    Also: $F(x) = x^2 + x$
+  </Step>
+  <Step>
+    Obere Grenze einsetzen
+
+    $F(1) = 1^2 + 1 = 2$
+  </Step>
+  <Step>
+    Untere Grenze einsetzen
+
+    $F(0) = 0^2 + 0 = 0$
+  </Step>
+  <Solution>
+    $\int_0^1 (2x+1)\,dx = F(1) - F(0) = 2 - 0 = 2$
+
+    Mit Notation: $[x^2+x]_0^1 = (1^2+1)-(0^2+0) = 2$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 5" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int 3e^{2x}\,dx$
+  </Task>
+  <Hint>
+    Bei $e^{ax}$ mit $a \neq 1$ verwende die Substitution $u = ax$ oder merke dir die Formel $\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C$. Die Konstante 3 kann vor das Integral gezogen werden.
+  </Hint>
+  <Step>
+    Konstante herausziehen
+
+    $\int 3e^{2x}\,dx = 3\int e^{2x}\,dx$
+  </Step>
+  <Step>
+    Substitution wählen
+
+    $u = 2x \Rightarrow \frac{du}{dx} = 2 \Rightarrow dx = \frac{1}{2}du$
+  </Step>
+  <Step>
+    Einsetzen und integrieren
+
+    $3\int e^{2x}\,dx = 3\int e^u \cdot \frac{1}{2}\,du = \frac{3}{2}\int e^u\,du = \frac{3}{2}e^u + C$
+  </Step>
+  <Solution>
+    $\int 3e^{2x}\,dx = \frac{3}{2}e^{2x} + C$
+
+    **Merksatz:** $\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 6" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int \sin(3x+1)\,dx$
+  </Task>
+  <Hint>
+    Dies ist eine lineare Substitution der Form $f(ax+b)$. Verwende $u = 3x + 1$ und beachte, dass sich das $dx$ entsprechend ändert. Allgemeine Formel: $\int \sin(ax+b)\,dx = -\frac{1}{a}\cos(ax+b) + C$
+  </Hint>
+  <Step>
+    Substitution festlegen
+
+    $u = 3x + 1$
+  </Step>
+  <Step>
+    Differential bestimmen
+
+    $\frac{du}{dx} = 3 \Rightarrow du = 3\,dx \Rightarrow dx = \frac{1}{3}du$
+  </Step>
+  <Step>
+    Einsetzen und integrieren
+
+    $\int \sin(3x+1)\,dx = \int \sin(u) \cdot \frac{1}{3}\,du = \frac{1}{3}\int \sin(u)\,du$
+  </Step>
+  <Step>
+    Stammfunktion bilden
+
+    $\frac{1}{3}\int \sin(u)\,du = \frac{1}{3}(-\cos(u)) + C = -\frac{1}{3}\cos(u) + C$
+  </Step>
+  <Solution>
+    $\int \sin(3x+1)\,dx = -\frac{1}{3}\cos(3x+1) + C$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7" difficulty="hard">
+  <Task>
+    Berechne: $\displaystyle \int x \ln x\,dx$
+  </Task>
+  <Hint>
+    Verwende partielle Integration. Wähle $f(x) = \ln x$ (wird durch Ableiten einfacher: $\frac{1}{x}$) und $g'(x) = x$ (bleibt beim Integrieren einfach: $\frac{x^2}{2}$). Bei Logarithmus-Integralen ist oft $\ln x$ die richtige Wahl für $f(x)$.
+  </Hint>
+  <Step>
+    Funktionen zuordnen
+
+    $f(x) = \ln x \Rightarrow f'(x) = \frac{1}{x}$
+
+    $g'(x) = x \Rightarrow g(x) = \int x\,dx = \frac{x^2}{2}$
+  </Step>
+  <Step>
+    Partielle Integration anwenden
+
+    $\int x \ln x\,dx = f(x) \cdot g(x) - \int f'(x) \cdot g(x)\,dx$
+
+    $= \ln x \cdot \frac{x^2}{2} - \int \frac{1}{x} \cdot \frac{x^2}{2}\,dx$
+  </Step>
+  <Step>
+    Vereinfachen des verbleibenden Integrals
+
+    $\int \frac{x^2}{2} \cdot \frac{1}{x}\,dx = \int \frac{x^2}{2x}\,dx = \int \frac{x}{2}\,dx = \frac{1}{2} \cdot \frac{x^2}{2} = \frac{x^2}{4}$
+  </Step>
+  <Solution>
+    $\int x \ln x\,dx = \frac{x^2}{2} \ln x - \frac{x^2}{4} + C = \frac{x^2}{4}(2\ln x - 1) + C$
+  </Solution>
+</Exercise>
+
+### Bestimmte Integrale
+
+<Exercise title="Aufgabe 8" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{4} \left(x^3 - 5x^2 + \frac{3}{2}x - 10\right)\,dx$
+  </Task>
+  <Hint>
+    Bestimme zuerst die Stammfunktion durch Anwendung der Potenzregel auf jeden Term. Dann verwende den Hauptsatz der Differential- und Integralrechnung.
+  </Hint>
+  <Step>
+    Stammfunktion bestimmen
+
+    $\int \left(x^3 - 5x^2 + \frac{3}{2}x - 10\right)\,dx = \frac{x^4}{4} - \frac{5x^3}{3} + \frac{3x^2}{4} - 10x + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $F(x) = \frac{x^4}{4} - \frac{5x^3}{3} + \frac{3x^2}{4} - 10x$
+  </Step>
+  <Step>
+    Obere Grenze einsetzen
+
+    $F(4) = \frac{4^4}{4} - \frac{5 \cdot 4^3}{3} + \frac{3 \cdot 4^2}{4} - 10 \cdot 4 = \frac{256}{4} - \frac{5 \cdot 64}{3} + \frac{3 \cdot 16}{4} - 40$
+
+    $= 64 - \frac{320}{3} + 12 - 40 = 36 - \frac{320}{3} = \frac{108 - 320}{3} = -\frac{212}{3}$
+  </Step>
+  <Step>
+    Untere Grenze einsetzen
+
+    $F(0) = 0$
+  </Step>
+  <Solution>
+    $\int_{0}^{4} \left(x^3 - 5x^2 + \frac{3}{2}x - 10\right)\,dx = F(4) - F(0) = -\frac{212}{3} - 0 = -\frac{212}{3}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 9" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{1}^{e} \frac{dt}{t}$
+  </Task>
+  <Hint>
+    Dies ist ein Standardintegral. Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. Da $t > 0$ im Integrationsbereich, können die Betragsstriche weggelassen werden.
+  </Hint>
+  <Step>
+    Stammfunktion identifizieren
+
+    $\int \frac{1}{t}\,dt = \ln|t| + C = \ln t + C$ (für $t > 0$)
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $\int_{1}^{e} \frac{dt}{t} = [\ln t]_{1}^{e} = \ln(e) - \ln(1)$
+  </Step>
+  <Solution>
+    $\int_{1}^{e} \frac{dt}{t} = \ln(e) - \ln(1) = 1 - 0 = 1$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 10" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{\pi} (a\sin t - b\cos t)\,dt$ mit Konstanten $a, b$
+  </Task>
+  <Hint>
+    Nutze die Linearität der Integration und die Standardintegrale für Sinus und Kosinus. Beachte die Grenzen $0$ und $\pi$.
+  </Hint>
+  <Step>
+    Integral aufteilen
+
+    $\int_{0}^{\pi} (a\sin t - b\cos t)\,dt = a\int_{0}^{\pi} \sin t\,dt - b\int_{0}^{\pi} \cos t\,dt$
+  </Step>
+  <Step>
+    Stammfunktionen bestimmen
+
+    $\int \sin t\,dt = -\cos t + C$ und $\int \cos t\,dt = \sin t + C$
+  </Step>
+  <Step>
+    Erstes Integral berechnen
+
+    $a\int_{0}^{\pi} \sin t\,dt = a[-\cos t]_{0}^{\pi} = a(-\cos \pi - (-\cos 0)) = a(-(-1) - (-1)) = a(1 + 1) = 2a$
+  </Step>
+  <Step>
+    Zweites Integral berechnen
+
+    $b\int_{0}^{\pi} \cos t\,dt = b[\sin t]_{0}^{\pi} = b(\sin \pi - \sin 0) = b(0 - 0) = 0$
+  </Step>
+  <Solution>
+    $\int_{0}^{\pi} (a\sin t - b\cos t)\,dt = 2a - 0 = 2a$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 11" difficulty="hard">
+  <Task>
+    Berechne: $\displaystyle \int_{-1}^{-4} \frac{1-z^2}{z}\,dz$
+  </Task>
+  <Hint>
+    Teile den Bruch auf: $\frac{1-z^2}{z} = \frac{1}{z} - \frac{z^2}{z} = \frac{1}{z} - z$. Beachte, dass beide Grenzen negativ sind.
+  </Hint>
+  <Step>
+    Bruch aufteilen
+
+    $\frac{1-z^2}{z} = \frac{1}{z} - \frac{z^2}{z} = \frac{1}{z} - z$
+  </Step>
+  <Step>
+    Integral umformen
+
+    $\int_{-1}^{-4} \frac{1-z^2}{z}\,dz = \int_{-1}^{-4} \left(\frac{1}{z} - z\right)\,dz = \int_{-1}^{-4} \frac{1}{z}\,dz - \int_{-1}^{-4} z\,dz$
+  </Step>
+  <Step>
+    Stammfunktionen anwenden
+
+    $\int \frac{1}{z}\,dz = \ln|z| + C$ und $\int z\,dz = \frac{z^2}{2} + C$
+  </Step>
+  <Step>
+    Erstes Integral berechnen
+
+    $\int_{-1}^{-4} \frac{1}{z}\,dz = [\ln|z|]_{-1}^{-4} = \ln|-4| - \ln|-1| = \ln 4 - \ln 1 = \ln 4$
+  </Step>
+  <Step>
+    Zweites Integral berechnen
+
+    $\int_{-1}^{-4} z\,dz = \left[\frac{z^2}{2}\right]_{-1}^{-4} = \frac{(-4)^2}{2} - \frac{(-1)^2}{2} = \frac{16}{2} - \frac{1}{2} = 8 - \frac{1}{2} = \frac{15}{2}$
+  </Step>
+  <Solution>
+    $\int_{-1}^{-4} \frac{1-z^2}{z}\,dz = \ln 4 - \frac{15}{2}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 12" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{1}^{2} 5\sqrt{x}\,dx$
+  </Task>
+  <Hint>
+    Schreibe $\sqrt{x} = x^{1/2}$ und verwende die Potenzregel. Die Konstante 5 kann vor das Integral gezogen werden.
+  </Hint>
+  <Step>
+    Umschreiben mit Potenz
+
+    $\int_{1}^{2} 5\sqrt{x}\,dx = 5\int_{1}^{2} x^{1/2}\,dx$
+  </Step>
+  <Step>
+    Potenzregel anwenden
+
+    $\int x^{1/2}\,dx = \frac{x^{1/2+1}}{1/2+1} + C = \frac{x^{3/2}}{3/2} + C = \frac{2}{3}x^{3/2} + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $5\int_{1}^{2} x^{1/2}\,dx = 5 \cdot \frac{2}{3}\left[x^{3/2}\right]_{1}^{2} = \frac{10}{3}\left[x^{3/2}\right]_{1}^{2}$
+  </Step>
+  <Step>
+    Grenzen einsetzen
+
+    $\frac{10}{3}\left[x^{3/2}\right]_{1}^{2} = \frac{10}{3}(2^{3/2} - 1^{3/2}) = \frac{10}{3}(2\sqrt{2} - 1)$
+  </Step>
+  <Solution>
+    $\int_{1}^{2} 5\sqrt{x}\,dx = \frac{10}{3}(2\sqrt{2} - 1) = \frac{10(2\sqrt{2} - 1)}{3}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 13" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int_{\pi}^{2} \cos(\varphi)\,d\varphi$
+  </Task>
+  <Hint>
+    Dies ist ein Standardintegral für die Kosinusfunktion. Die Stammfunktion von $\cos(\varphi)$ ist $\sin(\varphi)$.
+  </Hint>
+  <Step>
+    Stammfunktion anwenden
+
+    $\int \cos(\varphi)\,d\varphi = \sin(\varphi) + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $\int_{\pi}^{2} \cos(\varphi)\,d\varphi = [\sin(\varphi)]_{\pi}^{2} = \sin(2) - \sin(\pi)$
+  </Step>
+  <Solution>
+    $\int_{\pi}^{2} \cos(\varphi)\,d\varphi = \sin(2) - \sin(\pi) = \sin(2) - 0 = \sin(2)$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 14" difficulty="hard">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{2} 3(1-e^x)\,dx$
+  </Task>
+  <Hint>
+    Nutze die Linearität der Integration. Teile das Integral auf: $3(1-e^x) = 3 - 3e^x$. Die Stammfunktion von $e^x$ ist $e^x$.
+  </Hint>
+  <Step>
+    Integral aufteilen
+
+    $\int_{0}^{2} 3(1-e^x)\,dx = \int_{0}^{2} (3 - 3e^x)\,dx = 3\int_{0}^{2} 1\,dx - 3\int_{0}^{2} e^x\,dx$
+  </Step>
+  <Step>
+    Stammfunktionen bestimmen
+
+    $\int 1\,dx = x + C$ und $\int e^x\,dx = e^x + C$
+  </Step>
+  <Step>
+    Erstes Integral berechnen
+
+    $3\int_{0}^{2} 1\,dx = 3[x]_{0}^{2} = 3(2 - 0) = 6$
+  </Step>
+  <Step>
+    Zweites Integral berechnen
+
+    $3\int_{0}^{2} e^x\,dx = 3[e^x]_{0}^{2} = 3(e^2 - e^0) = 3(e^2 - 1)$
+  </Step>
+  <Solution>
+    $\int_{0}^{2} 3(1-e^x)\,dx = 6 - 3(e^2 - 1) = 6 - 3e^2 + 3 = 9 - 3e^2 = 3(3 - e^2)$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 15" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{1} \frac{3}{1+x^2}\,dx$
+  </Task>
+  <Hint>
+    Dies ist ein Standardintegral. Die Stammfunktion von $\frac{1}{1+x^2}$ ist $\arctan(x)$. Die Konstante 3 kann vor das Integral gezogen werden.
+  </Hint>
+  <Step>
+    Konstante herausziehen
+
+    $\int_{0}^{1} \frac{3}{1+x^2}\,dx = 3\int_{0}^{1} \frac{1}{1+x^2}\,dx$
+  </Step>
+  <Step>
+    Standardintegral anwenden
+
+    $\int \frac{1}{1+x^2}\,dx = \arctan(x) + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $3\int_{0}^{1} \frac{1}{1+x^2}\,dx = 3[\arctan(x)]_{0}^{1} = 3(\arctan(1) - \arctan(0))$
+  </Step>
+  <Solution>
+    $\int_{0}^{1} \frac{3}{1+x^2}\,dx = 3(\arctan(1) - \arctan(0)) = 3\left(\frac{\pi}{4} - 0\right) = \frac{3\pi}{4}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 16" difficulty="medium">
+  <Task>
+    Berechne: $\displaystyle \int_{\frac{1}{2}}^{5} \frac{4}{t}\,dt$
+  </Task>
+  <Hint>
+    Dies ist wieder ein logarithmisches Integral. Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. Da beide Grenzen positiv sind, können die Betragsstriche weggelassen werden.
+  </Hint>
+  <Step>
+    Konstante herausziehen
+
+    $\int_{\frac{1}{2}}^{5} \frac{4}{t}\,dt = 4\int_{\frac{1}{2}}^{5} \frac{1}{t}\,dt$
+  </Step>
+  <Step>
+    Stammfunktion anwenden
+
+    $\int \frac{1}{t}\,dt = \ln|t| + C = \ln t + C$ (für $t > 0$)
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $4\int_{\frac{1}{2}}^{5} \frac{1}{t}\,dt = 4[\ln t]_{\frac{1}{2}}^{5} = 4(\ln 5 - \ln \frac{1}{2})$
+  </Step>
+  <Step>
+    Logarithmusregeln verwenden
+
+    $4(\ln 5 - \ln \frac{1}{2}) = 4(\ln 5 - \ln 2^{-1}) = 4(\ln 5 - (-\ln 2)) = 4(\ln 5 + \ln 2)$
+  </Step>
+  <Solution>
+    $\int_{\frac{1}{2}}^{5} \frac{4}{t}\,dt = 4(\ln 5 + \ln 2) = 4\ln(5 \cdot 2) = 4\ln 10$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 17" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{1} a\,da$ (wobei $a$ die Integrationsvariable ist)
+  </Task>
+  <Hint>
+    Dies ist ein einfaches Integral einer Konstanten bezüglich der Variablen $a$. Verwende die Grundregel für Konstanten.
+  </Hint>
+  <Step>
+    Stammfunktion bestimmen
+
+    $\int a\,da = \frac{a^2}{2} + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $\int_{0}^{1} a\,da = \left[\frac{a^2}{2}\right]_{0}^{1} = \frac{1^2}{2} - \frac{0^2}{2}$
+  </Step>
+  <Solution>
+    $\int_{0}^{1} a\,da = \frac{1}{2} - 0 = \frac{1}{2}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 18" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{1} ax\,da$ (wobei $a$ die Integrationsvariable und $x$ eine Konstante ist)
+  </Task>
+  <Hint>
+    Hier ist $x$ eine Konstante bezüglich der Integration nach $a$. Behandle $x$ wie einen konstanten Faktor.
+  </Hint>
+  <Step>
+    Konstante herausziehen
+
+    $\int_{0}^{1} ax\,da = x\int_{0}^{1} a\,da$
+  </Step>
+  <Step>
+    Stammfunktion von $a$ bestimmen
+
+    $\int a\,da = \frac{a^2}{2} + C$
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $x\int_{0}^{1} a\,da = x\left[\frac{a^2}{2}\right]_{0}^{1} = x\left(\frac{1^2}{2} - \frac{0^2}{2}\right)$
+  </Step>
+  <Solution>
+    $\int_{0}^{1} ax\,da = x \cdot \frac{1}{2} = \frac{x}{2}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 19" difficulty="easy">
+  <Task>
+    Berechne: $\displaystyle \int_{0}^{1} x\,da$ (wobei $a$ die Integrationsvariable und $x$ eine Konstante ist)
+  </Task>
+  <Hint>
+    Da $x$ eine Konstante bezüglich der Integration nach $a$ ist, ist dies das Integral einer Konstanten.
+  </Hint>
+  <Step>
+    Konstante integrieren
+
+    $\int x\,da = x \cdot a + C$ (da $x$ bezüglich $a$ konstant ist)
+  </Step>
+  <Step>
+    Hauptsatz anwenden
+
+    $\int_{0}^{1} x\,da = [x \cdot a]_{0}^{1} = x \cdot 1 - x \cdot 0$
+  </Step>
+  <Solution>
+    $\int_{0}^{1} x\,da = x - 0 = x$
+  </Solution>
+</Exercise>
+
+### Knifflige Integrale
+
+Diese Aufgaben kombinieren mehrere Techniken, erfordern strategisches Denken und zeigen fortgeschrittene Anwendungen der Integrationsregeln.
+
+<Exercise title="Aufgabe 20" difficulty="hard">
+  <Task>
+    Berechne: $\displaystyle \int \frac{3x^3+4x}{x^2+1}\,dx$
+  </Task>
+  <Hint>
+    Der Zählergrad ist höher als der Nennergrad. Verwende Polynomdivision, um den Integranden zu vereinfachen.
+  </Hint>
+  <Step>
+    Polynomdivision durchführen
+
+    $3x^3 + 4x : (x^2 + 1) = 3x + \frac{x}{x^2+1}$
+
+    Verifikation: $3x \cdot (x^2+1) + x = 3x^3 + 3x + x = 3x^3 + 4x$ ✓
+  </Step>
+  <Step>
+    Integral aufteilen
+
+    $\int \frac{3x^3+4x}{x^2+1}\,dx = \int 3x\,dx + \int \frac{x}{x^2+1}\,dx$
+  </Step>
+  <Step>
+    Erstes Integral lösen
+
+    $\int 3x\,dx = \frac{3x^2}{2} + C_1$
+  </Step>
+  <Step>
+    Das Integral des Zweiten Integranden wird mittels Substitution gelöst: 
+    Das $x^{2}+1$ wird mit $z$ substituiert.
+    $$
+    \begin{align*}
+    & \to \int \frac{\cancel{ x }}{z} \frac{dz}{2\cancel{ x }} \\
+    & \to \int \frac{1}{2} \cdot \frac{dz}{z} \\
+    & \to \frac{1}{2} \cdot \int \frac{1}{z}dz \\
+    & \to \frac{1}{2}\cdot \ln |z| + cot
+    \end{align*}
+    $$
+    Dies wird Resubstituiert
+
+    $$
+    \to \frac{1}{2}\cdot \ln |x^{2}+1|+C
+    $$
+  </Step>
+  <Step>
+    Ergebnisse zusammenfassen
+
+    Da $x^2+1 > 0$ für alle reellen $x$, können die Betragsstriche weggelassen werden.
+  </Step>
+  <Step>
+    Somit lautet das Gesamtintegral: 
+    $$
+    F = \frac{3}{2}x^{2}+\frac{1}{2}\cdot \ln(x^{2}+1)+C
+    $$
+  </Step>
+  <Solution>
+    $\int \frac{3x^3+4x}{x^2+1}\,dx = \frac{3x^2}{2} + \frac{1}{2}\ln(x^2+1) + C$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 21" difficulty="hard">
+  <Task>
+    Berechne: $\displaystyle \int e^x \sin x\,dx$
+  </Task>
+  <Hint>
+    Dies erfordert zweimalige partielle Integration. Wichtig: Das ursprüngliche Integral erscheint wieder, sodass eine Gleichung aufgestellt werden kann. Wähle $f(x) = \sin x$ und $g'(x) = e^x$.
+  </Hint>
+  <Step>
+    Funktionen zuordnen
+    $$
+    \begin{align*}
+    f(x) &= \sin x \\
+    f'(x) &= \cos x
+    \end{align*}
+    $$
+    $$
+    \begin{align*}
+    g'(x) &= e^x \\
+    g(x) &= e^x
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Erste partielle Integration:
+
+    $$
+    \int e^x \sin x\,dx = \sin x \cdot e^x - \int \cos x \cdot e^x\,dx + C_{1}
+    $$
+  </Step>
+  <Step>
+    Zweite partielle Integration für $\int e^x \cos x\,dx$
+    <br/>
+    Erneute Zuordnung der Funktionen:
+    Funktionen zuordnen
+    $$
+    \begin{align*}
+    f(x) &= \cos x \\
+    f'(x) &= -\sin x
+    \end{align*}
+    $$
+    $$
+    \begin{align*}
+    g'(x) &= e^x \\
+    g(x) &= e^x
+    \end{align*}
+    $$
+    <br/>
+    Anwenden der partiellen Integration:
+    $$
+    \int e^x \cos x\,dx = \cos x \cdot e^x - \int (-\sin x) \cdot e^x\,dx + C_{2} = \cos x \cdot e^x + \int e^x \sin x\,dx + C_{2}
+    $$
+  </Step>
+  <Step>
+    Einsetzen und Gleichung aufstellen
+    $$
+    \begin{align*}
+    \int e^x \sin x\,dx &= \sin x \cdot e^x - (\cos x \cdot e^x + \int e^x \sin x\,dx + C_{2}) + C_{1} & & | \text{Klammer auflösen} \\
+    &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C_{1} - C_{2} & & | \text{Cs zusammenfassen} \\
+    &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Betrachtet man nun die Gleichung sieht man, dass das gesuchte Integral auf beiden Seiten der Gleichung auftaucht.
+    Einerseits könnte man meinen, dass eine endlose Schleife entsteht, aber anstatt weiter zu integrieren, können wir das Gesamte als Gleichung betrachten und nach dem gesuchten Integral auflösen.
+    Wir lösen also die Gleichung nach dem Integral auf:
+    $$ 
+    \int e^x \sin x\,dx
+    $$
+    <br/>
+    Nach dem gesuchten Integral auflösen:
+    $$
+    \begin{align*}
+    \int e^x \sin x\,dx &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C  & & | + \int e^x \sin x\,dx\\
+    2\int e^x \sin x\,dx &= \sin x \cdot e^x - \cos x \cdot e^x + C & & | e^x \text{ausklammern} \, ; \, :2 \\
+    \int e^x \sin x\,dx &= \frac{e^x(\sin x - \cos x)}{2} + C
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    $$
+    \int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2} + C
+    $$
+  </Solution>
+</Exercise>
+
+
+<PostPager 
+  prev={{ href: "/blog/ableitungsregeln-zusammenfassung", title: "Ableitungen" }} 
+  />

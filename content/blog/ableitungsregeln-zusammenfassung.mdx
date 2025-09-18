@@ -1,0 +1,455 @@
+---
+title: "Ableitungsregeln – kompakt mit Beispielen und Übungen"
+excerpt: "Alle wichtigen Ableitungsregeln auf einen Blick: Linearkombination, Potenz-, Produkt-, Quotienten-, Kettenregel sowie Ableitungen von e^x, a^x, ln, log_b, sin, cos, tan, arcsin, arccos, arctan – mit typischen Fehlern und Übungsaufgaben."
+date: "2025-09-17"
+tags: ["mathematik", "analysis", "ableitung", "differentialrechnung"]
+---
+
+## Was ist Ableiten?
+
+Die Ableitung misst die Änderungsrate von $f$ an der Stelle $x$. Anschaulich entspricht sie der **Steigung** der Tangente an den Graphen von $f$ im Punkt $(x, f(x))$. 
+Mathematisch wird die Ableitung definiert als Grenzwert des Differenzenquotienten:
+
+$$
+f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}
+$$
+
+## Grundregeln
+
+| Regel | Formel | Hinweis |
+|-------|--------|---------|
+| Konstante | $(c)' = 0$ | Zahlen verschwinden |
+| Identität | $(x)' = 1$ | x abgeleitet wird 1 |
+| Linearkombination | $(af + bg)' = af' + bg'$ | Konstanten "ziehen vor" |
+| Potenzregel | $(x^n)' = n \cdot x^{n-1}$ | Für alle reellen $n$ |
+
+## Verknüpfungsregeln
+
+### Produktregel: $(uv)' = u'v + uv'$
+
+Wenn zwei Funktionen multipliziert werden, muss jede einzeln abgeleitet und dann addiert werden.
+
+**Beispiel:** $f(x) = x^2 \cdot \sin x$
+- $u = x^2 \Rightarrow u' = 2x$
+- $v = \sin x \Rightarrow v' = \cos x$
+- $f'(x) = 2x \cdot \sin x + x^2 \cdot \cos x$
+
+### Quotientenregel: $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$
+
+Bei Brüchen gilt: "Ableitung oben mal unten minus oben mal Ableitung unten, alles durch unten zum Quadrat".
+
+**Beispiel:** $f(x) = \frac{x^2}{e^x}$
+- $u = x^2 \Rightarrow u' = 2x$
+- $v = e^x \Rightarrow v' = e^x$
+- $f'(x) = \frac{2x \cdot e^x - x^2 \cdot e^x}{(e^x)^2} = \frac{e^x(2x - x^2)}{e^{2x}} = \frac{2x - x^2}{e^x}$
+
+### Kettenregel: $(g \circ f)'(x) = g'(f(x)) \cdot f'(x)$
+
+Bei verketteten Funktionen: "Äußere Ableitung mal innere Ableitung".
+
+**Beispiel:** $f(x) = \sin(3x^2)$
+- Äußere Funktion: $g(u) = \sin u \Rightarrow g'(u) = \cos u$
+- Innere Funktion: $u(x) = 3x^2 \Rightarrow u'(x) = 6x$
+- $f'(x) = \cos(3x^2) \cdot 6x = 6x\cos(3x^2)$
+
+## Wichtige Standardableitungen
+
+### Potenz- und Wurzelfunktionen
+
+<div className="overflow-x-auto">
+
+| $f(x)$ | $x^n$ | $x^a$ | $\sqrt{x}$ | $\frac{1}{x}$ | $\frac{1}{x^n}$ |
+|---|---|---|---|---|---|
+| $f'(x)$ | $n\cdot x^{n-1}$ | $ax^{a-1}$ | $\frac{1}{2\sqrt{x}}$ | $-\frac{1}{x^2}$ | $-\frac{n}{x^{n+1}}$ |
+
+</div>
+
+### Exponential- und Logarithmusfunktionen
+
+<div className="overflow-x-auto">
+
+| $f(x)$ | $e^x$ | $a^x$ | $a^{g(x)}$ | $\ln(x)$ | $\log_a(x)$ |
+|---|---|---|---|---|---|
+| $f'(x)$ | $e^x$ | $a^x \ln(a)$ | $a^{g(x)} \cdot \ln(a) \cdot g'(x)$ | $\frac{1}{x}$ | $\frac{1}{x \ln(a)}$ |
+
+</div>
+
+### Trigonometrische Funktionen
+
+<div className="overflow-x-auto">
+
+| $f(x)$ | $\sin(x)$ | $\cos(x)$ | $\tan(x)$ | $\cot(x)$ |
+|---|---|---|---|---|
+| $f'(x)$ | $\cos(x)$ | $-\sin(x)$ | $\frac{1}{\cos^2(x)}$ | $-\frac{1}{\sin^2(x)}$ |
+
+</div>
+
+### Arkusfunktionen
+
+<div className="overflow-x-auto">
+
+| $f(x)$ | $\arcsin(x)$ | $\arccos(x)$ | $\arctan(x)$ | $\text{arccot}(x)$ |
+|---|---|---|---|---|
+| $f'(x)$ | $\frac{1}{\sqrt{1-x^2}}$ | $-\frac{1}{\sqrt{1-x^2}}$ | $\frac{1}{1+x^2}$ | $-\frac{1}{1+x^2}$ |
+
+</div>
+
+<Callout type="warning" title="Typische Fehler">
+- Potenzregel gilt nicht direkt für $a^x$ (hier: $(a^x)'=a^x\ln a$, nicht $x\cdot a^{x-1}$).
+- Bei der Kettenregel die innere Ableitung nicht vergessen.
+- In der Quotientenregel steht im Zähler $u'v-uv'$ (Reihenfolge beachten).
+</Callout>
+
+## Beispiele
+
+### 1) Potenz + Linearkombination
+
+$$
+f(x)=3x^5-\tfrac12 x^2+7
+$$
+
+$$
+f'(x)=3\cdot 5x^4-\tfrac12\cdot 2x+0=15x^4-x
+$$
+
+### 2) Produktregel
+
+$$
+f(x)=x^2\cdot \sin x
+$$
+
+$$
+f'(x)=2x\sin x + x^2\cos x
+$$
+
+### 3) Quotientenregel
+
+$$
+f(x)=\frac{e^x}{x^2+1}
+$$
+
+$$
+f'(x)=\frac{e^x(x^2+1)-e^x\cdot 2x}{(x^2+1)^2}
+=\frac{e^x(x^2+1-2x)}{(x^2+1)^2}
+$$
+
+### 4) Kettenregel
+
+$$
+f(x)=\ln(3x^2+5)
+$$
+
+$$
+f'(x)=\frac{1}{3x^2+5}\cdot 6x=\frac{6x}{3x^2+5}
+$$
+
+### 5) Kombination aus mehreren Regeln
+
+$$
+f(x)=e^{\sin x}\cdot (x^3+1)
+$$
+
+Produkt + Kette:
+
+$$
+f'(x)=e^{\sin x}\cdot (\cos x)\cdot (x^3+1)\;+\;e^{\sin x}\cdot 3x^2
+$$
+
+## Übungen
+
+<Exercise title="Aufgabe 1: Produkt + Kette" difficulty="medium">
+  <Task>
+    Leite ab: $f(x) = x^3 \cdot \cos(2x)$
+  </Task>
+  <Hint>
+    Produktregel; für $\cos(2x)$ Kettenregel beachten.
+  </Hint>
+  <Step>
+    $u=x^3,\; v=\cos(2x)\Rightarrow u'=3x^2,\; v'=-\sin(2x)\cdot 2$
+  </Step>
+  <Solution>
+    $f'(x)=3x^2\cos(2x) - 2x^3\sin(2x)$
+  </Solution>
+  
+</Exercise>
+
+<Exercise title="Aufgabe 2: Quotient" difficulty="medium">
+  <Task>
+    Leite ab: $f(x)=\dfrac{\ln x}{x}$ für $x>0$
+  </Task>
+  <Hint>
+    Quotientenregel oder Produktregel mit $x^{-1}$.
+  </Hint>
+  <Step>
+    $u=\ln x\Rightarrow u'=\tfrac1x$, $v=x\Rightarrow v'=1$
+  </Step>
+  <Solution>
+    $f'(x)=\dfrac{\tfrac1x\cdot x - \ln x\cdot 1}{x^2}=\dfrac{1-\ln x}{x^2}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3: Kette" difficulty="easy">
+  <Task>
+    Leite ab: $f(x)=\sqrt{4x^2+1}$
+  </Task>
+  <Hint>
+    Schreibe als $(4x^2+1)^{1/2}$.
+  </Hint>
+  <Step>
+    $(g(x))^{1/2}\Rightarrow \tfrac12 (g(x))^{-1/2}\cdot g'(x)$ mit $g(x)=4x^2+1$
+  </Step>
+  <Solution>
+    $f'(x)=\dfrac{1}{2\sqrt{4x^2+1}}\cdot 8x=\dfrac{4x}{\sqrt{4x^2+1}}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 4: Exponential + Log" difficulty="medium">
+  <Task>
+    Leite ab: $f(x)=a^x\cdot \ln(1+x)$, $a>0,\,a\neq 1$
+  </Task>
+  <Hint>
+    Produktregel; $(a^x)'=a^x\ln a$.
+  </Hint>
+  <Solution>
+    $f'(x)=a^x\ln a\cdot \ln(1+x)\;+\;a^x\cdot \dfrac{1}{1+x}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 5: Potenzfunktion" difficulty="easy">
+  <Task>
+    Leite ab: $f(x) = 2x^7 - 1$
+  </Task>
+  <Hint>
+    Potenzregel und Konstantenregel verwenden.
+  </Hint>
+  <Solution>
+    $f'(x) = 2 \cdot 7x^6 - 0 = 14x^6$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 6: Wurzelfunktion" difficulty="easy">
+  <Task>
+    Leite ab: $f(x) = \sqrt{4x}$
+  </Task>
+  <Hint>
+    Schreibe als $(4x)^{1/2}$ und verwende Kettenregel.
+  </Hint>
+  <Step>
+    $f(x) = (4x)^{1/2}$
+  </Step>
+  <Solution>
+    $f'(x) = \frac{1}{2}(4x)^{-1/2} \cdot 4 = \frac{2}{\sqrt{4x}} = \frac{1}{\sqrt{x}}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7: Kubikwurzel" difficulty="medium">
+  <Task>
+    Leite ab: $f(x) = \sqrt[3]{2x}$
+  </Task>
+  <Hint>
+    Schreibe als $(2x)^{1/3}$ und verwende Kettenregel.
+  </Hint>
+  <Step>
+    $f(x) = (2x)^{1/3}$
+  </Step>
+  <Solution>
+    $f'(x) = \frac{1}{3}(2x)^{-2/3} \cdot 2 = \frac{2}{3}(2x)^{-2/3} = \frac{2}{3 \sqrt[3]{(2x)^2}}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 8: Exponentialfunktion" difficulty="easy">
+  <Task>
+    Leite ab: $f(x) = e^{5x+3}$
+  </Task>
+  <Hint>
+    Kettenregel mit $e$-Funktion: $(e^{u(x)})' = e^{u(x)} \cdot u'(x)$.
+  </Hint>
+  <Step>
+    Innere Funktion: $u(x) = 5x + 3 \Rightarrow u'(x) = 5$
+  </Step>
+  <Solution>
+    $f'(x) = e^{5x+3} \cdot 5 = 5e^{5x+3}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 9: Logarithmus + Potenz" difficulty="medium">
+  <Task>
+    Leite ab: $g(x) = 3x^6 - 2\ln x + \frac{3}{x}$
+  </Task>
+  <Hint>
+    Linearkombination: Jede Funktion einzeln ableiten. Schreibe $\frac{3}{x} = 3x^{-1}$.
+  </Hint>
+  <Step>
+    $g(x) = 3x^6 - 2\ln x + 3x^{-1}$
+  </Step>
+  <Solution>
+    $g'(x) = 18x^5 - \frac{2}{x} - \frac{3}{x^2}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 10: Allgemeine Potenz" difficulty="medium">
+  <Task>
+    Leite ab: $h(x) = (ax)^5$ mit $a \in \mathbb{R}$ fest
+  </Task>
+  <Hint>
+    Variante 1:Potenzgesetz anwenden und anschließend Potenzregel. 
+    Variante 2: verwende Kettenregel mit $(ax)^5$.
+  </Hint>
+  <Step>
+    Variante 1: Potenzen Verteilen:
+    $h(x) = a^5 x^5$
+  </Step>
+  <Step>
+    Variante 1: $h'(x) = 5 \cdot a^5 x^4$
+  </Step>
+  <Step>
+    Variante 2: Innere * Äußere Ableitung
+    $u(v(x)) = (v(x))^5 \Rightarrow u' = 5(v(x))^4$
+    $v(x) = ax \Rightarrow v' = a$
+  </Step>
+  <Step>
+    Variante 2: 
+    $$
+    \begin{align*}
+    h'(x) &= u' \cdot v' \\
+    &= 5(v(x))^4 \cdot a \\
+    &= 5a(ax)^4 \\
+    &= 5a^5x^4
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    $h'(x) = a^5 \cdot 5x^4 = 5a^5 x^4$
+  </Solution>
+</Exercise>
+
+## Knifflige Aufgaben für Fortgeschrittene
+
+<Exercise title="Aufgabe 11" difficulty="hard">
+  <Task>
+    Leite ab: $f(x) = \sin(\ln(x^2 + 1))$
+  </Task>
+  <Hint>
+    Dreifache Kettenregel: äußere, mittlere, innere Funktion identifizieren.
+  </Hint>
+  <Step>
+    Äußere: $\sin(u)$, mittlere: $\ln(v)$, innere: $x^2 + 1$
+  </Step>
+  <Step>
+    $\sin(\ln(x^2+1))\frac{d}{dx} = \cos(\ln(x^2+1)) \cdot \frac{1}{x^2+1} \cdot 2x $
+  </Step>
+  <Solution>
+    $f'(x) = \frac{2x \cos(\ln(x^2+1))}{x^2+1}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 12" difficulty="hard">
+  <Task>
+    Leite ab: $f(x) = x^2 e^{3x} \sin(2x)$
+  </Task>
+  <Hint>
+    Produktregel für drei Faktoren: $(uvw)' = u'vw + uv'w + uvw'$.
+  </Hint>
+  <Step>
+    $u = x^2 \Rightarrow u' = 2x$
+  </Step>
+  <Step>
+    $v = e^{3x} \Rightarrow v' = 3e^{3x}$
+  </Step>
+  <Step>
+    $w = \sin(2x) \Rightarrow w' = 2\cos(2x)$
+  </Step>
+  <Solution>
+    $$
+    \begin{align*}
+    f'(x) &= 2x \cdot e^{3x} \sin(2x) + x^2 \cdot 3e^{3x} \sin(2x) + x^2 e^{3x} \cdot 2\cos(2x) \\
+    &= e^{3x}[2x\sin(2x) + 3x^2\sin(2x) + 2x^2\cos(2x)]
+  \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 13" difficulty="hard">
+  <Task>
+    Leite ab: $f(x) = \frac{e^x}{\sqrt{x^2 + \sin x}}$
+  </Task>
+  <Hint>
+    Quotientenregel, dabei Nenner mit Kettenregel ableiten.
+  </Hint>
+  <Step>
+    $u = e^x \Rightarrow u' = e^x$
+  </Step>
+  <Step>
+    $v = (x^2 + \sin x)^{1/2} \Rightarrow v' = \frac{1}{2}(x^2 + \sin x)^{-1/2} \cdot (2x + \cos x)$
+  </Step>
+  <Solution>
+    $$
+    \begin{align*}
+    f'(x) &= \frac{e^x \sqrt{x^2 + \sin x} - e^x \cdot \frac{2x + \cos x}{2\sqrt{x^2 + \sin x}}}{x^2 + \sin x} \\
+    &= \frac{e^x}{x^2 + \sin x} \left(1 - \frac{2x + \cos x}{2(x^2 + \sin x)}\right)
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 14" difficulty="hard">
+  <Task>
+    Leite ab: $f(x) = x^{\ln x}$ für $x > 0$
+  </Task>
+  <Hint>
+    Variable im Exponenten! Normale Potenzregel funktioniert nicht. Nutze logarithmische Ableitung.
+  </Hint>
+  <Step>
+    **Problem:** Bei $x^{\ln x}$ steht eine Variable sowohl in der Basis als auch im Exponenten. Die normale Potenzregel $(x^n)' = nx^{n-1}$ gilt nur für konstante Exponenten.
+  </Step>
+  <Step>
+    **Lösung:** Logarithmische Ableitung verwenden:
+    1. Logarithmus auf beide Seiten: $\ln(f(x)) = \ln(x^{\ln x})$
+    2. Logarithmusregel: $\ln(a^b) = b \cdot \ln(a)$
+    3. Also: $\ln(f(x)) = \ln x \cdot \ln x = (\ln x)^2$
+  </Step>
+  <Step>
+    Beide Seiten nach $x$ ableiten:
+    $\frac{d}{dx}[\ln(f(x))] = \frac{d}{dx}[(\ln x)^2]$
+  </Step>
+  <Step>
+    Links: Kettenregel $\Rightarrow \frac{f'(x)}{f(x)}$
+
+    Rechts: Kettenregel $\Rightarrow 2\ln x \cdot \frac{1}{x} = \frac{2\ln x}{x}$
+  </Step>
+  <Step>
+    Gleichung: $\frac{f'(x)}{f(x)} = \frac{2\ln x}{x}$
+
+    Nach $f'(x)$ auflösen: $f'(x) = f(x) \cdot \frac{2\ln x}{x}$
+  </Step>
+  <Solution>
+    $f'(x) = x^{\ln x} \cdot \frac{2\ln x}{x} = \frac{2x^{\ln x} \ln x}{x}$
+
+    **Merke:** Bei Funktionen der Form $g(x)^{h(x)}$ immer logarithmische Ableitung verwenden!
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 15" difficulty="hard">
+  <Task>
+    Leite ab: $f(x) = \arctan\left(\frac{x}{1-x^2}\right)$
+  </Task>
+  <Hint>
+    Kettenregel mit Arkustangens und Quotientenregel für innere Funktion.
+  </Hint>
+  <Step>
+    Äußere: $\arctan(u) \Rightarrow \frac{1}{1+u^2}$
+  </Step>
+  <Step>
+    Innere: $\frac{x}{1-x^2} \Rightarrow \frac{(1-x^2) \cdot 1 - x \cdot (-2x)}{(1-x^2)^2} = \frac{1+x^2}{(1-x^2)^2}$
+  </Step>
+  <Solution>
+    $f'(x) = \frac{1}{1+\left(\frac{x}{1-x^2}\right)^2} \cdot \frac{1+x^2}{(1-x^2)^2}$
+    $= \frac{1+x^2}{(1-x^2)^2 + x^2} = \frac{1+x^2}{1-2x^2+x^4+x^2} = \frac{1+x^2}{(1-x^2)^2+x^2}$
+  </Solution>
+</Exercise>
+
+<PostPager
+  prev={{ href: "/blog/potenz-exponential-logarithmen", title: "Potenz-, Exponential- und Logarithmusgesetze" }} 
+  next={{ href: "/blog/integrationsregeln-zusammenfassung", title: "Integrale" }} 
+/>
+
