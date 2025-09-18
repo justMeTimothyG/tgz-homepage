@@ -120,40 +120,8 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
       return <a href={href} {...props}>{children}</a>;
     },
 
-    // Enhanced headings with gradient colors (preserves emojis and KaTeX)
-    h1: ({ children, ...props }: HeadingProps) => {
-      const renderWithPreservation = (content: unknown) => {
-        if (typeof content === 'string') {
-          // Split by emoji regex and wrap non-emoji parts with gradient
-          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
-          const parts = content.split(emojiRegex);
-          return parts.map((part, index) => {
-            if (emojiRegex.test(part)) {
-              // This is an emoji, render without gradient
-              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
-            } else if (part.trim()) {
-              // Apply gradient to text content
-              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{part}</span>;
-            }
-            return part; // whitespace
-          });
-        }
-        // For React elements (like KaTeX), check if they contain math
-        if (React.isValidElement(content)) {
-          const className = (content.props as Record<string, unknown>)?.['className'];
-          if (typeof className === 'string' && className.includes('katex')) return content;
-          // This is a KaTeX element, preserve it completely
-        }
-        // For other React elements, wrap in gradient span
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content as React.ReactNode}</span>;
-      };
-
-      return (
-        <h1 {...props}>
-          {React.Children.map(children, (child) => renderWithPreservation(child))}
-        </h1>
-      );
-    },
+    // Do not render H1 inside MDX content to avoid duplicate page titles
+    h1: () => null,
 
     h2: ({ children, ...props }: HeadingProps) => {
       const renderWithPreservation = (content: unknown) => {
@@ -408,41 +376,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return <a href={href} {...props}>{children}</a>;
     },
 
-    // Enhanced headings with gradient colors (preserves emojis and KaTeX)
-    h1: ({ children, ...props }: HeadingProps) => {
-      const renderWithPreservation = (content: unknown) => {
-        if (typeof content === 'string') {
-          // Split by emoji regex and wrap non-emoji parts with gradient
-          const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
-          const parts = content.split(emojiRegex);
-          return parts.map((part, index) => {
-            if (emojiRegex.test(part)) {
-              // This is an emoji, render without gradient
-              return <span key={index} style={{ color: 'initial' }}>{part}</span>;
-            } else if (part.trim()) {
-              // Apply gradient to text content
-              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{part}</span>;
-            }
-            return part; // whitespace
-          });
-        }
-        // For React elements (like KaTeX), check if they contain math
-        if (React.isValidElement(content)) {
-          const className = (content.props as Record<string, unknown>)?.['className'];
-          if (typeof className === 'string' && className.includes('katex')) {
-            return content;
-          }
-        }
-        // For other React elements, wrap in gradient span
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">{content as React.ReactNode}</span>;
-      };
-
-      return (
-        <h1 {...props}>
-          {React.Children.map(children, (child) => renderWithPreservation(child))}
-        </h1>
-      );
-    },
+    // Do not render H1 inside MDX content to avoid duplicate page titles
+    h1: () => null,
 
     h2: ({ children, ...props }: HeadingProps) => {
       const renderWithPreservation = (content: unknown) => {
