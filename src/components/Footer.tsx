@@ -68,7 +68,7 @@ export default function Footer() {
               </Link>
             </div>
             <div className="text-sm text-muted-foreground">
-              © {currentYear} Blickfang Emsland. Alle Rechte vorbehalten.
+              © {currentYear} Timothy Lüdtke. Alle Rechte vorbehalten.
             </div>
           </div>
         </div>
