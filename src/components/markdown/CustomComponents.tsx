@@ -7,7 +7,6 @@ import LcmCalculator from './LcmCalculator';
 import GaussianElimination from './GaussianElimination';
 import PascalsTriangle from './PascalsTriangle';
 import VennSets from './VennSets';
-import Exercise, { Task, Hint, Step, Solution } from './Exercise';
 import Download from './Download';
 
 // Callout/Alert Component
@@ -294,5 +293,5 @@ export function ExternalLinkComponent({ href, children, ...props }: {
   );
 }
 
-// Export calculator and exercise components
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Exercise, Task, Hint, Step, Solution, Download };
+// Export calculator utilities for reuse
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download };

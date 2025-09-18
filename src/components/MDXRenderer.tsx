@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { useMDXComponents } from '@/lib/mdx-components';
+import { useMDXComponents } from '@/lib/mdx-components-client';
 import 'katex/dist/katex.min.css';
 
 interface MDXRendererProps {
