@@ -44,7 +44,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <article id="post-content" className="prose dark:prose-invert max-w-none">
             {/* Post header */}
             <header className="mb-8">
-              <h1>{post.title}</h1>
+              <h1>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
+                  {post.title}
+                </span>
+              </h1>
               {post.date && (
                 <p className="text-sm opacity-70">{formatDateDE(post.date)}</p>
               )}
