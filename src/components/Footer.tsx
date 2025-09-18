@@ -17,6 +17,7 @@ export default function Footer() {
     { name: 'Startseite', href: '/' },
     { name: 'Über mich', href: '/ueber-mich' },
     { name: 'Blog', href: '/blog' },
+    { name: 'Sammlungen', href: '/sammlungen' },
     { name: 'Tools', href: '/tools' },
   ];
 
