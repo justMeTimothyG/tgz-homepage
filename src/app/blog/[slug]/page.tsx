@@ -4,6 +4,7 @@ import { formatDateDE } from '@/lib/date';
 import ServerTableOfContents from '@/components/ServerTableOfContents';
 import { getTocProps } from '@/lib/toc';
 import ServerMDX from '@/components/ServerMDX';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
 
 export async function generateStaticParams() {
   try {
@@ -24,58 +25,62 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const tocData = getTocProps(post.content);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <div className="grid grid-cols-12 gap-8">
-        {/* TOC - left side on desktop */}
-        <aside className="hidden lg:col-span-3 lg:block">
-          <div className="sticky top-6 max-h-[calc(100vh-2rem)] overflow-auto pr-4">
-            {tocData.hasContent && (
-              <ServerTableOfContents 
-                headings={tocData.headings}
-                sections={tocData.sections}
-                containerSelector="#post-content" 
-              />
-            )}
-          </div>
-        </aside>
+    <>
+      <div className="mx-auto max-w-6xl px-4 py-10">
+        <div className="grid grid-cols-12 gap-8">
+          {/* TOC - left side on desktop */}
+          <aside className="hidden lg:col-span-3 lg:block">
+            <div className="sticky top-6 max-h-[calc(100vh-2rem)] overflow-auto pr-4">
+              {tocData.hasContent && (
+                <ServerTableOfContents
+                  headings={tocData.headings}
+                  sections={tocData.sections}
+                  containerSelector="#post-content"
+                />
+              )}
+            </div>
+          </aside>
 
-        {/* Main content */}
-        <div className="col-span-12 lg:col-span-9">
-          <article id="post-content" className="prose dark:prose-invert max-w-none">
-            {/* Post header */}
-            <header className="mb-8">
-              <h1>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
+          {/* Main content */}
+          <div className="col-span-12 lg:col-span-9">
+            <article id="post-content" className="prose dark:prose-invert max-w-none">
+              {/* Post header */}
+              <header className="mb-8">
+                <h1 className="text-white">
                   {post.title}
-                </span>
-              </h1>
-              {post.date && (
-                <p className="text-sm opacity-70">{formatDateDE(post.date)}</p>
-              )}
-              {post.excerpt && (
-                <p className="text-lg text-gray-600 dark:text-gray-400 italic">{post.excerpt}</p>
-              )}
-              {/* Tags */}
-              {post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-4 not-prose">
-                  {post.tags.map(tag => (
-                    <span key={tag} className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </header>
-            
-            {/* Post content */}
-            <ServerMDX
-              source={post.content}
-              className="max-w-none"
-              basePath={process.cwd()}
-            />
-          </article>
+                </h1>
+                {post.date && (
+                  <p className="text-sm opacity-70">{formatDateDE(post.date)}</p>
+                )}
+                {post.excerpt && (
+                  <p className="text-lg text-gray-600 dark:text-gray-400 italic">{post.excerpt}</p>
+                )}
+                {/* Tags */}
+                {post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-4 not-prose">
+                    {post.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </header>
+
+              {/* Post content */}
+              <ServerMDX
+                source={post.content}
+                className="max-w-none"
+                basePath={process.cwd()}
+              />
+            </article>
+          </div>
         </div>
       </div>
-    </div>
+      <ScrollToTopButton />
+    </>
   );
 }
