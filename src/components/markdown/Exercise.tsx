@@ -207,10 +207,10 @@ export default function Exercise({
   const btnBase = "flex items-center gap-2 text-sm font-medium transition-colors";
   const btnDisabled = "disabled:opacity-50 disabled:cursor-not-allowed";
   // Use compact (link-style) buttons in both variants
-  const btnSolution = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 ${btnDisabled}`;
-  const btnHint = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 ${btnDisabled}`;
-  const btnStep = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 hover:text-green-600 dark:hover:text-green-400 ${btnDisabled}`;
-  const btnReset = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100`;
+  const btnSolution = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 ${btnDisabled}`;
+  const btnHint = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 ${btnDisabled}`;
+  const btnStep = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 ${btnDisabled}`;
+  const btnReset = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100`;
 
   return (
     <div className={containerClasses}>
@@ -242,9 +242,7 @@ export default function Exercise({
       )}
 
       {/* Action Buttons */}
-      <div className={`flex flex-wrap gap-3 justify-end ${compact ? 'mt-2' : ''} 
-        md:absolute md:bottom-2 md:right-3 md:left-auto md:opacity-0 md:group-hover:opacity-100 md:transition-opacity md:duration-150 
-        ${compact ? 'md:mt-0' : 'md:mt-0'}`}>
+      <div className={`flex flex-wrap gap-3 justify-end ${compact ? 'mt-2' : ''}`}>
         {solutionComponents.length > 0 && (
           <button
             onClick={toggleSolution}
