@@ -66,7 +66,9 @@ export function Callout({ type = 'info', children, title, ...props }: {
               {title}
             </h4>
           )}
-          <div className={`${style.textColor} prose prose-sm max-w-none`}>
+          <div
+            className={`${style.textColor} prose prose-sm max-w-none [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:pl-1`}
+          >
             {children}
           </div>
         </div>

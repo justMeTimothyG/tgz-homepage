@@ -38,7 +38,9 @@ Hint.displayName = 'Hint';
 
 export function Step({ children }: { children: ReactNode }) {
   return (
-    <div className="prose dark:prose-invert max-w-none">
+    <div
+      className="prose dark:prose-invert max-w-none [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6 [&_li]:pl-1"
+    >
       {children}
     </div>
   );
@@ -302,16 +304,23 @@ export default function Exercise({
         </div>
       )}
 
-      {/* Steps Section (render steps directly) */}
+      {/* Steps Section (render steps with numbers) */}
       {visibleSteps > 0 && (
         <div className="mb-6">
           <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
             <ListOrdered className="w-4 h-4 text-green-600 dark:text-green-400" />
             Rechenweg:
           </h4>
-          <div className="space-y-3">
+          <div className="space-y-5">
             {stepComponents.slice(0, visibleSteps).map((step, index) => (
-              <div key={index}>{step}</div>
+              <div key={index} className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-sm font-semibold">
+                  {index + 1}
+                </div>
+                <div className="flex-1">
+                  {step}
+                </div>
+              </div>
             ))}
           </div>
         </div>
