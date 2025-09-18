@@ -206,32 +206,46 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int \frac{2x}{1+x^2}\,dx$
   </Task>
   <Hint>
-    Erkenne die Substitutionsform: Ein Faktor im Zähler ist die Ableitung des Nenners. Setze $u=1+x^2$ und beachte, dass $\frac{d}{dx}(1+x^2) = 2x$.
+    Wende Integration durch Substitution an.
+  </Hint>
+  <Hint>
+    Ein Faktor im Zähler ist die Ableitung des Nenners. Setze $z=1+x^2$.
+  </Hint>
+  <Hint>
+    Nach dem Wechsel nach $dz$ kann man den Faktor im Zähler kürzen da: $dx = \frac{dz}{2x}$.
   </Hint>
   <Step>
     Substitution wählen
 
-    $u = 1+x^2$
+    $z = 1+x^2$
   </Step>
   <Step>
     Differential bestimmen
 
-    $\frac{du}{dx} = 2x \Rightarrow du = 2x\,dx$
+    $\frac{dz}{dx} = 2x \Rightarrow dz = 2x\,dx$
   </Step>
   <Step>
     Einsetzen und vereinfachen
 
-    $\int \frac{2x}{1+x^2}\,dx = \int \frac{1}{u}\,du$
+    $\int \frac{2x}{1+x^2}\,dx = \int \frac{\cancel{2x}}{z}\, \frac{dz}{\cancel{2x}} = \int \frac{1}{z}\,dz$
   </Step>
   <Step>
     Integrieren
 
-    $\int \frac{1}{u}\,du = \ln|u| + C$
+    $\int \frac{1}{z}\,dz = \ln|z| + C$
+  </Step>
+  <Step>
+    Vereinfachen: da $x^2 + 1 > 0$ für alle reellen $x$, können die Betragsstriche weggelassen werden.
+
+    $\to \ln z + C$
+  </Step>
+  <Step>
+    Rücksubstitution
+
+    $\ln(1+x^2) + C$
   </Step>
   <Solution>
-    $\int \frac{2x}{1+x^2}\,dx = \ln|1+x^2| + C = \ln(1+x^2) + C$
-
-    (Da $1+x^2 > 0$ für alle reellen $x$, können wir die Betragsstriche weglassen)
+    $\int \frac{2x}{1+x^2}\,dx = \ln(1+x^2) + C$
   </Solution>
 </Exercise>
 
@@ -240,7 +254,17 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int x\cos x\,dx$
   </Task>
   <Hint>
-    Verwende partielle Integration. Wähle $f(x) = x$ (vereinfacht sich durch Ableiten) und $g'(x) = \cos x$ (bleibt einfach beim Integrieren). Formel: $\int f(x) \cdot g'(x)\,dx = f(x) \cdot g(x) - \int f'(x) \cdot g(x)\,dx$
+    Verwende die partielle Integration an: 
+    
+    $\int_{a}^{b} f(x) \cdot g'(x) \,dx = [f(x) \cdot g(x)]_{a}^{b} - \int_{a}^{b} f'(x) \cdot g(x) \,dx$
+  </Hint>
+  <Hint>
+    Wähle $f(x)$ so, dass der Term einfacher wird durch ableiten.
+    Im gleichen Sinne wähle $g(x)$ so, dass der Term durch Integration trotz dem einfach bleibt. 
+  </Hint>
+  <Hint>
+    Wähle $f(x) = x$ (wird durch Ableiten zu 1) und
+    $g'(x) = \cos x$ (bleibt durch Integrieren $\sin x$).
   </Hint>
   <Step>
     Funktionen zuordnen
@@ -259,6 +283,11 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $\int \sin x\,dx = -\cos x + C$
   </Step>
+  <Step>
+    Zusammenfassen
+
+    $\int x\cos x\,dx = x\sin x - (-\cos x) + C = x\sin x + \cos x + C$
+  </Step>
   <Solution>
     $\int x\cos x\,dx = x\sin x - (-\cos x) + C = x\sin x + \cos x + C$
   </Solution>
@@ -269,7 +298,10 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int (3x^2 - 4x + 7)\,dx$
   </Task>
   <Hint>
-    Nutze die Linearität der Integration: Das Integral einer Summe ist die Summe der Integrale. Wende dann die Potenzregel $\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$ auf jeden Term an.
+    Nutze die Linearität der Integration: Das Integral einer Summe ist die Summe der Integrale. 
+  </Hint>
+  <Hint>
+    Wende dann die Potenzregel $\int x^n\,dx = \frac{x^{n+1}}{n+1} + C$ auf jeden Term an.
   </Hint>
   <Step>
     Integral aufteilen
@@ -291,7 +323,7 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
   </Solution>
 </Exercise>
 
-<Exercise title="Aufgabe 4" difficulty="medium">
+<Exercise title="Aufgabe 4" difficulty="easy">
   <Task>
     Berechne: $\displaystyle \int_{0}^{1} (2x+1)\,dx$
   </Task>
@@ -315,10 +347,18 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $F(0) = 0^2 + 0 = 0$
   </Step>
-  <Solution>
-    $\int_0^1 (2x+1)\,dx = F(1) - F(0) = 2 - 0 = 2$
+  <Step>
+    Berechnen des definiten Integrals
 
-    Mit Notation: $[x^2+x]_0^1 = (1^2+1)-(0^2+0) = 2$
+    $\int_0^1 (2x+1)\,dx = F(1) - F(0) = 2 - 0 = 2$
+  </Step>
+  <Step>
+    Alternativ mit Notation
+
+    $\int_0^1 (2x+1)\,dx = [x^2+x]_0^1 = (1^2+1)-(0^2+0) = 2$
+  </Step>
+  <Solution>
+    $\int_0^1 (2x+1)\,dx = 2$
   </Solution>
 </Exercise>
 
@@ -327,7 +367,10 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int 3e^{2x}\,dx$
   </Task>
   <Hint>
-    Bei $e^{ax}$ mit $a \neq 1$ verwende die Substitution $u = ax$ oder merke dir die Formel $\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C$. Die Konstante 3 kann vor das Integral gezogen werden.
+    Nutze entweder die Substitution oder erkenne die lineare Substitution mit $\int f(ax+b)\,dx = \frac{1}{a}F(ax+b) + C$, wobei $F$ die Stammfunktion von $f$ ist. Alternativ kannst du dir vorstellen wie das Integral aussehen müsste, um wieder $3e^{2x}$ zu erhalten.
+  </Hint>
+  <Hint>
+    Bei der Substitution. Erkenne, dass $2x$ die innere Funktion ist und $e^{x}$ die äußere Funktion.
   </Hint>
   <Step>
     Konstante herausziehen
@@ -337,17 +380,25 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
   <Step>
     Substitution wählen
 
-    $u = 2x \Rightarrow \frac{du}{dx} = 2 \Rightarrow dx = \frac{1}{2}du$
+    $z = 2x \Rightarrow \frac{dz}{dx} = 2 \Rightarrow dx = \frac{dz}{2}$
   </Step>
   <Step>
     Einsetzen und integrieren
 
-    $3\int e^{2x}\,dx = 3\int e^u \cdot \frac{1}{2}\,du = \frac{3}{2}\int e^u\,du = \frac{3}{2}e^u + C$
+    $3\int e^{2x}\,dx = 3\int e^z \cdot \frac{1}{2}\,dz = \frac{3}{2}\int e^z\,dz = \frac{3}{2}e^z + C$
+  </Step>
+  <Step>
+    Rücksubstitution
+
+    $\frac{3}{2}e^z + C = \frac{3}{2}e^{2x} + C$
+  </Step>
+  <Step>
+    Alternativ mit der linearen Substitution
+
+    $3 \cdot \int e^{2x}\,dx = 3 \cdot \frac{1}{2}e^{2x} + C = \frac{3}{2}e^{2x} + C$
   </Step>
   <Solution>
     $\int 3e^{2x}\,dx = \frac{3}{2}e^{2x} + C$
-
-    **Merksatz:** $\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C$
   </Solution>
 </Exercise>
 
@@ -356,27 +407,32 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int \sin(3x+1)\,dx$
   </Task>
   <Hint>
-    Dies ist eine lineare Substitution der Form $f(ax+b)$. Verwende $u = 3x + 1$ und beachte, dass sich das $dx$ entsprechend ändert. Allgemeine Formel: $\int \sin(ax+b)\,dx = -\frac{1}{a}\cos(ax+b) + C$
+    Nutze entweder die Substitution oder erkenne die lineare Substitution mit $\int f(ax+b)\,dx = \frac{1}{a}F(ax+b) + C$, wobei hier $f(x) = \sin(x)$.
   </Hint>
   <Step>
-    Substitution festlegen
+    Substitution wählen
 
-    $u = 3x + 1$
+    $z = 3x + 1$
   </Step>
   <Step>
     Differential bestimmen
 
-    $\frac{du}{dx} = 3 \Rightarrow du = 3\,dx \Rightarrow dx = \frac{1}{3}du$
+    $dz = 3\, dx \Rightarrow dx = \frac{dz}{3}$
   </Step>
   <Step>
     Einsetzen und integrieren
 
-    $\int \sin(3x+1)\,dx = \int \sin(u) \cdot \frac{1}{3}\,du = \frac{1}{3}\int \sin(u)\,du$
+    $\int \sin(3x+1)\,dx = \int \sin(z) \cdot \frac{1}{3}\,dz = \frac{1}{3}\int \sin(z)\,dz$
   </Step>
   <Step>
     Stammfunktion bilden
 
-    $\frac{1}{3}\int \sin(u)\,du = \frac{1}{3}(-\cos(u)) + C = -\frac{1}{3}\cos(u) + C$
+    $\frac{1}{3}\int \sin(z)\,dz = \frac{1}{3}(-\cos(z)) + C = -\frac{1}{3}\cos(z) + C$
+  </Step>
+  <Step>
+    Rücksubstitution: $z = 3x + 1$
+
+    $-\frac{1}{3}\cos(z) + C = -\frac{1}{3}\cos(3x+1) + C$
   </Step>
   <Solution>
     $\int \sin(3x+1)\,dx = -\frac{1}{3}\cos(3x+1) + C$
@@ -388,7 +444,15 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int x \ln x\,dx$
   </Task>
   <Hint>
-    Verwende partielle Integration. Wähle $f(x) = \ln x$ (wird durch Ableiten einfacher: $\frac{1}{x}$) und $g'(x) = x$ (bleibt beim Integrieren einfach: $\frac{x^2}{2}$). Bei Logarithmus-Integralen ist oft $\ln x$ die richtige Wahl für $f(x)$.
+    Verwende partielle Integration. wähle geeignetes f(x) und g'(x).
+    <br/> $\int f(x) \cdot g'(x) \,dx = [f(x) \cdot g(x)] - \int f'(x) \cdot g(x) \,dx$
+  </Hint>
+  <Hint>
+    Bei Logarithmus-Integralen ist oft $\ln x$ die richtige Wahl für $f(x)$.
+  </Hint>
+  <Hint>
+    Wähle $f(x) = \ln x$ (wird durch Ableiten einfacher: $\frac{1}{x}$)
+    <br/> und $g'(x) = x$ (bleibt beim Integrieren einfach: $\frac{x^2}{2}$). 
   </Hint>
   <Step>
     Funktionen zuordnen
@@ -408,6 +472,11 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Vereinfachen des verbleibenden Integrals
 
     $\int \frac{x^2}{2} \cdot \frac{1}{x}\,dx = \int \frac{x^2}{2x}\,dx = \int \frac{x}{2}\,dx = \frac{1}{2} \cdot \frac{x^2}{2} = \frac{x^2}{4}$
+  </Step>
+  <Step>
+    Zusammenfassen
+
+    $\int x \ln x\,dx = \frac{x^2}{2} \ln x - \frac{x^2}{4} + C$
   </Step>
   <Solution>
     $\int x \ln x\,dx = \frac{x^2}{2} \ln x - \frac{x^2}{4} + C = \frac{x^2}{4}(2\ln x - 1) + C$
@@ -445,6 +514,11 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $F(0) = 0$
   </Step>
+  <Step>
+    Berechnen des definiten Integrals
+
+    $\int_{0}^{4} \left(x^3 - 5x^2 + \frac{3}{2}x - 10\right)\,dx = F(4) - F(0) = -\frac{212}{3} - 0 = -\frac{212}{3}$
+  </Step>
   <Solution>
     $\int_{0}^{4} \left(x^3 - 5x^2 + \frac{3}{2}x - 10\right)\,dx = F(4) - F(0) = -\frac{212}{3} - 0 = -\frac{212}{3}$
   </Solution>
@@ -455,7 +529,11 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int_{1}^{e} \frac{dt}{t}$
   </Task>
   <Hint>
-    Dies ist ein Standardintegral. Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. Da $t > 0$ im Integrationsbereich, können die Betragsstriche weggelassen werden.
+    Dies ist ein Standardintegral. 
+  </Hint>
+  <Hint>
+    Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. 
+    <br/>Da $t > 0$ im Integrationsbereich, können die Betragsstriche weggelassen werden.
   </Hint>
   <Step>
     Stammfunktion identifizieren
@@ -465,7 +543,7 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
   <Step>
     Hauptsatz anwenden
 
-    $\int_{1}^{e} \frac{dt}{t} = [\ln t]_{1}^{e} = \ln(e) - \ln(1)$
+    $\int_{1}^{e} \frac{dt}{t} = [\ln t]_{1}^{e} = \ln(e) - \ln(1) = 1 - 0 = 1$
   </Step>
   <Solution>
     $\int_{1}^{e} \frac{dt}{t} = \ln(e) - \ln(1) = 1 - 0 = 1$
@@ -492,12 +570,32 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
   <Step>
     Erstes Integral berechnen
 
-    $a\int_{0}^{\pi} \sin t\,dt = a[-\cos t]_{0}^{\pi} = a(-\cos \pi - (-\cos 0)) = a(-(-1) - (-1)) = a(1 + 1) = 2a$
+    $$
+      \begin{align*}
+      a\int_{0}^{\pi} \sin t\,dt &= a[-\cos t]_{0}^{\pi} \\
+      &= a(-\cos \pi - (-\cos 0)) \\
+      &= a(-(-1) - (-1)) \\
+      &= a(1 + 1) \\
+      &= 2a
+      \end{align*}
+    $$
   </Step>
   <Step>
     Zweites Integral berechnen
 
-    $b\int_{0}^{\pi} \cos t\,dt = b[\sin t]_{0}^{\pi} = b(\sin \pi - \sin 0) = b(0 - 0) = 0$
+    $$
+      \begin{align*}
+      b\int_{0}^{\pi} \cos t\,dt &= b[\sin t]_{0}^{\pi} \\
+      &= b(\sin \pi - \sin 0) \\
+      &= b(0 - 0) \\
+      &= 0
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Zusammenfassen
+
+    $\int_{0}^{\pi} (a\sin t - b\cos t)\,dt = 2a - 0 = 2a$
   </Step>
   <Solution>
     $\int_{0}^{\pi} (a\sin t - b\cos t)\,dt = 2a - 0 = 2a$
@@ -509,7 +607,11 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int_{-1}^{-4} \frac{1-z^2}{z}\,dz$
   </Task>
   <Hint>
-    Teile den Bruch auf: $\frac{1-z^2}{z} = \frac{1}{z} - \frac{z^2}{z} = \frac{1}{z} - z$. Beachte, dass beide Grenzen negativ sind.
+    Teile den Bruch auf.
+  </Hint>
+  <Hint>
+    Bruch aufgeteilt: $\frac{1-z^2}{z} = \frac{1}{z} - \frac{z^2}{z} = \frac{1}{z} - z$. 
+    <br/> Beachte, dass beide Grenzen negativ sind.
   </Hint>
   <Step>
     Bruch aufteilen
@@ -534,10 +636,17 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
   <Step>
     Zweites Integral berechnen
 
-    $\int_{-1}^{-4} z\,dz = \left[\frac{z^2}{2}\right]_{-1}^{-4} = \frac{(-4)^2}{2} - \frac{(-1)^2}{2} = \frac{16}{2} - \frac{1}{2} = 8 - \frac{1}{2} = \frac{15}{2}$
+    $\int_{-1}^{-4} z\,dz = \left[\frac{z^2}{2}\right]_{-1}^{-4} = \frac{(-4)^2}{2} - \frac{(-1)^2}{2} = \frac{16}{2} - \frac{1}{2} = \frac{15}{2}$
+  </Step>
+  <Step>
+    Zusammenfassen
+
+    $\int_{-1}^{-4} \frac{1-z^2}{z}\,dz = \ln 4 - \frac{15}{2}$
   </Step>
   <Solution>
     $\int_{-1}^{-4} \frac{1-z^2}{z}\,dz = \ln 4 - \frac{15}{2}$
+
+    <br/> Beachte, dass dieser Term nicht weiter vereinfacht werden kann und so stehen bleibt.
   </Solution>
 </Exercise>
 
@@ -568,6 +677,13 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $\frac{10}{3}\left[x^{3/2}\right]_{1}^{2} = \frac{10}{3}(2^{3/2} - 1^{3/2}) = \frac{10}{3}(2\sqrt{2} - 1)$
   </Step>
+  <Step>
+    Vereinfachen
+
+    $$
+    \frac{10}{3}(2\sqrt{2} - 1) = \frac{10(2\sqrt{2} - 1)}{3}
+    $$
+  </Step>
   <Solution>
     $\int_{1}^{2} 5\sqrt{x}\,dx = \frac{10}{3}(2\sqrt{2} - 1) = \frac{10(2\sqrt{2} - 1)}{3}$
   </Solution>
@@ -578,7 +694,10 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int_{\pi}^{2} \cos(\varphi)\,d\varphi$
   </Task>
   <Hint>
-    Dies ist ein Standardintegral für die Kosinusfunktion. Die Stammfunktion von $\cos(\varphi)$ ist $\sin(\varphi)$.
+    Dies ist ein Standardintegral für die Kosinusfunktion. 
+  </Hint>
+  <Hint>
+    Die Stammfunktion von $\cos(\varphi)$ ist $\sin(\varphi)$.
   </Hint>
   <Step>
     Stammfunktion anwenden
@@ -590,6 +709,16 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $\int_{\pi}^{2} \cos(\varphi)\,d\varphi = [\sin(\varphi)]_{\pi}^{2} = \sin(2) - \sin(\pi)$
   </Step>
+  <Step>
+    Werte der Sinusfunktion einsetzen
+
+    $\sin(\pi) = 0$
+  </Step>
+  <Step>
+    Vereinfachen
+
+    $\sin(2) - \sin(\pi) = \sin(2) - 0 = \sin(2)$
+  </Step>
   <Solution>
     $\int_{\pi}^{2} \cos(\varphi)\,d\varphi = \sin(2) - \sin(\pi) = \sin(2) - 0 = \sin(2)$
   </Solution>
@@ -600,7 +729,8 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int_{0}^{2} 3(1-e^x)\,dx$
   </Task>
   <Hint>
-    Nutze die Linearität der Integration. Teile das Integral auf: $3(1-e^x) = 3 - 3e^x$. Die Stammfunktion von $e^x$ ist $e^x$.
+    Multipliziere aus und Nutze die Linearität der Integration. 
+    <br/> Teile das Integral auf: $3(1-e^x) = 3 - 3e^x$. Die Stammfunktion von $e^x$ ist $e^x$.
   </Hint>
   <Step>
     Integral aufteilen
@@ -622,8 +752,13 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $3\int_{0}^{2} e^x\,dx = 3[e^x]_{0}^{2} = 3(e^2 - e^0) = 3(e^2 - 1)$
   </Step>
+  <Step>
+    Zusammenfassen
+
+    $\int_{0}^{2} 3(1-e^x)\,dx = 6 - 3(e^2 - 1)$
+  </Step>
   <Solution>
-    $\int_{0}^{2} 3(1-e^x)\,dx = 6 - 3(e^2 - 1) = 6 - 3e^2 + 3 = 9 - 3e^2 = 3(3 - e^2)$
+    $\displaystyle \int_{0}^{2} 3(1-e^x)\,dx = 6 - 3(e^2 - 1) = 9 - 3e^2 = 3(3 - e^2)$
   </Solution>
 </Exercise>
 
@@ -649,6 +784,7 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
 
     $3\int_{0}^{1} \frac{1}{1+x^2}\,dx = 3[\arctan(x)]_{0}^{1} = 3(\arctan(1) - \arctan(0))$
   </Step>
+
   <Solution>
     $\int_{0}^{1} \frac{3}{1+x^2}\,dx = 3(\arctan(1) - \arctan(0)) = 3\left(\frac{\pi}{4} - 0\right) = \frac{3\pi}{4}$
   </Solution>
@@ -659,7 +795,10 @@ Hier sind einige Übungsaufgaben, um die Integrationstechniken zu festigen. Vers
     Berechne: $\displaystyle \int_{\frac{1}{2}}^{5} \frac{4}{t}\,dt$
   </Task>
   <Hint>
-    Dies ist wieder ein logarithmisches Integral. Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. Da beide Grenzen positiv sind, können die Betragsstriche weggelassen werden.
+    Dies ist wieder ein logarithmisches Integral. 
+  </Hint>
+  <Hint>
+    Die Stammfunktion von $\frac{1}{t}$ ist $\ln|t|$. Da beide Grenzen positiv sind, können die Betragsstriche weggelassen werden.
   </Hint>
   <Step>
     Konstante herausziehen
@@ -772,7 +911,7 @@ Diese Aufgaben kombinieren mehrere Techniken, erfordern strategisches Denken und
     Polynomdivision durchführen
 
     $3x^3 + 4x : (x^2 + 1) = 3x + \frac{x}{x^2+1}$
-
+    <br/>
     Verifikation: $3x \cdot (x^2+1) + x = 3x^3 + 3x + x = 3x^3 + 4x$ ✓
   </Step>
   <Step>
@@ -788,14 +927,9 @@ Diese Aufgaben kombinieren mehrere Techniken, erfordern strategisches Denken und
   <Step>
     Das Integral des Zweiten Integranden wird mittels Substitution gelöst: 
     Das $x^{2}+1$ wird mit $z$ substituiert.
-    $$
-    \begin{align*}
-    & \to \int \frac{\cancel{ x }}{z} \frac{dz}{2\cancel{ x }} \\
-    & \to \int \frac{1}{2} \cdot \frac{dz}{z} \\
-    & \to \frac{1}{2} \cdot \int \frac{1}{z}dz \\
-    & \to \frac{1}{2}\cdot \ln |z| + cot
-    \end{align*}
-    $$
+    Setze in das Integral ein und vereinfache:
+
+    $\displaystyle \int \frac{x}{z} \cdot \frac{dz}{2x} = \frac{1}{2} \int \frac{dz}{z} = \frac{1}{2} \ln |z| + C$
     Dies wird Resubstituiert
 
     $$
@@ -826,19 +960,11 @@ Diese Aufgaben kombinieren mehrere Techniken, erfordern strategisches Denken und
     Dies erfordert zweimalige partielle Integration. Wichtig: Das ursprüngliche Integral erscheint wieder, sodass eine Gleichung aufgestellt werden kann. Wähle $f(x) = \sin x$ und $g'(x) = e^x$.
   </Hint>
   <Step>
-    Funktionen zuordnen
-    $$
-    \begin{align*}
-    f(x) &= \sin x \\
-    f'(x) &= \cos x
-    \end{align*}
-    $$
-    $$
-    \begin{align*}
-    g'(x) &= e^x \\
-    g(x) &= e^x
-    \end{align*}
-    $$
+    Funktionen zuordnen:
+
+    $f(x) = \sin x$, $f'(x) = \cos x$
+
+    $g'(x) = e^x$, $g(x) = e^x$
   </Step>
   <Step>
     Erste partielle Integration:
@@ -848,59 +974,39 @@ Diese Aufgaben kombinieren mehrere Techniken, erfordern strategisches Denken und
     $$
   </Step>
   <Step>
-    Zweite partielle Integration für $\int e^x \cos x\,dx$
-    <br/>
+    Zweite partielle Integration für $\int e^x \cos x\,dx$.
     Erneute Zuordnung der Funktionen:
-    Funktionen zuordnen
-    $$
-    \begin{align*}
-    f(x) &= \cos x \\
-    f'(x) &= -\sin x
-    \end{align*}
-    $$
-    $$
-    \begin{align*}
-    g'(x) &= e^x \\
-    g(x) &= e^x
-    \end{align*}
-    $$
-    <br/>
+
+    $f(x) = \cos x$, $f'(x) = -\sin x$
+
+    $g'(x) = e^x$, $g(x) = e^x$
+
     Anwenden der partiellen Integration:
     $$
     \int e^x \cos x\,dx = \cos x \cdot e^x - \int (-\sin x) \cdot e^x\,dx + C_{2} = \cos x \cdot e^x + \int e^x \sin x\,dx + C_{2}
     $$
   </Step>
   <Step>
-    Einsetzen und Gleichung aufstellen
-    $$
-    \begin{align*}
-    \int e^x \sin x\,dx &= \sin x \cdot e^x - (\cos x \cdot e^x + \int e^x \sin x\,dx + C_{2}) + C_{1} & & | \text{Klammer auflösen} \\
-    &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C_{1} - C_{2} & & | \text{Cs zusammenfassen} \\
-    &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C
-    \end{align*}
-    $$
+    Einsetzen und Gleichung aufstellen:
+
+    $\displaystyle \int e^x \sin x\,dx = \sin x \cdot e^x - (\cos x \cdot e^x + \int e^x \sin x\,dx + C_{2}) + C_{1}$
+
+    $= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C_{1} - C_{2}$
+
+    $= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C$
   </Step>
   <Step>
     Betrachtet man nun die Gleichung sieht man, dass das gesuchte Integral auf beiden Seiten der Gleichung auftaucht.
     Einerseits könnte man meinen, dass eine endlose Schleife entsteht, aber anstatt weiter zu integrieren, können wir das Gesamte als Gleichung betrachten und nach dem gesuchten Integral auflösen.
-    Wir lösen also die Gleichung nach dem Integral auf:
-    $$ 
-    \int e^x \sin x\,dx
-    $$
-    <br/>
-    Nach dem gesuchten Integral auflösen:
-    $$
-    \begin{align*}
-    \int e^x \sin x\,dx &= \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C  & & | + \int e^x \sin x\,dx\\
-    2\int e^x \sin x\,dx &= \sin x \cdot e^x - \cos x \cdot e^x + C & & | e^x \text{ausklammern} \, ; \, :2 \\
-    \int e^x \sin x\,dx &= \frac{e^x(\sin x - \cos x)}{2} + C
-    \end{align*}
-    $$
+
+    $\displaystyle \int e^x \sin x\,dx = \sin x \cdot e^x - \cos x \cdot e^x - \int e^x \sin x\,dx + C$
+
+    $2\int e^x \sin x\,dx = \sin x \cdot e^x - \cos x \cdot e^x + C$
+
+    Daraus folgt: $\displaystyle \int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2} + C$
   </Step>
   <Solution>
-    $$
-    \int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2} + C
-    $$
+    $\displaystyle \int e^x \sin x\,dx = \frac{e^x(\sin x - \cos x)}{2} + C$
   </Solution>
 </Exercise>
 
