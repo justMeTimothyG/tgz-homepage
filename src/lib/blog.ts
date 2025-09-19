@@ -10,6 +10,7 @@ export interface BlogPostMeta {
   tags: string[];
   published: boolean;
   slug: string;
+  sammlungen: string[];
 }
 
 export interface BlogPost extends BlogPostMeta {
@@ -49,6 +50,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     excerpt: data.excerpt || '',
     tags: data.tags || [],
     published: data.published !== false, // Default to true if not specified
+    sammlungen: Array.isArray(data.sammlungen) ? data.sammlungen : [],
     content,
   };
 }
@@ -71,6 +73,7 @@ export function getBlogPostBySlugSync(slug: string): Omit<BlogPost, 'compiledSou
     excerpt: data.excerpt || '',
     tags: data.tags || [],
     published: data.published !== false, // Default to true if not specified
+    sammlungen: Array.isArray(data.sammlungen) ? data.sammlungen : [],
     content,
   };
 }
@@ -108,5 +111,6 @@ export function getBlogPostMeta(): BlogPostMeta[] {
     tags: post.tags,
     published: post.published,
     slug: post.slug,
+    sammlungen: post.sammlungen,
   }));
 }

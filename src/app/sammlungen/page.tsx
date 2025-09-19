@@ -1,54 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-
-type CollectionItem = {
-  title: string;
-  description: string;
-  subtitle: string;
-  href?: string;
-};
-
-type CollectionSection = {
-  title: string;
-  description: string;
-  items: CollectionItem[];
-};
+import { collectionSections } from '@/data/collectionSections';
 
 export const metadata: Metadata = {
   title: 'Sammlungen - Timothy Lüdtke',
   description:
     'Kurierte Sammlungen und thematische Übersichten über Blogposts – geordnet nach Studium, Themen und Lernpfaden.',
 };
-
-const collectionSections: CollectionSection[] = [
-  {
-    title: 'Studium',
-    description:
-      'Module und Schwerpunkte aus meinem Studium. Jede Sammlung bündelt Blogposts, Zusammenfassungen und Materialien, die beim Lernen helfen.',
-    items: [
-      {
-        href: '/sammlungen/mathe-eins',
-        title: 'Mathe I – Lineare Algebra & Analysis',
-        description:
-          'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg – von linearen Gleichungssystemen bis zu Differenzialrechnung.',
-        subtitle: '1. Semester',
-      },
-    ],
-  },
-  {
-    title: 'Kuratiert & Experimente',
-    description:
-      'Sammlungen abseits der Uni: Lernpfade, Experimente und thematische Deep-Dives aus meinem persönlichen Wissensarchiv.',
-    items: [
-      {
-        title: 'In Planung',
-        description:
-          'Weitere Sammlungen folgen – von Produktivität über KI-Werkzeuge bis hin zu kreativen Projekten. Stay tuned!',
-        subtitle: 'Demnächst',
-      },
-    ],
-  },
-];
 
 export default function CollectionsPage() {
   return (
