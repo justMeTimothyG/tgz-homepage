@@ -40,6 +40,16 @@ const generalResources: Resource[] = [
     'Bruchrechnung',
     '',
   ),
+  getResource(
+    'summenzeichen',
+    'Das Summenzeichen',
+    '',
+  ),
+  getResource(
+    'polynomdivision',
+    'Polynomdivision',
+    '',
+  ),
 ];
 
 const topicResources: Resource[] = [
