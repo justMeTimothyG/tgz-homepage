@@ -70,15 +70,19 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     ExternalLinkComponent,
 
     // Enhanced standard HTML elements
-    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
-      // Auto-detect external links
+    a: ({ href, children, className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
+      // Base link style (used for both internal and external links)
+      const baseClass = "inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline";
+      const cls = className ? `${baseClass} ${className}` : baseClass;
+
+      // External links: open in new tab and show icon
       if (href?.startsWith('http')) {
         return (
           <a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+            className={cls}
             {...props}
           >
             {children}
@@ -86,7 +90,13 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
           </a>
         );
       }
-      return <a href={href} {...props}>{children}</a>;
+
+      // Internal links: same style, no icon/new tab
+      return (
+        <a href={href} className={cls} {...props}>
+          {children}
+        </a>
+      );
     },
 
     // Do not render H1 inside MDX content to avoid duplicate page titles
