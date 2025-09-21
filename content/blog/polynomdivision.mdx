@@ -1,0 +1,173 @@
+---
+title: "Polynomdivision – Schritt für Schritt"
+excerpt: "Wie man Polynome durch Polynome teilt: Algorithmus der Langdivision, mit vollständig durchgerechneten Beispielen und typischen Stolperfallen."
+date: "2025-09-20"
+tags: ["mathematik", "algebra", "polynome", "rechnen"]
+published: true
+sammlungen: ["mathe-eins"]
+---
+
+## Ziel der Polynomdivision
+
+Gegeben zwei Polynome $(f(x))$ (Dividend) und $(g(x))$ (Divisor, $g\not\equiv 0$). Das hört sich sehr theoretisch an. Besser ein Beispiel:
+
+$$
+\frac{f(x) = 2x^3 - 3x^2 + 4x - 5}{g(x) = x - 2}.
+$$
+
+Gesucht ist das Ergebnis dieser Division, also dem Quotient $(q(x))$ und Rest $(r(x))$ mit
+
+$$
+\frac{f(x)}{g(x)} = q(x) + r(x)
+$$
+
+
+## Vorbereitung
+
+- Terme nach absteigendem Grad sortieren.
+- Fehlende Grade als $0$-Term ergänzen (z. B. $x^4 + 0\cdot x^3 + 0\cdot x^2 + 0\cdot x - 1$).
+- Divisor darf nicht das Nullpolynom sein. ($g\not\equiv 0$).
+- Leitkoeffizienten notieren. Der Leitkoeffizient ist der Koeffizient des höchsten Grades ($x$ mit der höchsten Hochzahl), z. B. bei $2x^3-3x^2+4x-5$ ist der Leitkoeffizient $2$.
+
+## Algorithmus / Vorgehen (Langdivision)
+
+Wiederhole, bis $\operatorname{Grad}(\text{Rest}) < \operatorname{Grad}(g)$:
+
+1) Leitterm teilen: $\dfrac{\text{Leitterm}(\text{aktueller Dividend})}{\text{Leitterm}(g)}$ ergibt den nächsten Term von $q(x)$.
+2) Multiplizieren: Diesen Term mit \(g(x)\) multiplizieren.
+3) Subtrahieren: Vom aktuellen Dividend abziehen; Ergebnis ist der neue "Rest"/Zwischendividend.
+4) Nächsten Term „herunterholen“ (bzw. weiterrechnen), bis Abbruchbedingung erfüllt.
+
+So Allgemein gesprochen ist das manchmal sehr sehr schwer zu verstehen. Deshalb jetzt zwei vollständig durchgerechnete Beispiele.
+
+Es gibt auch eine gute Erklärung von [Simple Club](https://simpleclub.com/lessons/mathematik-polynomdivision?7fa6eb5b_page=3&gad_campaignid=21007103975&gbraid=0AAAAAC88BvOPPyr3oindWG-B6WVcjmuL0)
+
+## Beispiel 1: Division durch linearen Divisor 
+
+$$
+\frac{f(x)=2x^3-3x^2+4x-5}{g(x)=x-2}
+$$
+
+1) Leitterm teilen: $\dfrac{2x^3}{x}=2x^2$. Somit ist unser erster Term von $q(x) = 2x^2 \dots$
+
+2) Multiplizieren und subtrahieren:
+
+$$
+\begin{aligned}
+&\phantom{=}\; 2x^3-3x^2+4x-5\\
+&\;\;\;\; -\bigl(2x^2\cdot(x-2)\bigr) = -(2x^3-4x^2)\\
+&= \underbrace{(2x^3-2x^3)}_{0} + (-3x^2+4x^2) + 4x - 5 = x^2 + 4x - 5
+\end{aligned}
+$$
+
+3) Leitterm teilen: $\dfrac{x^2}{x}=x$.
+
+4) Multiplizieren und subtrahieren:
+
+$$
+\begin{aligned}
+&\phantom{=}\; x^2 + 4x - 5\\
+&\;\;\;\; -\bigl(x\cdot(x-2)\bigr) = -(x^2-2x)\\
+&= 0 + 6x - 5
+\end{aligned}
+$$
+
+5) Leitterm teilen: $\dfrac{6x}{x}=6$.
+
+6) Multiplizieren und subtrahieren:
+
+$$
+\begin{aligned}
+&\phantom{=}\; 6x - 5\\
+&\;\;\;\; -\bigl(6\cdot(x-2)\bigr) = -(6x-12)\\
+&= 7
+\end{aligned}
+$$
+
+Ergebnis:
+
+$$
+2x^3-3x^2+4x-5 = (2x^2 + x + 6)\,(x-2) + 7.
+$$
+
+Der Quotient ist $q(x)=2x^2+x+6$, der Rest $r=7$. Konsistenzcheck via Restsatz: $f(2)=7$.
+
+## Beispiel 2: Fehlende Terme ergänzen (Division durch quadratischen Divisor)
+
+Teile $f(x)=x^4-1$ durch $g(x)=x^2-1$. Ergänze fehlende Terme:
+
+$$
+f(x)=x^4+0\,x^3+0\,x^2+0\,x-1.
+$$
+
+1) $\dfrac{x^4}{x^2}=x^2$, dann
+
+$$
+\begin{aligned}
+&\phantom{=}\; x^4+0x^3+0x^2+0x-1\\
+&\;\;\;\; -\bigl(x^2\cdot(x^2-1)\bigr) = -(x^4-x^2)\\
+&= 0 + 0x^3 + x^2 + 0x - 1
+\end{aligned}
+$$
+
+2) $\dfrac{x^2}{x^2}=1$, dann
+
+$$
+\begin{aligned}
+&\phantom{=}\; x^2 + 0x - 1\\
+&\;\;\;\; -\bigl(1\cdot(x^2-1)\bigr) = -(x^2-1)\\
+&= 0
+\end{aligned}
+$$
+
+Damit
+
+$$
+x^4-1 = (x^2+1)\,(x^2-1) + 0,\quad \text{also } q(x)=x^2+1,\; r(x)=0.
+$$
+
+## Häufige Fehlerquellen
+
+- Vorzeichenfehler beim Subtrahieren der Produktterme.
+- Fehlende Terme nicht ergänzt ⇒ falsche Ausrichtung der Grade.
+- Zu früh stoppen (Abbruch erst bei $\operatorname{deg} r < \operatorname{deg} g$).
+- Divisor nicht normiert: Das ist kein Fehler, aber achte beim Teilen der Leitterme auf den Leitkoeffizienten.
+
+## Kurz: Horner-Schema für lineare Divisoren
+
+Für $g(x)=x-a$ kann man die Division effizient mit dem Horner-Schema durchführen. Das liefert zugleich $q(x)$ und den Rest $r=f(a)$.
+
+Beispiel wie oben, $f(x)=2x^3-3x^2+4x-5$, $a=2$:
+
+$$
+\begin{array}{r|rrrr}
+\;2 & 2 & -3 & 4 & -5\\ \hline
+\; & \downarrow & 4 & 2 & 12\\
+\; & 2 & 1 & 6 & \boxed{7}
+\end{array}
+\qquad\Rightarrow\qquad q(x)=2x^2+x+6,\; r=7.
+$$
+
+Leseregel: Die untere Zeile (bis auf den letzten Kasten) sind die Koeffizienten von $q(x)$. Der letzte Eintrag ist der Rest.
+
+---
+
+## Übungen
+
+<Exercise title="Lineare Division" difficulty="easy">
+  <Task>
+  Teile $f(x)=3x^2+5x+2$ durch $g(x)=x+1$. Bestimme $q(x)$ und $r$.
+  </Task>
+  <Solution>
+  $q(x)=3x+2$, $r=0$ (da $3x^2+5x+2=(3x+2)(x+1)$).
+  </Solution>
+  <Hint>Restsatz: Prüfe $f(-1)$.</Hint>
+  
+</Exercise>
+
+<Exercise title="Quadratischer Divisor" difficulty="medium">
+  <Task>
+  Teile $f(x)=2x^4 - x^2 + 1$ durch $g(x)=x^2-\tfrac{1}{2}$. Gib $q(x)$ und $r(x)$ an.
+  </Task>
+  <Hint>Ergänze fehlende Terme in \(f\) und gehe Grad für Grad vor.</Hint>
+</Exercise>

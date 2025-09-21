@@ -1,0 +1,176 @@
+---
+title: "Das Summenzeichen verstehen"
+excerpt: "Das Summenzeichen souverän lesen: die Notation verstehen und sicher anwenden, erklärt anhand typischer Beispiele."
+date: "2025-09-21"
+tags: ["mathematik", "notation"]
+published: true
+sammlungen: ["mathe-eins"]
+---
+
+## Bausteine der Notation
+
+$$
+\sum_{k=1}^{n} a_k
+$$
+
+- **Sigma**: Das große griechische Sigma $\sum$ steht für "Summe".
+- **Laufindex**: In $\sum_{\color{#2563eb}{k}=1}^{n} a_{\color{#2563eb}{k}}$ ist $k$ eine Platzhaltervariable (auch Dummy-Variable). Der konkrete Buchstabe ist egal. Es wird immer um +1 erhöht.
+- **Untere/obere Grenze**: $k=1$ ist Startwert, $n$ der Endwert. Beide Grenzen sind inklusive.
+- **Summand**: Der Ausdruck rechts vom Sigma, z. B. $a_k$ oder $f(k)$, wird für jeden Index eingesetzt und aufsummiert.
+
+### In ganz einfachen Worten
+
+1. Starte bei der unteren Grenze (unter dem $\displaystyle \sum_{\color{#2563eb}{k=1}}$).
+2. Zähle bis zur oberen Grenze (über dem $\displaystyle \sum^{\color{#2563eb}{n}}$). Merke dir wie oft du gezählt hast. (Beispiel $k=1,2,3,\dots,n=5$, also 5 mal). 
+3. "Kopiere" alles rechts vom $\sum$ (den Summanden) so oft wie du gezählt hast und verbinde die Kopien mit Plus-Zeichen.
+4. Ersetze in der ersten Kopie überall den Laufindex (hier $k$) durch den Startwert (hier 1), in der zweiten Kopie durch den nächsten Wert (hier 2) usw. bis zum Endwert (hier 5).
+5. Fasse die Summe ggf. zusammen.
+
+
+### Beispiel mit allgemeinem Summanden:
+
+$$
+\sum_{k=1}^{n} (2k-1) = 1 + 3 + 5 + \dots + (2n-1)
+$$
+
+<Callout type="info">
+- Inklusive Grenzen: $\sum_{k=1}^{n}$ enthält die Terme für $k=1,2,\dots,n$.
+- Start bei 0: $\sum_{k=0}^{n}$ enthält zusätzlich den Term für $k=0$.
+- Leere Summe: Wenn die untere Grenze größer als die obere ist, ist die Summe per Definition 0, z. B. $\sum_{k=5}^{3} f(k)=0$.
+</Callout>
+
+## Summenzeichen routiniert lesen
+
+Das Summenzeichen $\sum_{k=1}^{n} a_k$ sprichst du "Summe von k gleich eins bis n von a k". Gemeint ist die Aufsummierung aller Folgenglieder $a_1 + a_2 + \dots + a_n$.
+
+**Einfache Illustration:**
+
+$$
+\sum_{k=1}^{4} k = 1 + 2 + 3 + 4 = 10.
+$$
+
+## Rechenregeln (Linearität)
+
+| Regel | Formel |
+|-------|--------|
+| Konstanten herausziehen | $\displaystyle \sum_{k=m}^{n} c\,f(k) = c \sum_{k=m}^{n} f(k)$ |
+| Summe aufteilen | $\displaystyle \sum_{k=m}^{n} (f(k)+g(k)) = \sum_{k=m}^{n} f(k) + \sum_{k=m}^{n} g(k)$ |
+| Faktor ohne $k$ vorziehen | $\displaystyle \sum_{k=m}^{n} a\,b_k = a \sum_{k=m}^{n} b_k$ (wenn $a$ nicht von $k$ abhängt) |
+
+Diese Regeln erlauben, Summen zu vereinfachen oder in bekannte Bausteine zu zerlegen.
+
+## Besonderes Wissen über Summen
+
+weitere Themen könnten hilfreich sein, aber nicht notwendig zum Verständnis der Notation. Sie vereinfachen Spezialfälle. 
+
+### Indexverschiebung (Reindexierung)
+
+Man setzt eine neue Laufvariable ein, z. B. $j = k-1$. Grenzen und Summand müssen konsistent umgeschrieben werden.
+
+Beispiel:
+
+$$
+\sum_{k=2}^{n+1} (2k-1) \;\overset{j=k-1}{=}\; \sum_{j=1}^{n} \bigl(2(j+1)-1\bigr) = \sum_{j=1}^{n} (2j+1)
+$$
+
+Zweck: Terme an eine gewünschte Standardform anpassen (z. B. Start bei 1 statt 0) oder Teleskopieren ermöglichen.
+
+### Häufige Spezialfälle
+
+- Arithmetische Reihe:
+
+  $$
+  \sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+  $$
+
+- Quadratsumme und Kubiksummen:
+
+  $$
+  \sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6},\qquad
+  \sum_{k=1}^{n} k^3 = \left(\frac{n(n+1)}{2}\right)^2
+  $$
+
+- Geometrische Reihe (endlich):
+
+  $$
+  \sum_{k=0}^{n} q^k = \frac{1-q^{n+1}}{1-q} \quad (q\ne 1)
+  $$
+
+  Unendlich für $|q|<1$:
+
+  $$
+  \sum_{k=0}^{\infty} q^k = \frac{1}{1-q},\quad |q|<1
+  $$
+
+### Summen über Bedingungen
+
+Manchmal summiert man nur über bestimmte Indizes (z. B. gerade Zahlen). Das kann man so schreiben:
+
+$$
+\sum_{\substack{1\le k\le n \\ k\,\text{gerade}}} f(k) \;=\; \sum_{j=1}^{\lfloor n/2\rfloor} f(2j)
+$$
+
+Beispiel:
+
+$$
+\sum_{\substack{1\le k\le 10 \\ k\,\text{gerade}}} k \;=\; 2+4+6+8+10 = 30 = \sum_{j=1}^{5} 2j
+$$
+
+### Doppelsummen in Kürze
+
+Bei einer Doppelsumme werden zwei Summen ineinander verschachtelt. Man beginnt mit der inneren Summe und arbeitet sich nach außen vor.
+Bei $\sum_{i=1}^{m} \sum_{j=1}^{n} a_{ij}$ läuft $j$ für jeden festen $i$ seine gesamte Spanne durch. Reihenfolge kann bei endlichen Summen vertauscht werden.
+
+
+Kleines Beispiel:
+
+$$
+\sum_{i=1}^{2} \sum_{j=1}^{3} (i+j) = \sum_{i=1}^{2} \bigl((i+1)+(i+2)+(i+3)\bigr) = (2+3+4) + (3+4+5) = 21
+$$
+
+### Mini-Beispiele
+
+1) Konstanten ziehen: $\sum_{k=1}^{n} 5\,k = 5\sum_{k=1}^{n} k = 5\cdot \tfrac{n(n+1)}{2}$
+
+2) Reindexieren: $\sum_{k=0}^{n-1} (k+1) = \sum_{j=1}^{n} j = \tfrac{n(n+1)}{2}$
+
+---
+
+## Übungen
+
+<Exercise title="Aufgabe 1" difficulty="easy">
+  <Task>
+  Führe die Summe aus: $\displaystyle S_n = \sum_{k=1}^{n} \frac{z_{k}}{(1+r)^{k}}$.
+    <br />
+    (Hier sind $z_k$ eine Reihe, $r$ Konstante, $n=3$.)
+  </Task>
+  <Hint>Die Summe ist so allgemein nicht weiter vereinfachbar. Die Aufgabe besteht darin zu verstehen, was die Notation bedeutet und Einzusetzen.</Hint> 
+  <Solution>
+    $$
+    \sum_{k=1}^{n} \frac{z_{k}}{(1+r)^{k}} = \frac{z_1}{(1+r)^1} + \frac{z_2}{(1+r)^2} + \frac{z_3}{(1+r)^3}
+    $$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2" difficulty="easy">
+  <Task>
+  Was wird mit dieser Summe berechnet?: 
+  <br />
+  $\displaystyle \frac{1}{n} \sum_{i=1}^{n} x_{i}$.
+  </Task>
+  <Solution>
+    Das arithmetische Mittel (Durchschnitt) der Zahlen $x_1, x_2, \dots, x_n$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Nur über gerade Indizes summieren" difficulty="medium">
+  <Task>
+  Schreibe $\displaystyle \sum_{\substack{1\le k\le n \\ k\,\text{gerade}}} (k-1)$ als Summe mit neuem Index $j$ ohne Bedingung und vereinfache.
+  </Task>
+  <Solution>
+    $$
+    \sum_{\substack{1\le k\le n \\ k\,\text{gerade}}} (k-1) = \sum_{j=1}^{\lfloor n/2\rfloor} (2j-1)
+    $$
+    $= \lfloor n/2\rfloor^2$ (Summe der ersten $\lfloor n/2\rfloor$ ungeraden Zahlen)
+  </Solution>
+</Exercise>
