@@ -15,7 +15,6 @@ import {
   NextJSLogo, 
   ReactLogo, 
   TypeScriptLogo, 
-  PythonLogo, 
   PostgreSQLLogo, 
   TailwindLogo, 
   NodeJSLogo, 
@@ -82,9 +81,8 @@ export default function UeberMichPage() {
             </p>
             
             <p>
-              Heute arbeite ich als Software Engineer mit Fokus auf interaktive Bildung, 
-              Visualisierungen und KI-gestützte Inhalte. Jeden Tag lerne ich etwas Neues – 
-              und hier dokumentiere ich diese Reise.
+              Heute studiere ich Wirtschaftsingenieurwesen und versuche, meine technischen Fähigkeiten weiter auszubauen.
+              Ich bin fasziniert von den Möglichkeiten, die moderne Technologien bieten – Es war noch nie so einfach neue Dinge zu lernen und umzusetzen.
             </p>
           </div>
         </div>
@@ -111,7 +109,7 @@ export default function UeberMichPage() {
                     </h3>
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Von Next.js und React über Python bis hin zu Datenbank-Design – ich liebe es, Ideen in funktionierenden Code zu verwandeln. TypeScript ist mein treuer Begleiter für typsichere Entwicklung.
+                    Von Next.js und React bis hin zu Datenbank-Design – ich liebe es, Ideen in funktionierenden Code zu verwandeln. TypeScript ist mein treuer Begleiter für typsichere Entwicklung.
                   </p>
                   
                   {/* Technology Logos Grid */}
@@ -127,10 +125,6 @@ export default function UeberMichPage() {
                     <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
                       <TypeScriptLogo className="w-8 h-8 text-blue-600" />
                       <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">TypeScript</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
-                      <PythonLogo className="w-8 h-8 text-yellow-500" />
-                      <span className="text-xs font-medium text-center text-neutral-600 dark:text-neutral-400 group-hover/tech:text-neutral-900 dark:group-hover/tech:text-neutral-200">Python</span>
                     </div>
                     <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-b from-neutral-100/80 to-neutral-100 dark:from-neutral-800/80 dark:to-neutral-800 border border-neutral-200/50 dark:border-neutral-700/50 group/tech transition-all duration-300 hover:border-neutral-300 dark:hover:border-neutral-600">
                       <PostgreSQLLogo className="w-8 h-8 text-blue-700" />
@@ -163,25 +157,25 @@ export default function UeberMichPage() {
                   </h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                  Kontinuierliches Lernen und Wachstum durch praktische Projekte und neue Technologien.
+                  Kontinuierliches Lernen und Wachstum durch Projekte und schierer Neugier. Es gibt noch so vieles was ich lernen möchte.
                 </p>
                 
                 <div className="mt-3 space-y-3">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">AI & Machine Learning</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">CAD Modelierung</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">Cloud Architecture</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">Elektronik und Löten</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">DevOps & CI/CD</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">日本語 - Japanisch</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 dark:text-emerald-400 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">Web3 & Blockchain</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">3D Druck</span>
                   </div>
                 </div>
               </div>
@@ -252,7 +246,7 @@ export default function UeberMichPage() {
               Meine fotografischen Arbeiten und visuellen Geschichten.
             </p>
             <Link 
-              href="#" 
+              href="https://blickfangemsland.de" 
               className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
             >
               Zur Fotografie-Seite <ExternalLink className="w-4 h-4" />
@@ -282,7 +276,7 @@ export default function UeberMichPage() {
               Das Projekt, das alles ins Rollen brachte – eine Plattform für Träume und Ziele.
             </p>
             <Link 
-              href="#" 
+              href="https://github.com/justMeTimothyG/WiSe-24_25-Grundzuege-der-Wirtschaftsinformatik-Wunschnest/tree/master" 
               className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline"
             >
               Mehr erfahren <ExternalLink className="w-4 h-4" />

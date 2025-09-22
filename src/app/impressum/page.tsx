@@ -34,7 +34,7 @@ export default function ImpressumPage() {
             </h2>
             <div className="space-y-2">
               <p>
-                <span className="font-medium">Telefon:</span> +49 (0) 151 68104955
+                <span className="font-medium">Telefon:</span> +49 (0) 173 4501637
               </p>
               <p>
                 <span className="font-medium">E-Mail:</span> hallo@tgz.lol
