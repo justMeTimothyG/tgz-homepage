@@ -24,71 +24,103 @@ function getResource(slug: string, overrideTitle: string, overrideDescription: s
   };
 }
 
-const generalResources: Resource[] = [
-  getResource(
-    'mathematische-definitionen',
-    'Mathematische Definitionen',
-    '',
-  ),
-  getResource(
-    'begriffe-und-rechenregeln',
-    'Begriffe und Rechenregeln',
-    '',
-  ),
-  getResource(
-    'bruchrechnung',
-    'Bruchrechnung',
-    '',
-  ),
-  getResource(
-    'summenzeichen',
-    'Das Summenzeichen',
-    '',
-  ),
-  getResource(
-    'polynomdivision',
-    'Polynomdivision',
-    '',
-  ),
-];
+const linkHighlightClass = 'from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500';
 
-const topicResources: Resource[] = [
-  getResource(
-    'potenz-exponential-logarithmen',
-    'Potenz- und Logarithmengesetze',
-    '',
-  ),
-  getResource(
-    'trigonometrie-grundlagen',
-    'Trigonometrie – Kreis, Sinus, Cosinus',
-    '',
-  ),
-  getResource(
-    'ableitungsregeln-zusammenfassung',
-    'Differentiale - Ableitungen',
-    '',
-  ),
-  getResource(
-    'integrationsregeln-zusammenfassung',
-    'Integrale',
-    '',
-  ),
-];
+type SectionConfig = {
+  key: string;
+  title: string;
+  description: string;
+  resources: Resource[];
+  highlightClassName?: string;
+};
 
-const reflectionResources: Resource[] = [
+const pageSections: SectionConfig[] = [
   {
-    title: 'Studi-Routine & Wochenstruktur',
+    key: 'topics',
+    title: 'Themen',
+    description:
+      'Vertiefungen zu Kernthemen der Vorlesung. Perfekt für Wiederholungsphasen und Prüfungsvorbereitung.',
+    resources: [
+      getResource(
+        'potenz-exponential-logarithmen',
+        'Potenz- und Logarithmengesetze',
+        '',
+      ),
+      getResource(
+        'trigonometrie-grundlagen',
+        'Trigonometrie – Kreis, Sinus, Cosinus',
+        '',
+      ),
+      getResource(
+        'ableitungsregeln-zusammenfassung',
+        'Differentiale - Ableitungen',
+        '',
+      ),
+      getResource(
+        'integrationsregeln-zusammenfassung',
+        'Integrale',
+        '',
+      ),
+    ],
   },
   {
-    title: 'Weitere Reflexionen folgen',
-    variant: 'note',
+    key: 'foundations',
+    title: 'Grundlagen',
+    description:
+      'Starte mit den Fundamenten: Definitionen, Terme und Rechengesetze. Diese Beiträge schaffen das Vokabular, das in späteren Vorlesungen vorausgesetzt wird.',
+    resources: [
+      getResource(
+        'mathematische-definitionen',
+        'Mathematische Definitionen',
+        '',
+      ),
+      getResource(
+        'begriffe-und-rechenregeln',
+        'Begriffe und Rechenregeln',
+        '',
+      ),
+      getResource(
+        'bruchrechnung',
+        'Bruchrechnung',
+        '',
+      ),
+      getResource(
+        'summenzeichen',
+        'Das Summenzeichen',
+        '',
+      ),
+      getResource(
+        'polynomdivision',
+        'Polynomdivision',
+        '',
+      ),
+    ],
   },
-];
-
-const generellesResources: Resource[] = [
   {
-    title: 'Weitere Ressourcen folgen',
-    variant: 'note',
+    key: 'general',
+    title: 'Generelles',
+    description: 'Generelles was wichtig sein könnte für die Veranstaltung.',
+    resources: [
+      {
+        title: 'Weitere Ressourcen folgen',
+        variant: 'note',
+      },
+    ],
+  },
+  {
+    key: 'reflections',
+    title: 'Reflections',
+    description:
+      'Lernen endet nicht nach dem letzten Übungsblatt. Hier sammle ich Gedanken dazu, wie ich das Fach besser verankere: Methoden, Routinen und kleine Retrospektiven.',
+    resources: [
+      {
+        title: 'Studi-Routine & Wochenstruktur',
+      },
+      {
+        title: 'Weitere Reflexionen folgen',
+        variant: 'note',
+      },
+    ],
   },
 ];
 
@@ -119,6 +151,28 @@ function CollectionListItem({ item }: { item: Resource }) {
   );
 }
 
+function CollectionSection({ section }: { section: SectionConfig }) {
+  const highlightClass = section.highlightClassName ?? linkHighlightClass;
+
+  return (
+    <section className="space-y-6">
+      <div className="space-y-2">
+        <h3 className="text-2xl font-bold">
+          <span className={`text-transparent bg-clip-text bg-gradient-to-r ${highlightClass}`}>
+            {section.title}
+          </span>
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300">{section.description}</p>
+      </div>
+      <div className="space-y-3">
+        {section.resources.map((item) => (
+          <CollectionListItem key={item.title} item={item} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function MatheEinsCollectionPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
@@ -134,82 +188,9 @@ export default function MatheEinsCollectionPage() {
         </p>
       </header>
       <div className="grid gap-12 lg:grid-cols-2">
-        
-
-        <section className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">
-                Themen
-              </span>
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Vertiefungen zu Kernthemen der Vorlesung.
-              Perfekt für Wiederholungsphasen und Prüfungsvorbereitung.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {topicResources.map((item) => (
-              <CollectionListItem key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">
-                Grundlagen
-              </span>
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Starte mit den Fundamenten: Definitionen, Terme und Rechengesetze. Diese Beiträge schaffen das Vokabular, das in
-              späteren Vorlesungen vorausgesetzt wird.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {generalResources.map((item) => (
-              <CollectionListItem key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">
-                Generelles 
-              </span>
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Generelles was wichtig sein könnte für die Veranstaltung.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {generellesResources.map((item) => (
-              <CollectionListItem key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section className="space-y-6">
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500">
-                Reflections
-              </span>
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              Lernen endet nicht nach dem letzten Übungsblatt. Hier sammle ich Gedanken dazu, wie ich das Fach besser verankere:
-              Methoden, Routinen und kleine Retrospektiven.
-            </p>
-          </div>
-          <div className="space-y-3">
-            {reflectionResources.map((item) => (
-              <CollectionListItem key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
+        {pageSections.map((section) => (
+          <CollectionSection key={section.key} section={section} />
+        ))}
       </div>
     </div>
   );
