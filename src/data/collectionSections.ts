@@ -24,6 +24,13 @@ export const collectionSections: CollectionSection[] = [
           'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg – von linearen Gleichungssystemen bis zu Differenzialrechnung.',
         subtitle: '1. Semester',
       },
+      {
+        href: '/sammlungen/technische-physik',
+        title: 'Technische Physik – Grundlagen',
+        description:
+          'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg – von mechanischen Grundprinzipien bis zu Optik & Wellen.',
+        subtitle: '1. Semester',
+      },
     ],
   },
   {
