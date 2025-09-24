@@ -56,7 +56,7 @@ function renderTask(task: TaskItem, index: number, isCompact: boolean): React.Re
         <div className="flex-shrink-0 mt-0.5 text-blue-600 dark:text-blue-400">
           <Pencil className="w-4 h-4" />
         </div>
-        <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-gray-100">
+        <div className="prose dark:prose-invert max-w-none text-gray-900 dark:text-gray-100 prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
           {task.content}
         </div>
       </div>
@@ -67,7 +67,7 @@ function renderTask(task: TaskItem, index: number, isCompact: boolean): React.Re
 
   return (
     <div key={index} className={`bg-gray-50 dark:bg-gray-900/50 rounded-lg ${spacing}`}>
-      <div className="prose dark:prose-invert max-w-none">
+      <div className="prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
         {task.content}
       </div>
     </div>
