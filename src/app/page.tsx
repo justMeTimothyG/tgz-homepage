@@ -18,7 +18,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div>
+          <div className="order-2 md:order-1">
             <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight leading-tight">
               Timothy <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Lüdtke</span>
             </h1>
@@ -27,7 +27,7 @@ export default function HomePage() {
               Ich dokumentiere meine Projekte, Gedanken und Fortschritte – offen, unperfekt und transparent. Denn echter Fortschritt entsteht im Prozess, nicht im Verborgenen. Student in Wirtschaftsingenieurwesen.
             </p>
           </div>
-          <div className="flex md:justify-end">
+          <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="h-40 w-40 sm:h-48 sm:w-48 md:h-56 md:w-56 rounded-full overflow-hidden ring-2 ring-gray-200 dark:ring-gray-800">
               <Image src="/profile.jpg" alt="Profilfoto von Timothy Lüdtke" width={400} height={400} className="h-full w-full object-cover" />
             </div>
