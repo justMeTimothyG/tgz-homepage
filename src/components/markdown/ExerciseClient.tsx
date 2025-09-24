@@ -169,7 +169,6 @@ export default function ExerciseClient({
         {hints.length > 0 && visibleHints > 0 && (
           <motion.div
             key="hints"
-            layout
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -184,7 +183,6 @@ export default function ExerciseClient({
               {hints.slice(0, visibleHints).map((hint, index) => (
                 <motion.div
                   key={index}
-                  layout
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, ease: 'easeOut', delay: index * 0.05 }}
@@ -216,7 +214,6 @@ export default function ExerciseClient({
         {steps.length > 0 && visibleSteps > 0 && (
           <motion.div
             key="steps"
-            layout
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
@@ -231,7 +228,6 @@ export default function ExerciseClient({
               {steps.slice(0, visibleSteps).map((step, index) => (
                 <motion.div
                   key={index}
-                  layout
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, ease: 'easeOut', delay: index * 0.05 }}
