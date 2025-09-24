@@ -31,6 +31,13 @@ export const collectionSections: CollectionSection[] = [
           'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg – von mechanischen Grundprinzipien bis zu Optik & Wellen.',
         subtitle: '1. Semester',
       },
+      {
+        href: '/sammlungen/projektmanagement',
+        title: 'Projektmanagement',
+        description:
+          'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg.',
+        subtitle: '3. Semester',
+      },
     ],
   },
   {
