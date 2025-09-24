@@ -293,5 +293,66 @@ export function ExternalLinkComponent({ href, children, ...props }: {
   );
 }
 
+type NumberedListVariant = 'decimal' | 'lower-alpha' | 'upper-alpha' | 'lower-roman' | 'upper-roman';
+
+export interface NumberedListProps extends React.OlHTMLAttributes<HTMLOListElement> {
+  variant?: NumberedListVariant;
+  tight?: boolean;
+}
+
+export function NumberedList(props: NumberedListProps) {
+  const {
+    variant = 'decimal',
+    tight = false,
+    className = '',
+    style,
+    start,
+    children,
+    type: _type,
+    ...rest
+  } = props;
+
+  const listStyleTypeMap: Record<NumberedListVariant, React.CSSProperties['listStyleType']> = {
+    decimal: 'decimal',
+    'lower-alpha': 'lower-alpha',
+    'upper-alpha': 'upper-alpha',
+    'lower-roman': 'lower-roman',
+    'upper-roman': 'upper-roman',
+  };
+
+  const olTypeAttr: Record<NumberedListVariant, '1' | 'a' | 'A' | 'i' | 'I'> = {
+    decimal: '1',
+    'lower-alpha': 'a',
+    'upper-alpha': 'A',
+    'lower-roman': 'i',
+    'upper-roman': 'I',
+  };
+
+  const spacingClass = tight ? 'space-y-1' : 'space-y-2';
+  const mergedClassName = [
+    'pl-6 list-outside',
+    spacingClass,
+    '[&>li]:mr-4',
+    className,
+  ].filter(Boolean).join(' ');
+
+  const mergedStyle: React.CSSProperties = {
+    listStyleType: listStyleTypeMap[variant],
+    ...style,
+  };
+
+  return (
+    <ol
+      {...rest}
+      start={start}
+      type={olTypeAttr[variant]}
+      className={mergedClassName}
+      style={mergedStyle}
+    >
+      {children}
+    </ol>
+  );
+}
+
 // Export calculator utilities for reuse
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download };
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList };

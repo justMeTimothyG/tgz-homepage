@@ -16,6 +16,7 @@ import {
   Stats,
   Stat,
   ExternalLinkComponent,
+  NumberedList,
   GcdCalculator,
   LcmCalculator,
   GaussianElimination,
@@ -66,6 +67,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     TabPanel: withNotProse(TabPanel),
     Stats: withNotProse(Stats),
     Stat: withNotProse(Stat),
+    NumberedList,
     // Keep links inline; do not wrap with not-prose to avoid block divs in paragraphs
     ExternalLinkComponent,
 
