@@ -43,6 +43,9 @@ const btnSolution = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-g
 const btnHint = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 ${btnDisabled}`;
 const btnStep = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 ${btnDisabled}`;
 const btnReset = `${btnBase} px-2 py-1 bg-transparent border-0 rounded text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100`;
+const inlineBtnHint = `${btnHint} px-3 py-2 bg-amber-50 dark:bg-amber-900/30 hover:bg-amber-100 dark:hover:bg-amber-900/50 border border-amber-100 dark:border-amber-800`;
+const inlineBtnStep = `${btnStep} px-3 py-2 bg-green-50 dark:bg-green-900/30 hover:bg-green-100 dark:hover:bg-green-900/50 border border-green-100 dark:border-green-800`;
+const inlineBtnSolution = `${btnSolution} px-3 py-2 bg-blue-50 dark:bg-blue-900/30 hover:bg-blue-100 dark:hover:bg-blue-900/50 border border-blue-100 dark:border-blue-800`;
 
 function getDifficultyLabel(difficulty: 'easy' | 'medium' | 'hard'): string {
   const labels = { easy: 'Einfach', medium: 'Mittel', hard: 'Schwer' } as const;
@@ -88,6 +91,9 @@ export default function ExerciseClient({
   const [visibleHints, setVisibleHints] = useState(0);
   const [visibleSteps, setVisibleSteps] = useState(0);
 
+  const revealNextHint = () => setVisibleHints((prev) => Math.min(prev + 1, hints.length));
+  const revealNextStep = () => setVisibleSteps((prev) => Math.min(prev + 1, steps.length));
+
   useEffect(() => {
     setShowSolution(false);
     setVisibleHints(0);
@@ -130,22 +136,14 @@ export default function ExerciseClient({
         )}
 
         {hints.length > 0 && (
-          <button
-            onClick={() => setVisibleHints((prev) => Math.min(prev + 1, hints.length))}
-            disabled={visibleHints >= hints.length}
-            className={btnHint}
-          >
+          <button onClick={revealNextHint} disabled={visibleHints >= hints.length} className={btnHint}>
             <Lightbulb className="w-4 h-4" />
             Tipps ({visibleHints}/{hints.length})
           </button>
         )}
 
         {steps.length > 0 && (
-          <button
-            onClick={() => setVisibleSteps((prev) => Math.min(prev + 1, steps.length))}
-            disabled={visibleSteps >= steps.length}
-            className={btnStep}
-          >
+          <button onClick={revealNextStep} disabled={visibleSteps >= steps.length} className={btnStep}>
             <ListOrdered className="w-4 h-4" />
             Schritte ({visibleSteps}/{steps.length})
           </button>
@@ -166,7 +164,7 @@ export default function ExerciseClient({
         )}
       </div>
 
-      {visibleHints > 0 && (
+      {hints.length > 0 && visibleHints > 0 && (
         <div className="mb-6">
           <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
             <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400" />
@@ -174,13 +172,24 @@ export default function ExerciseClient({
           </h4>
           <div className="space-y-3">
             {hints.slice(0, visibleHints).map((hint, index) => (
-              <div key={index}>{hint}</div>
+              <div
+                key={index}
+                className="prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4"
+              >
+                {hint}
+              </div>
             ))}
           </div>
+          {visibleHints > 0 && visibleHints < hints.length && (
+            <button onClick={revealNextHint} className={`${inlineBtnHint} mt-3`}>
+              <Lightbulb className="w-4 h-4" />
+              Nächsten Tipp anzeigen
+            </button>
+          )}
         </div>
       )}
 
-      {visibleSteps > 0 && (
+      {steps.length > 0 && visibleSteps > 0 && (
         <div className="mb-6">
           <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
             <ListOrdered className="w-4 h-4 text-green-600 dark:text-green-400" />
@@ -192,12 +201,24 @@ export default function ExerciseClient({
                 <div className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-sm font-semibold">
                   {index + 1}
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
                   {step}
                 </div>
               </div>
             ))}
           </div>
+          {visibleSteps > 0 && visibleSteps < steps.length && (
+            <button onClick={revealNextStep} className={`${inlineBtnStep} mt-4`}>
+              <ListOrdered className="w-4 h-4" />
+              Nächsten Schritt anzeigen
+            </button>
+          )}
+          {visibleSteps === steps.length && !showSolution && solutions.length > 0 && (
+            <button onClick={() => setShowSolution(true)} className={`${inlineBtnSolution} mt-4`}>
+              <Eye className="w-4 h-4" />
+              Lösung anzeigen
+            </button>
+          )}
         </div>
       )}
 
@@ -207,7 +228,7 @@ export default function ExerciseClient({
             <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Lösung:
           </h4>
-          <div>
+          <div className="prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
             {solutions.map((solution, index) => (
               <React.Fragment key={index}>{solution}</React.Fragment>
             ))}
