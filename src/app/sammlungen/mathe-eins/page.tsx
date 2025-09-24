@@ -81,6 +81,15 @@ const pageSections: SectionConfig[] = [
     ],
   },
   {
+    key: 'exercises',
+    title: 'Übungen & Tutorium',
+    description:
+      'Reine Übungsaufgaben zum Festigen der Inhalte – ohne neue Theorie, aber mit ausführlichen Lösungen.',
+    resources: [
+      getCollectionResource('mathe-i-tutorium-i'),
+    ],
+  },
+  {
     key: 'general',
     title: 'Generelles',
     description: 'Generelles was wichtig sein könnte für die Veranstaltung.',
