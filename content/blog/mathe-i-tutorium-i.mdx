@@ -1,0 +1,464 @@
+---
+title: "Tutorium 1: Grundlagen der Mathematik"
+date: 2024-10-10
+lastUpdated: 2024-10-10
+excerpt: "Übungsaufgaben zur Mengenlehre, Abbildungen, Logik, quadratische Gleichungen und Binomialkoeffizienten"
+tags: ["mathematik", "vorkurs", "mengenlehre", "abbildungen", "logik", "algebra"]
+sammlungen: ["vorkurs-mathematik"]
+published: true
+---
+
+# Tutorium 1: Grundlagen der Mathematik
+
+Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis für das weitere Studium dienen. Wir beginnen mit Mengenlehre, untersuchen Abbildungen und ihre Eigenschaften, arbeiten mit Aussagenlogik und lösen quadratische Gleichungen sowie Binomialkoeffizienten.
+
+<Download 
+  title="Übungsblatt (PDF)" 
+  description="Original-Aufgabenblatt zum Download"
+  href="/downloads/Tut-01.pdf"
+  fileType="PDF"
+/>
+
+<Download 
+  title="Lösungsvorschlag (PDF)" 
+  description="Vollständige Lösungen mit Erklärungen"
+  href="/downloads/Tut-01_Loesung.pdf"
+  fileType="PDF"
+/>
+
+## Mengenlehre
+
+<Exercise title="Aufgabe 1: Mengenoperationen" difficulty="easy">
+  <Task>
+    Es sind folgende Mengen gegeben: $A = \{1, 3, 5\}$, $B = \{2, 4, 6, 8\}$ und $C = \{ n \in \mathbb{N} \mid 0 < n < 8 \}$.
+    
+    Geben Sie an:
+    <NumberedList variant="lower-roman">
+      <li>$|A|$, $|B|$, $|C|$</li>
+      <li>$A \cap B$</li>
+      <li>$A \cup B$</li>
+      <li>$A \cap C$</li>
+      <li>$C \setminus A$</li>
+    </NumberedList>
+  </Task>
+  
+  <Hint>
+    Bestimmen Sie zuerst die Menge $C$ explizit, bevor Sie die Operationen durchführen. Denken Sie daran, dass $C$ alle natürlichen Zahlen zwischen 0 und 8 enthält.
+  </Hint>
+  
+  <Step>
+    **Teil (i): Mächtigkeiten bestimmen**
+    
+    Die Mächtigkeit einer Menge ist die Anzahl ihrer Elemente:
+    - $|A| = 3$ (die Menge enthält 1, 3, 5)
+    - $|B| = 4$ (die Menge enthält 2, 4, 6, 8)
+    - $C = \{1, 2, 3, 4, 5, 6, 7\}$, also $|C| = 7$
+  </Step>
+  
+  <Step>
+    **Teil (ii): Schnittmenge $A \cap B$**
+    
+    Die Schnittmenge enthält alle Elemente, die sowohl in $A$ als auch in $B$ vorkommen.
+    Da $A$ nur ungerade und $B$ nur gerade Zahlen enthält:
+    $$
+    A \cap B = \emptyset
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (iii): Vereinigungsmenge $A \cup B$**
+    
+    Die Vereinigungsmenge enthält alle Elemente aus $A$ oder $B$:
+    $$
+    A \cup B = \{1, 2, 3, 4, 5, 6, 8\}
+    $$
+    
+    Beachten Sie, dass 7 nicht enthalten ist!
+  </Step>
+  
+  <Step>
+    **Teil (iv): Schnittmenge $A \cap C$**
+    
+    $$
+    A \cap C = \{1, 3, 5\} = A
+    $$
+    
+    Dies zeigt: Wenn $A \subseteq C$, dann gilt $A \cap C = A$.
+  </Step>
+  
+  <Step>
+    **Teil (v): Differenzmenge $C \setminus A$**
+    
+    Die Differenzmenge enthält alle Elemente aus $C$, die nicht in $A$ sind:
+    $$
+    C \setminus A = \{2, 4, 6, 7\}
+    $$
+  </Step>
+  
+  <Solution>
+    Zusammenfassung der Ergebnisse:
+    1. $|A| = 3$, $|B| = 4$, $|C| = 7$
+    2. $A \cap B = \emptyset$
+    3. $A \cup B = \{1, 2, 3, 4, 5, 6, 8\}$
+    4. $A \cap C = \{1, 3, 5\}$
+    5. $C \setminus A = \{2, 4, 6, 7\}$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2: Rechenregeln für Mengen" difficulty="medium">
+  <Task>
+    Vereinfachen Sie folgende Ausdrücke, wobei $A \subseteq \mathbb{N}$ und $B \subseteq \mathbb{N}$:
+    1. $A \cap (A \cap B)$
+    2. $A \cup ((B \cap \bar{B}) \cup (\bar{A} \cup A))$
+  </Task>
+  
+  <Hint>
+    Nutzen Sie die Eigenschaften von Komplement-Mengen: $B \cap \bar{B} = \emptyset$ und $A \cup \bar{A} = \mathbb{N}$ (wenn $A \subseteq \mathbb{N}$).
+  </Hint>
+  
+  <Step>
+    **Teil (i): Assoziativität des Schnitts**
+    
+    Nach dem Assoziativgesetz gilt:
+    $$
+    A \cap (A \cap B) = (A \cap A) \cap B = A \cap B
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (ii): Schritt-für-Schritt-Vereinfachung**
+    
+    $$
+    \begin{align}
+        A \cup ((B \cap \bar{B}) \cup (\bar{A} \cup A)) &= A \cup (\emptyset \cup \mathbb{N}) \\
+        &= A \cup \mathbb{N} \\
+        &= \mathbb{N}
+        \end{align}
+    $$
+    
+    Hier nutzen wir:
+    - $B \cap \bar{B} = \emptyset$ (eine Menge und ihr Komplement sind disjunkt)
+    - $\bar{A} \cup A = \mathbb{N}$ (Vereinigung mit Komplement ergibt Grundmenge)
+  </Step>
+  
+  <Solution>
+    1. $A \cap (A \cap B) = A \cap B$
+    2. $A \cup ((B \cap \bar{B}) \cup (\bar{A} \cup A)) = \mathbb{N}$
+  </Solution>
+</Exercise>
+
+## Abbildungen
+
+<Callout type="info" title="Wichtige Begriffe">
+**Injektiv**: Verschiedene Elemente im Definitionsbereich werden auf verschiedene Elemente abgebildet (keine zwei Pfeile treffen dasselbe Element).
+
+**Surjektiv**: Jedes Element im Zielbereich wird getroffen (alle Elemente rechts haben mindestens einen Pfeil).
+
+**Bijektiv**: Sowohl injektiv als auch surjektiv (genau eine Umkehrabbildung existiert).
+</Callout>
+
+<Exercise title="Aufgabe 3: Eigenschaften von Abbildungen" difficulty="medium">
+  <Task>
+    Sind die nachfolgenden Abbildungen injektiv, surjektiv und/oder bijektiv? Es ist $\mathbb{R}_0^+ = [0, \infty)$.
+    
+    1. $f: \mathbb{N} \to \mathbb{N}, x \mapsto x^2$
+    2. $f: \mathbb{Z} \to \mathbb{N}_0, x \mapsto x^2$
+    3. $f: \mathbb{R}_0^+ \to \mathbb{R}_0^+, x \mapsto x^2$
+  </Task>
+  
+  <Hint>
+    Prüfen Sie systematisch:
+    - Injektivität: Gibt es verschiedene $x_1, x_2$ mit $f(x_1) = f(x_2)$?
+    - Surjektivität: Wird jedes Element im Zielbereich getroffen?
+  </Hint>
+  
+  <Step>
+    **Teil (i): $f: \mathbb{N} \to \mathbb{N}, x \mapsto x^2$**
+    
+    - **Injektiv**: Ja, denn für $x_1, x_2 \in \mathbb{N}$ mit $x_1^2 = x_2^2$ folgt $x_1 = x_2$
+    - **Surjektiv**: Nein, z.B. wird 2 nicht getroffen (keine natürliche Zahl quadriert ergibt 2)
+    - **Bijektiv**: Nein (nicht surjektiv)
+  </Step>
+  
+  <Step>
+    **Teil (ii): $f: \mathbb{Z} \to \mathbb{N}_0, x \mapsto x^2$**
+    
+    - **Injektiv**: Nein, denn $f(-3) = f(3) = 9$
+    - **Surjektiv**: Nein, z.B. wird 2 nicht getroffen
+    - **Bijektiv**: Nein (weder injektiv noch surjektiv)
+  </Step>
+  
+  <Step>
+    **Teil (iii): $f: \mathbb{R}_0^+ \to \mathbb{R}_0^+, x \mapsto x^2$**
+    
+    - **Injektiv**: Ja, für $x_1, x_2 \geq 0$ mit $x_1^2 = x_2^2$ folgt $x_1 = x_2$
+    - **Surjektiv**: Ja, jedes $y \in \mathbb{R}_0^+$ hat eine Wurzel $\sqrt{y} \in \mathbb{R}_0^+$
+    - **Bijektiv**: Ja (injektiv und surjektiv)
+  </Step>
+  
+  <Solution>
+    1. $f: \mathbb{N} \to \mathbb{N}, x \mapsto x^2$: injektiv, nicht surjektiv
+    2. $f: \mathbb{Z} \to \mathbb{N}_0, x \mapsto x^2$: weder injektiv noch surjektiv  
+    3. $f: \mathbb{R}_0^+ \to \mathbb{R}_0^+, x \mapsto x^2$: bijektiv
+    
+    Die Eigenschaften hängen stark vom Definitions- und Zielbereich ab!
+  </Solution>
+</Exercise>
+
+## Aussagenlogik
+
+<Exercise title="Aufgabe 4: Wahrheitstafel" difficulty="medium">
+  <Task>
+    Zeigen oder widerlegen Sie mit einer Wahrheitstafel:
+    $$
+    A \wedge (B \vee C) \Leftrightarrow (A \vee C) \wedge (B \vee C)
+    $$
+  </Task>
+  
+  <Hint>
+    Erstellen Sie eine vollständige Wahrheitstafel mit allen 8 möglichen Kombinationen von A, B, C. Die Aussage ist genau dann wahr, wenn beide Seiten in jeder Zeile denselben Wahrheitswert haben.
+  </Hint>
+  
+  <Step>
+    **Wahrheitstafel erstellen**
+    
+    | A | B | C | $B \vee C$ | $A \wedge (B \vee C)$ | $A \vee C$ | $B \vee C$ | $(A \vee C) \wedge (B \vee C)$ |
+    |---|---|---|------------|------------------------|------------|------------|----------------------------------|
+    | w | w | w | w | w | w | w | w |
+    | w | w | f | w | w | w | w | w |
+    | w | f | w | w | w | w | w | w |
+    | w | f | f | f | **f** | w | f | **f** |
+    | f | w | w | w | f | w | w | **w** |
+    | f | w | f | w | f | f | w | f |
+    | f | f | w | w | f | w | w | **w** |
+    | f | f | f | f | f | f | f | f |
+  </Step>
+  
+  <Solution>
+    Die Äquivalenz ist **falsch**, da die Wahrheitswerte in Zeile 5 und 7 nicht übereinstimmen.
+    
+    Gegenbeispiele:
+    - Bei $A = \text{falsch}, B = \text{wahr}, C = \text{wahr}$: Links ergibt falsch, rechts ergibt wahr
+    - Bei $A = \text{falsch}, B = \text{falsch}, C = \text{wahr}$: Links ergibt falsch, rechts ergibt wahr
+  </Solution>
+</Exercise>
+
+## Quadratische Gleichungen
+
+
+
+<Exercise title="Aufgabe 5: Quadratische Gleichungen lösen" difficulty="medium">
+  <Task>
+    Bestimmen Sie die reellen Lösungen der folgenden Gleichungen:
+    1. $x^2 - 5x + 6 = 0$
+    2. $(4 - x)^2 = 0$
+    3. $-x^2 + 3x = 0$
+    4. $2x^2 + 16x + 26 = 2$
+  </Task>
+  
+  <Hint>
+    Bringen Sie die Gleichungen zuerst in Normalform $x^2 + px + q = 0$. Bei Teil (iii) können Sie alternativ ausklammern und den Satz vom Nullprodukt anwenden.
+  </Hint>
+  
+  <Step>
+    **Teil (i): $x^2 - 5x + 6 = 0$**
+    
+    Mit der pq-Formel: $p = -5$, $q = 6$
+    
+    $$
+    x_{1,2} = -\frac{-5}{2} \pm \sqrt{\left(\frac{-5}{2}\right)^2 - 6} = 2{,}5 \pm \sqrt{0{,}25} = 2{,}5 \pm 0{,}5
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (ii): $(4 - x)^2 = 0$**
+    
+    Die Gleichung ist äquivalent zu $4 - x = 0$, also $x = 4$.
+    
+    Alternativ ausmultipliziert: $x^2 - 8x + 16 = 0$ mit Lösung $x = 4$ (doppelte Nullstelle).
+  </Step>
+  
+  <Step>
+    **Teil (iii): $-x^2 + 3x = 0$**
+    
+    Ausklammern: $x(-x + 3) = 0$
+    
+    Nach dem Satz vom Nullprodukt: $x = 0$ oder $-x + 3 = 0$, also $x = 3$
+  </Step>
+  
+  <Step>
+    **Teil (iv): $2x^2 + 16x + 26 = 2$**
+    
+    Umformen und normalisieren:
+    $$
+    2x^2 + 16x + 24 = 0 \quad \Rightarrow \quad x^2 + 8x + 12 = 0
+    $$
+    
+    Mit pq-Formel: $p = 8$, $q = 12$
+    $$
+    x_{1,2} = -4 \pm \sqrt{16 - 12} = -4 \pm 2
+    $$
+  </Step>
+  
+  <Solution>
+    Die Lösungsmengen sind:
+    1. $\mathbb{L} = \{2, 3\}$
+    2. $\mathbb{L} = \{4\}$
+    3. $\mathbb{L} = \{0, 3\}$
+    4. $\mathbb{L} = \{-6, -2\}$
+  </Solution>
+</Exercise>
+
+## Binomialkoeffizienten
+
+<PascalsTriangle 
+  title="Pascalsches Dreieck"
+  initialLevel={7}
+  minLevel={0}
+  maxLevel={12}
+/>
+
+<Exercise title="Aufgabe 6: Binomialkoeffizienten" difficulty="hard">
+  <Task variant="compact">
+    **Teil a)** Berechnen Sie folgende Binomialkoeffizienten:
+    1. $\binom{5}{2}$
+    2. $\binom{6}{4}$
+    3. $\binom{4}{4}$
+    4. $\binom{n}{1}$
+    5. $\binom{n}{n}$
+  </Task>
+  
+  <Task variant="compact">
+    **Teil b)** Zeigen Sie folgende Gleichheit:
+    $$
+    \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}
+    $$
+  </Task>
+  
+  <Hint>
+    Verwenden Sie die Formel $\binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}$ und beachten Sie, dass $0! = 1$.
+  </Hint>
+  
+  <Step>
+    **Teil a) Berechnungen**
+    
+    1. $\binom{5}{2} = \frac{5!}{2! \cdot 3!} = \frac{5 \cdot 4}{2 \cdot 1} = 10$
+    
+    2. $\binom{6}{4} = \frac{6!}{4! \cdot 2!} = \frac{6 \cdot 5}{2 \cdot 1} = 15$
+    
+    3. $\binom{4}{4} = \frac{4!}{4! \cdot 0!} = 1$
+    
+    4. $\binom{n}{1} = \frac{n!}{1! \cdot (n-1)!} = n$
+    
+    5. $\binom{n}{n} = \frac{n!}{n! \cdot 0!} = 1$
+  </Step>
+  
+  <Step>
+    **Teil b) Beweis der Additionsregel**
+    
+    Linke Seite:
+    $$
+    \binom{n}{k} + \binom{n}{k+1} = \frac{n!}{k!(n-k)!} + \frac{n!}{(k+1)!(n-k-1)!}
+    $$
+    
+    Hauptnenner bilden:
+    $$
+    = \frac{n!(k+1) + n!(n-k)}{(k+1)!(n-k)!} = \frac{n!(n+1)}{(k+1)!(n-k)!}
+    $$
+    
+    Dies entspricht genau $\binom{n+1}{k+1} = \frac{(n+1)!}{(k+1)!(n-k)!}$
+  </Step>
+  
+  <Solution>
+    **Teil a)** Die Binomialkoeffizienten sind: 10, 15, 1, $n$, 1
+    
+    **Teil b)** Die Additionsregel beschreibt, wie im Pascalschen Dreieck jede Zahl die Summe der beiden darüberliegenden Zahlen ist. Dies ist fundamental für die Konstruktion des Dreiecks.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7: Anwendung des Pascalschen Dreiecks" difficulty="hard">
+  <Task>
+    Berechnen Sie mit Hilfe des Pascalschen Zahlendreiecks (ohne Taschenrechner!):
+    1. $(a + 5)^3$
+    2. $(x - y)^4$
+    3. $(a - b)^5$
+    4. $9^4$
+  </Task>
+  
+  <Hint>
+    Nutzen Sie die Binomialentwicklung $(a+b)^n = \sum_{k=0}^{n} \binom{n}{k} a^{n-k} b^k$. 
+    Beachten Sie bei negativen Vorzeichen: $(x-y)^n = (x+(-y))^n$.
+  </Hint>
+  
+  <Step>
+    **Teil (i): $(a + 5)^3$**
+    
+    Mit Zeile 3 des Pascalschen Dreiecks (1, 3, 3, 1):
+    $$
+    = 1 \cdot a^3 + 3 \cdot a^2 \cdot 5 + 3 \cdot a \cdot 25 + 1 \cdot 125
+    $$
+    $$
+    = a^3 + 15a^2 + 75a + 125
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (ii): $(x - y)^4 = (x + (-y))^4$**
+    
+    Mit Zeile 4 (1, 4, 6, 4, 1) und alternierendem Vorzeichen:
+    $$
+    = x^4 - 4x^3y + 6x^2y^2 - 4xy^3 + y^4
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (iii): $(a - b)^5$**
+    
+    Mit Zeile 5 (1, 5, 10, 10, 5, 1):
+    $$
+    = a^5 - 5a^4b + 10a^3b^2 - 10a^2b^3 + 5ab^4 - b^5
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (iv): $9^4 = (10 - 1)^4$**
+    
+    $$
+    = 10^4 - 4 \cdot 10^3 \cdot 1 + 6 \cdot 10^2 \cdot 1 - 4 \cdot 10 \cdot 1 + 1
+    $$
+    $$
+    = 10000 - 4000 + 600 - 40 + 1 = 6561
+    $$
+  </Step>
+  
+  <Solution>
+    1. $(a + 5)^3 = a^3 + 15a^2 + 75a + 125$
+    2. $(x - y)^4 = x^4 - 4x^3y + 6x^2y^2 - 4xy^3 + y^4$
+    3. $(a - b)^5 = a^5 - 5a^4b + 10a^3b^2 - 10a^2b^3 + 5ab^4 - b^5$
+    4. $9^4 = 6561$
+  </Solution>
+</Exercise>
+
+## Zusammenfassung
+
+<Callout type="success" title="Wichtige Erkenntnisse">
+- **Mengenlehre**: Die Grundoperationen (Schnitt, Vereinigung, Differenz) bilden die Basis für viele mathematische Konzepte
+- **Abbildungen**: Die Eigenschaften injektiv, surjektiv und bijektiv hängen stark vom Definitions- und Zielbereich ab
+- **Logik**: Wahrheitstafeln sind ein systematisches Werkzeug zur Überprüfung logischer Äquivalenzen
+- **Quadratische Gleichungen**: Die pq-Formel ist universell anwendbar, aber manchmal sind alternative Methoden effizienter
+- **Binomialkoeffizienten**: Das Pascalsche Dreieck verbindet Kombinatorik mit Algebra auf elegante Weise
+</Callout>
+
+<FeatureGrid>
+  <FeatureCard title="Weiterführende Übungen" icon="📚" color="blue">
+    Versuchen Sie, eigene Beispiele zu konstruieren und die gelernten Konzepte anzuwenden.
+  </FeatureCard>
+  
+  <FeatureCard title="Praxisbezug" icon="🎯" color="green">
+    Diese Grundlagen werden Sie in Analysis, Linearer Algebra und Stochastik wiederfinden.
+  </FeatureCard>
+  
+  <FeatureCard title="Selbstkontrolle" icon="✅" color="purple">
+    Lösen Sie die Aufgaben zunächst ohne Lösungsvorschlag und vergleichen Sie dann.
+  </FeatureCard>
+</FeatureGrid>
