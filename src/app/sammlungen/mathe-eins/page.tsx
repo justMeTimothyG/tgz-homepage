@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getBlogPostBySlugSync } from '@/lib/blog';
+import { getCollectionResource, type CollectionResource } from '@/lib/collection-resources';
 
 export const metadata: Metadata = {
   title: 'Mathe I Sammlung – Timothy Lüdtke',
@@ -8,29 +8,13 @@ export const metadata: Metadata = {
     'Kuratiert in Mathe I einsteigen: Generalmaterial, thematische Vertiefungen und Lernreflexionen für Lineare Algebra und Analysis im ersten Semester.',
 };
 
-type Resource = {
-  title: string;
-  description?: string;
-  href?: string;
-  variant?: 'note';
-};
-
-function getResource(slug: string, overrideTitle: string, overrideDescription: string): Resource {
-  const post = getBlogPostBySlugSync(slug);
-  return {
-    title: overrideTitle ?? post?.title,
-    description: overrideDescription ?? post?.excerpt,
-    href: `/blog/${slug}`,
-  };
-}
-
 const linkHighlightClass = 'from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500';
 
 type SectionConfig = {
   key: string;
   title: string;
   description: string;
-  resources: Resource[];
+  resources: CollectionResource[];
   highlightClassName?: string;
 };
 
@@ -41,22 +25,22 @@ const pageSections: SectionConfig[] = [
     description:
       'Vertiefungen zu Kernthemen der Vorlesung. Perfekt für Wiederholungsphasen und Prüfungsvorbereitung.',
     resources: [
-      getResource(
+      getCollectionResource(
         'potenz-exponential-logarithmen',
         'Potenz- und Logarithmengesetze',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'trigonometrie-grundlagen',
         'Trigonometrie – Kreis, Sinus, Cosinus',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'ableitungsregeln-zusammenfassung',
         'Differentiale - Ableitungen',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'integrationsregeln-zusammenfassung',
         'Integrale',
         '',
@@ -69,27 +53,27 @@ const pageSections: SectionConfig[] = [
     description:
       'Starte mit den Fundamenten: Definitionen, Terme und Rechengesetze. Diese Beiträge schaffen das Vokabular, das in späteren Vorlesungen vorausgesetzt wird.',
     resources: [
-      getResource(
+      getCollectionResource(
         'mathematische-definitionen',
         'Mathematische Definitionen',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'begriffe-und-rechenregeln',
         'Begriffe und Rechenregeln',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'bruchrechnung',
         'Bruchrechnung',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'summenzeichen',
         'Das Summenzeichen',
         '',
       ),
-      getResource(
+      getCollectionResource(
         'polynomdivision',
         'Polynomdivision',
         '',
@@ -124,7 +108,7 @@ const pageSections: SectionConfig[] = [
   },
 ];
 
-function CollectionListItem({ item }: { item: Resource }) {
+function CollectionListItem({ item }: { item: CollectionResource }) {
   if (item.href) {
     return (
       <Link

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getBlogPostBySlugSync } from '@/lib/blog';
+import { type CollectionResource } from '@/lib/collection-resources';
 
 export const metadata: Metadata = {
   title: 'Technische Physik I Sammlung – Timothy Lüdtke',
@@ -8,29 +8,13 @@ export const metadata: Metadata = {
     'Kuratiert in Technische Physik I einsteigen: Generalmaterial, thematische Vertiefungen und Lernreflexionen für Technische Physik im ersten Semester.',
 };
 
-type Resource = {
-  title: string;
-  description?: string;
-  href?: string;
-  variant?: 'note';
-};
-
-function getResource(slug: string, overrideTitle: string, overrideDescription: string): Resource {
-  const post = getBlogPostBySlugSync(slug);
-  return {
-    title: overrideTitle ?? post?.title,
-    description: overrideDescription ?? post?.excerpt,
-    href: `/blog/${slug}`,
-  };
-}
-
 const linkHighlightClass = 'from-blue-500 to-blue-600 dark:from-blue-400 dark:to-blue-500';
 
 type SectionConfig = {
   key: string;
   title: string;
   description: string;
-  resources: Resource[];
+  resources: CollectionResource[];
   highlightClassName?: string;
 };
 
@@ -87,7 +71,7 @@ const pageSections: SectionConfig[] = [
   },
 ];
 
-function CollectionListItem({ item }: { item: Resource }) {
+function CollectionListItem({ item }: { item: CollectionResource }) {
   if (item.href) {
     return (
       <Link
