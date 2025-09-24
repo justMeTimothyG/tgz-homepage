@@ -9,6 +9,123 @@ import PascalsTriangle from './PascalsTriangle';
 import VennSets from './VennSets';
 import Download from './Download';
 
+// Utility: merge class names
+function cx(...parts: Array<string | false | null | undefined>) {
+  return parts.filter(Boolean).join(' ');
+}
+
+type TableLines = 'none' | 'horizontal' | 'vertical' | 'both';
+type TableAlign = 'left' | 'center' | 'right';
+
+type TableEnhanceOptions = {
+  lines: TableLines;
+  align: TableAlign;
+  dense: boolean;
+};
+
+export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
+  lines?: TableLines;
+  align?: TableAlign;
+  dense?: boolean;
+  className?: string;
+  children?: React.ReactNode;
+}
+
+function enhanceTableTree(node: React.ReactNode, opts: TableEnhanceOptions): React.ReactNode {
+  const alignMap: Record<TableAlign, string[]> = {
+    left: ['[&>tr>th]:text-left', '[&>tr>td]:text-left'],
+    center: ['[&>tr>th]:text-center', '[&>tr>td]:text-center'],
+    right: ['[&>tr>th]:text-right', '[&>tr>td]:text-right'],
+  };
+
+  const vertHead = opts.lines === 'vertical' || opts.lines === 'both' ? [
+    '[&>tr>th:not(:last-child)]:border-r',
+    '[&>tr>th:not(:last-child)]:border-gray-200',
+    'dark:[&>tr>th:not(:last-child)]:border-gray-700',
+  ] : [];
+
+  const vertBody = opts.lines === 'vertical' || opts.lines === 'both' ? [
+    '[&>tr>td:not(:last-child)]:border-r',
+    '[&>tr>td:not(:last-child)]:border-gray-200',
+    'dark:[&>tr>td:not(:last-child)]:border-gray-700',
+  ] : [];
+
+  const horizHead = opts.lines === 'horizontal' || opts.lines === 'both' ? [
+    '[&>tr]:border-b',
+    '[&>tr]:border-gray-200',
+    'dark:[&>tr]:border-gray-700',
+  ] : [];
+
+  const horizBody = opts.lines === 'horizontal' || opts.lines === 'both' ? [
+    '[&>tr:not(:last-child)>td]:border-b',
+    '[&>tr:not(:last-child)>td]:border-gray-200',
+    'dark:[&>tr:not(:last-child)>td]:border-gray-700',
+  ] : [];
+
+  const headPad = opts.dense ? ['[&>tr>th]:px-3', '[&>tr>th]:py-1.5'] : ['[&>tr>th]:px-4', '[&>tr>th]:py-2.5'];
+  const bodyPad = opts.dense ? ['[&>tr>td]:px-3', '[&>tr>td]:py-1.5'] : ['[&>tr>td]:px-4', '[&>tr>td]:py-2.5'];
+
+  return React.Children.map(node, (child) => {
+    if (!React.isValidElement(child)) return child;
+
+    const type = typeof child.type === 'string' ? child.type : undefined;
+    const addedClasses: string[] = [];
+
+    if (type === 'thead') {
+      addedClasses.push(
+        '[&>tr>th]:text-xs',
+        '[&>tr>th]:font-semibold',
+        '[&>tr>th]:uppercase',
+        '[&>tr>th]:tracking-wide',
+        '[&>tr>th]:text-gray-700',
+        'dark:[&>tr>th]:text-gray-300',
+        '[&>tr>th]:bg-gray-100',
+        'dark:[&>tr>th]:bg-gray-900/60',
+        ...headPad,
+        ...alignMap[opts.align],
+        ...vertHead,
+        ...horizHead,
+      );
+    } else if (type === 'tbody' || type === 'tfoot') {
+      addedClasses.push(
+        '[&>tr>td]:text-sm',
+        '[&>tr>td]:text-gray-800',
+        'dark:[&>tr>td]:text-gray-200',
+        '[&>tr>td]:align-middle',
+        ...bodyPad,
+        ...alignMap[opts.align],
+        ...vertBody,
+        ...horizBody,
+      );
+    }
+
+    const classAddition = addedClasses.join(' ').trim();
+    const mergedClass = classAddition ? cx(child.props.className, classAddition) : child.props.className;
+    const enhancedChildren = enhanceTableTree(child.props.children, opts);
+    const finalChildren = enhancedChildren === undefined ? child.props.children : enhancedChildren;
+
+    return React.cloneElement(child, { ...child.props, className: mergedClass }, finalChildren);
+  });
+}
+
+// Table component with configurable borders and alignment
+export function Table({ lines = 'horizontal', align = 'left', dense = false, className, children, ...rest }: TableProps) {
+  const wrapperClass = cx('not-prose overflow-x-auto my-6', className);
+  const alignClass = align === 'center' ? 'text-center' : align === 'right' ? 'text-right' : 'text-left';
+  const tableClass = cx('w-full border-collapse border-spacing-0 text-sm', alignClass);
+
+  const content = enhanceTableTree(children, { align, lines, dense });
+  const finalContent = content === undefined ? children : content;
+
+  return (
+    <div className={wrapperClass} {...rest}>
+      <table className={tableClass}>
+        {finalContent}
+      </table>
+    </div>
+  );
+}
+
 // Callout/Alert Component
 export function Callout({ type = 'info', children, title, ...props }: {
   type?: 'info' | 'warning' | 'error' | 'success';
@@ -356,3 +473,6 @@ export function NumberedList(props: NumberedListProps) {
 
 // Export calculator utilities for reuse
 export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList };
+
+// Also export Table for MDX usage
+export { Table };

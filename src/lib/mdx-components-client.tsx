@@ -23,6 +23,7 @@ import {
   PascalsTriangle,
   VennSets,
   Download,
+  Table,
 } from '@/components/markdown/CustomComponents';
 import ExerciseClient, { ExerciseContentProps, TaskItem } from '@/components/markdown/ExerciseClient';
 import PostPager from '@/components/PostPager';
@@ -170,6 +171,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
     Download: withNotProse(Download),
+    Table: withNotProse(Table),
 
     PostPager: withNotProse(PostPager),
 

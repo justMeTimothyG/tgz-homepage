@@ -23,6 +23,7 @@ import {
   PascalsTriangle,
   VennSets,
   Download,
+  Table,
 } from '@/components/markdown/CustomComponents';
 import Exercise, { Hint as ExerciseHint, Solution as ExerciseSolution, Step as ExerciseStep, Task as ExerciseTask } from '@/components/markdown/Exercise';
 import PostPager from '@/components/PostPager';
@@ -52,6 +53,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
     Download: withNotProse(Download),
+    Table: withNotProse(Table),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),
