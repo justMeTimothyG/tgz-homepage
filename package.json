@@ -14,6 +14,7 @@
     "tailwind:safelist": "tsx scripts/generate-tailwind-safelist.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.896.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/mdx": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
