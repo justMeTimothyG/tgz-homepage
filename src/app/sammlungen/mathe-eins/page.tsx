@@ -87,6 +87,7 @@ const pageSections: SectionConfig[] = [
       'Reine Übungsaufgaben zum Festigen der Inhalte – ohne neue Theorie, aber mit ausführlichen Lösungen.',
     resources: [
       getCollectionResource('mathe-i-tutorium-i'),
+      getCollectionResource('mathe-i-tutorium-ii'),
     ],
   },
   {
