@@ -61,6 +61,26 @@ npm run dev
 - `npm run lint` - Run ESLint checks
 - `npm run tailwind:safelist` - Generate Tailwind CSS safelist
 
+## 🖼️ Hetzner Object Storage Proxy
+
+Images served from Hetzner Object Storage can be proxied through the built-in API route at `/api/images/[...key]`. Configure the following environment variables before running the server:
+
+```
+HETZNER_S3_ENDPOINT=https://fsn1.your-objectstorage.com
+HETZNER_S3_REGION=eu-central-1
+HETZNER_S3_BUCKET=tluedtke
+HETZNER_S3_ACCESS_KEY=<your-access-key>
+HETZNER_S3_SECRET_KEY=<your-secret-key>
+```
+
+Usage example in MDX:
+
+```mdx
+<Image src="/api/images/physik-1/tut-01-0202.jpeg" alt="Versatz" width={250} height={186} />
+```
+
+The API streams the object from Hetzner using signed requests, adds public caching headers, and preserves content metadata (type, last-modified). Only supply keys relative to the configured bucket (e.g. `physik-1/tut-01.jpeg`).
+
 ## ✏️ Creating Blog Posts
 
 ### Adding New Posts
