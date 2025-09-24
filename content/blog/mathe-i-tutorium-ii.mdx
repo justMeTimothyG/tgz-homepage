@@ -1,0 +1,425 @@
+---
+title: "Tutorium II: Mengen, Betragsgleichungen und komplexe Zahlen"
+excerpt: "Mengenoperationen mit Infimum/Supremum, Minimum/Maximum sowie Lösungsverfahren für Betragsgleichungen und komplexe Zahlen"
+date: 2024-11-15
+tags: ["mathematik", "analysis", "mengen", "komplexe-zahlen"]
+sammlungen: ["mathe-eins"]
+published: true
+lastUpdated: 2024-11-15
+---
+
+Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum bei Mengen sowie systematische Lösungsverfahren für Betragsgleichungen. Zusätzlich werden Grundlagen der komplexen Zahlen und deren Rechenoperationen erarbeitet.
+
+## Intervalle und Schranken
+
+### Grundlegende Begriffe
+
+<Callout type="info" title="Definitionen">
+**Minimum und Maximum** existieren nur, wenn die Zahl zur Menge gehört (eckige Klammern bei Intervallen).
+
+**Infimum und Supremum** existieren immer für beschränkte Mengen, müssen aber nicht zur Menge gehören. Infimum/Minimum sowie Supremum/Maximum können gleich sein.
+</Callout>
+
+### Aufgaben
+
+<Exercise title="Aufgabe 1 (i)" difficulty="easy">
+  <Task>
+    Gebe die Menge $M = \{x \in \mathbb{R} | 0 \leq x \leq 2\}$ in Intervallschreibweise an und bestimme Supremum, Infimum, Maximum und Minimum.
+  </Task>
+  <Step>
+    Intervallschreibweise: $M = [0, 2]$
+  </Step>
+  <Step>
+    $\inf(M) = 0$ (kleinste Zahl in $M$) <br />
+    $\sup(M) = 2$ (größte Zahl in $M$) <br />
+    $\min(M) = 0$ (Minimum existiert, da $0 \in M$) <br />
+    $\max(M) = 2$ (Maximum existiert, da $2 \in M$) <br />
+  </Step>
+  <Solution>
+    $$\inf(M) = 0, \quad \sup(M) = 2, \quad \min(M) = 0, \quad \max(M) = 2$$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 1 (ii)" difficulty="easy">
+  <Task>
+    Bestimme für $N = \{x \in \mathbb{R} | x \leq 1 \wedge x > -4\}$ alle Schranken.
+  </Task>
+  <Step>
+    Intervallschreibweise: $N = (-4, 1]$
+  </Step>
+  <Step>
+    $\inf(N) = -4$ (kleinste Zahl, aber nicht in $N$) <br />
+    $\sup(N) = 1$ (größte Zahl in $N$) <br />
+    $\min(N) = \nexists / \emptyset$ (Minimum existiert nicht, da $-4 \notin N$) <br />
+    $\max(N) = 1$ (Maximum existiert, da $1 \in N$) <br />
+  </Step>
+  <Solution>
+    $$\inf(N) = -4, \quad \sup(N) = 1, \quad \min(N) = \nexists, \quad \max(N) = 1$$
+    
+    Da $-4 \notin N$, existiert kein Minimum.
+  </Solution>
+</Exercise>
+<Exercise title="Aufgabe 1 (iii)" difficulty="easy">
+  <Task>
+    Bestimme für $O = \{x \in \mathbb{R} | x \leq 1 \}$ die Intervallschreibweise und alle Schranken.
+  </Task>
+  <Step>
+    Intervallschreibweise: $O = (-\infty, 1]$
+  </Step>
+  <Step>
+    $\inf(O) = -\infty$ (kleinste Zahl in $O$) <br />
+    $\sup(O) = 1$ (größte Zahl in $O$) <br />
+    $\min(O) = \nexists / \emptyset$ (Minimum existiert nicht, da $-\infty$ keine definierte Zahl ist) <br />
+    $\max(O) = 1$ (Maximum existiert, da $1 \in O$) <br />
+  </Step>
+  <Solution>
+    $$\inf(O) = -\infty, \quad \sup(O) = 1, \quad \min(O) = \nexists, \quad \max(O) = 1$$
+
+    Da $-\infty$ keine definierte Zahl ist, existiert kein Minimum.
+  </Solution>
+</Exercise>
+<Exercise title="Aufgabe 1 (iv)" difficulty="easy">
+  <Task>
+    Bestimme für $P = \{x \in \mathbb{R} | x \gt 1 \wedge x \lt -4\}$ die Intervallschreibweise und alle Schranken.
+  </Task>
+  <Step>
+    Intervallschreibweise: $P = (-\infty, -4) \cap (1, \infty) = \emptyset$
+  </Step>
+  <Step>
+    $\inf(P) = -\infty$ (In $P$ gibt es keine kleinste Zahl, aber $-\infty$ ist eine untere Schranke) <br />
+    $\sup(P) = +\infty$ (In $P$ gibt es keine größte Zahl, aber $+\infty$ ist eine obere Schranke) <br />
+    $\min(P) = \nexists / \emptyset$ (Minimum existiert nicht, da $P$ leer ist) <br />
+    $\max(P) = \nexists / \emptyset$ (Maximum existiert nicht, da $P$ leer ist) <br />
+    <br />
+    <br />
+    Hinweis: das $\inf$ und $\sup$ von leeren Mengen sind definitionsgemäß $-\infty$ bzw. $+\infty$. Damit diese Schranken existieren, muss die Menge nach oben bzw. unten beschränkt sein. Und so verhält es sich konsistenter. Das ist eher Mathematische Konvention und muss gelernt werden und nicht direkt intuitiv verstanden werden.
+  </Step>
+  <Solution>
+    $$\inf(P) = -\infty, \quad \sup(P) = +\infty, \quad \min(P) = \nexists, \quad \max(P) = \nexists$$
+
+    Da $P$ leer ist, existieren kein Minimum und kein Maximum.
+  </Solution>
+</Exercise>
+<Exercise title="Aufgabe 1 (v)" difficulty="easy">
+  <Task>
+    Bestimme für $Q = \{x \in \mathbb{R} | -1 \leq x \lt 0 \} \cup \{ x \in \mathbb{R} | 0 \lt x \leq 1 \} \cup \{0\}$ die Intervallschreibweise und alle Schranken.
+  </Task>
+  <Step>
+    Intervallschreibweise: $Q = [-1, 1]$
+  </Step>
+  <Step>
+    $\inf(Q) = -1$ (kleinste Zahl in $Q$) <br />
+    $\sup(Q) = 1$ (größte Zahl in $Q$) <br />
+    $\min(Q) = -1$ (Minimum existiert, da $-1 \in Q$) <br />
+    $\max(Q) = 1$ (Maximum existiert, da $1 \in Q$) <br />
+  </Step>
+  <Solution>
+    $$\inf(Q) = -1, \quad \sup(Q) = 1, \quad \min(Q) = -1, \quad \max(Q) = 1$$
+
+    Da $-1 \in Q$ und $1 \in Q$, existieren Minimum und Maximum.
+  </Solution>
+</Exercise>
+
+## Quadratische Gleichungen
+
+<QuadraticSolver 
+  title="Quadratische Gleichungen lösen"
+  description="Verwende die p-q-Formel oder abc-Formel"
+  defaultExpanded
+  initialMode="pq"
+  initialPQ={{ p: -5, q: 6 }}
+/>
+
+### Lösungsverfahren
+
+<Exercise title="Aufgabe 2: Quadratische Gleichungen lösen" difficulty="medium">
+  <Task>
+    Bestimmen Sie die reellen Lösungen der folgenden Gleichungen:
+    <NumberedList tight>
+      <li>$x^2 - 5x + 6 = 0$</li>
+      <li>$(4 - x)^2 = 0$</li>
+      <li>$-x^2 + 3x = 0$</li>
+      <li>$2x^2 + 16x + 26 = 2$</li>
+    </NumberedList>
+  </Task>
+  
+  <Hint>
+    Bringen Sie die Gleichungen zuerst in Normalform $x^2 + px + q = 0$. Bei Teil (iii) können Sie alternativ ausklammern und den Satz vom Nullprodukt anwenden.
+  </Hint>
+  
+  <Step>
+    **Teil (i): $x^2 - 5x + 6 = 0$**
+    
+    Mit der pq-Formel: $p = -5$, $q = 6$
+    
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-5}{2} \pm \sqrt{ \left( \frac{-5}{2} \right)^{2}-6 } \\
+    &= 2,5 \pm \sqrt{ 0,25 } \\
+    &= 2,5 \pm 0,5 = 2 ; 3 \\
+    \mathbb{L} &= \{ 2, 3 \}
+    \end{align*}
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (ii): $(4 - x)^2 = 0$**
+    
+    Die Gleichung ist äquivalent zu $(4 - x)\cdot (4-x) = 0$. Betrachten wir dies als Produkt zweier Faktoren, so folgt aus dem Satz vom Nullprodukt:
+    $4 - x = 0 \Rightarrow x = 4$. da beide Faktoren identisch sind, handelt es sich um eine doppelte Nullstelle.
+    
+    Alternativ ausmultipliziert: $x^2 - 8x + 16 = 0$ mit Lösung $x = 4$ (doppelte Nullstelle).
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-8}{2} \pm \sqrt{ \left( \frac{-8}{2} \right)^{2}-16 } \\
+    &= 4 \pm \sqrt{ 0 } \\
+    &= 4 \pm 0 = 4 \\
+    \mathbb{L} &= \{ 4 \}
+    \end{align*}
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (iii): $-x^2 + 3x = 0$**
+    
+    Ausklammern: $x(-x + 3) = 0$
+    
+    Nach dem Satz vom Nullprodukt: $x = 0$ oder $-x + 3 = 0$, also $x = 3$
+
+    Alternativ lösen mittels pq-Formel: $p = -3$, $q = 0$ nachdem die Gleichung in Normalform gebracht wurde mit: $x^2 - 3x + 0 = 0$
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-3}{2} \pm \sqrt{ \left( \frac{-3}{2} \right)^{2}-0 } \\
+    &= 1,5 \pm \sqrt{ 1,5^{2} } \\
+    &= 1,5 \pm 1,5 = 0 ; 3 \\
+    \mathbb{L} &= \{ 0\, ;\,  3 \}
+    \end{align*}
+    $$
+  </Step>
+  
+  <Step>
+    **Teil (iv): $2x^2 + 16x + 26 = 2$**
+    
+    Umformen und normalisieren:
+    $$
+    \begin{align*}
+    2x^2 + 16x + 24 &= 0 & & | :2 \\
+    \Rightarrow \quad x^2 + 8x + 12 &= 0
+    \end{align*}
+    $$
+    <br />
+    Mit der pq-Formel: $p = 8$, $q = 12$
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{8}{2} \pm \sqrt{ \left( \frac{8}{2} \right)^{2}-12 } \\
+    &= -4 \pm \sqrt{ 4 } \\
+    &= -4 \pm 2 = -6 ; -2 \\
+    \mathbb{L} &= \{ -6\, ;\,  -2 \}
+    \end{align*}
+    $$
+
+  </Step>
+  
+  <Solution>
+    Die Lösungsmengen sind:
+    <NumberedList tight>
+      <li>$\mathbb{L} = \{2, 3\}$</li>
+      <li>$\mathbb{L} = \{4\}$</li>
+      <li>$\mathbb{L} = \{0, 3\}$</li>
+      <li>$\mathbb{L} = \{-6, -2\}$</li>
+    </NumberedList>
+  </Solution>
+</Exercise>
+
+## Kubische und Biquadratische Gleichungen
+
+<Exercise title="Aufgabe 3 – Kubische Gleichungen" difficulty="medium">
+  <Task>
+    Gib die Lösungsmenge der Gleichung $x^3 = 2x^2 + 8x$ an.
+  </Task>
+  <Hint>
+    Forme zur Normalform um und klammere anschließend $x$ aus.
+  </Hint>
+  <Step>
+    $$
+    \begin{align*}
+    x^3 &= 2x^2 + 8x \\
+    x^3 - 2x^2 - 8x &= 0 \\
+    x(x^2 - 2x - 8) &= 0
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Eine Nullstelle ist $x_0 = 0$. Für das quadratische Polynom
+    $$x^2 - 2x - 8 = 0$$
+    liefert die pq-Formel $x_{1,2} = 1 \pm 3$.
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{-2, 0, 4\}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3 – Biquadratische Gleichungen" difficulty="medium">
+  <Task>
+    Gib die Lösungsmenge der Gleichung $x^4 - 3x^2 + \tfrac{3}{4} = -x^2$ an.
+  </Task>
+  <Hint>
+    Substituiere $z = x^2$, um eine quadratische Gleichung zu erhalten.
+  </Hint>
+  <Step>
+    $$
+    \begin{align*}
+    x^4 - 3x^2 + \tfrac{3}{4} &= -x^2 \\
+    x^4 - 2x^2 + \tfrac{3}{4} &= 0 \\
+    z^2 - 2z + \tfrac{3}{4} &= 0
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Mit der pq-Formel erhältst du $z_{1,2} = 1 \pm \tfrac{1}{2}$, also
+    $z_1 = \tfrac{3}{2}$ und $z_2 = \tfrac{1}{2}$. Resubstitution liefert vier reelle Lösungen.
+  </Step>
+  <Solution>
+    $\mathbb{L} = \left\{-\sqrt{\tfrac{3}{2}}, -\sqrt{\tfrac{1}{2}}, \sqrt{\tfrac{1}{2}}, \sqrt{\tfrac{3}{2}}\right\}$.
+  </Solution>
+</Exercise>
+
+
+
+## Betragsgleichungen
+
+### Lösungsschema für einfache Betragsgleichungen
+
+<Callout type="info" title="Systematisches Vorgehen">
+1. **Fallunterscheidung** nach Vorzeichen des Terms im Betrag
+2. **Kandidaten bestimmen** für jeden Fall
+3. **Zulässigkeitsbereich prüfen** für jeden Kandidaten
+4. **Vereinigung** aller gültigen Lösungen
+</Callout>
+
+<Exercise title="Betragsgleichung mit Fallunterscheidung" difficulty="medium">
+  <Task>
+    Löse die Gleichung $|3x - 5| = 10 - 2x$.
+  </Task>
+  <Hint>
+    Unterscheide die Fälle $3x - 5 \geq 0$ und $3x - 5 < 0$.
+  </Hint>
+  <Step>
+    **Fall 1:** $3x - 5 \geq 0 \Rightarrow x \geq \frac{5}{3}$
+    
+    $3x - 5 = 10 - 2x \Rightarrow 5x = 15 \Rightarrow x = 3$
+    
+    Da $3 \geq \frac{5}{3}$, ist $x = 3$ eine gültige Lösung.
+  </Step>
+  <Step>
+    **Fall 2:** $3x - 5 < 0 \Rightarrow x < \frac{5}{3}$
+    
+    $-(3x - 5) = 10 - 2x \Rightarrow -3x + 5 = 10 - 2x \Rightarrow x = -5$
+    
+    Da $-5 < \frac{5}{3}$, ist $x = -5$ eine gültige Lösung.
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{-5, 3\}$.
+  </Solution>
+</Exercise>
+
+### Doppelbetragsgleichungen
+
+<Exercise title="Gleichung mit zwei Beträgen" difficulty="hard">
+  <Task>
+    Löse $|2x - 4| - 1 = |−x + 2|$.
+  </Task>
+  <Hint>
+    Bei zwei Beträgen musst du vier Fälle unterscheiden (alle Kombinationen der Vorzeichen).
+  </Hint>
+  <Step>
+    **Fall 1:** $2x - 4 \geq 0$ und $-x + 2 \geq 0$
+    $\Rightarrow x = 2$ (zulässiger Bereich)
+    
+    $2x - 4 - 1 = -x + 2 \Rightarrow x = \frac{7}{3}$
+    
+    Nicht im zulässigen Bereich!
+  </Step>
+  <Step>
+    **Fall 2:** $2x - 4 < 0$ und $-x + 2 \geq 0$
+    $\Rightarrow x < 2$ (zulässiger Bereich)
+    
+    $-(2x - 4) - 1 = -x + 2 \Rightarrow x = 1$
+    
+    Gültige Lösung!
+  </Step>
+  <Step>
+    **Fall 3:** $2x - 4 \geq 0$ und $-x + 2 < 0$
+    $\Rightarrow x > 2$ (zulässiger Bereich)
+    
+    $2x - 4 - 1 = x - 2 \Rightarrow x = 3$
+    
+    Gültige Lösung!
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{1, 3\}$.
+  </Solution>
+</Exercise>
+
+## Komplexe Zahlen
+
+### Grundoperationen
+
+<Callout type="info" title="Rechenregeln">
+Bei der Division komplexer Zahlen erweitert man mit der komplex Konjugierten des Nenners:
+
+$$\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c - di)} = \frac{(a + bi)(c - di)}{c^2 + d^2}$$
+</Callout>
+
+<Exercise title="Komplexe Arithmetik" difficulty="easy">
+  <Task>
+    Berechne für $z_1 = 7 + 14i$ und $z_2 = 1 + 7i$:
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    Addition: $(7 + 14i) + (1 + 7i) = 8 + 21i$
+    
+    Subtraktion: $(7 + 14i) - (1 + 7i) = 6 + 7i$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$(7 + 14i)(1 + 7i) = 7 + 49i + 14i + 98i^2 = -91 + 63i$$
+  </Step>
+  <Step>
+    Division:
+    $$\frac{7 + 14i}{1 + 7i} = \frac{(7 + 14i)(1 - 7i)}{50} = \frac{105 - 35i}{50} = \frac{21}{10} - \frac{7}{10}i$$
+  </Step>
+</Exercise>
+
+### Quadratische Gleichungen im Komplexen
+
+<Exercise title="Komplexe Nullstellen" difficulty="medium">
+  <Task>
+    Löse $z^2 + 4 = 0$ über $\mathbb{C}$.
+  </Task>
+  <Solution>
+    $$z^2 = -4 \Rightarrow z = \pm 2i$$
+    
+    Die Lösungsmenge ist $\mathbb{L} = \{2i, -2i\}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Gleichung mit komplexen Koeffizienten" difficulty="hard">
+  <Task>
+    Löse $z^2 - iz + 6 = 0$.
+  </Task>
+  <Step>
+    Mit der p-q-Formel für $p = -i$ und $q = 6$:
+    $$z_{1,2} = \frac{i}{2} \pm \sqrt{\frac{-1}{4} - 6}$$
+  </Step>
+  <Step>
+    $$z_{1,2} = \frac{i}{2} \pm \sqrt{-\frac{25}{4}} = \frac{i}{2} \pm \frac{5i}{2}$$
+  </Step>
+  <Solution>
+    $\mathbb{L} = \{3i, -2i\}$
+  </Solution>
+</Exercise>
