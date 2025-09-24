@@ -219,16 +219,102 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
   <Step>
     **Wahrheitstafel erstellen**
     
-    | A | B | C | $B \vee C$ | $A \wedge (B \vee C)$ | $A \vee C$ | $B \vee C$ | $(A \vee C) \wedge (B \vee C)$ |
-    |---|---|---|------------|------------------------|------------|------------|----------------------------------|
-    | w | w | w | w | w | w | w | w |
-    | w | w | f | w | w | w | w | w |
-    | w | f | w | w | w | w | w | w |
-    | w | f | f | f | **f** | w | f | **f** |
-    | f | w | w | w | f | w | w | **w** |
-    | f | w | f | w | f | f | w | f |
-    | f | f | w | w | f | w | w | **w** |
-    | f | f | f | f | f | f | f | f |
+    <Table lines="both" align="center">
+      <thead>
+        <tr>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>$B \vee C$</th>
+          <th>$A \wedge (B \vee C)$</th>
+          <th>$A \vee C$</th>
+          <th>$B \vee C$</th>
+          <th>$(A \vee C) \wedge (B \vee C)$</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+        </tr>
+        <tr>
+          <td>w</td>
+          <td>w</td>
+          <td>f</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+        </tr>
+        <tr>
+          <td>w</td>
+          <td>f</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+        </tr>
+        <tr>
+          <td>w</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>w</td>
+          <td>f</td>
+          <td>f</td>
+        </tr>
+        <tr>
+          <td>f</td>
+          <td>w</td>
+          <td>w</td>
+          <td>w</td>
+          <td><strong>f</strong></td>
+          <td>w</td>
+          <td>w</td>
+          <td><strong>w</strong></td>
+        </tr>
+        <tr>
+          <td>f</td>
+          <td>w</td>
+          <td>f</td>
+          <td>w</td>
+          <td>f</td>
+          <td>f</td>
+          <td>w</td>
+          <td>f</td>
+        </tr>
+        <tr>
+          <td>f</td>
+          <td>f</td>
+          <td>w</td>
+          <td>w</td>
+          <td><strong>f</strong></td>
+          <td>w</td>
+          <td>w</td>
+          <td><strong>w</strong></td>
+        </tr>
+        <tr>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+          <td>f</td>
+        </tr>
+      </tbody>
+    </Table>
   </Step>
   
   <Solution>
@@ -240,8 +326,7 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
   </Solution>
 </Exercise>
 
-## Quadratische Gleichungen
-
+## Quadratische Gleichungen 
 
 
 <Exercise title="Aufgabe 5: Quadratische Gleichungen lösen" difficulty="medium">
@@ -265,16 +350,32 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
     Mit der pq-Formel: $p = -5$, $q = 6$
     
     $$
-    x_{1,2} = -\frac{-5}{2} \pm \sqrt{\left(\frac{-5}{2}\right)^2 - 6} = 2{,}5 \pm \sqrt{0{,}25} = 2{,}5 \pm 0{,}5
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-5}{2} \pm \sqrt{ \left( \frac{-5}{2} \right)^{2}-6 } \\
+    &= 2,5 \pm \sqrt{ 0,25 } \\
+    &= 2,5 \pm 0,5 = 2 ; 3 \\
+    \mathbb{L} &= \{ 2, 3 \}
+    \end{align*}
     $$
   </Step>
   
   <Step>
     **Teil (ii): $(4 - x)^2 = 0$**
     
-    Die Gleichung ist äquivalent zu $4 - x = 0$, also $x = 4$.
+    Die Gleichung ist äquivalent zu $(4 - x)\cdot (4-x) = 0$. Betrachten wir dies als Produkt zweier Faktoren, so folgt aus dem Satz vom Nullprodukt:
+    $4 - x = 0 \Rightarrow x = 4$. da beide Faktoren identisch sind, handelt es sich um eine doppelte Nullstelle.
     
     Alternativ ausmultipliziert: $x^2 - 8x + 16 = 0$ mit Lösung $x = 4$ (doppelte Nullstelle).
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-8}{2} \pm \sqrt{ \left( \frac{-8}{2} \right)^{2}-16 } \\
+    &= 4 \pm \sqrt{ 0 } \\
+    &= 4 \pm 0 = 4 \\
+    \mathbb{L} &= \{ 4 \}
+    \end{align*}
+    $$
   </Step>
   
   <Step>
@@ -283,6 +384,17 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
     Ausklammern: $x(-x + 3) = 0$
     
     Nach dem Satz vom Nullprodukt: $x = 0$ oder $-x + 3 = 0$, also $x = 3$
+
+    Alternativ lösen mittels pq-Formel: $p = -3$, $q = 0$ nachdem die Gleichung in Normalform gebracht wurde mit: $x^2 - 3x + 0 = 0$
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-3}{2} \pm \sqrt{ \left( \frac{-3}{2} \right)^{2}-0 } \\
+    &= 1,5 \pm \sqrt{ 1,5^{2} } \\
+    &= 1,5 \pm 1,5 = 0 ; 3 \\
+    \mathbb{L} &= \{ 0\, ;\,  3 \}
+    \end{align*}
+    $$
   </Step>
   
   <Step>
@@ -290,13 +402,23 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
     
     Umformen und normalisieren:
     $$
-    2x^2 + 16x + 24 = 0 \quad \Rightarrow \quad x^2 + 8x + 12 = 0
+    \begin{align*}
+    2x^2 + 16x + 24 &= 0 & & | :2 \\
+    \Rightarrow \quad x^2 + 8x + 12 &= 0
+    \end{align*}
     $$
-    
-    Mit pq-Formel: $p = 8$, $q = 12$
+    <br />
+    Mit der pq-Formel: $p = 8$, $q = 12$
     $$
-    x_{1,2} = -4 \pm \sqrt{16 - 12} = -4 \pm 2
+    \begin{align*}
+    x_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{8}{2} \pm \sqrt{ \left( \frac{8}{2} \right)^{2}-12 } \\
+    &= -4 \pm \sqrt{ 4 } \\
+    &= -4 \pm 2 = -6 ; -2 \\
+    \mathbb{L} &= \{ -6\, ;\,  -2 \}
+    \end{align*}
     $$
+
   </Step>
   
   <Solution>
@@ -314,13 +436,13 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
 
 <PascalsTriangle 
   title="Pascalsches Dreieck"
-  initialLevel={7}
+  initialLevel={3}
   minLevel={0}
   maxLevel={12}
 />
 
-<Exercise title="Aufgabe 6: Binomialkoeffizienten" difficulty="hard">
-  <Task variant="compact">
+<Exercise title="Aufgabe 6a: Binomialkoeffizienten" difficulty="hard">
+  <Task>
     **Teil a)** Berechnen Sie folgende Binomialkoeffizienten:
     <NumberedList tight>
       <li>$\binom{5}{2}$</li>
@@ -331,38 +453,156 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
     </NumberedList>
   </Task>
   
-  <Task variant="compact">
-    **Teil b)** Zeigen Sie folgende Gleichheit:
-    $$
-    \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}
-    $$
-  </Task>
+
   
   <Hint>
     Verwenden Sie die Formel $\binom{n}{k} = \frac{n!}{k! \cdot (n-k)!}$ und beachten Sie, dass $0! = 1$.
   </Hint>
   
   <Step>
-    **Teil a) Berechnungen**
-    
-    <NumberedList tight>
-      <li>$\binom{5}{2} = \frac{5!}{2! \cdot 3!} = \frac{5 \cdot 4}{2 \cdot 1} = 10$</li>
-      <li>$\binom{6}{4} = \frac{6!}{4! \cdot 2!} = \frac{6 \cdot 5}{2 \cdot 1} = 15$</li>
-      <li>$\binom{4}{4} = \frac{4!}{4! \cdot 0!} = 1$</li>
-      <li>$\binom{n}{1} = \frac{n!}{1! \cdot (n-1)!} = n$</li>
-      <li>$\binom{n}{n} = \frac{n!}{n! \cdot 0!} = 1$</li>
-    </NumberedList>
+  Teilaufgabe 1: 
+  $$
+  \begin{align*}
+  &= \frac{5!}{2!\cdot (5-2)!} \\
+  \\
+  &= \frac{5!}{2!\cdot 3!} \\ \\
+
+  &= \frac{120}{12} \\ \\
+
+  &= 10
+  \end{align*}
+  $$
+  </Step>
+  <Step>
+  Teilaufgabe 2: 
+  $$
+  \begin{align*}
+  &= \frac{6!}{4!\cdot (6-4)!} \\ 
+  \\
+  &= \frac{6!}{4!\cdot 2!} \\ 
+  \\
+  &= \frac{720}{48} \\ 
+  \\
+  &= 15
+  \end{align*}
+  $$
+  </Step>
+  <Step>
+  Teilaufgabe 3: 
+  $$
+  \begin{align*}
+  &= \frac{4!}{4!\cdot 0!} \\ 
+  \\
+  &= \frac{4!}{4!} \\ 
+  \\
+  &= 1
+  \end{align*}
+  $$
+  </Step>
+  <Step>
+  Teilaufgabe 4: 
+  $$
+  \begin{align*}
+  &= \frac{n!}{1!\cdot (n-1)!} \\
+  \\
+  &= \frac{n!}{(n-1)!} \\
+  \\
+  &= \frac{n\cdot \cancel{ (n-1) }\cdot \cancel{ (n-2) }\cdot \cancel{ (n-3) } \dots \cancel{ 2 } \cdot \cancel{ 1 } }{\cancel{ (n-1) }\cdot \cancel{ (n-2) }\cdot \cancel{ (n-3) }\dots \cancel{ 2 } \cdot \cancel{ 1 }} \\
+  \\
+  &= n
+  \end{align*}
+  $$
+  </Step>
+  <Step>
+  Teilaufgabe 5: 
+  $$
+  \begin{align*}
+  &= \frac{n!}{n!\cdot (n-n)!} \\
+  \\
+  &= \frac{n!}{n! \cdot \underbrace{ 0! }_{ 1 }} \\
+  \\
+  &= \frac{n!}{n!} \\
+  \\
+  &= 1
+  \end{align*}
+  $$
   </Step>
   
+  <Solution>
+    Die Binomialkoeffizienten sind:
+    <NumberedList tight>
+      <li>10</li>
+      <li>15</li>
+      <li>1</li>
+      <li>$n$</li>
+      <li>1</li>
+    </NumberedList>
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 6b: Beweis der Additionsregel" difficulty="hard">
+  <Task>
+    **Teil b)** Beweisen Sie die Additionsregel der Binomialkoeffizienten:
+    $$
+    \binom{n}{k} + \binom{n}{k+1} = \binom{n+1}{k+1}
+    $$
+    für alle $n \in \mathbb{N}_0$ und $0 \leq k < n$.
+  </Task>
+  
+  <Hint>
+    Verwenden Sie die Definition der Binomialkoeffizienten und formen Sie die linke Seite um, um die rechte Seite zu erhalten.
+  </Hint>
+  
   <Step>
-    **Teil b) Beweis der Additionsregel**
-    
-    Linke Seite:
+    Wir betrachten zunächst die linke Seite und führen die Umformung in Faktorialschreibweise durch:
     $$
     \binom{n}{k} + \binom{n}{k+1} = \frac{n!}{k!(n-k)!} + \frac{n!}{(k+1)!(n-k-1)!}
     $$
-    
-    Hauptnenner bilden:
+  </Step>
+  <Step>
+    Hauptnenner bilden, in dem wir beide Brüche auf den folgenden gemeinsamen Nenner bringen: 
+    $$
+    (k+1)!(n-k)!
+    $$
+    <br />
+    Zunächst den ersten Bruch mit $\frac{(k+1)}{(k+1)}$ erweitern:
+    $$
+    \begin{align*}
+    &= \frac{n!(k+1)}{(k+1) \cdot k!(n-k)!} \\
+    &= \frac{n!(k+1)}{(k+1)!(n-k)!}
+    \end{align*}
+    $$
+    <br />
+    Diese vereinfachung kann durchgeführt werden, da $(k+1) \cdot k! = (k+1)!$ gilt. Man führt sich das Faktorial ausgeschrieben vor Augen:
+    $$
+    \begin{align*}
+    k! &=   & k \cdot (k-1) \dots 2 \cdot 1 \\
+    (k+1) \cdot k! &= (k+1) \cdot  & k \cdot (k-1) \dots 2 \cdot 1 \\
+    (k+1)! &= (k+1) \cdot  & k \cdot (k-1) \dots 2 \cdot 1
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+
+    Nun den zweiten Bruch mit $\frac{(n-k)}{(n-k)}$ erweitern:
+    $$
+    \begin{align*}
+    &= \frac{n!(n-k)}{(k+1)!(n-k-1) \cdot (n-k)} \\
+    &= \frac{n!(n-k)}{(k+1)!(n-k)!}
+    \end{align*}
+    $$
+    Auch hier gilt die Vereinfachung, da $(n-k-1) \cdot (n-k) = (n-k)!$. 
+    Nochmal ausgeschrieben:
+    $$
+    \begin{align*}
+    (n-k)! &=   & (n-k) \cdot (n-k-1) \cdot (n-k-2) \dots 2 \cdot 1 \\
+    (n-k-1) \cdot (n-k) &= (n-k) \cdot  & (n-k-1) \cdot (n-k-2) \dots 2 \cdot 1 \\
+    (n-k)! &= (n-k) \cdot  & (n-k-1) \cdot (n-k-2) \dots 2 \cdot 1
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Jetzt können wir die beiden Brüche addieren, da sie denselben Nenner haben:
     $$
     = \frac{n!(k+1) + n!(n-k)}{(k+1)!(n-k)!} = \frac{n!(n+1)}{(k+1)!(n-k)!}
     $$
@@ -371,16 +611,7 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
   </Step>
   
   <Solution>
-    **Teil a)** Die Binomialkoeffizienten sind:
-    <NumberedList tight>
-      <li>10</li>
-      <li>15</li>
-      <li>1</li>
-      <li>$n$</li>
-      <li>1</li>
-    </NumberedList>
-
-    **Teil b)** Die Additionsregel beschreibt, wie im Pascalschen Dreieck jede Zahl die Summe der beiden darüberliegenden Zahlen ist. Dies ist fundamental für die Konstruktion des Dreiecks.
+    Der Beweis zeigt, dass die Additionsregel korrekt ist. Diese Regel ist fundamental für die Konstruktion des Pascalschen Dreiecks, da jede Zahl die Summe der beiden darüberliegenden Zahlen ist.
   </Solution>
 </Exercise>
 
@@ -460,17 +691,3 @@ Dieses Tutorium behandelt fundamentale mathematische Konzepte, die als Basis fü
 - **Quadratische Gleichungen**: Die pq-Formel ist universell anwendbar, aber manchmal sind alternative Methoden effizienter
 - **Binomialkoeffizienten**: Das Pascalsche Dreieck verbindet Kombinatorik mit Algebra auf elegante Weise
 </Callout>
-
-<FeatureGrid>
-  <FeatureCard title="Weiterführende Übungen" icon="📚" color="blue">
-    Versuchen Sie, eigene Beispiele zu konstruieren und die gelernten Konzepte anzuwenden.
-  </FeatureCard>
-  
-  <FeatureCard title="Praxisbezug" icon="🎯" color="green">
-    Diese Grundlagen werden Sie in Analysis, Linearer Algebra und Stochastik wiederfinden.
-  </FeatureCard>
-  
-  <FeatureCard title="Selbstkontrolle" icon="✅" color="purple">
-    Lösen Sie die Aufgaben zunächst ohne Lösungsvorschlag und vergleichen Sie dann.
-  </FeatureCard>
-</FeatureGrid>
