@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types';
 import { ExternalLink } from 'lucide-react';
+import Image, { ImageProps } from 'next/image';
 import React from 'react';
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode };
 
@@ -26,6 +27,7 @@ import {
   Table,
 } from '@/components/markdown/CustomComponents';
 import Exercise, { Hint as ExerciseHint, Solution as ExerciseSolution, Step as ExerciseStep, Task as ExerciseTask } from '@/components/markdown/Exercise';
+import QuadraticSolver from '@/components/markdown/QuadraticSolver';
 import PostPager from '@/components/PostPager';
 
 // Non-hook version for server-side usage
@@ -35,6 +37,15 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     <div className="not-prose">
       {React.createElement<P>(Comp, props)}
     </div>
+  );
+
+  const MdxImage: React.FC<ImageProps> = ({ className, ...props }) => (
+    <Image
+      {...props}
+      className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', className]
+        .filter(Boolean)
+        .join(' ')}
+    />
   );
 
   return {
@@ -53,7 +64,18 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
     Download: withNotProse(Download),
+    QuadraticSolver: withNotProse(QuadraticSolver),
     Table: withNotProse(Table),
+
+    Image: withNotProse(MdxImage),
+    img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+      <img
+        {...props}
+        className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', props.className]
+          .filter(Boolean)
+          .join(' ')}
+      />
+    ),
 
     // Blog navigation
     PostPager: withNotProse(PostPager),

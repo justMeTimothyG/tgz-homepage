@@ -2,6 +2,7 @@
 
 import type { MDXComponents } from 'mdx/types';
 import { ExternalLink } from 'lucide-react';
+import Image, { ImageProps } from 'next/image';
 import React, { ReactNode, useMemo } from 'react';
 
 import {
@@ -25,6 +26,7 @@ import {
   Download,
   Table,
 } from '@/components/markdown/CustomComponents';
+import QuadraticSolver from '@/components/markdown/QuadraticSolver';
 import ExerciseClient, { ExerciseContentProps, TaskItem } from '@/components/markdown/ExerciseClient';
 import PostPager from '@/components/PostPager';
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode };
@@ -158,6 +160,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     </div>
   );
 
+  const MdxImage: React.FC<ImageProps> = ({ className, ...props }) => (
+    <Image
+      {...props}
+      className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', className]
+        .filter(Boolean)
+        .join(' ')}
+    />
+  );
+
   return {
     Exercise: withNotProse(ExercisePreview),
     Task,
@@ -171,7 +182,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PascalsTriangle: withNotProse(PascalsTriangle),
     VennSets: withNotProse(VennSets),
     Download: withNotProse(Download),
+    QuadraticSolver: withNotProse(QuadraticSolver),
     Table: withNotProse(Table),
+
+    Image: withNotProse(MdxImage),
+    img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
+      <img {...props} className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', props.className]
+        .filter(Boolean)
+        .join(' ')} />
+    ),
 
     PostPager: withNotProse(PostPager),
 
