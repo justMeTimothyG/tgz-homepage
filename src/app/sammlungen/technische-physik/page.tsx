@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { type CollectionResource } from '@/lib/collection-resources';
+import { getCollectionResource, type CollectionResource } from '@/lib/collection-resources';
 
 export const metadata: Metadata = {
   title: 'Technische Physik I Sammlung – Timothy Lüdtke',
@@ -39,6 +39,19 @@ const pageSections: SectionConfig[] = [
     resources: [
       {
         title: 'Weitere Ressourcen folgen',
+        variant: 'note',
+      },
+    ],
+  },
+  {
+    key: 'tutorium',
+    title: 'Tutorium & Übungen',
+    description:
+      'Aufgaben aus dem Tutorium mit Lösungen und Denkanstößen, um die Inhalte der Vorlesung praktisch zu verankern.',
+    resources: [
+      getCollectionResource('physik-i-tutorium-i'),
+      {
+        title: 'Weitere Übungen folgen',
         variant: 'note',
       },
     ],
