@@ -160,9 +160,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     </div>
   );
 
-  const MdxImage: React.FC<ImageProps> = ({ className, ...props }) => (
+  const MdxImage: React.FC<ImageProps> = ({ className, alt = '', ...props }) => (
     <Image
       {...props}
+      alt={alt}
       className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', className]
         .filter(Boolean)
         .join(' ')}
@@ -186,10 +187,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Table: withNotProse(Table),
 
     Image: withNotProse(MdxImage),
-    img: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
-      <img {...props} className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', props.className]
-        .filter(Boolean)
-        .join(' ')} />
+    img: ({ className, alt, ...imgProps }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+      // eslint-disable-next-line @next/next/no-img-element -- Raw img keeps MDX authoring flexibility when Next/Image constraints are unsuitable.
+      <img
+        {...imgProps}
+        alt={alt ?? ''}
+        className={['rounded-lg border border-slate-200 shadow-sm dark:border-slate-700', className]
+          .filter(Boolean)
+          .join(' ')}
+      />
     ),
 
     PostPager: withNotProse(PostPager),

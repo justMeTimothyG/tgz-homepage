@@ -40,7 +40,7 @@ const eslintConfig = [
       "@next/next/no-assign-module-variable": "off", // Allow module assignments for dynamic imports
       
       // Allow console in development but warn in production
-      "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+      "no-console": process.env.NODE_ENV === "production" ? ["warn", { allow: ["error"] }] : "off",
       
       // Relax some strict rules for active development
       "@typescript-eslint/ban-ts-comment": "warn", // Allow @ts-ignore with warning

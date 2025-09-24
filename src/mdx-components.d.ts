@@ -1,6 +1,8 @@
 import 'mdx/types';
 import type React from 'react';
 
+type EmptyProps = Record<string, never>;
+
 declare module 'mdx/types' {
   // Augment the MDX component mapping for IntelliSense in .mdx files
   // Keep props aligned with implementations under src/components/markdown
@@ -19,11 +21,11 @@ declare module 'mdx/types' {
     Solution: (props: { children?: React.ReactNode }) => React.ReactNode;
 
     // Calculators & interactive widgets
-    GcdCalculator: (props: {}) => React.ReactNode;
-    LcmCalculator: (props: {}) => React.ReactNode;
-    GaussianElimination: (props: {}) => React.ReactNode;
-    PascalsTriangle: (props: {}) => React.ReactNode;
-    VennSets: (props: {}) => React.ReactNode;
+    GcdCalculator: (props: EmptyProps) => React.ReactNode;
+    LcmCalculator: (props: EmptyProps) => React.ReactNode;
+    GaussianElimination: (props: EmptyProps) => React.ReactNode;
+    PascalsTriangle: (props: EmptyProps) => React.ReactNode;
+    VennSets: (props: EmptyProps) => React.ReactNode;
 
     // Download
     Download: (props:
@@ -75,4 +77,3 @@ declare module 'mdx/types' {
     ExternalLinkComponent: (props: React.ComponentProps<'a'>) => React.ReactNode;
   }
 }
-

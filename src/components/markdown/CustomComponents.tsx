@@ -66,7 +66,7 @@ function enhanceTableTree(node: React.ReactNode, opts: TableEnhanceOptions): Rea
   const bodyPad = opts.dense ? ['[&>tr>td]:px-3', '[&>tr>td]:py-1.5'] : ['[&>tr>td]:px-4', '[&>tr>td]:py-2.5'];
 
   return React.Children.map(node, (child) => {
-    if (!React.isValidElement(child)) return child;
+    if (!React.isValidElement<React.HTMLAttributes<HTMLElement>>(child)) return child;
 
     const type = typeof child.type === 'string' ? child.type : undefined;
     const addedClasses: string[] = [];
@@ -109,7 +109,7 @@ function enhanceTableTree(node: React.ReactNode, opts: TableEnhanceOptions): Rea
 }
 
 // Table component with configurable borders and alignment
-export function Table({ lines = 'horizontal', align = 'left', dense = false, className, children, ...rest }: TableProps) {
+function Table({ lines = 'horizontal', align = 'left', dense = false, className, children, ...rest }: TableProps) {
   const wrapperClass = cx('not-prose overflow-x-auto my-6', className);
   const alignClass = align === 'center' ? 'text-center' : align === 'right' ? 'text-right' : 'text-left';
   const tableClass = cx('w-full border-collapse border-spacing-0 text-sm', alignClass);
@@ -417,7 +417,7 @@ export interface NumberedListProps extends React.OlHTMLAttributes<HTMLOListEleme
   tight?: boolean;
 }
 
-export function NumberedList(props: NumberedListProps) {
+function NumberedList(props: NumberedListProps) {
   const {
     variant = 'decimal',
     tight = false,
@@ -472,7 +472,4 @@ export function NumberedList(props: NumberedListProps) {
 }
 
 // Export calculator utilities for reuse
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList };
-
-// Also export Table for MDX usage
-export { Table };
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, Table };
