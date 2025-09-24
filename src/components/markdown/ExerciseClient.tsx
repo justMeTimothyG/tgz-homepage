@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Eye, Lightbulb, ListOrdered, RotateCcw, Pencil } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 
 export interface TaskItem {
   content: ReactNode;
@@ -164,63 +165,104 @@ export default function ExerciseClient({
         )}
       </div>
 
-      {hints.length > 0 && visibleHints > 0 && (
-        <div className="mb-6">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-            <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-            Tipps:
-          </h4>
-          <div className="space-y-3">
-            {hints.slice(0, visibleHints).map((hint, index) => (
-              <div
-                key={index}
-                className="prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4"
-              >
-                {hint}
-              </div>
-            ))}
-          </div>
-          {visibleHints > 0 && visibleHints < hints.length && (
-            <button onClick={revealNextHint} className={`${inlineBtnHint} mt-3`}>
-              <Lightbulb className="w-4 h-4" />
-              Nächsten Tipp anzeigen
-            </button>
-          )}
-        </div>
-      )}
+      <AnimatePresence mode="wait">
+        {hints.length > 0 && visibleHints > 0 && (
+          <motion.div
+            key="hints"
+            layout
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="mb-6"
+          >
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              Tipps:
+            </h4>
+            <div className="space-y-3">
+              {hints.slice(0, visibleHints).map((hint, index) => (
+                <motion.div
+                  key={index}
+                  layout
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, ease: 'easeOut', delay: index * 0.05 }}
+                  className="overflow-x-auto"
+                >
+                  <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
+                    {hint}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            {visibleHints > 0 && visibleHints < hints.length && (
+              <button onClick={revealNextHint} className={`${inlineBtnHint} mt-3`}>
+                <Lightbulb className="w-4 h-4" />
+                Nächsten Tipp anzeigen
+              </button>
+            )}
+            {visibleHints === hints.length && steps.length > 0 && visibleSteps === 0 && (
+              <button onClick={revealNextStep} className={`${inlineBtnStep} mt-3`}>
+                <ListOrdered className="w-4 h-4" />
+                Ersten Schritt anzeigen
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {steps.length > 0 && visibleSteps > 0 && (
-        <div className="mb-6">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-            <ListOrdered className="w-4 h-4 text-green-600 dark:text-green-400" />
-            Rechenweg:
-          </h4>
-          <div className="space-y-5">
-            {steps.slice(0, visibleSteps).map((step, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-sm font-semibold">
-                  {index + 1}
-                </div>
-                <div className="flex-1 prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
-                  {step}
-                </div>
-              </div>
-            ))}
-          </div>
-          {visibleSteps > 0 && visibleSteps < steps.length && (
-            <button onClick={revealNextStep} className={`${inlineBtnStep} mt-4`}>
-              <ListOrdered className="w-4 h-4" />
-              Nächsten Schritt anzeigen
-            </button>
-          )}
-          {visibleSteps === steps.length && !showSolution && solutions.length > 0 && (
-            <button onClick={() => setShowSolution(true)} className={`${inlineBtnSolution} mt-4`}>
-              <Eye className="w-4 h-4" />
-              Lösung anzeigen
-            </button>
-          )}
-        </div>
-      )}
+      <AnimatePresence mode="wait">
+        {steps.length > 0 && visibleSteps > 0 && (
+          <motion.div
+            key="steps"
+            layout
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="mb-6"
+          >
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <ListOrdered className="w-4 h-4 text-green-600 dark:text-green-400" />
+              Rechenweg:
+            </h4>
+            <div className="space-y-5">
+              {steps.slice(0, visibleSteps).map((step, index) => (
+                <motion.div
+                  key={index}
+                  layout
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2, ease: 'easeOut', delay: index * 0.05 }}
+                  className="flex items-start gap-3"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-sm font-semibold">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1 overflow-x-auto">
+                    <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
+                      {step}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            {visibleSteps > 0 && visibleSteps < steps.length && (
+              <button onClick={revealNextStep} className={`${inlineBtnStep} mt-4`}>
+                <ListOrdered className="w-4 h-4" />
+                Nächsten Schritt anzeigen
+              </button>
+            )}
+            {visibleSteps === steps.length && !showSolution && solutions.length > 0 && (
+              <button onClick={() => setShowSolution(true)} className={`${inlineBtnSolution} mt-4`}>
+                <Eye className="w-4 h-4" />
+                Lösung anzeigen
+              </button>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {showSolution && solutions.length > 0 && (
         <div className="mb-4">
@@ -228,9 +270,13 @@ export default function ExerciseClient({
             <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             Lösung:
           </h4>
-          <div className="prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
+          <div className="space-y-4">
             {solutions.map((solution, index) => (
-              <React.Fragment key={index}>{solution}</React.Fragment>
+              <div key={index} className="overflow-x-auto">
+                <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
+                  {solution}
+                </div>
+              </div>
             ))}
           </div>
         </div>
