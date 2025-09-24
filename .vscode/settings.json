@@ -17,4 +17,7 @@
   // Use workspace ESLint
   "eslint.runtime": "node",
   "eslint.packageManager": "npm"
+  ,
+  // Use the workspace TypeScript for MDX IntelliSense
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
