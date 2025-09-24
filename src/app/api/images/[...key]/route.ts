@@ -14,9 +14,12 @@ function isInvalidKey(key: string): boolean {
 
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { key?: string[] } },
+  context: { params: Promise<Record<string, string | string[] | undefined>> },
 ) {
-  const keySegments = params.key ?? [];
+  const resolvedParams = await context.params;
+  const rawKey = resolvedParams?.['key'];
+  const keySegments = (Array.isArray(rawKey) ? rawKey : rawKey ? [rawKey] : [])
+    .filter((segment): segment is string => Boolean(segment));
   const objectKey = keySegments.join('/');
   const normalizedKey = objectKey.replace(/^\/+/, '');
 
