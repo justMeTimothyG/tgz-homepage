@@ -1,5 +1,5 @@
 # Multi-stage build for static Next.js deployment
-FROM ghcr.io/nodejs/node:20-alpine AS base
+FROM public.ecr.aws/docker/library/node:20-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
