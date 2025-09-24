@@ -29,11 +29,17 @@ function pascalRow(n: number): number[] {
 
 // formatTerm (nur Terme ohne konkrete Zahlen) wurde entfernt, da aktuell ungenutzt
 
+function formatBase(value: number, exponent: number): string {
+  const normalized = Object.is(value, -0) ? 0 : value;
+  const base = normalized < 0 ? `(${normalized})` : String(normalized);
+  return exponent > 1 ? `${base}^${exponent}` : base;
+}
+
 function formatTermWithValues(coeff: number, aPow: number, bPow: number, a: number, b: number): string {
   const parts: string[] = [];
   parts.push(String(coeff));
-  if (aPow > 0) parts.push(`${a}${aPow > 1 ? `^${aPow}` : ""}`);
-  if (bPow > 0) parts.push(`${b}${bPow > 1 ? `^${bPow}` : ""}`);
+  if (aPow > 0) parts.push(formatBase(a, aPow));
+  if (bPow > 0) parts.push(formatBase(b, bPow));
   return parts.join("·");
 }
 
@@ -47,6 +53,7 @@ export default function PascalsTriangle({
   const [level, setLevel] = useState<number>(Math.min(Math.max(initialLevel, minLevel), maxLevel));
   const [aInput, setAInput] = useState<string>("");
   const [bInput, setBInput] = useState<string>("");
+  const [operation, setOperation] = useState<"plus" | "minus">("plus");
 
   const coeffs = useMemo(() => pascalRow(level), [level]);
 
@@ -89,18 +96,23 @@ export default function PascalsTriangle({
     });
   }, [coeffs, level, valueColorIndex]);
 
-  const numbersProvided = aInput.trim() !== "" && bInput.trim() !== "" && !isNaN(Number(aInput)) && !isNaN(Number(bInput));
+  const numbersProvided =
+    aInput.trim() !== "" &&
+    bInput.trim() !== "" &&
+    !isNaN(Number(aInput)) &&
+    !isNaN(Number(bInput));
 
   const numericExpansion = useMemo(() => {
     if (!numbersProvided) return null;
     const aNum = Number(aInput);
     const bNum = Number(bInput);
+    const effectiveB = operation === "minus" ? -bNum : bNum;
     const terms = coeffs.map((c, k) => {
       const aPow = level - k;
       const bPow = k;
-      const termVal = c * Math.pow(aNum, aPow) * Math.pow(bNum, bPow);
+      const termVal = c * Math.pow(aNum, aPow) * Math.pow(effectiveB, bPow);
       return {
-        display: formatTermWithValues(c, aPow, bPow, aNum, bNum),
+        display: formatTermWithValues(c, aPow, bPow, aNum, effectiveB),
         value: termVal,
       };
     });
@@ -109,7 +121,7 @@ export default function PascalsTriangle({
       display: terms.map((t) => t.display).join(" + "),
       sum,
     };
-  }, [numbersProvided, coeffs, level, aInput, bInput]);
+  }, [numbersProvided, coeffs, level, aInput, bInput, operation]);
 
   const inc = () => setLevel((n) => Math.min(n + 1, maxLevel));
   const dec = () => setLevel((n) => Math.max(n - 1, minLevel));
@@ -117,6 +129,8 @@ export default function PascalsTriangle({
     setAInput("");
     setBInput("");
   };
+
+  const operationSymbol = operation === "minus" ? "-" : "+";
 
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-6 my-4 bg-white dark:bg-gray-800">
@@ -131,8 +145,8 @@ export default function PascalsTriangle({
       </div>
 
       {/* Inputs for a and b with Clear */}
-      <div className="mb-6 flex items-end gap-3">
-        <div className="flex-1">
+      <div className="mb-6 flex flex-wrap items-end gap-3">
+        <div className="flex-1 min-w-[12rem]">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pr-4 bg-gray-100 dark:bg-gray-600 border-r border-gray-300 dark:border-gray-500 rounded-l-lg">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">a</span>
@@ -147,7 +161,17 @@ export default function PascalsTriangle({
             />
           </div>
         </div>
-        <div className="flex-1">
+        <button
+          type="button"
+          onClick={() => setOperation((prev) => (prev === "plus" ? "minus" : "plus"))}
+          className="w-12 h-12 inline-flex items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          aria-pressed={operation === "minus"}
+          aria-label="Operation umschalten"
+          title="Zwischen Plus und Minus wechseln"
+        >
+          {operation === "minus" ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+        </button>
+        <div className="flex-1 min-w-[12rem]">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pr-4 bg-gray-100 dark:bg-gray-600 border-r border-gray-300 dark:border-gray-500 rounded-l-lg">
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">b</span>
@@ -179,7 +203,10 @@ export default function PascalsTriangle({
           <div className="flex flex-wrap items-center gap-2 text-amber-900 dark:text-amber-100">
             <span
               dangerouslySetInnerHTML={{
-                __html: katex.renderToString(`(a + b)^{${level}} =`, { throwOnError: false, displayMode: false }),
+                __html: katex.renderToString(`(a ${operationSymbol} b)^{${level}} =`, {
+                  throwOnError: false,
+                  displayMode: false,
+                }),
               }}
             />
             {termDescriptors.map((t, i) => {
@@ -208,7 +235,12 @@ export default function PascalsTriangle({
                   </span>
                   {i < termDescriptors.length - 1 && (
                     <span
-                      dangerouslySetInnerHTML={{ __html: katex.renderToString('+', { throwOnError: false }) }}
+                      dangerouslySetInnerHTML={{
+                        __html: katex.renderToString(
+                          operation === "minus" ? (i % 2 === 0 ? '-' : '+') : '+',
+                          { throwOnError: false }
+                        ),
+                      }}
                       className="opacity-80"
                     />
                   )}
@@ -222,7 +254,7 @@ export default function PascalsTriangle({
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <div className="text-sm text-blue-700 dark:text-blue-300 font-medium mb-1">Mit Werten</div>
             <div className="font-mono text-sm text-blue-900 dark:text-blue-100 break-words">
-              ( {aInput} + {bInput} )^{level} = {numericExpansion.display}
+              ( {aInput} {operationSymbol} {bInput} )^{level} = {numericExpansion.display}
             </div>
             <div className="mt-2 text-blue-900 dark:text-blue-100 font-semibold">Ergebnis: {numericExpansion.sum}</div>
           </div>
