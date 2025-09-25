@@ -196,7 +196,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
             if (emojiRegex.test(part)) {
               return <span key={index} style={{ color: 'initial' }}>{part}</span>;
             } else if (part.trim()) {
-              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{part}</span>;
+              return <span key={index} className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500">{part}</span>;
             }
             return part;
           });
@@ -205,7 +205,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
           const className = (content.props as Record<string, unknown>)?.['className'];
           if (typeof className === 'string' && className.includes('katex')) return content;
         }
-        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-400 dark:to-rose-400">{content as React.ReactNode}</span>;
+        return <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-600 dark:from-emerald-400 dark:to-emerald-500">{content as React.ReactNode}</span>;
       };
 
       return (
