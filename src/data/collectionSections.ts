@@ -38,6 +38,13 @@ export const collectionSections: CollectionSection[] = [
           'Grundlagen, Verständnisfragen und Repetitorien für den Einstieg.',
         subtitle: '3. Semester',
       },
+      {
+        href: '/sammlungen/rechtliche-grundlagen',
+        title: 'Rechtliche Grundlagen',
+        description:
+          'Vorlesungsnotizen, thematische Vertiefungen und Lernreflexionen rund ums Zivilrecht in Bezug auf Wirtschaftsingenieurwesen.',
+        subtitle: '3. Semester',
+      },
     ],
   },
   {
