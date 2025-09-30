@@ -18,20 +18,19 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
   </Task>
   <Hint>
     Schreibe zunächst alle gegeben und gesuchten Größen mit ihren Einheiten auf.
-    **Gegeben:** 
-    Federkonstante $c = 0,8 \, \mathrm{\frac{N}{m}}$, 
+    <br />
+    **Gegeben:** <br />
+    Federkonstante $c = 0,8 \, \mathrm{\frac{N}{m}}$,  <br />
     Längenänderung $s = 45 \, \mathrm{mm} = 0,045 \, \mathrm{m}$
 
     <br />
-    **Gesucht:**
-    Gewichtskraft $F$ in Newton (N),
+    **Gesucht:** <br />
+    Gewichtskraft $F$ in Newton (N),  <br />
     Masse $m$ in Kilogramm (kg)
   </Hint>
   <Hint>
-    Nutze das Hookesche Gesetz: 
-    $$F = c \cdot s$$ 
-    für die Federkraft und 
-    $$F = m \cdot g$$ 
+    Nutze das Hookesche Gesetz: $F = c \cdot s$ <br />
+    für die Federkraft und $F = m \cdot g$ <br />
     für den Zusammenhang zwischen Gewichtskraft und Masse.
   </Hint>
   <Hint>
@@ -42,24 +41,42 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
   </Hint>
   <Step>
     Zunächst rechnen wir die Längenänderung in Meter um:
-    $$s = 45 \, \mathrm{mm} = 0,045 \, \mathrm{m} = 45 \cdot 10^{-3} \, \mathrm{m}$$
+    $$
+      \begin{align*}
+      s & = 45 \, \mathrm{mm} \\
+      & = 45 \cdot 10^{-3} \, \mathrm{m} \\
+      &  = 0,045 \, \mathrm{m} 
+      \end{align*}
+    $$
   </Step>
   <Step>
     Die Gewichtskraft berechnen wir mit dem Hookeschen Gesetz:
-    $$F = c \cdot s = 0,8 \, \mathrm{\frac{N}{m}} \cdot 0,045 \, \mathrm{m} = 0,036 \, \mathrm{N}$$
+    $$
+      \begin{align*}
+      F &= c \cdot s \\
+      & = 0,8 \, \mathrm{\frac{N}{m}} \cdot 0,045 \, \mathrm{m} \\
+      & = 0,036 \, \mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
-    Aus der Gewichtskraft ermitteln wir die Masse mit $F = m \cdot g$:
-    $$m = \frac{F}{g} = \frac{0,036 \, \mathrm{N}}{9,81 \, \mathrm{\frac{m}{s^2}}} = 0,00367 \, \mathrm{kg} = 3,67 \, \mathrm{g}$$
+    Aus der Gewichtskraft ermitteln wir die Masse mit $F = m \cdot g$, umgestellt nach $m$:
+    $$
+      \begin{align*}
+      m & = \frac{F}{g} \\
+      & = \frac{0,036 \, \mathrm{N}}{9,81 \, \mathrm{\frac{m}{s^2}}} = 0,00367 \, \mathrm{kg} \\
+      & = 3,67 \, \mathrm{g}
+      \end{align*}
+    $$
   </Step>
   <Solution>
-    Die Gewichtskraft beträgt $F = 0,036 \, \mathrm{N}$ und die Masse des Körpers ist $m \approx 3,67 \, \mathrm{g}$.
+    Die Gewichtskraft beträgt <span className="text-amber-700 dark:text-amber-300"> $F = 0,036 \, \mathrm{N}$ </span> und die Masse des Körpers ist <span className="text-amber-700 dark:text-amber-300"> $m = 3,67 \, \mathrm{g}$.</span>
   </Solution>
 </Exercise>
 
 ## Kräftesysteme und Resultierende
 
-<Exercise title="Resultierende Kraft im Versatz" difficulty="medium">
+<Exercise title="Aufgabe 2: Resultierende Kraft im Versatz" difficulty="medium">
   <Task>
     <Image 
       src="/api/images/physik-1/tut-01-0201.jpeg" 
@@ -72,46 +89,137 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
     <div className="clear-both" />
   </Task>
   <Hint>
-    Zerlege alle Kräfte in ihre x- und y-Komponenten. Die Winkel der Kräfte zur x-Achse sind: $F_1$: 0°, $F_2$: 135°, $F_3$: 255°, $F_4$: 195°.
+    Zerlege alle Kräfte in ihre x- und y-Komponenten. Bestimme die Winkel der Kräfte zur x-Achse.
+    <br />
+    Berücksichtige, dass die Winkel so zu bestimmen sind, dass die Vektoren vom Ursprung ausgehen.
+  </Hint>
+  <Hint>
+    Die Winkel der Kräfte zur x-Achse sind:
+    <br />
+    $$
+      \begin{align*}
+      F_1 &: 0°, \\
+      F_2 &: 315°, \\
+      F_3 &: 75°, \\
+      F_4 &: 15°
+      \end{align*}
+    $$
+
+  </Hint>
+  <Hint>
+    Die x- und y-Komponenten der Kräfte berechnen sich wie folgt:
+    $$
+      \begin{align*}
+      F_{x} & = F \cdot \cos(\alpha) \\
+      F_{y} & = F \cdot \sin(\alpha)
+      \end{align*}
+    $$
+    Die resultierenden Komponenten sind die Summen der Einzelkomponenten:
+    $$
+      \begin{align*}
+      F_{x,\text{ges}} & = \sum F_{x,i} \\
+      F_{y,\text{ges}} & = \sum F_{y,i}
+      \end{align*}
+    $$
+    Die resultierende Kraft berechnet sich dann zu:
+    $$
+      F_r = \sqrt{F_{x,\text{ges}}^2 + F_{y,\text{ges}}^2}
+    $$
+    Der Winkel zur x-Achse ist:
+    $$
+      \alpha = \arctan\left(\frac{F_{y,\text{ges}}}{F_{x,\text{ges}}}\right)
+    $$
   </Hint>
   <Step>
     Berechnung der x-Komponenten aller Kräfte:
-    $$F_{x,\text{ges}} = F_1 \cdot \cos(0°) + F_2 \cdot \cos(135°) + F_3 \cdot \cos(255°) + F_4 \cdot \cos(195°)$$
-    $$F_{x,\text{ges}} = 6000 \cdot 1 + 2000 \cdot (-0,707) + 2000 \cdot (-0,259) + 1200 \cdot (-0,966)$$
-    $$F_{x,\text{ges}} = 6000 - 1414 - 518 - 1159 = 2909 \, \mathrm{N}$$
+    <br />
+    $$
+      \begin{align*}
+      F_{x,\text{ges}} & = F_1 \cdot \cos(0°) + F_2 \cdot \cos(315°) + F_3 \cdot \cos(75°) + F_4 \cdot \cos(15°) \\
+      & = 6000 \cdot \cos(0°) + 2000 \cdot \cos(315°) + 2000 \cdot \cos(75°) + 1200 \cdot \cos(15°) \\
+      & = 9.090,9626 \,\mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
     Berechnung der y-Komponenten aller Kräfte:
-    $$F_{y,\text{ges}} = F_1 \cdot \sin(0°) + F_2 \cdot \sin(135°) + F_3 \cdot \sin(255°) + F_4 \cdot \sin(195°)$$
-    $$F_{y,\text{ges}} = 6000 \cdot 0 + 2000 \cdot 0,707 + 2000 \cdot (-0,966) + 1200 \cdot (-0,259)$$
-    $$F_{y,\text{ges}} = 0 + 1414 - 1932 - 311 = -829 \, \mathrm{N}$$
+    <br />
+    $$
+      \begin{align*}
+      F_{y,\text{ges}} & = F_1 \cdot \sin(0°) + F_2 \cdot \sin(315°) + F_3 \cdot \sin(75°) + F_4 \cdot \sin(15°) \\
+      & = 6000 \cdot \sin(0°) + 2000 \cdot \sin(315°) + 2000 \cdot \sin(75°) + 1200 \cdot \sin(15°) \\
+      & = 828,2209 \, \mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
     Berechnung der resultierenden Kraft:
-    $$F_r = \sqrt{F_{x,\text{ges}}^2 + F_{y,\text{ges}}^2} = \sqrt{2909^2 + (-829)^2} = \sqrt{8462281 + 687241}$$
-    $$F_r = \sqrt{9149522} = 3025 \, \mathrm{N} \approx 9,13 \, \mathrm{kN}$$
+    <br />
+    $$
+      \begin{align*}
+      F_r &= \sqrt{F_{x,\text{ges}}^2 + F_{y,\text{ges}}^2} \\
+      &= \sqrt{9090,9626^2 + (828,2209)^2} \\
+      &= 9.128,61 \mathrm{N} \approx 9,13 \, \mathrm{kN}
+    \end{align*}
+    $$
   </Step>
   <Step>
     Bestimmung des Winkels zur x-Achse:
-    $$\alpha = \arctan\left(\frac{F_{y,\text{ges}}}{F_{x,\text{ges}}}\right) = \arctan\left(\frac{-829}{2909}\right) = -15,9°$$
-    Da die Kraft im 4. Quadranten liegt (positives x, negatives y), addieren wir 360°:
-    $$\alpha = -15,9° + 360° = 344,1°$$
-    Alternativ als Winkel zur positiven x-Achse: $\alpha \approx 5,21°$ unter der x-Achse.
+    $$
+      \begin{align*}
+      \alpha &= \arctan\left(\frac{F_{y,\text{ges}}}{F_{x,\text{ges}}}\right) \\
+      &= \arctan\left(\frac{828,2209}{9090,9626}\right) \\
+      &= 5,2055° \approx 5,21°
+      \end{align*}
+    $$
   </Step>
   <Solution>
-    Die resultierende Kraft beträgt $F_r \approx 9,13 \, \mathrm{kN}$ und wirkt unter einem Winkel von $\alpha \approx 5,21°$ zur positiven x-Achse.
+    Die resultierende Kraft beträgt <span className="text-amber-700 dark:text-amber-300"> $F_r \approx 9,13 \, \mathrm{kN}$ </span> und wirkt unter einem Winkel von <span className="text-amber-700 dark:text-amber-300"> $\alpha \approx 5,21°$ </span> zur positiven x-Achse.
   </Solution>
 </Exercise>
 
 ## Schiefe Ebene
 
-<Exercise title="Kräfte auf der schiefen Ebene" difficulty="easy">
+<Exercise title="Aufgabe 3: Kräfte auf der schiefen Ebene" difficulty="easy">
   <Task>
     Auf einer schiefen Ebene mit einem Neigungswinkel $\alpha = 25°$ liegt ein Körper mit der Masse $m = 100 \, \mathrm{kg}$. Wie groß sind die Hangabtriebskraft $F_H$ und die Normalkraft $F_N$?
   </Task>
   <Hint>
-    Die Gewichtskraft zerlegt sich in Hangabtriebskraft $F_H = F_G \cdot \sin(\alpha)$ und Normalkraft $F_N = F_G \cdot \cos(\alpha)$.
+    Schreibe zunächst alle gegeben und gesuchten Größen mit ihren Einheiten auf.
+    <br />
+    **Gegeben:** <br />
+    Neigungswinkel $\alpha = 25°$,  <br />
+    Masse $m = 100 \, \mathrm{kg}$
+
+    <br />
+    **Gesucht:** <br />
+    Hangabtriebskraft $F_H$ in Newton (N),  <br />
+    Normalkraft $F_N$ in Newton (N)
   </Hint>
+  <Hint>
+    Lege dir eine Skizze der Situation an. Die Gewichtskraft $F_G$ wirkt immer senkrecht nach unten.
+  </Hint>
+  <Hint>
+    Die Gewichtskraft zerlegt sich in **Hangabtriebskraft**:
+    $$
+      F_H = F_G \cdot \sin(\alpha)
+    $$
+    und **Normalkraft**: 
+    $$
+      F_N = F_G \cdot \cos(\alpha)
+    $$
+  </Hint>
+  <Step>
+    Skizze der Situation:
+    <br />
+    <Image 
+      src="/api/images/physik-1/tut-01-0301.jpeg" 
+      alt="Kräfte auf der schiefen Ebene"
+      width={300}
+      height={200}
+      className="my-4"
+    />
+  </Step>
   <Step>
     Berechnung der Gewichtskraft:
     $$F_G = m \cdot g = 100 \, \mathrm{kg} \cdot 9,81 \, \mathrm{\frac{m}{s^2}} = 981 \, \mathrm{N}$$
@@ -133,7 +241,7 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
 
 ## Impuls und Energie
 
-<Exercise title="Hammerkraft beim Schmieden" difficulty="medium">
+<Exercise title=" Aufgabe 4: Hammerkraft beim Schmieden" difficulty="medium">
   <Task>
     Beim Schmieden eines Werkstücks wird ein $1000 \, \mathrm{g}$ schwerer Hammer verwendet. Die Hammergeschwindigkeit beim Auftreffen beträgt $5 \, \mathrm{\frac{m}{s}}$ und der Schmiedeweg beträgt $0,75 \, \mathrm{mm}$. Dies bedeutet, dass der Hammer auf einem Weg von $0,75 \, \mathrm{mm}$ vollkommen abgebremst wird. Berechnen Sie mit Hilfe des Arbeitssatzes die mittlere Hammerkraft.
   </Task>
@@ -142,8 +250,14 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
   </Hint>
   <Step>
     Berechnung der kinetischen Energie des Hammers vor dem Aufprall:
-    $$W_{\text{kin}} = \frac{1}{2} \cdot m \cdot v^2 = \frac{1}{2} \cdot 1 \, \mathrm{kg} \cdot \left(5 \, \mathrm{\frac{m}{s}}\right)^2$$
-    $$W_{\text{kin}} = 0,5 \cdot 1 \cdot 25 = 12,5 \, \mathrm{J}$$
+    $$
+      \begin{align*}
+      W_{\text{kin}} &= \frac{1}{2} \cdot m \cdot v^2 \\
+      &= \frac{1}{2} \cdot 1 \, \mathrm{kg} \cdot \left(5 \, \mathrm{\frac{m}{s}}\right)^2 \\
+      & = 0,5 \, \mathrm{kg} \cdot 25 \, \mathrm{\frac{m^2}{s^2}} \\
+      & = 12,5 \, \mathrm{J}
+      \end{align*}
+    $$
   </Step>
   <Step>
     Die kinetische Energie wird vollständig in Verformungsarbeit umgewandelt:
@@ -152,8 +266,15 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
   </Step>
   <Step>
     Umstellen nach der mittleren Kraft:
-    $$F = \frac{W_{\text{kin}}}{s} = \frac{12,5 \, \mathrm{J}}{0,75 \times 10^{-3} \, \mathrm{m}}$$
-    $$F = \frac{12,5}{0,00075} = 16667 \, \mathrm{N} \approx 16,7 \, \mathrm{kN}$$
+    $$
+      \begin{align*}
+      F & = \frac{W_{\text{kin}}}{s} \\
+      & = \frac{12,5 \, \mathrm{J}}{0,75 \times 10^{-3} \, \mathrm{m}}\\
+      & = \frac{12,5}{0,00075} \\
+      & = 16667 \, \mathrm{N} \\
+      & \approx 16,7 \, \mathrm{kN}
+      \end{align*}
+    $$
   </Step>
   <Solution>
     Die mittlere Hammerkraft beträgt $F \approx 16,7 \, \mathrm{kN}$.
@@ -162,55 +283,143 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
 
 ## Bremsmoment
 
-<Exercise title="Einfache Backenbremse" difficulty="hard">
+<Exercise title="Aufgabe 5: Einfache Backenbremse" difficulty="hard">
   <Task>
+    <Image 
+      src="/api/images/physik-1/tut-01-0501.jpeg" 
+      alt="Einfache Backenbremse mit Hebelarmen"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
     Bei einer einfachen Backenbremse wirkt eine Kraft $F = 450 \, \mathrm{N}$ über einen Hebel auf die Bremsbacke. Der Reibungskoeffizient beträgt $\mu = 0,2$. Die Hebelarme betragen $600 \, \mathrm{mm}$ für die Kraft und $130 \, \mathrm{mm}$ für die Bremsbacke. Der Radius der Bremsscheibe ist $150 \, \mathrm{mm}$. Berechnen Sie das erzeugte Bremsmoment.
+    <div className="clear-both" />
   </Task>
   <Hint>
-    Verwende das Hebelgesetz zur Berechnung der Normalkraft auf die Bremsbacke. Die Reibungskraft ergibt sich aus $F_R = \mu \cdot F_N$ und das Moment aus $M = F_R \cdot r$.
+    Verwende das Hebelgesetz zur Berechnung der Normalkraft auf die Bremsbacke. Nutze dabei das Momentengleichgewicht $\sum M = 0$ zur Aufstellung der Gleichung.
+  </Hint>
+  <Hint>
+    Die Normalkraft $F_N$ wirkt senkrecht zur Bremsbacke und erzeugt eine Reibungskraft $F_R$. Überlege welche Kraft das Bremsmoment erzeugt.
+  </Hint>
+  <Hint>
+    Die Reibungskraft überträgt das Bremsmoment $M_B$ auf die Bremsscheibe, da diese tangential am radius der Bremsscheibe wirkt und das Bremsmoment erzeugt.
+  </Hint>
+  <Hint>
+    Die Reibungskraft ergibt sich aus $F_R = \mu \cdot F_N$ und das Moment aus $M = F_R \cdot r$.
+    Lege dir eine Skizze der Situation an, um die Kräfte und Hebelarme zu visualisieren.
   </Hint>
   <Step>
     Berechnung der Normalkraft auf die Bremsbacke mittels Momentengleichgewicht:
-    $$\sum M = 0: \quad F \cdot 600 \, \mathrm{mm} = F_N \cdot 130 \, \mathrm{mm}$$
-    $$F_N = \frac{F \cdot 600 \, \mathrm{mm}}{130 \, \mathrm{mm}} = \frac{450 \, \mathrm{N} \cdot 600}{130}$$
-    $$F_N = 2077 \, \mathrm{N}$$
+    $$
+      \begin{align*}
+      \sum M = 0 & = - F \cdot 600 \, \mathrm{mm} + F_N \cdot 130 \, \mathrm{mm} & & | + F \cdot 600 \, \mathrm{mm} \\
+      F \cdot 600 \, \mathrm{mm} & = F_N \cdot 130 \, \mathrm{mm} & & | : 130 \, \mathrm{mm} \\
+      \frac{F \cdot 600 \, \mathrm{mm}}{130 \, \mathrm{mm}} & = F_N \\
+      F_N & = 2077 \, \mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
     Berechnung der Reibungskraft zwischen Bremsbacke und Bremsscheibe:
-    $$F_R = \mu \cdot F_N = 0,2 \cdot 2077 \, \mathrm{N} = 415,4 \, \mathrm{N}$$
+    $$
+      \begin{align*}
+      F_R & = \mu \cdot F_N \\
+      & = 0,2 \cdot 2077 \, \mathrm{N} \\
+      & = 415,4 \, \mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
     Berechnung des Bremsmoments mit dem Radius der Bremsscheibe:
-    $$M_B = F_R \cdot r = 415,4 \, \mathrm{N} \cdot 0,15 \, \mathrm{m} = 62,3 \, \mathrm{Nm}$$
+    $$
+      \begin{align*}
+      M_B & = F_R \cdot r \\
+      & = 415,4 \, \mathrm{N} \cdot 0,15 \, \mathrm{m} \\
+      & = 62,3 \,\mathrm{Nm}
+      \end{align*}
+    $$
   </Step>
   <Solution>
-    Das erzeugte Bremsmoment beträgt $M \approx 62,3 \, \mathrm{Nm}$.
+    Das erzeugte Bremsmoment beträgt $M = 62,3 \, \mathrm{Nm}$.
   </Solution>
 </Exercise>
 
 ## Haftreibung
 
-<Exercise title="Überwindung der Haftreibung" difficulty="medium">
+<Exercise title="Aufgabe 6: Überwindung der Haftreibung" difficulty="medium">
   <Task>
+    <Image 
+      src="/api/images/physik-1/tut-01-0601.jpeg" 
+      alt="Schiefe Ebene mit Kräften und Haftreibung"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
     In einer Anordnung wirken die Kräfte $F_1 = 300 \, \mathrm{N}$, $F_2 = 500 \, \mathrm{N}$ und eine gesuchte Kraft $F_3$ auf einen Körper mit der Gewichtskraft $F_G = 5 \, \mathrm{kN}$. Der Haftreibungskoeffizient beträgt $\mu_0 = 0,28$. Welche kleinste Kraft $F_3$ ist nötig, damit die Haftreibungskraft $F_H$ überwunden wird?
+    <div className="clear-both" />
   </Task>
   <Hint>
-    Die maximale Haftreibungskraft ist $F_{H,\text{max}} = \mu_0 \cdot F_N$. Die Summe aller horizontalen Kräfte muss diese überwinden.
+    Lege dir eine Skizze der Situation an, und zeichne dir alle Kräfte ein.
+  </Hint>
+  <Hint>
+    Das System kann in ein schiefes Koordinatensystem gebracht um X und Y Anteile zu berechnen: <br />
+    $F_{G}$ wirkt dann unter einem Winkel von $240°$ zur schiefen X-Achse. 
+  </Hint>
+  <Hint>
+    Die Verwendeten Formeln sind: <br />
+    Maximale Haftreibungskraft: 
+    $$
+      F_{H} = \mu \cdot F_N
+    $$
+    Summe der Kräfte in schiefer X-Richtung für ein Gleichgewicht:
+    $$
+      \sum F_ix \cdot \cos(\alpha)  = 0
+    $$
+    Summe der Kräfte in schiefer Y-Richtung für ein Gleichgewicht:
+    $$
+      \sum F_iy \cdot \sin(\alpha) = 0
+    $$
   </Hint>
   <Step>
-    Berechnung der maximalen Haftreibungskraft:
-    $$F_{H,\text{max}} = \mu_0 \cdot F_G = 0,28 \cdot 5000 \, \mathrm{N} = 1400 \, \mathrm{N}$$
+    Berechnung der Horizontalen-Kräfte zur schiefen x-Achse um die Kraft $F_3$ zu berechnen, die den Körper in Position hält (Gleichgewicht):
+    $$
+      \begin{align*}
+      \sum F_{x} = 0 &= F_{1} + F_{3} + F_{2} \cdot \cos(15°) + F_{G}\cdot \cos(240°) \\
+      F_{3} &= -F_{1}-F_{2}\cdot \cos(15°)-F_{G}\cdot \cos(240°) \\
+      &= 1.717,037 \,\mathrm{N} 
+      \end{align*}
+    $$
   </Step>
   <Step>
-    Die Summe aller horizontalen Kräfte muss die Haftreibung überwinden:
-    $$F_1 + F_2 + F_3 > F_{H,\text{max}}$$
-    $$300 \, \mathrm{N} + 500 \, \mathrm{N} + F_3 > 1400 \, \mathrm{N}$$
+    Die Summe aller vertikalen Kräfte berechnen, um $F_N$ zu bestimmen und somit die Haftreibungskraft:
+    $$
+      \begin{align*}
+      \sum F_{y} = 0 &= F_{G}\cdot \sin(240°)+F_{2}\cdot \sin(15°)+F_{N} \\
+      F_{N} &= -F_{G}\cdot \sin(240°)-F_{2}\cdot \sin(15°) \\
+      &= 4.200,72 \,\mathrm{N}
+      \end{align*}
+    $$
   </Step>
   <Step>
-    Berechnung der minimalen Kraft $F_3$:
-    $$F_3 > 1400 \, \mathrm{N} - 800 \, \mathrm{N} = 600 \, \mathrm{N}$$
-    
-    Hinweis: Die Lösung im Original gibt $F_3 \approx 2,89 \, \mathrm{kN}$ an, was auf eine komplexere Geometrie mit Winkeln hindeutet.
+    Bei diesem Aufbau entsteht eine Reibungskraft, die überwindet werden muss die mit $\mu_{0}$ berücksichtigt wird. Diese gilt es zu berechnen. 
+    $$
+      \begin{align*}
+      F_{R} &= F_{N} \cdot \mu_{0} \\
+      &= 4.200,72 \,\mathrm{N} \cdot 0,28  \\
+      &= 1.176,2 \,\mathrm{N} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Die Kraft $F_3$ muss mindestens so groß sein, dass die Reibungskraft überwunden wird und das Gleichgewicht gehalten werden kann:
+    $$
+      \begin{align*}
+      F_{3,ges} &\geq F_{R} + F_3 \\
+      F_{3,ges} &\geq 1.176,2 \,\mathrm{N} + 1.717,037 \,\mathrm{N} \\
+      F_{3,ges} &\geq 2.893,237 \,\mathrm{N} \\
+      F_{3,ges} &\approx 2,89 \, \mathrm{kN}
+      \end{align*}
+    $$
   </Step>
   <Solution>
     Die kleinste erforderliche Kraft beträgt $F_3 \approx 2,89 \, \mathrm{kN}$.
@@ -222,34 +431,68 @@ Dieses Tutorium behandelt grundlegende Konzepte der Mechanik mit Fokus auf Kräf
 <Exercise title="Schrank verschieben" difficulty="hard">
   <Task variant="compact">
     Ein Mann will einen $70 \, \mathrm{kg}$ schweren Schrank der Höhe $h = 2,0 \, \mathrm{m}$ und der Breite $b = 80 \, \mathrm{cm}$ verrutschen. Der Schwerpunkt liegt in der Schrankmitte und der Haftreibungskoeffizient ist $\mu_0 = 0,70$.
-    
+    <br />
     a) Berechnen Sie den Betrag der Kraft $F_{\text{Schub}}$, mit der der Mann den Schrank schieben muss, damit der Schrank zu rutschen beginnt.
-    
+    <br />
     b) Berechnen Sie die Höhe $x$, in der der Mann höchstens schieben darf, damit der Schrank zu rutschen und nicht zu kippen beginnt.
   </Task>
   <Hint>
-    Für Teil a) nutze $F_{\text{Schub}} = \mu_0 \cdot F_G$. Für Teil b) betrachte das Momentengleichgewicht um die Kippkante.
+    Für Teil a) bedenke, dass die Haftreibungskraft überwunden werden muss. <br />
+    Für Teil b) betrachte das Momentengleichgewicht um die Kippkante. Wo fängt der Schrank an zu kippen?
+  </Hint>
+  <Hint>
+    Für Teil a)  $F_{\text{Schub}} \geq \mu_0 \cdot F_G$. 
+    <br />
+    Für Teil b)  Die Kippkante ist die vordere untere Ecke des Schranks. <br /> 
+    Bilde also das Momentengleichgewicht um diese Kante.
+    $$
+      \sum M = 0 = \dots
+    $$
   </Hint>
   <Step>
-    Teil a) - Berechnung der Gewichtskraft:
-    $$F_G = m \cdot g = 70 \, \mathrm{kg} \cdot 9,81 \, \mathrm{\frac{m}{s^2}} = 687 \, \mathrm{N}$$
+     **Teilaufgabe a)** Die Gewichtskraft des Schranks:
+    $$
+    F_{G} = m \cdot g = 70 \, \mathrm{kg} \cdot 9,81 \, \mathrm{\frac{m}{s^{2}}} = 687 \, \mathrm{N}
+    $$
   </Step>
   <Step>
-    Teil a) - Kraft zum Überwinden der Haftreibung:
-    $$F_{\text{Schub}} = \mu_0 \cdot F_G = 0,70 \cdot 687 \, \mathrm{N} = 481 \, \mathrm{N}$$
+    **Teilaufgabe a)** Die Haftreibungskraft muss überwinden werden also muss die Grenze von $F_{Schub} > F_{Haft}$ gelten. Beachte, dass hier die Normalkraft der Gewichtskraft entspricht.<br />
+    $$
+      \begin{align*}
+      F_{\text{Schub}} &> F_{\text{Haft}} \\
+      &> \mu_0 \cdot F_{N} & & | F_N = F_G \\
+      &> \mu_0 \cdot F_{G} & & | F_G = 687 \, \mathrm{N} \\
+      &> 0,7 \cdot 687 \, \mathrm{N} \\
+      &> 480,9\,\mathrm{N} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil a)** - Kraft zum Überwinden der Haftreibung:
+    $$
+      \begin{align*}    
+      F_{\text{Schub}} & = \mu_0 \cdot F_G \\
+      & = 0,70 \cdot 687 \, \mathrm{N} \\
+      & = 481 \, \mathrm{N}
+      \end{align*}
+    $$
+    
     Der Schrank beginnt zu rutschen bei $F_{\text{Schub}} > 481 \, \mathrm{N}$.
   </Step>
   <Step>
-    Teil b) - Momentengleichgewicht um die vordere untere Kante beim Kippen:
-    Das rückhaltende Moment durch die Gewichtskraft: $M_G = F_G \cdot \frac{b}{2}$
+    **Teil b)** - Momentengleichgewicht um die vordere untere Kante beim Kippen: <br />
+    Hinweis: Beachte, dass Die Schubkraft $F_{\text{Schub}}$ in Höhe $x$, also variabel angreift. Hier stellen wir nach $x$ um. Und nicht nach einer Kraft.
+    $$
+      \begin{align*}
+      \sum M = 0 &= -F_{G}\cdot \frac{b}{2}+F_{\text{Schub}}\cdot x \\
+      x &= \frac{F_{G}\cdot \frac{b}{2}}{F_{\text{Schub}}} \\
+      x &= \frac{F_{G}\cdot b}{2\cdot F_{\text{Schub}}} \\
+      &= \frac{686,7 \,\mathrm{N}\cdot 0,8 \,\mathrm{m}  }{2 \cdot 480,69\,\mathrm{N} } \\
+      &= 0,5714 \,\mathrm{m} 
+      \end{align*}
+    $$
+
     Das kippende Moment durch die Schubkraft: $M_{\text{Schub}} = F_{\text{Schub}} \cdot x$
-  </Step>
-  <Step>
-    Teil b) - Gleichgewichtsbedingung für den Grenzfall:
-    $$F_{\text{Schub}} \cdot x = F_G \cdot \frac{b}{2}$$
-    Mit $F_{\text{Schub}} = 481 \, \mathrm{N}$ (Kraft zum Rutschen):
-    $$x = \frac{F_G \cdot b}{2 \cdot F_{\text{Schub}}} = \frac{687 \, \mathrm{N} \cdot 0,8 \, \mathrm{m}}{2 \cdot 481 \, \mathrm{N}}$$
-    $$x = \frac{549,6}{962} = 0,571 \, \mathrm{m} = 57,1 \, \mathrm{cm}$$
   </Step>
   <Solution>
     a) Der Schrank beginnt zu rutschen bei $F_{\text{Schub}} > 481 \, \mathrm{N}$.
