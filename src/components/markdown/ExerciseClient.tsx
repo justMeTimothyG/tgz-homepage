@@ -179,17 +179,22 @@ export default function ExerciseClient({
               <Lightbulb className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               Tipps:
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {hints.slice(0, visibleHints).map((hint, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, ease: 'easeOut', delay: index * 0.05 }}
-                  className="overflow-x-auto"
+                  className="flex items-start gap-3"
                 >
-                  <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
-                    {hint}
+                  <div className="flex-shrink-0 w-8 h-8 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center text-amber-600 dark:text-amber-400 text-sm font-semibold">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1 overflow-x-auto overflow-y-visible">
+                    <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
+                      {hint}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -236,7 +241,7 @@ export default function ExerciseClient({
                   <div className="flex-shrink-0 w-8 h-8 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-sm font-semibold">
                     {index + 1}
                   </div>
-                  <div className="flex-1 overflow-x-auto">
+                  <div className="flex-1 overflow-x-auto overflow-y-visible">
                     <div className="inline-block min-w-full prose dark:prose-invert max-w-none prose-ol:list-decimal prose-ul:list-disc prose-li:pl-1 prose-li:mr-4">
                       {step}
                     </div>
