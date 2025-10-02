@@ -26,12 +26,12 @@ const pageSections: SectionConfig[] = [
       'Hier findest du meine Notizen aus den Vorlesungen.',
     resources: [
       getCollectionResource({
-        slug: '01-Projektmanagement',
+        slug: '01-projektmanagement',
         source: 'lecture',
         overrideTitle: 'Vorlesung 01: Grundlagen & Einführung',
       }),
       getCollectionResource({
-        slug: '02-Projektmanagement',
+        slug: '02-projektmanagement',
         source: 'lecture',
         overrideTitle: 'Vorlesung 02: Phasenkonzept und Projektorganisation',
       }),
