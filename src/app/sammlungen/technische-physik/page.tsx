@@ -49,7 +49,7 @@ const pageSections: SectionConfig[] = [
     description:
       'Aufgaben aus dem Tutorium mit Lösungen und Denkanstößen, um die Inhalte der Vorlesung praktisch zu verankern.',
     resources: [
-      getCollectionResource('physik-i-tutorium-i'),
+      getCollectionResource('physik-i-tutorium-i', 'Tutorium I: Kräfte und Bewegung'),
       {
         title: 'Weitere Übungen folgen',
         variant: 'note',
