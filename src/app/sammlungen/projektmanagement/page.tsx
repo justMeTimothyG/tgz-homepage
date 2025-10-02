@@ -30,6 +30,11 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: 'Vorlesung 01: Grundlagen & Einführung',
       }),
+      getCollectionResource({
+        slug: '02-Projektmanagement',
+        source: 'lecture',
+        overrideTitle: 'Vorlesung 02: Phasenkonzept und Projektorganisation',
+      }),
       {
         title: 'Weitere Ressourcen folgen',
         variant: 'note',
