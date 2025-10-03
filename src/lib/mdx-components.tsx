@@ -25,6 +25,8 @@ import {
   VennSets,
   Download,
   Table,
+  RevealableTable,
+  TAccount,
 } from '@/components/markdown/CustomComponents';
 import Exercise, { Hint as ExerciseHint, Solution as ExerciseSolution, Step as ExerciseStep, Task as ExerciseTask } from '@/components/markdown/Exercise';
 import QuadraticSolver from '@/components/markdown/QuadraticSolver';
@@ -67,6 +69,8 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     Download: withNotProse(Download),
     QuadraticSolver: withNotProse(QuadraticSolver),
     Table: withNotProse(Table),
+    RevealableTable: withNotProse(RevealableTable),
+    TAccount: withNotProse(TAccount),
 
     Image: withNotProse(MdxImage),
     img: ({ className, alt, ...imgProps }: React.ImgHTMLAttributes<HTMLImageElement>) => (
