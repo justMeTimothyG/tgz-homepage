@@ -10,6 +10,7 @@ import VennSets from './VennSets';
 import Download from './Download';
 import RevealableTable from './RevealableTable';
 import TAccount from './TAccount';
+import TAccountLedger from './TAccountLedger';
 
 // Utility: merge class names
 function cx(...parts: Array<string | false | null | undefined>) {
@@ -474,4 +475,4 @@ function NumberedList(props: NumberedListProps) {
 }
 
 // Export calculator utilities for reuse
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, Table, RevealableTable, TAccount };
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, Table, RevealableTable, TAccount, TAccountLedger };

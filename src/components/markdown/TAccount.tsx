@@ -2,13 +2,21 @@ import React from 'react';
 
 export type BookingSide = 'S' | 'H';
 
-type KontoType = 'aktiv' | 'passiv' | 'guv';
+export type KontoType =
+  | 'aktiv'
+  | 'passiv'
+  | 'aufwandskonto'
+  | 'aufwand'
+  | 'ertragskonto'
+  | 'ertrag'
+  | 'guv';
 
-type Booking = [number, BookingSide];
+export type Booking = [number, BookingSide];
+export type InitialBooking = [number, BookingSide | null];
 
 export interface TAccountData {
   title: string;
-  initValue: Booking;
+  initValue: InitialBooking;
   type: KontoType;
   bookings: Booking[];
 }
@@ -45,18 +53,22 @@ function Amount({ value }: { value: number }) {
 function computeSaldoSign(type: KontoType, difference: number) {
   if (difference === 0) return 'neutral';
 
-  const isPositive = (() => {
+  const category = (() => {
     switch (type) {
       case 'aktiv':
-        return difference > 0;
+      case 'aufwandskonto':
+      case 'aufwand':
+        return 'debit';
       case 'passiv':
+      case 'ertragskonto':
+      case 'ertrag':
       case 'guv':
-        return difference < 0;
       default:
-        return false;
+        return 'credit';
     }
   })();
 
+  const isPositive = category === 'debit' ? difference > 0 : difference < 0;
   return isPositive ? 'positive' : 'negative';
 }
 

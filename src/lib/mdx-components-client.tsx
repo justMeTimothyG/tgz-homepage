@@ -27,6 +27,7 @@ import {
   Table,
   RevealableTable,
   TAccount,
+  TAccountLedger,
 } from '@/components/markdown/CustomComponents';
 import QuadraticSolver from '@/components/markdown/QuadraticSolver';
 import ExerciseClient, { ExerciseContentProps, TaskItem } from '@/components/markdown/ExerciseClient';
@@ -189,6 +190,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Table: withNotProse(Table),
     RevealableTable: withNotProse(RevealableTable),
     TAccount: withNotProse(TAccount),
+    TAccountLedger: withNotProse(TAccountLedger),
 
     Image: withNotProse(MdxImage),
     img: ({ className, alt, ...imgProps }: React.ImgHTMLAttributes<HTMLImageElement>) => (
