@@ -9,6 +9,367 @@ sammlungen: ["unternehmensrechnung"]
 
 ## Abschlussaufgabe
 
+In dieser Abschlussaufgabe wenden Sie die im Praktikum behandelten Themen an, um ein umfassenden Buchungskreislauf durchzuführen. Sie werden verschiedene Geschäftsvorfälle analysieren, buchen und die entsprechenden Abschlüsse erstellen.
+Folgende Eröffnungsbilanz wird als Ausgangspunkt verwendet:
+
+<span className="block text-center font-bold">Eröffnungsbilanz zum 01.01.{new Date().getFullYear()} (in Euro)</span>
+
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| Grundstücke und Gebäude | 170.000,- | Eigenkapital | 314.275,- |
+| Maschinen | 30.000,- | Hypothek | 70.000,- |
+| BGA | 6.200,- | Verbindlichkeiten aus L.u.L. | 7.000,- |
+| RHB-Stoffe | 21.350,- | | |
+| Fertige Erzeugnisse | 1.500,- | | |
+| Forderungen aus L.u.L. | 10.500,- | | |
+| Bank | 150.250,- | | |
+| Kasse | 1.475,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">391.275,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">391.275,-</span> |
+
+Im Laufe des Jahres treten folgende Geschäftsvorfälle auf:
+
+1. Kauf von Rohstoffen für 1.000,- € und sofortige Bezahlung per Bank.
+2. Kauf einer Maschine für 20.000,- € auf Ziel.
+3. Kauf eines Computers für 1.500,- € auf Ziel.
+4. Aufnahme eines Darlehns in Höhe von 10.000,- €.
+5. Bezahlung eines Teils der Verbindlichkeiten gegenüber dem Lieferanten Müller in Höhe von 500,- € per Bank.
+6. Umwandlung der Restverbindlichkeit gegenüber dem Lieferanten Müller in ein langfristiges Darlehn in Höhe von 500,- €.
+7. Bezahlung einer Forderung durch den Kunden Maier in Höhe von 8.500,- € gegen bar.
+8. Kauf von Rohstoffen in Höhe von 650,- € gegen bar.
+9. Begleichung einer Verbindlichkeit gegenüber einem Lieferanten gegen Barzahlung in Höhe von 6.000,- €.
+10. Verkauf einer gebrauchten Maschine für 2.500,- € (Buchwert 2.500,- €). 750,- € werden sofort per Banküberweisung bezahlt.
+11. Kauf einer Maschine für 5.000,- € auf Ziel.
+12. Kauf eines Grundstücks für 100.000,- € gegen Banküberweisung.
+13. Umwandlung von Verbindlichkeiten aus Lieferungen und Leistungen in Höhe von 5.000,- € in ein langfristiges Darlehn.
+14. Aufnahme eines Darlehns am 30.09. über 15.000,- €. Laufzeit zu einem Zins von 6 %. Zins- und Tilgungszahlungen sind vierteljährlich zu leisten.
+15. Fristgerechte Tilgung des Darlehns aus Geschäftsvorfall (14) in Höhe von 1.250,- €.
+16. Bezahlung der Miete von 3.500,- € per Bank.
+17. Zahlung der Zinsen für das Darlehn aus Geschäftsvorfall (14) in Höhe von 225,- €.
+18. Ein Kunde holt seine Bestellung sofort ab und bezahlt die Rechnung über 65.000 € sofort gegen bar: 65.000,- €.
+19. Ein Lieferant erlässt Verbindlichkeiten in Höhe von 5.000,- €.
+20. Zahlung von Hypothekenzinsen in Höhe von 1.250,- € per Banküberweisung.
+21. Bezahlung von Löhnen per Banküberweisung: 35.000,- €.
+22. Es werden Umsatzerlöse in höhe von 120.000,- € erzielt, von denen 108.000,- € sofort überweisen werden.
+23. Verkauf eines Grundstücks mit Buchwert von 6.000,- € für 20.000,- € gegen bar.
+24. Abschreibungen von Maschinen (Gebäuden): 6.000,- € (14.000,- €).
+25. Einsatz eines bislang ausschließlich privat genutzten PKW (Wert: 6.800,- €) wird als Einlage in die KG übertragen.
+26. Eine im Unternehmen angestellte Reinigungsfachkraft putzt die Privatwohnung von Theresa Cleanly. Die auf den Einsatz in der Privatwohnung entfallen Personalkosten belaufen sich auf 1.500,- €.
+27. Entnahmen von RHB-Stoffen für private Zwecke: 250,- €.
+
+### Aufgaben:
+
+<NumberedList variant="decimal">
+    <li>Führen Sie die Eröffnungsbuchungen durch und stellen das Eröffnungsbilanzkonto auf.</li>
+    <li>
+        Verbuchen Sie die obigen Geschäftsvorfälle, in dem Sie die entsprechenden Buchungssätze bilden.
+        <span className="font-bold">Hinweise:</span>
+        <ul className="list-disc list-inside mt-2">
+            <li>Die Umsatzsteuer wird in dieser Aufgabe nicht berücksichtigt.</li>
+            <li>Verwende folgende Konten:</li>
+
+                <span className="font-bold">Bestandskonten:</span>
+                <ul className="list-disc list-inside ml-6 mt-2">
+                    <li>Grundstücke & Gebäude</li>
+                    <li>Maschinen</li>
+                    <li>Betriebs- und Geschäftsausstattung</li>
+                    <li>Fuhrpark</li>
+                    <li>RHB-Stoffe</li>
+                    <li>Fertige Erzeugnisse</li>
+                    <li>Forderungen aus L.u.L.</li>
+                    <li>Bank</li>
+                    <li>Kasse</li>
+                    <li>Eigenkapital</li>
+                    <li>Hypothek</li>
+                    <li>Verbindlichkeiten aus L.u.L.</li>
+                    <li>langfristige Verbindlichkeiten</li>
+                    <li>Verbindlichkeiten ggü. Kreditinstituten</li>
+                </ul>
+                <span className="font-bold">Aufwandskonten:</span>
+                <ul className="list-disc list-inside ml-6 mt-2">
+                    <li>Personalaufwand</li>
+                    <li>Mietaufwand</li>
+                    <li>Zinsaufwand</li>
+                    <li>Abschreibungen</li>
+                    <li>Umsatzerlöse</li>
+                    <li>sonstige betriebliche Erträge</li>
+                </ul>
+                Beachte zusätzlich das Privatkonto.
+        </ul>
+    </li>
+    <li>Übertragen Sie die obigen Buchungssätze in die einzelnen Bestands- und Erfolgskonten. Danach schließen diese Konten ab, geben die Abschlussbuchungen an und erstellen die Abschlussbilanz.</li>
+</NumberedList>
+
+### Lösung
+
+#### 1. Eröffnungsbuchungen und Eröffnungsbilanzkonto
+
+Zunächst eröffnen wir wieder die Konten und wieder gilt: Aktivkonten werden im Soll eröffnet, Passivkonten im Haben. Eröffnung der Konten läuft über das Eröffnungsbilanzkonto (EBK). Im EBK finden wir die Anfangsbestände der Aktivkonten auf der Habenseite und die Anfangsbestände der Passivkonten auf der Sollseite.
+
+| Soll  | an | Haben |
+|:---|:---:|---:|
+| Aktivkonten | an | EBK |
+| EBK | an | Passivkonten |
+
+Das EBK wird mit den Werten der Eröffnungsbilanz gefüllt und sieht dann wie folgt aus:
+
+<span className="block text-center font-bold -mb-12 mt-8">Eröffnungsbilanzkonto</span>
+| Soll         | |          | Haben |
+|-----------------------|---------:|-----------------------|---------:|
+| Eigenkapital | 314.275,- | Grundstücke und Gebäude | 170.000,- | 
+| Hypothek | 70.000,- | Maschinen | 30.000,- | 
+| Verbindlichkeiten aus L.u.L. | 7.000,- | BGA | 6.200,- |
+| langfristige Verbindlichkeiten | 0,- | RHB-Stoffe | 21.350,- |
+| Verbindlichkeiten ggü. Kreditinstituten | 0,- | Fuhrpark | 0,- |
+|  |  | Fertige Erzeugnisse | 1.500,- |
+|  |  | Forderungen aus L.u.L. | 10.500,- |
+|  |  | Bank | 150.250,- |
+|  |  | Kasse | 1.475,- |
+| <span className="font-bold">Summe</span> | <span className="font-bold">391.275,-</span> | <span className="font-bold">Summe</span> | <span className="font-bold">391.275,-</span> |
+
+Hinweis: Aufwands- und Ertragskonten werden nicht über das EBK eröffnet, da diese keinen Anfangsbestand haben.
+
+Das EBK in Kontodarstellung sieht dann wie folgt aus:
+
+<TAccount
+    account={{
+        title: "Eröffnungsbilanzkonto",
+        type: "aktiv",
+        initValue: [0, null],
+        bookings: [
+            [314275, "S"],
+            [70000, "S"],
+            [7000, "S"],
+            [0, "S"],
+            [0, "S"],
+            [170000, "H"],
+            [30000, "H"],
+            [6200, "H"],
+            [21350, "H"],
+            [0, "H"],
+            [1500, "H"],
+            [10500, "H"],
+            [150250, "H"],
+            [1475, "H"],
+            ]
+    }}
+/>
+
+
+Die Konten sind nun eröffnet und können für die Buchungen der Geschäftsvorfälle verwendet werden.
+
+#### 2. Verbuchung der Geschäftsvorfälle
+
+Nun müssen wir die Geschäftsvorfälle analysieren und die entsprechenden Buchungssätze bilden. Hier sind die Buchungssätze für die angegebenen Geschäftsvorfälle:
+
+| | Soll | an | Haben | Betrag |
+|---|:---|:---:|:---|---:|
+|1. | RHB | an | Bank | 1.000 |
+|2. | Maschinen | an | Verbindlichkeiten aus L.u.L. | 20.000 |
+|3. | BGA | an | Verbindlichkeiten aus L.u.L. | 1.500 |
+|4. | Bank | an | Verbindlichkeiten ggü. Kreditinstituten | 10.000 |
+|5. | Verbindlichkeiten aus L.u.L. | an | Bank | 500 |
+|6. | Verbindlichkeiten aus L.u.L. | an | Langfristige Verbindlichkeiten | 500 |
+|7. | Kasse | an | Forderungen aus L.u.L. | 8.500 |
+|8. | RHB | an | Kasse | 650 |
+|9. | Verbindlichkeiten aus L.u.L. | an | Kasse | 6.000 |
+|10. | Bank| an | Maschinen | 750 |
+| | Forderungen aus L.u.L. | an | Maschinen | 1.750 |
+|11. | Maschinen | an | Verbindlichkeiten aus L.u.L. | 5.000 |
+|12. | Grundstücke und Gebäude | an | Bank | 100.000 |
+|13. | Verbindlichkeiten aus L.u.L. | an | Langfristige Verbindlichkeiten | 5.000 |
+|14. | Bank | an | Verbindlichkeiten ggü. Kreditinstituten | 15.000 |
+|15. | Verbindlichkeiten ggü. Kreditinstituten | an | Bank | 1.250 |
+|16. | Mietaufwand | an | Bank | 3.500 |
+|17. | Zinsaufwand | an | Verbindlichkeiten ggü. Kreditinstituten | 225 |
+|18. | Kasse | an | Umsatzerlöse | 65.000 |
+|19. | Verbindlichkeiten aus L.u.L. | an | Sonstige betriebliche Erträge | 5.000 |
+|20. | Zinsaufwand | an | Bank | 1.250 |
+|21. | Personalaufwand | an | Bank | 35.000 |
+|22. | Bank | an | Umsatzerlöse | 108.000 | 
+| | Forderungen aus L.u.L. | an | Umsatzerlöse | 12.000 |
+|23. | Kasse | an | Grundstücke und Gebäude | 6.000 | 
+| | Kasse | an | Sonstige Betriebliche Erlöse | 14.000 |
+|24. | Abschreibung | an | Maschinen | 6.000 | 
+| | Abschreibungen | an | Grundstücken und Gebäude | 14.000 |
+|25. | Fuhrpark | an | Privatkonto | 6.800 |
+|26. | Privatkonto | an | Sonstige betriebliche Erträge | 1.500 |
+|27. | Privatkonto | an | RHB-Stoffe | 250 |
+
+#### 3. Übertragung in die Konten, Abschluss und Abschlussbilanz
+
+Nachdem die Buchungssätze gebildet wurden, werden diese in die entsprechenden Bestands- und Erfolgskonten übertragen. Nach der Übertragung werden die Konten abgeschlossen, die Abschlussbuchungen vorgenommen und die Abschlussbilanz erstellt.
+
+<TAccountLedger
+    data={{
+    accounts: [
+      { title: "Grundstücke und Gebäude", type: "aktiv", initValue: [170000, "S"] },
+      { title: "Maschinen", type: "aktiv", initValue: [30000, "S"] },
+      { title: "BGA", type: "aktiv", initValue: [6200, "S"] },
+      { title: "RHB-Stoffe", type: "aktiv", initValue: [21350, "S"] },
+      { title: "Fuhrpark", type: "aktiv", initValue: [0, "S"] },
+      { title: "Fertige Erzeugnisse", type: "aktiv", initValue: [1500, "S"] },
+      { title: "Forderungen aus L.u.L.", type: "aktiv", initValue: [10500, "S"] },
+      { title: "Bank", type: "aktiv", initValue: [150250, "S"] },
+      { title: "Kasse", type: "aktiv", initValue: [1475, "S"] },
+      { title: "Eigenkapital", type: "passiv", initValue: [314275, "H"] },
+      { title: "Privatkonto", type: "passiv", initValue: [0, "H"] },
+      { title: "Hypothek", type: "passiv", initValue: [70000, "H"] },
+      { title: "Verbindlichkeiten aus L.u.L.", type: "passiv", initValue: [7000, "H"] },
+      { title: "langfristige Verbindlichkeiten", type: "passiv", initValue: [0, "H"] },
+      { title: "Verbindlichkeiten ggü. Kreditinstituten", type: "passiv", initValue: [0, "H"] },
+      { title: "Personalaufwand", type: "aufwand", initValue: [0, null] },
+      { title: "Mietaufwand", type: "aufwand", initValue: [0, null] },
+      { title: "Zinsaufwand", type: "aufwand", initValue: [0, null] },
+      { title: "Abschreibungen", type: "aufwand", initValue: [0, null] },
+      { title: "Umsatzerlöse", type: "ertrag", initValue: [0, null] },
+      { title: "sonstige betriebliche Erträge", type: "ertrag", initValue: [0, null] }
+    ],
+    bookings: [
+      ["RHB-Stoffe", "Bank", 1000],
+      ["Maschinen", "Verbindlichkeiten aus L.u.L.", 20000],
+      ["BGA", "Verbindlichkeiten aus L.u.L.", 1500],
+      ["Bank", "Verbindlichkeiten ggü. Kreditinstituten", 10000],
+      ["Verbindlichkeiten aus L.u.L.", "Bank", 500],
+      ["Verbindlichkeiten aus L.u.L.", "langfristige Verbindlichkeiten", 500],
+      ["Kasse", "Forderungen aus L.u.L.", 8500],
+      ["RHB-Stoffe", "Kasse", 650],
+      ["Verbindlichkeiten aus L.u.L.", "Kasse", 6000],
+      ["Bank", "Maschinen", 750],
+      ["Forderungen aus L.u.L.", "Maschinen", 1750],
+      ["Maschinen", "Verbindlichkeiten aus L.u.L.", 5000],
+      ["Grundstücke und Gebäude", "Bank", 100000],
+      ["Verbindlichkeiten aus L.u.L.", "langfristige Verbindlichkeiten", 5000],
+      ["Bank", "Verbindlichkeiten ggü. Kreditinstituten", 15000],
+      ["Verbindlichkeiten ggü. Kreditinstituten", "Bank", 1250],
+      ["Mietaufwand", "Bank", 3500],
+      ["Zinsaufwand", "Verbindlichkeiten ggü. Kreditinstituten", 225],
+      ["Kasse", "Umsatzerlöse", 65000],
+      ["Verbindlichkeiten aus L.u.L.", "sonstige betriebliche Erträge", 5000],
+      ["Zinsaufwand", "Bank", 1250],
+      ["Personalaufwand", "Bank", 35000],
+      ["Bank", "Umsatzerlöse", 108000],
+      ["Forderungen aus L.u.L.", "Umsatzerlöse", 12000],
+      ["Kasse", "Grundstücke und Gebäude", 6000],
+      ["Kasse", "sonstige betriebliche Erträge", 14000],
+      ["Abschreibungen", "Maschinen", 6000],
+      ["Abschreibungen", "Grundstücke und Gebäude", 14000],
+      ["Fuhrpark", "Privatkonto", 6800],
+      ["Privatkonto", "sonstige betriebliche Erträge", 1500],
+      ["Privatkonto", "RHB-Stoffe", 250],
+    ]
+  }}
+/>
+
+#### 3. Konten abschliessen, Abschlussbuchungen erstellen und Abschlussbilanz aufstellen
+
+Die Konten wurden durch das Bilden des Saldos "quasi" abgeschlossen. Die Abschlussbuchungen werden über das Schlussbilanzkonto (SBK) durchgeführt. Das SBK wird mit den Endbeständen der Aktivkonten auf der Sollseite und den Endbeständen der Passivkonten auf der Habenseite gefüllt.
+
+Zunächst bilden wir die Abschlussbuchungen:
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| SBK | an | Grundstücke und Gebäude | 250.000,- |
+| SBK | an | Maschinen | 46.500,- |
+| SBK | an | BGA | 7.700,- |
+| SBK | an | RHB-Stoffe | 22.750,- |
+| SBK | an | Fuhrpark | 6.800,- |
+| SBK | an | Fertige Erzeugnisse | 1.500,- |
+| SBK | an | Forderungen aus L.u.L. | 15.750,- |
+| SBK | an | Bank | 141.500,- |
+| SBK | an | Kasse | 88.325,- |
+| Hypothek | an | SBK | 70.000,- |
+| Verbindlichkeiten aus L.u.L. | an | SBK | 16.500,- |
+| langfristige Verbindlichkeiten | an | SBK | 5.500,- |
+| Verbindlichkeiten ggü. Kreditinstituten | an | SBK | 23.975,- |
+
+Bestandskonten sind nun abgeschlossen. Nun müssen wir die Erfolgskonten abschließen. Dazu wird der Saldo der Aufwandskonten auf die Habenseite des GuV-Kontos gebucht und der Saldo der Ertragskonten auf die Sollseite des GuV-Kontos gebucht. Der Saldo des GuV-Kontos wird dann auf das Eigenkapitalkonto gebucht.
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| GuV | an | Personalaufwand | 35.000,- |
+| GuV | an | Mietaufwand | 3.500,- |
+| GuV | an | Zinsaufwand | 1.475,- |
+| GuV | an | Abschreibungen | 20.000,- |
+| Umsatzerlöse | an | GuV | 185.000,- |
+| sonstige betriebliche Erträge | an | GuV | 20.500,- |
+
+
+Das GuV Konto sieht dann wie folgt aus: 
+
+<TAccount
+    account={{
+        title: "GuV",
+        type: "guv",
+        initValue: [0, null],
+        bookings: [
+            [35000, "S"],
+            [3500, "S"],
+            [1475, "S"],
+            [20000, "S"],
+            [185000, "H"],
+            [20500, "H"],
+            ]
+    }}
+/>
+
+Der Gewinn beträgt 145.525,00 EUR (= 205.500 - 59.975). Dieser wird auf das Eigenkapitalkonto gebucht: 
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| GuV | an | Eigenkapital | 145.525,- |
+
+Zum Schluss muss das Privatkonto noch abgeschlossen werden über das Eigenkapitalkonto, womit wir dann auch das Eigenkapitalkonto abschließen:
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| Privatkonto | an | Eigenkapital | 5.050,- |
+
+Das Eigenkapitalkonto sieht dann wie folgt aus:
+
+<TAccount
+    account={{
+        title: "Eigenkapital",
+        type: "passiv",
+        initValue: [314275, "H"],
+        bookings: [
+            [145525, "H"],
+            [5050, "H"]
+            ]
+    }}
+/>
+
+Dieses buchen wir dann abschließend auf das SBK, womit wir dann das SBK abschließen können:
+
+<span className="block text-center font-bold -mb-12 mt-8">Schlussbilanzkonto</span>
+
+| Soll         | |          | Haben |
+|-----------------------|---------:|-----------------------|---------:|
+| Grundstücke & Gebäude | 250.000,- | Eigenkapital | 464.850,- |
+| Maschinen | 46.500,- | Hypothek | 70.000,- |
+| BGA | 7.700,- | Verbindlichkeiten ggü. Kreditinstituten | 23.975,- |
+| RHB-Stoffe | 22.750,- | Langfristige Verbindlichkeiten | 5.500,- |
+| Fuhrpark | 6.800,- | Verbindlichkeiten aus L.u.L. | 16.500,- |
+| Fertige Erzeugnisse | 1.500,- | | |
+| Forderungen aus L.u.L. | 15.750,- | | |
+| Bank | 141.500,- | | |
+| Kasse | 88.325,- | | |
+| <span className="font-bold">Summe</span> | <span className="font-bold">580.825,-</span> | <span className="font-bold">Summe</span> | <span className="font-bold">580.825,-</span> |
+
+Die Abschlussbilanz sieht dann wie folgt aus:
+
+<span className="block text-center font-bold">Abschlussbilanz zum 31.12.{new Date().getFullYear()} (in Euro)</span>
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| Grundstücke & Gebäude | 250.000,- | Eigenkapital | 464.850,- |
+| Maschinen | 46.500,- | Hypothek | 70.000,- |
+| BGA | 7.700,- | Verbindlichkeiten ggü. Kreditinstituten | 23.975,- |
+| RHB-Stoffe | 22.750,- | Langfristige Verbindlichkeiten | 5.500,- |
+| Fuhrpark | 6.800,- | Verbindlichkeiten aus L.u.L. | 16.500,- |
+| Fertige Erzeugnisse | 1.500,- | | |
+| Forderungen aus L.u.L. | 15.750,- | | |
+| Bank | 141.500,- | | |
+| Kasse | 88.325,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">580.825,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">580.825,-</span> |
 
 
 <PostPager

@@ -23,12 +23,33 @@ interface TAccountLedgerProps {
 const typeSortWeight: Record<KontoType, number> = {
   aktiv: 0,
   passiv: 1,
-  aufwandskonto: 2,
-  aufwand: 2,
-  ertragskonto: 3,
-  ertrag: 3,
-  guv: 4,
+  privat: 2,
+  aufwandskonto: 3,
+  aufwand: 3,
+  ertragskonto: 4,
+  ertrag: 4,
+  guv: 5,
 };
+
+const typeLabelMap: Record<KontoType, string> = {
+  aktiv: 'Aktivkonten',
+  passiv: 'Passivkonten',
+  privat: 'Privatkonten',
+  aufwandskonto: 'Aufwandskonten',
+  aufwand: 'Aufwandkonten',
+  ertragskonto: 'Ertragskonten',
+  ertrag: 'Ertragskonten',
+  guv: 'GuV-Konten',
+};
+
+interface StructuredGroup {
+  type: KontoType;
+  accounts: TAccountData[];
+}
+
+function getTypeLabel(type: KontoType) {
+  return typeLabelMap[type] ?? type;
+}
 
 function normalizeAccounts(config: LedgerAccountConfig[]) {
   const map = new Map<string, TAccountData>();
@@ -46,7 +67,7 @@ function normalizeAccounts(config: LedgerAccountConfig[]) {
 }
 
 export default function TAccountLedger({ data, className = '' }: TAccountLedgerProps) {
-  const { structuredAccounts, warnings } = useMemo(() => {
+  const { structuredGroups, warnings } = useMemo(() => {
     const map = normalizeAccounts(data.accounts);
     const missingAccounts = new Set<string>();
 
@@ -66,18 +87,37 @@ export default function TAccountLedger({ data, className = '' }: TAccountLedgerP
       }
     });
 
-    const accounts = Array.from(map.values()).sort((a, b) => {
-      const typeDiff = typeSortWeight[a.type] - typeSortWeight[b.type];
-      if (typeDiff !== 0) return typeDiff;
-      return a.title.localeCompare(b.title, 'de', { sensitivity: 'base' });
+    const accountsByType = new Map<KontoType, TAccountData[]>();
+    const typeFirstEncounterIndex = new Map<KontoType, number>();
+
+    data.accounts.forEach((accountConfig, index) => {
+      const account = map.get(accountConfig.title);
+      if (!account) return;
+
+      if (!accountsByType.has(account.type)) {
+        accountsByType.set(account.type, []);
+        typeFirstEncounterIndex.set(account.type, index);
+      }
+
+      accountsByType.get(account.type)!.push(account);
     });
+
+    const structuredGroups: StructuredGroup[] = Array.from(accountsByType.entries())
+      .sort(([typeA], [typeB]) => {
+        const weightDiff = typeSortWeight[typeA] - typeSortWeight[typeB];
+        if (weightDiff !== 0) return weightDiff;
+        return (
+          (typeFirstEncounterIndex.get(typeA) ?? 0) - (typeFirstEncounterIndex.get(typeB) ?? 0)
+        );
+      })
+      .map(([type, accounts]) => ({ type, accounts }));
 
     const warningMessages = Array.from(missingAccounts).map(
       (name) => `Konto: ${name} wurde nicht definiert`
     );
 
     return {
-      structuredAccounts: accounts,
+      structuredGroups,
       warnings: warningMessages,
     };
   }, [data.accounts, data.bookings]);
@@ -94,11 +134,18 @@ export default function TAccountLedger({ data, className = '' }: TAccountLedgerP
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
-        {structuredAccounts.map((account) => (
-          <TAccount key={account.title} account={account} />
-        ))}
-      </div>
+      {structuredGroups.map(({ type, accounts }) => (
+        <section key={type} className="mb-10 last:mb-0">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">
+            {getTypeLabel(type)}
+          </h3>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2">
+            {accounts.map((account) => (
+              <TAccount key={account.title} account={account} />
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }

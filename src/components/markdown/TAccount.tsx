@@ -5,6 +5,7 @@ export type BookingSide = 'S' | 'H';
 export type KontoType =
   | 'aktiv'
   | 'passiv'
+  | 'privat'
   | 'aufwandskonto'
   | 'aufwand'
   | 'ertragskonto'
@@ -58,6 +59,7 @@ function computeSaldoSign(type: KontoType, difference: number) {
       case 'aktiv':
       case 'aufwandskonto':
       case 'aufwand':
+      case 'privat':
         return 'debit';
       case 'passiv':
       case 'ertragskonto':
@@ -145,7 +147,7 @@ export default function TAccount({ account, className = '' }: TAccountProps) {
       <div className="mx-auto w-full max-w-xl overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-900">
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 dark:border-gray-700 dark:text-gray-300">
           <span className="uppercase">Soll</span>
-          <span className="text-base font-semibold text-gray-900 dark:text-gray-100">{title}</span>
+          <span className="text-center font-semibold text-gray-900 dark:text-gray-100">{title}</span>
           <span className="uppercase">Haben</span>
         </div>
         <div className="grid grid-cols-2 divide-x divide-gray-200 dark:divide-gray-700">
