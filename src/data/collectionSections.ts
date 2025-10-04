@@ -32,6 +32,13 @@ export const collectionSections: CollectionSection[] = [
         subtitle: '1. Semester',
       },
       {
+        href: '/sammlungen/unternehmensrechnung',
+        title: 'Unternehmensrechnung',
+        description:
+          'Buchungssätze, Bilanzierung und Gewinn- und Verlustrechnung und alles was dazu gehört.',
+        subtitle: '1. Semester',
+      },
+      {
         href: '/sammlungen/projektmanagement',
         title: 'Projektmanagement',
         description:
