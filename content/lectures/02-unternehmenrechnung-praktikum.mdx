@@ -1,0 +1,184 @@
+---
+title: "02 Praktikum Unternehmensrechnung: Bilanzen und Geschäftsvorfälle"
+excerpt: "Übungsaufgaben zu Bilanzen und Geschäftsvorfällen, samt Eröffnung und Abschluss der Buchungskonten."
+date: "2025-10-03"
+tags: ["unternehmenrechnung", "praktikum", "bilanzen", "geschäftsvorfälle"]
+published: true
+sammlungen: ["unternehmensrechnung"]
+---
+
+## Übungsaufgabe 1
+
+### Aufgabe:
+Beurteile, ob es sich bei den nachstehenden Konten jeweils um ein **Bestandskonto** oder um ein **Erfolgskonto** handelt.
+handelt.
+
+<RevealableTable
+  headers={["", "Konto", "Bestandskonto", "Erfolgskonto"]}
+  data={[
+    { label: "Löhne und Gehälter", values: [null, "X"] },
+    { label: "Beteiligungen", values: ["X", null] },
+    { label: "Umsatzerlöse", values: [null, "X"] },
+    { label: "Betriebssteuern", values: [null, "X"] },
+    { label: "Grundstücke", values: ["X", null] },
+    { label: "Patente", values: ["X", null] },
+    { label: "Zinserträge", values: [null, "X"] },
+    { label: "Sachanlagen", values: ["X", null] },
+    { label: "Abschreibungen", values: [null, "X"] },
+    { label: "Reisekosten", values: [null, "X"] },
+    { label: "Umsatzsteuer", values: ["X", null] },
+    { label: "Rückstellungen", values: ["X", null] },
+    { label: "Mietaufwendungen", values: [null, "X"] }
+  ]}
+/>
+
+## Übungsaufgabe 2
+
+### Hintergrund: 
+Folgende Eröffnungsbilanz eines Garten- und Landschaftsbaubetriebs liegt vor:
+
+<span className="block text-center font-bold">Eröffnungsbilanz zum 01.01.2024</span>
+
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| <span className="font-bold">Anlagevermögen</span> | | <span className="font-bold">Eigenkapital</span> | 360.000,- |
+| <span className="ml-4"></span> Grundstücke und Gebäude | 500.000,- | <span className="font-bold">Verbindlichkeiten</span> |  |
+| <span className="ml-4"></span> Maschinen | 220.000,- | <span className="ml-4"></span> Darlehen | 500.000,- |
+| <span className="font-bold">Umlaufvermögen</span> | | <span className="ml-4"></span> Verbindlichkeiten aus L.u.L. | 134.000,- |
+| <span className="ml-4"></span> Rohstoffe | 198.000,- | | |
+| <span className="ml-4"></span> Hilfsstoffe | 32.000,- | | |
+| <span className="ml-4"></span> Bank | 38.000,- | | |
+| <span className="ml-4"></span> Kasse | 6.000,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">994.000,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">994.000,-</span> |
+
+**Geschäftsvorfälle im Jahr 2024:**
+
+1. Barabhebung vom Bankkonto in Höhe von 1.800,- €.
+2. Kauf von Hilfsstoffen 500,- € in bar.
+3. Aufnahme eines Bankdarlehns (Gutschrift auf dem Bankkonto) in Höhe von 50.000,- €.
+4. Begleichung einer Rechnung in Höhe von 500,- € per Banküberweisung.
+5. Kauf von Rohstoffen in Höhe von 60.000,- € auf Ziel (43.000,- €) und gegen Banküberweisung (17.000,- €).
+
+### Aufgaben: 
+
+<NumberedList variant="lower-alpha">
+  <li>Eröffnen Sie die Konten.</li>
+  <li>Bilden Sie die Buchungssätze zu den Geschäftsvorfällen.</li>
+  <li>Die Geschäftsfälle sind in den jeweiligen Konten zu buchen.</li>
+  <li>Schließen Sie die Konten ab.</li>
+  <li>Erstellen Sie die Abschlussbilanz.</li>
+</NumberedList>
+
+#### a) Eröffnen Sie die Konten.
+
+Generell gilt: Aktivkonten werden im Soll eröffnet, Passivkonten im Haben. Eröffnung der Konten läuft über das Eröffnungsbilanzkonto (EBK).
+
+| Soll  | an | Haben |
+|:---|:---:|---:|
+| Aktivkonten | an | EBK |
+| EBK | an | Passivkonten |
+
+#### b) Bilden Sie die Buchungssätze zu den Geschäftsvorfällen.
+
+| Soll | Betrag | an | Haben | Betrag |
+|:---|---:|:---:|:---|---:|
+| Kasse | 1.800,- | an | Bank | 1.800,- |
+| Hilfsstoffe | 500,- | an | Kasse | 500,- |
+| Bank | 50.000,- | an | Darlehen | 50.000,- |
+| Verbindlichkeiten aus L.u.L. | 500,- | an | Bank | 500,- |
+| Rohstoffe | 60.000,- | an | Verbindlichkeiten aus L.u.L. <br /> Bank | 43.000,-  <br /> 17.000,- |
+
+#### c) Die Geschäftsfälle sind in den jeweiligen Konten zu buchen.
+
+
+<TAccountLedger
+  data={{
+    accounts: [
+      { title: "Bank", type: "aktiv", initValue: [38000, "S"] },
+      { title: "Kasse", type: "aktiv", initValue: [6000, "S"] },
+      { title: "Darlehen", type: "passiv", initValue: [500000, "H"] },
+      { title: "Hilfsstoffe", type: "aktiv", initValue: [32000, "S"] },
+      { title: "Rohstoffe", type: "aktiv", initValue: [198000, "S"] },
+      { title: "Verbindlichkeiten aus L.u.L.", type: "passiv", initValue: [134000, "H"] }
+    ],
+    bookings: [
+      ["Kasse", "Bank", 1800],
+      ["Hilfsstoffe", "Kasse", 500],
+      ["Bank", "Darlehen", 50000],
+      ["Verbindlichkeiten aus L.u.L.", "Bank", 500],
+      ["Rohstoffe", "Bank", 17000],
+      ["Rohstoffe", "Verbindlichkeiten aus L.u.L.", 43000]
+    ]
+  }}
+/>
+
+#### d) Schließen Sie die Konten ab
+
+Wie beim Eröffnen des Kontos werden alle Aktivkonten im Soll und alle Passivkonten im Haben abgeschlossen. Der Saldo wird jeweils auf die Seite gebucht, die den geringeren Betrag aufweist.
+
+<span className="block text-center font-bold">SBK = Schlussbilanzkonto</span>
+| Soll         | Euro (€) | Haben         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| Grundstücke & Gebäude | 500.000,- | Eigenkapital | 360.000,- |
+| Maschinen | 220.000,- | Darlehen | 550.000,- |
+| Rohstoffe | 258.000,- | Verbindlichkeiten aus L.u.L. | 176.500,- |
+| Hilfsstoffe | 32.500,- | | |
+| Bank | 68.700,- | | |
+| Kasse | 7.300,- | | |
+| | | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">1.086.500,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">1.086.500,-</span> |
+
+#### e) Erstellen Sie die Abschlussbilanz
+
+Da dass Schlussbilanzkonto (SBK) alle Konten saldiert, bildet es spiegelbildlich die Abschlussbilanz und kann es direkt in die Abschlussbilanz übernommen werden.
+Es kann also fast 1-zu-1 übernommen werden und die Überschriten werden lediglich angepasst.
+
+<span className="block text-center font-bold">Abschlussbilanz zum 31.12.2024</span>
+
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| <span className="font-bold">Anlagevermögen</span> | | <span className="font-bold">Eigenkapital</span> | 360.000,- |
+| <span className="ml-4"></span> Grundstücke und Gebäude | 500.000,- | <span className="font-bold">Verbindlichkeiten</span> |  |
+| <span className="ml-4"></span> Maschinen | 220.000,- | <span className="ml-4"></span> Darlehen | 550.000,- |
+| <span className="font-bold">Umlaufvermögen</span> | | <span className="ml-4"></span> Verbindlichkeiten aus L.u.L. | 176.500,- |
+| <span className="ml-4"></span> Rohstoffe | 258.000,- | | |
+| <span className="ml-4"></span> Hilfsstoffe | 32.500,- | | |
+| <span className="ml-4"></span> Bank | 68.700,- | | |
+| <span className="ml-4"></span> Kasse | 7.300,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">1.086.500,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">1.086.500,-</span> |
+
+## Übungsaufgabe 3
+
+<Callout type="warning" title="Könnte so in der Klausur vorkommen." />
+
+Interpretiere zu den folgenden Buchungssätzen die zugrunde liegenden Geschäftsvorfälle:
+
+| | Soll  | Betrag | an| Haben |  Betrag|
+|:---|---|---:|:---:|---|---:|
+| 1. | Kasse <br /> Bank | 5.000,- <br /> 5.000,- | an | Forderungen aus L.u.L. | 10.000,- |
+| 2. | Darlehen | 8.000,- | an | Bank | 8.000,- |
+| 3. | Rohstoffe | 15.000,- | an | Bank <br /> Verbindlichkeiten aus L.u.L. | 5.000,- <br /> 10.000,- |
+| 4. | Verbindlichkeiten aus L.u.L. | 2.500,- | an | Bank <br /> Kasse | 2.000,- <br /> 500,- |
+| 5. | Maschinen | 23.000,- | an | Bank | 23.000,- |
+| 6. | Bank | 15.000,- | an | Darlehen | 15.000,- |
+
+### Lösung:
+
+1) Bezahlung einer Forderung über 10.000, wobei 5.000 in Bar und 5.000 in Bank bezahlt werden
+2) Tilgung eines Darlehens über 8.000 per Banküberweisung
+3) Kauf von Rohstoffen 15.000, 10.000 auf Ziel  und 5.000 per Überweisung
+4) Bezahlung einer LieferantenVB über 2.500, 2.000 per Überweisung und 500 in Bar
+5) Kauf von Maschinen per Banküberweisung über 23.000
+6) Aufnahme eines Darlehens über 15.000 mit Gutschrift auf die Bank. 
+
+
+<PostPager 
+  next={{
+    title: "03 Bilanzen und Geschäftsvorfälle",
+    href: "/lectures/03-unternehmenrechnung-praktikum"
+  }}
+  prev={{
+    title: "01 Grundlagen der Buchführung",
+    href: "/lectures/01-unternehmenrechnung-praktikum"
+  }}
+/>

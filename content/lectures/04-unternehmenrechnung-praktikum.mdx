@@ -1,0 +1,115 @@
+---
+title: "04 Praktikum Unternehmensrechnung: Privatkonten und Eigenkapital"
+excerpt: "Übungsaufgaben zu Privatkonten und Eigenkapital"
+date: "2025-10-03"
+tags: ["unternehmenrechnung", "praktikum", "privatkonten", "eigenkapital"]
+published: true
+sammlungen: ["unternehmensrechnung"]
+---
+
+## Übungsaufgabe 1
+
+<RevealableTable
+  headers={["", "Aussage", "Wahr oder Falsch"]}
+  data={[
+    { label: "Das Privatkonto ist ein Unterkonto des Eigenkapitalkontos.", values: ["✅ Wahr"] },
+    { label: "Privateinlagen werden im Soll, Privatentnahmen werden im Haben gebucht.", values: ["❌ Falsch"] },
+    { label: "Privateinlagen und Privatentnahmen sind erfolgswirksam.", values: ["❌ Falsch"] },
+    { label: "Privateinlagen und Privatentnahmen verändern das Eigenkapital.", values: ["✅ Wahr"] },
+    { label: "Das Privatkonto wird direkt über das SBK abgeschlossen.", values: ["❌ Falsch"] }
+  ]}
+/>
+
+{/* TODO: Add explanations for each statement */}
+
+## Übungsaufgabe 2
+
+Das Eigenkapital eines Unternehmens beträgt zu Ende des Jahres 520.000,- €. Im Laufe des Jahres ergeben sich folgende Geschäftsvorfälle:
+
+1) Der Unternehmer schenkt einem Freund 5.000 € in bar. Den Betrag entnimmt er aus der Kasse des Betriebs.
+2) Der Unternehmer erhält eine Rückzahlung vom Finanzamt für zu viel bezahlte Einkommenssteuer (4.200 €) als Gutschrift auf dem betrieblichen Postbankkonto.
+3) Der Unternehmer überweist die private Miete (1.000 €) vom betrieblichen Bankkonto.
+4) Für eine Reparatur am nur privat genutzten Pkw entnimmt der Unternehmer 2.800 € aus der Kasse des Betriebs.
+5) Die gesamten Aufwendungen zum Ende des Jahres betragen 280.000 €, die gesamten Erträge 350.000 €.
+
+### Aufgaben: 
+
+<NumberedList variant="lower-alpha">
+  <li>Nennen Sie die Buchungssätze bei Verwendung eines Privatkontos.</li>
+  <li>Welches Aussehen haben das Privatkonto, GuV-Konto und Eigenkapitalkonto?</li>
+  <li>Ermitteln Sie den Erfolg der Periode mit der Distanzrechnung.</li>
+</NumberedList>
+
+### Lösungen:
+#### a) Buchungssätze
+
+| | Soll | an | Haben | Betrag | Erklärung |
+|---|---|---|---|---|---|
+| 1) | Privatkonto | an | Kasse | 5.000 | Privatentnahme |
+| 2) | Bank | an | Privatkonto | 4.200 | Privateinlage (Privatsteuern: Einkommenssteuern) |
+| 3) | Privatkonto | an | Bank | 1.000 | Privatentnahme |
+| 4) | Privatkonto | an | Kasse | 2.800 | Privatentnahme |
+| 5) | Erträge | an | GuV | 350.000 | kein Privatkonto beteiligt |
+|   | GuV | an | Aufwand | 280.000 | kein Privatkonto beteiligt |
+
+#### b) Wie sehen die Konten aus?
+
+Durch die Geschäftsvorfälle sehen die Konten wie folgt aus:
+
+<TAccount
+  account={{
+    title: "Privatkonto",
+    type: "passiv",
+    initValue: [0, null],
+    bookings: [
+      [5000, "S"],
+      [4200, "H"],
+      [1000, "S"],
+      [2800, "S"]
+    ]
+  }}
+/>
+<TAccount
+  account={{
+    title: "GuV-Konto",
+    type: "guv",
+    initValue: [0, null],
+    bookings: [
+      [280000, "S"],
+      [350000, "H"]
+    ]
+  }}
+/>
+<TAccount
+  account={{
+    title: "Eigenkapital",
+    type: "passiv",
+    initValue: [520000, "H"],
+    bookings: [
+      [4600, "S"],
+      [70000, "H"]
+    ]
+  }}
+/>
+
+#### c) Erfolg der Periode mit der Distanzrechnung
+
+Der Erfolg der Periode kann durch die Distanzrechnung ermittelt werden. Dabei wird der Unterschied zwischen den Erträgen und den Aufwendungen betrachtet:
+
+**Erträge:**
+- 350.000 € (Gesamterträge)
+
+**Aufwendungen:**
+- 280.000 € (Gesamtaufwendungen)
+
+**Erfolg:**
+- 350.000 € - 280.000 € = 70.000 €
+
+Der Erfolg der Periode beträgt somit 70.000 €.
+
+Die Veränderungen im Eigenkapital durch Privatentnahmen und Privateinlagen werden separat betrachtet und beeinflussen den Erfolg der Periode nicht, sondern sie verändern nur das Eigenkapital.
+
+<PostPager
+    next={{ title: "05 Abschlussaufgabe", href: "05-unternehmenrechnung-praktikum" }}
+    prev={{ title: "03 Bilanzen und Geschäftsvorfälle", href: "03-unternehmenrechnung-praktikum" }}
+/>

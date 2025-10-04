@@ -1,0 +1,232 @@
+---
+title: "03 Praktikum Unternehmensrechnung: Bilanzen und Geschäftsvorfälle"
+excerpt: "Übungsaufgaben zu Bilanzen und Geschäftsvorfällen, samt Eröffnung und Abschluss der Buchungskonten."
+date: "2025-10-03"
+tags: ["unternehmenrechnung", "praktikum", "bilanzen", "geschäftsvorfälle"]
+published: true
+sammlungen: ["unternehmensrechnung"]
+---
+
+## Übungsaufgabe 1
+
+Ordne folgende Konten durch Ankreuzen der richtigen Kontenart zu: 
+
+<RevealableTable
+  headers={["", "Konto", "Aktivkonto", "Passivkonto", "Aufwandskonto", "Ertragskonto", "Sonstiges Konto"]}
+  data={[
+    { label: "Betriebsstoffe", values: ["X", null, null, null, null] },
+    { label: "Mieterträge", values: [null, null, null, "X", null] },
+    { label: "Darlehen", values: [null, "X", null, null, null] },
+    { label: "Löhne", values: [null, null, "X", null, null] },
+    { label: "Unfertige Erzeugnisse", values: ["X", null, null, null, null] },
+    { label: "Aufwendungen für Rohstoffe", values: [null, null, "X", null, null] },
+    { label: "GuV-Konto", values: [null, null, null, null, "X"] },
+    { label: "Verbindlichkeiten aus L. U. L", values: [null, "X", null, null, null] },
+    { label: "Versicherungsbeiträge", values: [null, null, "X", null, null] },
+    { label: "Betriebs- und Geschäftsausstattung", values: ["X", null, null, null, null] }
+  ]}
+/>
+
+## Übungsaufgabe 2
+### Hintergrund:
+Folgende Eröffnungsbilanz eines Sanierungsunternehmens liegt vor:
+
+<span className="block text-center font-bold">Eröffnungsbilanz zum 01.01.2024</span>
+
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| <span className="font-bold">Anlagevermögen</span> | | <span className="font-bold">Eigenkapital</span> | 304.000,- |
+| <span className="ml-4"></span> Grundstücke und Gebäude | 225.000,- | <span className="font-bold">Verbindlichkeiten</span> |  |
+| <span className="ml-4"></span> Maschinen | 200.000,- | <span className="ml-4"></span> Darlehen | 400.000,- |
+| <span className="font-bold">Umlaufvermögen</span> | | <span className="ml-4"></span> Verbindlichkeiten aus L.u.L. | 175.000,- |
+| <span className="ml-4"></span> Rohstoffe | 150.000,- | | |
+| <span className="ml-4"></span> Forderungen aus L.u.L. | 100.000,- | | |
+| <span className="ml-4"></span> Bank | 200.000,- | | |
+| <span className="ml-4"></span> Kasse | 4.000,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">879.000,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">879.000,-</span> |
+
+**Geschäftsvorfälle im Jahr 2024:**
+
+1. Kauf von Rohstoffen auf Ziel im Wert von 75.000,- €. 
+2. Rohstoffe im Wert von 100.000,- € werden in der Produktion verbraucht. 
+3. Löhne in Höhe von 125.000,- € werden per Banküberweisung gezahlt. 
+4. Erzielung von Umsatzerlösen auf Ziel in Höhe von 275.000,- €. 
+5. Bezahlung der Miete für die gemieteten Büroräume in Höhe von 22.500,- € durch Überweisung. 
+6. Auf dem Bankkonto gehen Zinserträge für ein Festgeld in Höhe von 7.500,- € ein.
+7. Ein Kunde begleicht eine Rechnung in Höhe von 10.000,- € durch Überweisung.
+
+### Aufgaben:
+
+<NumberedList variant="lower-alpha">
+  <li>Eröffnen Sie die Konten und buchen Sie die Geschäftsvorfälle in diese Konten.</li>
+  <li>Bilden Sie die Buchungssätze zu den Geschäftsvorfällen und zum Abschluss der Konten.</li>
+  <li>Schließen Sie die Konten ab und erstellen Sie die Abschlussbilanz.</li>
+</NumberedList>
+
+#### a) Eröffnen Sie die Konten und buchen Sie die Geschäftsvorfälle in diese Konten.
+
+Zunächst eröffnen wir wieder die Konten und wieder gilt: Aktivkonten werden im Soll eröffnet, Passivkonten im Haben. Eröffnung der Konten läuft über das Eröffnungsbilanzkonto (EBK).
+
+| Soll  | an | Haben |
+|:---|:---:|---:|
+| Aktivkonten | an | EBK |
+| EBK | an | Passivkonten |
+
+Als Nächstes nehmen wir die Geschäftsvorfälle und buchen diese in die jeweiligen Konten ein.
+
+<TAccountLedger
+  data={{
+    accounts: [
+      { title: "Grundstücke und Gebäude", type: "aktiv", initValue: [225000, "S"] },
+      { title: "Maschinen", type: "aktiv", initValue: [200000, "S"] },
+      { title: "Rohstoffe", type: "aktiv", initValue: [150000, "S"] },
+      { title: "Forderungen aus L.u.L.", type: "aktiv", initValue: [100000, "S"] },
+      { title: "Bank", type: "aktiv", initValue: [200000, "S"] },
+      { title: "Kasse", type: "aktiv", initValue: [4000, "S"] },
+      { title: "Darlehen", type: "passiv", initValue: [400000, "H"] },
+      { title: "Verbindlichkeiten aus L.u.L.", type: "passiv", initValue: [175000, "H"] },
+      { title: "Löhne", type: "aufwand", initValue: [0, null] },
+      { title: "Mietaufwendungen", type: "aufwand", initValue: [0, null] },
+      { title: "Materialaufwand", type: "aufwand", initValue: [0, null] },
+      { title: "Zinserträge", type: "ertrag", initValue: [0, null] },
+      { title: "Umsatzerlöse", type: "ertrag", initValue: [0, null] }
+    ],
+    bookings: [
+      ["Rohstoffe", "Verbindlichkeiten aus L.u.L.", 75000],
+      ["Materialaufwand", "Rohstoffe", 100000],
+      ["Löhne", "Bank", 125000],
+      ["Forderungen aus L.u.L.", "Umsatzerlöse", 275000],
+      ["Mietaufwendungen", "Bank", 22500],
+      ["Bank", "Zinserträge", 7500],
+      ["Bank", "Forderungen aus L.u.L.", 10000]
+    ]
+  }}
+/>
+
+#### b) Bilden Sie die Buchungssätze zu den Geschäftsvorfällen.
+
+Erstmal bilden wir die Buchungssätze zu den Geschäftsvorfällen.
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| Rohstoffe | an | Verbindlichkeiten aus L.u.L. | 75.000,- |
+| Materialaufwand | an | Rohstoffe | 100.000,- |
+| Löhne | an | Bank | 125.000,- |
+| Forderungen aus L.u.L. | an | Umsatzerlöse | 275.000,- |
+| Mietaufwendungen | an | Bank | 22.500,- |
+| Bank | an | Zinserträge | 7.500,- |
+| Bank | an | Forderungen aus L.u.L. | 10.000,- |
+
+Danach bilden wir die Buchungssätze zum Abschluss der Konten. Hierfür müssen wir zunächst erstmal die GuV abschließen, da die Aufwands- und Ertragskonten über die GuV abgeschlossen werden.
+Hier nehmen wir die Salden der Aufwands- und Ertragskonten und buchen diese auf das GuV-Konto.
+
+| Soll | an | Haben | Betrag |
+|:---|:---:|:---|---:|
+| Umsatzerlöse | an | GuV | 275.000,- |
+| GuV | an | Materialaufwand | 100.000,- |
+| GuV | an | Löhne | 125.000,- |
+| GuV | an | Mietaufwendungen | 22.500,- |
+| Zinserträge | an | GuV | 7.500,- |
+| GuV | an | Eigenkapital | 35.000,- |
+
+Die GuV sieht dann wie folgt aus: 
+
+<TAccount
+  account={{
+    title: "GuV",
+    type: "guv",
+    initValue: [0, null],
+    bookings: [
+      [275000, "H"],
+      [100000, "S"],
+      [125000, "S"],
+      [22500, "S"],
+      [7500, "H"]
+    ]
+  }}
+/>
+
+
+#### c) Schließen Sie die Konten ab und erstellen Sie die Abschlussbilanz.
+
+Wie beim Eröffnen des Kontos werden alle Aktivkonten im Soll und alle Passivkonten im Haben abgeschlossen. Der Saldo wird jeweils auf die Seite gebucht, die den geringeren Betrag aufweist.
+
+<span className="block text-center font-bold">SBK = Schlussbilanzkonto</span>
+| Soll         | Euro (€) | Haben         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| Grundstücke & Gebäude | 225.000,- | Eigenkapital | 304.000,- |
+| Maschinen | 200.000,- | <span className="ml-12"></span> GuV | 35.000,- |
+| Rohstoffe | 125.000,- | Darlehen | 400.000,- |
+| Forderungen aus L.u.L. | 365.000,- | Verbindlichkeiten aus L.u.L. | 250.000,- |
+| Bank | 70.000,- | | |
+| Kasse | 4.000,- | | |
+| | | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">989.000,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">989.000,-</span> |
+
+
+Da dass Schlussbilanzkonto (SBK) alle Konten saldiert, bildet es spiegelbildlich die Abschlussbilanz und kann es direkt in die Abschlussbilanz übernommen werden.
+Es kann also fast 1-zu-1 übernommen werden und die Überschriten werden lediglich angepasst.
+
+<span className="block text-center font-bold">Abschlussbilanz zum 31.12.2024</span>
+
+| Aktiva         | Euro (€) | Passiva         | Euro (€) |
+|-----------------------|---------:|-----------------------|---------:|
+| <span className="font-bold">Anlagevermögen</span> | | <span className="font-bold">Eigenkapital</span> | 339.000,- |
+| <span className="ml-4"></span> Grundstücke und Gebäude | 225.000,- | <span className="font-bold">Verbindlichkeiten</span> |  |
+| <span className="ml-4"></span> Maschinen | 200.000,- | <span className="ml-4"></span> Darlehen | 400.000,- |
+| <span className="font-bold">Umlaufvermögen</span> | | <span className="ml-4"></span> Verbindlichkeiten aus L.u.L. | 250.000,- |
+| <span className="ml-4"></span> Rohstoffe | 125.000,- | | |
+| <span className="ml-4"></span> Forderungen aus L.u.L. | 365.000,- | | |
+| <span className="ml-4"></span> Bank | 70.000,- | | |
+| <span className="ml-4"></span> Kasse | 4.000,- | | |
+| <span className="font-bold">Summe Aktiva</span> | <span className="font-bold">989.000,-</span> | <span className="font-bold">Summe Passiva</span> | <span className="font-bold">989.000,-</span> |
+
+## Übungsaufgabe 3
+
+Buche folgende Geschäftsvorfälle: 
+
+1. Das Gartencenter kauft zwei Kopierer zum Nettowert von 7.000,- € und bezahlt per Bank.
+2. Der Internetanbieter 3&5 schickt dem Gartencenter eine Rechnung in Höhe von 238,- € inkl. MwSt.
+3. Das Gartencenter zahlt die Rechnung (aus Aufgabe 2) per Banküberweisung.
+4. Die Gebäudeversicherung des Gartencenters wird vom Bankkonto abgebucht: 4.500,- €
+5. Für Elektroinstallationsarbeiten erhält das Gartencenter eine Rechnung in Höhe von 2.856,- € brutto.
+6. Das Gartencenter verkauft an einen Kunden Blumen im Wert von 2.499,- € brutto auf Rechnung.
+7. Der Kunde (aus Aufgabe 6) bezahlt seine Rechnung in Höhe von 2.499,- € per Banküberweisung.
+8. Ein Kunde kauft Gartenmöbel im Wert von 1.500,- zuzüglich MwSt. und zahlt bar.
+9. Das Gartencenter überweist Löhne in Höhe von 10.000,- € per Bank.
+10. Das Gartencenter kauft Warenregale zum Gesamtbetrag von 4.284,- € auf Rechnung.
+
+### Lösung: 
+
+Aus den Geschäftsvorfällen ergeben sich folgende Buchungssätze:
+| | Soll | Betrag |  an | Haben | Betrag |
+|---|:---|---:|:---:|:---|---:|
+| 1 | Büro- und Geschäftsausstattung <br /> Vorsteuer | 7.000,- <br /> 1.330,-| an | Bank <br /> Bank  | 7.000,- <br /> 1.330,- |
+| 2 | Telekommunikationsaufwand <br /> Forderungen aus Vorsteuer | 200,- <br /> 38,- | an | VB aus L.u.L. <br /> VB aus L.u.L. | 200,-  <br /> 38,- |
+| 3 | VB aus L.u.L. | 238,- | an | Bank | 238,- |
+| 4 | Versicherungsaufwand | 4.500,- | an | Bank | 4.500,- |
+| 5 | Instandhaltungsaufwand <br /> Vorsteuer | 2.400,- <br /> 456,- | an | VB aus L.u.L. <br /> VB aus L.u.L. | 2.400,- <br /> 456,- |
+| 6 | Forderungen aus L.u.L. | 2.499,- | an | Umsatzerlöse <br /> Umsatzsteuer | 2.100,- <br /> 399,- |
+| 7 | Bank | 2.499,- | an | Forderungen aus L.u.L. | 2.499,- |
+| 8 | Kasse | 1.785,- | an | Umsatzerlöse <br /> Umsatzsteuer | 1.500,- <br /> 285,- |
+| 9 | Löhne | 10.000,- | an | Bank | 10.000,- |
+| 10 | Betriebs- und Geschäftsausstattung <br /> Vorsteuer | 3.600,- <br /> 684,- | an | VB aus L.u.L. <br /> VB aus L.u.L. | 3.600,- <br /> 684,- |
+
+## Übungsaufgabe 4
+
+<Callout type="warning" title="Unvollständig" >
+Die Aufgabe ist unvollständig. Wir haben diese nicht bearbeitet, da sie für die Klausur nicht relevant ist.
+Diese Aufgaben behandelt das Thema der Rechnungsabgrenzungsposten, welches in der Klausur nicht geprüft wird.
+</Callout>
+
+
+<PostPager
+    prev={{
+        href: "/lectures/02-unternehmenrechnung-praktikum",
+        title: "02 Buchungssätze und Konten"
+    }}
+    next={{
+        href: "/lectures/04-unternehmenrechnung-praktikum",
+        title: "04 Privatkonten und Eigenkapital"
+    }}
+/>
