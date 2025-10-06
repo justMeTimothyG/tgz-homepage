@@ -20,13 +20,14 @@ type SectionConfig = {
 
 const pageSections: SectionConfig[] = [
   {
-    key: 'topics',
-    title: 'Themen',
+    key: 'tutorium',
+    title: 'Tutorium & Übungen',
     description:
-      'Vertiefungen zu Kernthemen der Vorlesung. Perfekt für Wiederholungsphasen und Prüfungsvorbereitung.',
+      'Aufgaben aus dem Tutorium mit Lösungen und Denkanstößen, um die Inhalte der Vorlesung praktisch zu verankern.',
     resources: [
+      getCollectionResource('physik-i-tutorium-i', 'Tutorium I: Kräfte und Bewegung'),
       {
-        title: 'Weitere Ressourcen folgen',
+        title: 'Weitere Übungen folgen',
         variant: 'note',
       },
     ],
@@ -37,6 +38,7 @@ const pageSections: SectionConfig[] = [
     description:
       'Starte mit den Fundamenten: Definitionen, Terme und Rechengesetze. Diese Beiträge schaffen das Vokabular, das in späteren Vorlesungen vorausgesetzt wird.',
     resources: [
+      getCollectionResource('x-und-y-anteile-von-kraeftevektoren', 'X- und Y-Anteile von Kräftevektoren'),
       {
         title: 'Weitere Ressourcen folgen',
         variant: 'note',
@@ -44,14 +46,13 @@ const pageSections: SectionConfig[] = [
     ],
   },
   {
-    key: 'tutorium',
-    title: 'Tutorium & Übungen',
+    key: 'topics',
+    title: 'Themen',
     description:
-      'Aufgaben aus dem Tutorium mit Lösungen und Denkanstößen, um die Inhalte der Vorlesung praktisch zu verankern.',
+      'Vertiefungen zu Kernthemen der Vorlesung. Perfekt für Wiederholungsphasen und Prüfungsvorbereitung.',
     resources: [
-      getCollectionResource('physik-i-tutorium-i', 'Tutorium I: Kräfte und Bewegung'),
       {
-        title: 'Weitere Übungen folgen',
+        title: 'Weitere Ressourcen folgen',
         variant: 'note',
       },
     ],

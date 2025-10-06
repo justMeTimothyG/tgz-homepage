@@ -74,6 +74,11 @@ declare module 'mdx/types' {
       className?: string;
       children: React.ReactNode;
     }) => React.ReactNode;
+    Lightbox: (props: {
+      className?: string;
+      caption?: React.ReactNode;
+      children: React.ReactNode;
+    }) => React.ReactNode;
     ExternalLinkComponent: (props: React.ComponentProps<'a'>) => React.ReactNode;
   }
 }

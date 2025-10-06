@@ -5,6 +5,8 @@ import React from 'react';
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & { children?: React.ReactNode };
 
 // Import all custom components
+import Lightbox from '@/components/Lightbox';
+
 import {
   Callout,
   CodeBlock,
@@ -75,6 +77,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     TAccountLedger: withNotProse(TAccountLedger),
 
     Image: withNotProse(MdxImage),
+    Lightbox: withNotProse(Lightbox),
     img: ({ className, alt, ...imgProps }: React.ImgHTMLAttributes<HTMLImageElement>) => (
       // eslint-disable-next-line @next/next/no-img-element -- Raw img keeps MDX authoring flexibility when Next/Image constraints are unsuitable.
       <img
