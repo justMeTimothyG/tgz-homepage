@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import TAccount, { Booking, InitialBooking, KontoType, TAccountData } from './TAccount';
+import TAccount, { InitialBooking, KontoType, TAccountData } from './TAccount';
 
 type LedgerBooking = [string, string, number];
 

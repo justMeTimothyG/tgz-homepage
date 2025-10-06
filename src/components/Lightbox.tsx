@@ -62,7 +62,7 @@ function isImageElement(node: ReactElement): boolean {
   return 'src' in (node.props as Record<string, unknown>);
 }
 
-function findFirstImage(node: ReactNode): ReactElement | null {
+function findFirstImage(node: ReactNode): ReactElement<ImageLikeProps> | null {
   if (!node) return null;
 
   if (Array.isArray(node)) {
@@ -78,7 +78,7 @@ function findFirstImage(node: ReactNode): ReactElement | null {
   }
 
   if (isImageElement(node)) {
-    return node as ReactElement;
+    return node as ReactElement<ImageLikeProps>;
   }
 
   const childArray = Children.toArray((node.props as { children?: ReactNode }).children);
@@ -90,7 +90,11 @@ function findFirstImage(node: ReactNode): ReactElement | null {
   return null;
 }
 
-function replaceImageNode(source: ReactNode, target: ReactElement, replacement: ReactNode): ReactNode {
+function replaceImageNode(
+  source: ReactNode,
+  target: ReactElement<ImageLikeProps>,
+  replacement: ReactNode,
+): ReactNode {
   if (source === target) {
     return replacement;
   }
@@ -173,7 +177,7 @@ export default function Lightbox({ children, className, caption }: LightboxProps
       if (event.defaultPrevented) return;
       if (!imageSrc) {
         if (process.env.NODE_ENV !== 'production') {
-          console.warn('[Lightbox] Could not resolve an image source for the lightbox.');
+          console.error('[Lightbox] Could not resolve an image source for the lightbox.');
         }
         return;
       }
@@ -200,9 +204,11 @@ export default function Lightbox({ children, className, caption }: LightboxProps
   const interactiveImage = useMemo(() => {
     if (!imageElement) return null;
 
+    const typedImageElement = imageElement as ReactElement<ImageLikeProps>;
+
     return (
       <span className={cn('relative inline-block group', className)}>
-        {React.cloneElement(imageElement, {
+        {React.cloneElement(typedImageElement, {
           onClick: handleOpen,
           onKeyDown: handleKeyDown,
           role: imageRole ?? 'button',
@@ -211,7 +217,7 @@ export default function Lightbox({ children, className, caption }: LightboxProps
             'cursor-zoom-in transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             imageClassName,
           ),
-        })}
+        } as Partial<ImageLikeProps>)}
 
         <span className="pointer-events-none absolute inset-0 rounded-lg bg-black/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
           <span className="flex h-full items-center justify-center">
@@ -225,7 +231,7 @@ export default function Lightbox({ children, className, caption }: LightboxProps
   const enhancedContent = useMemo(() => {
     if (!imageElement || !interactiveImage) {
       if (process.env.NODE_ENV !== 'production') {
-        console.warn('[Lightbox] Could not locate an image element within its children.');
+        console.error('[Lightbox] Could not locate an image element within its children.');
       }
       return children;
     }
