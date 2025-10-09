@@ -27,12 +27,17 @@ const pageSections: SectionConfig[] = [
       getCollectionResource({
         slug: '01-rechtliche-grundlagen',
         source: 'lecture',
-        overrideTitle: 'Vorlesung 01: Einführung in das Rechtssystem',
+        overrideTitle: '01: Einführung in das Rechtssystem',
       }),
       getCollectionResource({
         slug: '02-rechtliche-grundlagen',
         source: 'lecture',
-        overrideTitle: 'Vorlesung 02: BGB AT, Rechtssubjekte, Rechtsobjekte, Willenserklärungen',
+        overrideTitle: '02: BGB AT, Rechtssubjekte, Rechtsobjekte, Willenserklärungen',
+      }),
+      getCollectionResource({
+        slug: '03-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '03: Vertragsrecht und Wirksamkeitshindernisse',
       }),
       {
         title: 'Weitere Vorlesungsnotizen folgen',
