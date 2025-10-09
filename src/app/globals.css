@@ -196,3 +196,16 @@ html {
   color: var(--mdx-em);
   font-style: italic; /* explicit for clarity */
 }
+
+/* Highlight inline code snippets (single backticks) */
+.prose :where(code):not(:where(pre code)) {
+  background-color: rgba(107, 114, 128, 0.08); /* fallback grey tone */
+  background-color: color-mix(in oklch, oklch(0.674 0 0) 20%, transparent);
+  border: 1px solid color-mix(in oklch, var(--foreground) 14%, transparent);
+  border-radius: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  font-size: 0.95em;
+  font-weight: 600;
+  box-decoration-break: clone; /* keep padding on wrapped lines */
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
