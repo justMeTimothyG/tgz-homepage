@@ -29,38 +29,13 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: 'Vorlesung 01: Einführung in das Rechtssystem',
       }),
+      getCollectionResource({
+        slug: '02-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: 'Vorlesung 02: BGB AT, Rechtssubjekte, Rechtsobjekte, Willenserklärungen',
+      }),
       {
         title: 'Weitere Vorlesungsnotizen folgen',
-        variant: 'note',
-      },
-    ],
-  },
-  {
-    key: 'rechtsgebiete',
-    title: 'Rechtsgebiete',
-    description: 'Schwerpunkte aus Zivil-, Straf- und öffentlichem Recht – mit Fokus auf typische Klausurthemen.',
-    resources: [
-      {
-        title: 'Fallbearbeitung Öffentliches Recht',
-        variant: 'note',
-      },
-      {
-        title: 'Checkliste: Deliktsrecht',
-        variant: 'note',
-      },
-    ],
-  },
-  {
-    key: 'methoden',
-    title: 'Methoden & Werkzeuge',
-    description: 'Strategien für Gutachtenstil, Normprüfung und strukturierte Fallbearbeitung.',
-    resources: [
-      {
-        title: 'IRAC / Gutachtenstil kompakt',
-        variant: 'note',
-      },
-      {
-        title: 'Schemata & Entscheidungsbäume',
         variant: 'note',
       },
     ],
