@@ -422,7 +422,7 @@ export interface NumberedListProps extends React.OlHTMLAttributes<HTMLOListEleme
 
 type ListVariant = 'disc' | 'circle' | 'square';
 
-export interface ListProps extends React.UlHTMLAttributes<HTMLUListElement> {
+export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   variant?: ListVariant;
   tight?: boolean;
 }
