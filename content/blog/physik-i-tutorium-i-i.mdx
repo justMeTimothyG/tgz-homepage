@@ -1,0 +1,351 @@
+---
+title: "Technische Physik - Tutorium 1.1: Kräfte und Bewegungen"
+date: 2025-10-08
+excerpt: "Übungsaufgaben zu Federkraft, Kräftesystemen, schiefen Ebenen, Impulserhaltung und Bremsmomenten"
+tags: ["physik", "mechanik", "kraefte"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-10-08
+---
+
+Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Aufgaben um weitere Beispiele zu Kräften, Umrechnungen und Kinematik.
+
+## Kräftegleichgewicht
+
+<Exercise title="Aufgabe 1: Kräftegleichgewicht an der Walze" difficulty="medium">
+  <Task>
+    <Image 
+      src="/api/images/physik-1/tut-01-i-0001.jpg" 
+      alt="Kräfte an einer Walze"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
+    Unterschiedliche Kräfte wirken auf eine Walze:
+    $$
+      \begin{align*}
+      F_{1} &= 750\,\mathrm{N} \\
+      F_{2} &= 1.520\,\mathrm{N} \\
+      F_{3} &= 450\,\mathrm{N}
+      \end{align*}
+    $$
+    Mit folgenden Winkeln:
+    $$
+      \begin{align*}
+      \alpha &= 15° \\
+      \beta &= 25° \\
+      \gamma &= 35°
+      \end{align*}
+    $$
+    Ermitteln Sie eine vierte Kraft $F_4$, die das System ins Gleichgewicht bringt. Geben Sie Richtung und Betrag sowohl für den Zug- als auch für den Druckfall an.
+    <div className="clear-both" />
+  </Task>
+  <Hint>
+    Stelle alle Winkel zur positiven x-Achse dar, damit du die Kräfte mit Sinus und Kosinus zerlegen kannst.
+  </Hint>
+  <Hint>
+    Ein Kräftegleichgewicht gilt, wenn sowohl $\sum F_x = 0$ als auch $\sum F_y = 0$ erfüllt ist. Die gesuchte Kraft ergibt sich aus der negativen Summe der vorhandenen Komponenten.
+  </Hint>
+  <Step>
+    Berechne die Winkel $\psi_i$ zur positiven x-Achse:
+    $$
+      \begin{align*}
+      \psi_{1} &= 180° - \alpha + 180° = 180° - 15° + 180° \\
+      &= 345°  \\
+      \psi_{2} &=  270° - \beta + 180° = 270° - 25° +180°  \\
+      &= 425 ° -360° \\
+      &= 65° \\
+      \psi_{3} &= 360° - \gamma = 360° - 35°  \\
+      &= 325°
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Mit diesen Winkeln können wir die Kräfte in y und in x Richtung bestimmen für das Gleichgewicht des Systems: 
+    
+    Zunächst erstmal für die Kräfte in X-Richtung:
+    $$
+      \begin{align*}
+      \sum F_{x} = 0 &= F_{1}\cdot \cos(345°) + F_{2}\cdot \cos(65°)+F_{3}\cdot \cos(325°) + F_{4x}  &  & | -F_{4x}\cdot -1\\
+      F_{4x}&= (-1)\cdot (F_{1}\cdot \cos(345°) + F_{2}\cdot \cos(65°)+F_{3}\cdot \cos(325°))  \\
+      &= - 750\,\mathrm{N}\cdot \cos(345°) - 1.520 \,\mathrm{N} \cdot \cos(65°)-  450\,\mathrm{N}\cdot \cos(325°) \\
+      &= -1.735,4425 \,\mathrm{N}  
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Zunächst erstmal für die Kräfte in Y-Richtung:
+    $$
+      \begin{align*}
+      \sum F_{y} = 0 &= F_{1}\cdot \sin(345°) + F_{2}\cdot \sin(65°)+F_{3}\cdot \sin(325°) + F_{4y}  &  & | -F_{4y}\cdot -1\\
+      F_{4y}&= (-1)\cdot (F_{1}\cdot \sin(345°) + F_{2}\cdot \sin(65°)+F_{3}\cdot \sin(325°))  \\
+      &= - 750\,\mathrm{N}\cdot \sin(345°) - 1.520 \,\mathrm{N} \cdot \sin(65°)-  450\,\mathrm{N}\cdot \sin(325°) \\
+      &= -925,3642 \,\mathrm{N}  
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Bestimme Betrag und Winkel von $F_4$: (Da im III. Quadranten gilt folgende Formel)
+    $$
+      \begin{align*}
+      \psi_{4} &= \tan ^{-1}\left( \frac{F_{y}}{F_{x}} \right)+180° \\
+      &= \tan ^{-1}\left( \frac{-925,3642\,\mathrm{N} }{-1.735,4426\,\mathrm{N} } \right)+180° \\
+      &= 208,0672°
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Gefordert war auch nochmal den Winkel zu bestimmen als Druckkraft. Da die Druckkraft genau entgegengesetzt zur Zugkraft wirkt, gilt:
+    $$
+      \begin{align*}
+      \psi_{4,\text{Druck}} &= \psi_{4,\text{Zug}} - 180° \\
+      &= 208,0672° - 180° \\
+      &= 28,0672°
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die ausgleichende Kraft beträgt $\lvert F_4 \rvert \approx 2{,}0\,\mathrm{kN}$. Im Zug wirkt sie unter $\psi_{4,\text{Zug}} \approx 208°$, im Druck unter $\psi_{4,\text{Druck}} \approx 28°$ bezogen auf die positive x-Achse.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2: Resultierende Kraftsysteme" difficulty="medium">
+  <Task>
+    <Image 
+      src="/api/images/physik-1/tut-01-i-0002.jpg" 
+      alt="Skizze einer Walze mit Kräften"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
+    Eine Walze wird von drei Kräften belastet:
+    $$
+      \begin{align*}
+      F_{1} &= 400\,\mathrm{N} \\
+      F_{2} &= 500\,\mathrm{N} \\
+      F_{3} &= 250\,\mathrm{N}
+      \end{align*}
+    $$
+    Mit den Winkeln $\alpha = 30°$, $\beta = 45°$ und $\gamma = 15°$. Bestimmen Sie die resultierende Kraft $F_R$ und deren Richtung $\epsilon$, damit das System im Gleichgewicht bleibt.
+    <div className="clear-both" />
+  </Task>
+  <Hint>
+    Zerlege alle Kräfte in x- und y-Komponenten und setze $\sum F_x = 0$ sowie $\sum F_y = 0$ für das Gleichgewicht an. Die resultierende Richtung ergibt sich mit $\tan \epsilon = \frac{F_y}{F_x}$.
+  </Hint>
+  <Solution>
+    Die detaillierte Rechnung wird im Tutorium besprochen. Nutze das Vorgehen aus Aufgabe&nbsp;1 als Vorlage.
+  </Solution>
+</Exercise>
+
+## Einheiten und Größen
+
+<Exercise title="Aufgabe 3: Einheitenumrechnung" difficulty="easy">
+  <Task>
+    Führe die folgenden Umrechnungen durch:
+    <br />
+    <NumberedList variant="decimal">
+    <li> $6,4 \,\mathrm{h}$ in Minuten und Sekunden </li>
+    <li> $3{,}600 \cdot 10^{3} \,\mathrm{\mu m}$ in Dezameter</li>
+    <li> $A_{1} = 0{,}7 \,\mathrm{km^{2}}$ in Quadratzentimeter </li>
+    <li> $V = 30 \,\mathrm{dm^{3}}$ in Kubikmillimeter </li>
+    <li> $V = 0{,}8 \,\mathrm{m^{3}}$ in Kilogramm Wasser</li>
+    </NumberedList>
+  </Task>
+  <Hint>
+    <span className="font-bold">Teilaufgabe 5</span>: Wasser hat eine Dichte von $1\,\mathrm{dm^{3} = 1kg}$. Rechne also erst in $\,\mathrm{dm}$ um. 
+  </Hint>
+  <Step>
+    Zeitumrechnung:
+    $$
+      \begin{align*}
+      6,4 \,\mathrm{h}  &= 6,4 \,\mathrm{h}\cdot 60 \,\mathrm{\frac{min}{h}}    \\
+      &=  384 \,\mathrm{min} \cdot 60 \,\mathrm{\frac{s}{min}} \\
+      & = 23.040 \,\mathrm{s} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Längenumrechnung:
+    $$
+      \begin{align*}
+      3.600 \cdot 10^{3} &=  3.600 \cdot 10^{3} \cdot 10^{-7}\,\mathrm{dam}  \\
+      &= 3.600 \cdot 10-4 \,\mathrm{dam}  \\
+      &= 0,36 \,\mathrm{dam} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Flächenumrechnung:
+    $$
+      \begin{align*}
+      0,7 \,\mathrm{km^{2}} &= 0,7 (\,\mathrm{\cdot 10^{5}cm} )^{2} \\
+      &= 0,7 \cdot 10^{10} \,\mathrm{cm} ^{2} \\
+      &= 7.000.000.000 \,\mathrm{cm^{2}} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Volumenumrechnung:
+    $$
+      \begin{align*}
+      30 \,\mathrm{dm^{3}}  &= 30 (\,\mathrm{\cdot 10^{2}mm} )^{3} \\
+      &= 30 \cdot 10 ^{6}\cdot \,\mathrm{mm^{3}}  \\
+      &= 30.000.000\,\mathrm{mm^{3}}  
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Masse von Wasser (1 dm³ Wasser = 1 kg): <br />
+    Hierfür muss man wissen, dass Wasser eine Dichte von $1\,\mathrm{dm^{3} = 1kg}$ ist. Also müssen wir in $\,\mathrm{dm}$ erst umrechnen. 
+    $$
+      \begin{align*}
+      0,8 \,\mathrm{m^{3}} &= 0,8 \,\mathrm{(\cdot 10^{1}dm)^{3}}  \\
+      &= 0,8 \cdot 10^{3}\,\mathrm{dm^{3}}  \\
+      &= 800 \,\mathrm{dm^{3}}  \\
+      &= 800 \,\mathrm{kg} 
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die gesuchten Größen lauten: 
+    $$
+      \begin{align*}
+      1 &: 23.040 \,\mathrm{s}; \\
+      2 &: 0{,}36 \,\mathrm{dam}; \\
+      3 &:7{,}0 \cdot 10^{9} \,\mathrm{cm^{2}}; \\
+      4 &: 3{,}0 \cdot 10^{7} \,\mathrm{mm^{3}}; \\
+      5 &: 800 \,\mathrm{kg} \; \mathrm{Wasser}.
+      \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+## Statistik
+
+<Exercise title="Aufgabe 4: Arithmetisches Mittel und Abweichung" difficulty="easy">
+  <Task>
+    Gegeben sind die Längenwerte in cm:
+    <Table lines="both" align="center">
+      <thead>
+        <tr>
+          <th>15,3</th>
+          <th>15,0</th>
+          <th>15,6</th>
+          <th>14,7</th>
+          <th>14,9</th>
+          <th>17,0</th>
+        </tr>
+      </thead>
+    </Table>
+    Berechne das arithmetische Mittel und die mittlere absolute Abweichung.
+  </Task>
+  <Step>
+    Arithmetisches Mittel:
+    $$
+      \begin{align*}
+      \bar{x} &= \frac{1}{n}\sum_{i = 1}^{n} x_{i}  \\
+      &= \frac{1}{6}\cdot (15,3+15+15,6+14,7+14,9+17) \\
+      &= 15,4167
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Mittlere absolute Abweichung:
+    $$
+      \begin{align*}
+      \Delta \bar{x} &= \sqrt{ \frac{\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}}{n \cdot (n-1)} } \\
+      &= \sqrt{ \frac{(15,3-15,4167)^{2}+(15-15,4167)^{2}+(15,6-15,4167)^{2}+(14,7-15,4167)^{2}+(14,9-15,4167)^{2}+(17-15,4167)^{2}}{30} } \\
+      &=\sqrt{ \frac{3,5083}{40} } \\
+      &= 0,2962 \,\mathrm{cm} 
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Das arithmetische Mittel beträgt $\bar{x} \approx 15{,}42\,\mathrm{cm}$, die mittlere absolute Abweichung $\Delta \bar{x} \approx 0{,}30\,\mathrm{cm}$.
+  </Solution>
+</Exercise>
+
+## Relativbewegung
+
+<Exercise title="Aufgabe 5: Aufeinander zufahrende Fahrzeuge" difficulty="medium">
+  <Task>
+    Marty McFly fährt den DeLorean mit $88 \,\mathrm{mph}$ (1&nbsp;Meile = $1{,}60934 \,\mathrm{km}$). Maverick fährt mit $100 \,\mathrm{mph}$ aus einer Entfernung von $400 \,\mathrm{km}$ entgegen. Bestimme
+    <br />
+    a) die Zeit bis zum Treffen,
+    <br />
+    b) den Abstand nach einer Gesamtfahrzeit von $3{,}25 \,\mathrm{h}$.
+  </Task>
+  <Hint>
+    Rechne zunächst alle Geschwindigkeiten in km/h um.
+  </Hint>
+  <Hint>
+    Für den Zeitpunkt des Treffens ermittle die relative Geschwindigkeit, die beide Fahrzeuge haben. Also wie schnell fahren sie aufeinander zu. 
+  </Hint>
+  <Hint>
+    Da beide aufeinander zufahren, addierst du die Geschwindigkeiten um die Relativgeschwindigkeit zu erhalten.
+    Danach kann der Zeitpunkt des Treffens mit $t = \frac{s}{v}$ bestimmt werden.
+  </Hint>
+  <Step>
+    Geschwindigkeit in km/h:
+    $$
+      \begin{align*}
+      v_{\text{del}} &= 88 \cdot 1{,}60934 = 141{,}62 \,\mathrm{\tfrac{km}{h}} \\
+      v_{\text{mav}} &= 100 \cdot 1{,}60934 = 160{,}93 \,\mathrm{\tfrac{km}{h}}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Relative Geschwindigkeit und Treffzeit:
+    $$
+      \begin{align*}
+      v_{\text{rel}} &= v_{\text{del}} + v_{\text{mav}} = 302{,}56 \,\mathrm{\tfrac{km}{h}} \\
+      t &= \frac{400 \,\mathrm{km}}{302{,}56 \,\mathrm{\tfrac{km}{h}}} \approx 1{,}32 \,\mathrm{h}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Restlicher Abstand nach $3{,}25 \,\mathrm{h}$:
+    $$
+      \begin{align*}
+      s &= v_{\text{rel}} \cdot \left(3{,}25 - 1{,}32\right) \,\mathrm{h} \\
+      &\approx 302{,}56 \cdot 1{,}93 \approx 583{,}3 \,\mathrm{km}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Fahrzeuge treffen sich nach etwa $1{,}32 \,\mathrm{h}$. Nach $3{,}25 \,\mathrm{h}$ liegen sie rund $583 \,\mathrm{km}$ auseinander.
+  </Solution>
+</Exercise>
+
+## Kinematik
+
+<Exercise title="Aufgabe 6: Freier Fall mit Anfangsgeschwindigkeit" difficulty="medium">
+  <Task>
+    Loki startet mit $v_0 = 10 \,\mathrm{\tfrac{m}{s}}$ in den freien Fall. Die Beschleunigung beträgt $a = 40 \,\mathrm{\tfrac{cm}{s^{2}}}$, und Dr.&nbsp;Strange lässt ihn $15$ Minuten fallen. Vernachlässige Reibung. Bestimme Endgeschwindigkeit und Fallstrecke.
+  </Task>
+  <Hint>
+    Wandle die Beschleunigung in $\mathrm{\tfrac{m}{s^{2}}}$ um und nutze $t = 15 \,\mathrm{min} = 900 \,\mathrm{s}$.
+  </Hint>
+  <Step>
+    Endgeschwindigkeit:
+    $$
+      \begin{align*}
+      a &= 0{,}4 \,\mathrm{\tfrac{m}{s^{2}}} \\
+      v_{\text{end}} &= v_{0} + a \cdot t = 10 + 0{,}4 \cdot 900 = 370 \,\mathrm{\tfrac{m}{s}}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Fallstrecke:
+    $$
+      \begin{align*}
+      s &= v_{0} \cdot t + \frac{1}{2} a t^{2} \\
+      &= 10 \cdot 900 + \frac{1}{2} \cdot 0{,}4 \cdot 900^{2} \\
+      &= 9.000 + 162.000 = 171.000 \,\mathrm{m}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Loki erreicht eine Endgeschwindigkeit von $370 \,\mathrm{\tfrac{m}{s}}$ und legt eine Strecke von $1,71 \cdot 10^{5} \,\mathrm{m}$ (rund $171 \,\mathrm{km}$) zurück.
+  </Solution>
+</Exercise>
