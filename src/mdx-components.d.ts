@@ -74,6 +74,12 @@ declare module 'mdx/types' {
       className?: string;
       children: React.ReactNode;
     }) => React.ReactNode;
+    List: (props: {
+      variant?: 'disc' | 'circle' | 'square';
+      tight?: boolean;
+      className?: string;
+      children: React.ReactNode;
+    }) => React.ReactNode;
     Lightbox: (props: {
       className?: string;
       caption?: React.ReactNode;

@@ -420,6 +420,13 @@ export interface NumberedListProps extends React.OlHTMLAttributes<HTMLOListEleme
   tight?: boolean;
 }
 
+type ListVariant = 'disc' | 'circle' | 'square';
+
+export interface ListProps extends React.UlHTMLAttributes<HTMLUListElement> {
+  variant?: ListVariant;
+  tight?: boolean;
+}
+
 function NumberedList(props: NumberedListProps) {
   const {
     variant = 'decimal',
@@ -474,5 +481,39 @@ function NumberedList(props: NumberedListProps) {
   );
 }
 
+function List(props: ListProps) {
+  const {
+    variant = 'disc',
+    tight = false,
+    className = '',
+    style,
+    children,
+    ...rest
+  } = props;
+
+  const spacingClass = tight ? 'space-y-1' : 'space-y-2';
+  const mergedClassName = [
+    'pl-6 list-outside',
+    spacingClass,
+    '[&>li]:mr-4',
+    className,
+  ].filter(Boolean).join(' ');
+
+  const mergedStyle: React.CSSProperties = {
+    listStyleType: variant,
+    ...style,
+  };
+
+  return (
+    <ul
+      {...rest}
+      className={mergedClassName}
+      style={mergedStyle}
+    >
+      {children}
+    </ul>
+  );
+}
+
 // Export calculator utilities for reuse
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, Table, RevealableTable, TAccount, TAccountLedger };
+export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, List, Table, RevealableTable, TAccount, TAccountLedger };

@@ -20,6 +20,7 @@ import {
   Stat,
   ExternalLinkComponent,
   NumberedList,
+  List,
   GcdCalculator,
   LcmCalculator,
   GaussianElimination,
@@ -104,6 +105,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     Stats: withNotProse(Stats),
     Stat: withNotProse(Stat),
     NumberedList,
+    List,
     // Keep links inline; do not wrap with not-prose to avoid block divs in paragraphs
     ExternalLinkComponent,
 

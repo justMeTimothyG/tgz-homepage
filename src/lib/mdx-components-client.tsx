@@ -20,6 +20,7 @@ import {
   Stat,
   ExternalLinkComponent,
   NumberedList,
+  List,
   GcdCalculator,
   LcmCalculator,
   GaussianElimination,
@@ -221,6 +222,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Stat: withNotProse(Stat),
     ExternalLinkComponent,
     NumberedList,
+    List,
 
     a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { children?: React.ReactNode }) => {
       if (href?.startsWith('http')) {
