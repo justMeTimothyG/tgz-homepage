@@ -39,6 +39,13 @@ export const collectionSections: CollectionSection[] = [
         subtitle: '1. Semester',
       },
       {
+        href: '/sammlungen/grundzuege-der-wirtschaftsinformatik',
+        title: 'Grundzüge der Wirtschaftsinformatik',
+        description:
+          'Einführung in die Grundlagen der Wirtschaftsinformatik, HTML, Datenbanken und Systementwicklung.',
+        subtitle: '1. Semester',
+      },
+      {
         href: '/sammlungen/projektmanagement',
         title: 'Projektmanagement',
         description:
