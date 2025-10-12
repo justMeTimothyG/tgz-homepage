@@ -52,7 +52,7 @@ export default async function LecturePage({ params }: { params: Promise<{ slug: 
                 <p className="text-sm font-semibold uppercase tracking-wide text-blue-600 dark:text-blue-400">
                   Vorlesung · Ressourcen
                 </p>
-                <h1 className="text-white">
+                <h1 className="text-gray-900 dark:text-white">
                   {lecture.title}
                 </h1>
                 {lecture.date && (

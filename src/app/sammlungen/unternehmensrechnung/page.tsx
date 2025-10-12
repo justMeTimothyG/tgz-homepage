@@ -65,43 +65,26 @@ const pageSections: SectionConfig[] = [
     ],
   },
   {
-    key: 'foundations',
-    title: 'Grundlagen',
-    description:
-      'Starte mit den Fundamenten: Definitionen, Terme und Rechengesetze. Diese Beiträge schaffen das Vokabular, das in späteren Vorlesungen vorausgesetzt wird.',
-    resources: [
-      {
-        title: 'Weitere Ressourcen folgen',
-        variant: 'note',
-      },
-    ],
-  },
-  {
     key: 'general',
     title: 'Generelles',
     description: 'Generelles was wichtig sein könnte für die Veranstaltung.',
     resources: [
+      getCollectionResource({
+        slug: 'unternehmensrechnung-klausurhinweise',
+        source: 'lecture',
+        overrideTitle: 'Klausurhinweise WiSe 2024/25',
+      }),
+      getCollectionResource({
+        slug: 'unternehmensrechnung-formelsammlung',
+        source: 'lecture',
+        overrideTitle: 'Formelsammlung WiSe 2024/25',
+      }),
       {
         title: 'Weitere Ressourcen folgen',
         variant: 'note',
       },
     ],
-  },
-  {
-    key: 'reflections',
-    title: 'Reflections',
-    description:
-      'Lernen endet nicht nach dem letzten Übungsblatt. Hier sammle ich Gedanken dazu, wie ich das Fach besser verankere: Methoden, Routinen und kleine Retrospektiven.',
-    resources: [
-      {
-        title: 'Studi-Routine & Wochenstruktur',
-      },
-      {
-        title: 'Weitere Reflexionen folgen',
-        variant: 'note',
-      },
-    ],
-  },
+  }
 ];
 
 function CollectionListItem({ item }: { item: CollectionResource }) {

@@ -1,0 +1,168 @@
+---
+title: "Formelsammlung zur Unternehmensrechnung WiSe 2024/25"
+excerpt: "Meine Formelsammlung mit den wichtigen Formeln für die Unternehmensrechnung Klausur im WiSe 2024/25."
+date: "2025-10-12"
+tags: ["unternehmenrechnung", "formelsammlung", "klausur"]
+published: true
+sammlungen: ["unternehmensrechnung"]
+---
+
+<Callout type="info" title="Hinweis">
+  Diese Formelsammlung ist für den Kurs "Unternehmensrechnung" im Wintersemester 2024/25 an der Hochschule Osnabrück erstellt worden. Sie dient als Lernhilfe und Zusammenfassung der wichtigsten Formeln und Konzepte, die in der Vorlesung behandelt wurden. Bitte beachten Sie, dass diese Sammlung nicht alle möglichen Formeln abdeckt und es ratsam ist, die Vorlesungsunterlagen und das Lehrbuch für eine umfassendere Vorbereitung zu konsultieren.
+  In anderen Semestern können natürlich andere Themen behandelt werden. Deshalb dient diese Formelsammlung mehr als Anhaltspunkt oder als ein Beispiel. Denn ihr dürft eine Formelsammlung mit in die Klausur nehmen, die aber auch *mit abgegeben* wird. <br />
+  <br />
+  Arbeitet beim Lernen und vorbereiten auf die Klausur frühzeitig mit der Formelsammlung, um sicherzustellen, dass ihr die Formeln versteht und anwenden könnt, bzw auch einfach die richtigen Formeln findet. Oder fehlende Formeln ergänzt. <br />
+  <br />  
+  Viel Erfolg bei der Klausurvorbereitung!
+</Callout>
+
+## Bestands und Bewegungsrechnung: 
+$$
+\text{Endbestand} = \text{Anfangsbestand} + \text{Zugänge} - \text{Abgänge}
+$$
+$$
+\text{Periodenerfolg} = \text{Endbestand} - \text{Anfangsbestand}
+$$
+$$
+\text{Periodenerfolg} = \text{Zugänge} - \text{Abgänge}
+$$
+$$
+\text{Periodenerfolg} = EK_{t}-EK_{t-1}
+$$
+## Vermögensebenen: 
+$$
+\text{Zahlungsmittel} = \text{Einzahlungen} - \text{Auszahlung}
+$$
+$$
+\text{Geldvermögen} = \text{Zahlungsmittel} + \text{Forderungen} - \text{Schulden}
+$$
+$$
+\text{Reinvermögen} = \text{Geldvermögen} + \text{Sachvermögen}
+$$
+## Clean-Surplus Bedingung (PersG)
+$$
+EK_{t}- EK_{t-1} = \text{Gewinn}_{t} - (\text{Einlagen}_{t}-\text{Entnahmen}_{t})
+$$
+## Bestand des Vermögens: 
+$$
+\text{Vermögen} = EK + \text{Schulden}
+$$
+## T-Kontenverrechnung: 
+$$
+\text{Endbestand} = \text{Anfangsbestand} + \text{Zugänge} - \text{Abgänge}
+$$
+## EBK Buchungen
+$$
+\begin{align*}
+\text{Aktivkonten}   & & an & &  EBK \\
+EBK  & & an  & & \text{Passivkonten}
+\end{align*}
+$$
+### Abschreibungen: 
+$$
+\begin{align*}
+AHK  & = \text{Anschaffungspreis}  \\
+ & + \text{Nebenkosten (Transport, Versicherungen)}  \\
+ & + \text{Kosten für Versetzung in Betriebszustand}  \\
+& - \text{Minderungen}
+\end{align*}
+$$
+## Abschreibungsbeträge: (für alle Methoden)
+$$
+\sum_{t=1}^{n} \text{AfA}_{t} = A_{0}-\text{RBW}_{n}
+$$
+## Linear: 
+### Jährliche Abschreibungsbeträge: 
+$$
+\text{AfA}_{t} = \frac{A_{0}-\text{RBW}_{n}}{n}\cdot \frac{12-\text{Anschaffungsmonat+1}}{12}
+$$
+### RBW am Bilanzstichtag: 
+$$
+\text{RBW}_{t} = \text{AHK}_{0}-\sum_{k=1}^{t}\text{AfA}_{k} 
+$$
+## Leistungsabhängige: 
+### Jährliche Abschreibungsbeträge
+$$
+\text{AfA}_{t} = \frac{L_{t}}{L}\cdot (A_{0}-RBW_{n})
+$$
+### RBW:
+$$
+RBW_{t} = A_{0}-\sum_{k=1}^{t} \text{AfA}_{k}
+$$
+## Digitale/Degresive:
+$$
+d = \frac{2\cdot (A_{0}-\text{RBW}_{n})}{n\cdot (n+1)}
+$$
+### Jährliche Abschreibungsbeträge: 
+$$
+\text{AfA}_{t} = (n-(t-1))\cdot d
+$$
+## Geometrisch-Degressiv: 
+$$
+\text{RBW}_{t}=A_{0}\cdot (1-g)^{t}
+$$
+$$
+\text{AfA}_{t}=A_{0}\cdot (1-g)^{t-1}\cdot g
+$$
+$$
+g = 1 - \sqrt[n]{ \frac{\text{RBW}_{n}}{A_{0}} }
+$$
+$$
+t^{*}\geq n+1[+\alpha]-\frac{1}{g}
+$$
+## Außerplanmäßige Abschreibung: 
+(Prüfung, ob dauernde Wertminderung vorliegt)
+$$
+\text{BZW}_{t}\leq\text{RBW}_{t}-\sum_{k=1}^{\frac{n-t}{2}}\text{AfA}_{t+k} 
+$$
+## Wertaufholung: 
+
+$$
+\text{WA}_{t} = min\{ \text{apl.AfA} \quad ; \quad \text{fortgeführte AHK}_{t} - \text{RBW}_{t} \}
+$$
+Fortgeführte AHK = RBW den du eigentlich gehabt hättest
+
+
+## Kostenstellenrechnung: 
+$$
+V_{i}\cdot q_{i} = \text{PGK}_{i} + \sum_{j=1}^{n}V_{ji}\cdot q_{j} 
+$$
+## Grundschema der Kalkulation: 
+$$
+\begin{align*}
+ &  & \text{Einzelmaterialkosten} \\
+ & + & \text{Materialgemeinkosten} \\
+ & + & \text{Fertigungseinzelkosten} \\
+ & + & \text{Fertigungsgemeinkosten} \\
+ & + & \text{Sondereinzelkosten der Fertigung} \\
+ \hline \\
+ & =  &  \text{Herstellkosten} \\
+ \\
+ & + & \text{Verwaltungsgemeinkosten} \\
+ \hline \\
+ & = &  \text{Herstellungskosten} \\
+ \\
+ & + & \text{Vertriebsgemeinkosten} \\
+ & + & \text{Sondereinzelkosten des Vertriebs} \\
+    \hline \\
+ & =  & \text{Selbstkosten}
+\end{align*}
+$$
+
+## Kalkulationssatz: 
+$$
+\text{Kalkulationssatz} = \frac{\text{Gemeinkosten der Endkostenstelle}}{\text{Bezugsgröße}}
+$$
+## Zuschlagssatz Material: 
+$$
+Z_{M} = \frac{\text{Materialgemeinkosten}}{\text{Gessamte Materialeinzelkosten}}\cdot 100
+$$
+## Zuschlagssatz Fertigung: 
+$$
+Z_{F} = \frac{\text{Fertigungsgemeinkosten}}{\text{Gesamte Fertigungseinzelkosten}}\cdot 100
+$$
+## Zuschlagsatz Verwaltungs und Vertrieb: 
+$$
+Z_{VwVT} = \frac{\text{Verwaltungs und Vertriebsgemeinkosten}}{\text{Gesamte Herstellkosten}}\cdot 100
+$$
+
