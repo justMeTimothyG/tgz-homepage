@@ -5,7 +5,7 @@ excerpt: "Übungsaufgaben zu Federkraft, Kräftesystemen, schiefen Ebenen, Impul
 tags: ["physik", "mechanik", "kraefte"]
 sammlungen: ["technische-physik"]
 published: true
-lastUpdated: 2025-10-08
+lastUpdated: 2025-10-11
 ---
 
 Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Aufgaben um weitere Beispiele zu Kräften, Umrechnungen und Kinematik.
@@ -130,10 +130,70 @@ Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Auf
     <div className="clear-both" />
   </Task>
   <Hint>
-    Zerlege alle Kräfte in x- und y-Komponenten und setze $\sum F_x = 0$ sowie $\sum F_y = 0$ für das Gleichgewicht an. Die resultierende Richtung ergibt sich mit $\tan \epsilon = \frac{F_y}{F_x}$.
+    Zerlege alle Kräfte in x- und y-Komponenten und setze $\sum F_x = 0$ sowie $\sum F_y = 0$ für das Gleichgewicht an. Die resultierende Richtung ergibt sich mit $\epsilon = \tan ^{-1}\left( \frac{F_y}{F_x} \right)$.
+    Zur Wiederholung kannst du [hier](/blog/x-und-y-anteile-von-kraeftevektoren) nachschauen. 
+    Nutze das Vorgehen, wie in Aufgabe 1.
   </Hint>
+  <Step>
+    Zunächst werden die Winkel einheitlich zur der positiven x-Achse (gegen den Uhrzeigersinn) gesucht: 
+    $$
+    \begin{align*}
+    \psi_{1} &= 90° + \alpha = 90° + 30° \\
+    &= 120° \\
+    \psi_{2} &= 90° - \beta = 90° - 45° \\
+    &= 45° \\
+    \psi_{3} &= 270° - \gamma = 270° - 15° \\
+    &= 255°
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+
+    Als nächste bestimmen wir die Kräfte in X und in Y Richtung für das Gleichgewicht des Systems: 
+    Beginnend mit den x-Kräften: 
+    $$
+    \begin{align*}
+    \sum F_{x} = 0 &= \sum_{i=1}^{3}(F_{i\cdot }\cos(\psi_{i}))  + F_{4x}  &  & | - \sum F_{i}\cdot \cos(\psi_{i})\\
+    F_{4x} &= -(F_{1} \cdot \cos(\psi_{1}) + F_{2} \cdot \cos(\psi_{3})+F_{3}\cdot \cos(\psi_{3})) \\
+    &= -(400\,\mathrm{N}  \cdot 120° + 500\,\mathrm{N}  \cdot 45°+ 250 \,\mathrm{N}  \cdot 255°) \\
+    &= -88,8486\,\mathrm{N} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Und weiter mit den y-Kräften: 
+    $$
+    \begin{align*}
+    \sum F_{y} = 0 &= \sum_{i=1}^{3}(F_{i\cdot }\sin(\psi_{i}))  + F_{4y}  &  & | - \sum F_{i}\cdot \sin(\psi_{i})\\
+    F_{4y} &= -(F_{1} \cdot \sin(\psi_{1}) + F_{2} \cdot \sin(\psi_{3})+F_{3}\cdot \sin(\psi_{3})) \\
+    &= -(400\,\mathrm{N}  \cdot \sin(120°) + 500\,\mathrm{N}  \cdot \sin(45°)+ 250 \,\mathrm{N}  \cdot \sin(255°) \\
+    &= -458,4821\,\mathrm{N} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Daraus ergibt sich folgender Gesamtbetrag für $F_{4}$
+    $$
+    \begin{align*}
+    F_{4} &= \sqrt{ F_{4x}^{2}+F_{4y}^{2} } \\
+    &= \sqrt{ (-88,8486\,\mathrm{N} )^{2} + (-458,4821\,\mathrm{N} )^{2} } \\
+    &= 467,0117\,\mathrm{N} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Nun muss noch der Winkel bestimmt werden. Da sich der Vektor im III. Quadranten befindet gilt folgendes:
+    $$
+    \begin{align*}
+    \psi_{4} &= \tan ^{-1}\left( \frac{y}{x} \right) + 180° \\
+    &= \tan ^{-1}\left( \frac{-458,4821}{-88,8486} \right)+ & 180° \\
+    &= 79,0327°+180° \\
+    &= 259,0327°
+    \end{align*}
+    $$
+  </Step>
   <Solution>
-    Die detaillierte Rechnung wird im Tutorium besprochen. Nutze das Vorgehen aus Aufgabe&nbsp;1 als Vorlage.
+    Die resultierende Kraft beträgt *$F_4 = 467,01 \,\mathrm{N}$* und wirkt unter einem Winkel von *$\psi_4 \approx 259°$* zur positiven x-Achse als Zugkraft.
   </Solution>
 </Exercise>
 
@@ -151,6 +211,22 @@ Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Auf
     <li> $V = 0{,}8 \,\mathrm{m^{3}}$ in Kilogramm Wasser</li>
     </NumberedList>
   </Task>
+  <Hint>
+    Bei der Umrechnung beachte die 10er Potenzen. Die Differenz in der Potenz bestimmt die Umrechnungsfaktoren. <br />
+    z.B. zwischen km(hoch 3) und cm(hoch -2) sind es eine Differenz von 5 in der Potenz. 
+    <br />
+    wandelst du von einer höheren Potenz in eine niedrigere ist es positiv: also $10^5$. <br />
+    Von einer niedrigeren Potenz in eine höhere ist es negativ: also $10^{-5}$.
+  </Hint>
+  <Hint>
+    Rechnest du Flächen oder Volumen um, musst du die Potenz auch quadrieren bzw. hoch 3 nehmen. Mit dem gleichen Beispiel also: 
+    $$
+      \begin{align*}
+      1 \,\mathrm{km^{2}} &= 1 (\,\mathrm{\cdot 10^{5}cm} )^{2} \\
+      &= 1 \cdot 10^{10} \,\mathrm{cm^{2}} 
+      \end{align*}
+    $$
+  </Hint>
   <Hint>
     <span className="font-bold">Teilaufgabe 5</span>: Wasser hat eine Dichte von $1\,\mathrm{dm^{3} = 1kg}$. Rechne also erst in $\,\mathrm{dm}$ um. 
   </Hint>
@@ -239,6 +315,17 @@ Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Auf
     </Table>
     Berechne das arithmetische Mittel und die mittlere absolute Abweichung.
   </Task>
+  <Hint>
+    Das arithmetische Mittel ist der Durchschnittswert aller Messwerte. Berechne also den Durchschnitt. 
+    <br />
+    Die mittlere absolute Abweichung gibt an, wie stark die einzelnen Messwerte im Durchschnitt vom arithmetischen Mittel abweichen.
+    Also der Durchschnitt des Betrages der Abweichung.
+  </Hint>
+  <Hint>
+    Das arithmetische Mittel wird mit $\bar{x} = \frac{1}{n}\sum_{i = 1}^{n} x_{i}$ berechnet. 
+    <br />
+    Die mittlere absolute Abweichung wird mit $\Delta \bar{x} = \sqrt{ \frac{\sum_{i=1}^{n} (x_{i}-\bar{x})^{2}}{n \cdot (n-1)} }$ berechnet.
+  </Hint>
   <Step>
     Arithmetisches Mittel:
     $$
@@ -321,10 +408,15 @@ Dieses Tutorium vertieft die Inhalte aus dem ersten Termin und erweitert die Auf
 
 <Exercise title="Aufgabe 6: Freier Fall mit Anfangsgeschwindigkeit" difficulty="medium">
   <Task>
-    Loki startet mit $v_0 = 10 \,\mathrm{\tfrac{m}{s}}$ in den freien Fall. Die Beschleunigung beträgt $a = 40 \,\mathrm{\tfrac{cm}{s^{2}}}$, und Dr.&nbsp;Strange lässt ihn $15$ Minuten fallen. Vernachlässige Reibung. Bestimme Endgeschwindigkeit und Fallstrecke.
+    Dr. Strange schickt Loki durch 2 übereinander liegende Portale in einen freien Fall durch 2 Multiversen.  Loki fällt mit einer Anfangsgeschwindigkeit von $10\,\mathrm{\frac{m}{s}}$ erfährt dann eine Beschleunigung von $40 \,\mathrm{\frac{cm}{s^{2}}}$. Dr. Strange wird von sadistischen Züge überwältigt und lässt Loki 15 min fallen. Ohne Berücksichtigung von Reibung oder Terminal-Geschwindigkeiten — Welche Endgeschwindigkeit würde Loki erreichen und welche Strecke hat dieser zurückgelegt. 
   </Task>
   <Hint>
     Wandle die Beschleunigung in $\mathrm{\tfrac{m}{s^{2}}}$ um und nutze $t = 15 \,\mathrm{min} = 900 \,\mathrm{s}$.
+  </Hint>
+  <Hint>
+    Die Endgeschwindigkeit berechnet sich mit $v_{\text{end}} = v_{0} + a \cdot t$.
+    <br />
+    Die Fallstrecke berechnet sich mit $s = v_{0} \cdot t + \frac{1}{2} a t^{2}$.
   </Hint>
   <Step>
     Endgeschwindigkeit:
