@@ -31,6 +31,7 @@ import {
   RevealableTable,
   TAccount,
   TAccountLedger,
+  Icon,
 } from '@/components/markdown/CustomComponents';
 import Exercise, { Hint as ExerciseHint, Solution as ExerciseSolution, Step as ExerciseStep, Task as ExerciseTask } from '@/components/markdown/Exercise';
 import QuadraticSolver from '@/components/markdown/QuadraticSolver';
@@ -106,6 +107,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     Stat: withNotProse(Stat),
     NumberedList,
     List,
+    Icon,
     // Keep links inline; do not wrap with not-prose to avoid block divs in paragraphs
     ExternalLinkComponent,
 

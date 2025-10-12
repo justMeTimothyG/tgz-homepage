@@ -53,6 +53,59 @@ const pageSections: SectionConfig[] = [
     ],
   },
   {
+    key: 'uebung',
+    title: 'Übung zur Vorlesung',
+    description:
+      'Hier findest du meine Ausarbeitungen zu den Übungsaufgaben.',
+    resources: [
+      getCollectionResource({
+        slug: '01-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '01: Grundlagen',
+      }),
+      getCollectionResource({
+        slug: '02-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '02: Übung',
+      }),
+      getCollectionResource({
+        slug: '03-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '03: Übung',
+      }),
+      getCollectionResource({
+        slug: '04-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '04: Übung',
+      }),
+      getCollectionResource({
+        slug: '05-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '05: Übung',
+      }),
+      getCollectionResource({
+        slug: '06-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '06: Übung',
+      }),
+      getCollectionResource({
+        slug: '07-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '07: Übung',
+      }),
+      getCollectionResource({
+        slug: '08-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '08: Übung',
+      }),
+      getCollectionResource({
+        slug: '09-unternehmensrechnung-uebung',
+        source: 'lecture',
+        overrideTitle: '09: Übung',
+      }),
+    ],
+  },
+  {
     key: 'topics',
     title: 'Themen',
     description:

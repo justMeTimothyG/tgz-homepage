@@ -57,10 +57,13 @@ async function main() {
   // In development, this would scan the database but for Docker builds we'll rely on static analysis
   console.log('[safelist] Generating static safelist (no database access during build)');
   
-  // Scan src files for className usage
-  const srcDir = path.join(currentDir, 'src');
-  if (fs.existsSync(srcDir)) {
-    scanDirectory(srcDir, classes);
+  // Scan source directories (including content MDX) for class usage
+  const sourceDirs = ['src', 'content'];
+  for (const dir of sourceDirs) {
+    const target = path.join(currentDir, dir);
+    if (fs.existsSync(target)) {
+      scanDirectory(target, classes);
+    }
   }
 
   // Seed a minimal set of common typography + layout utilities used in MDX
@@ -95,4 +98,3 @@ main().catch((e) => {
   console.error('[safelist] Failed:', e);
   process.exit(1);
 });
-

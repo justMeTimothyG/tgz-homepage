@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { AlertCircle, CheckCircle, Info, XCircle, ExternalLink } from 'lucide-react';
+import { AlertCircle, CheckCircle, Info, XCircle, ExternalLink, icons, type LucideProps } from 'lucide-react';
 import GcdCalculator from './GcdCalculator';
 import LcmCalculator from './LcmCalculator';
 import GaussianElimination from './GaussianElimination';
@@ -32,6 +32,87 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   dense?: boolean;
   className?: string;
   children?: React.ReactNode;
+}
+
+type IconRegistry = typeof icons;
+type IconName = keyof IconRegistry;
+
+function normalizeIconName(rawName?: string): IconName | undefined {
+  if (!rawName) return undefined;
+  const trimmed = rawName.trim();
+  if (!trimmed) return undefined;
+
+  if (trimmed in icons) {
+    return trimmed as IconName;
+  }
+
+  const camelized = trimmed
+    .toLowerCase()
+    .replace(/[\s_-]+(.)/g, (_, char: string) => char.toUpperCase())
+    .replace(/^\w/, (char) => char.toUpperCase());
+  if (camelized in icons) {
+    return camelized as IconName;
+  }
+
+  const pascal = trimmed
+    .split(/[\s_-]+/)
+    .filter(Boolean)
+    .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+    .join('');
+  if (pascal in icons) {
+    return pascal as IconName;
+  }
+
+  return undefined;
+}
+
+export interface IconProps extends Omit<LucideProps, 'ref'> {
+  name: string;
+  label?: string;
+  fallback?: React.ReactNode;
+}
+
+export function Icon({ name, label, fallback = null, className, size, ...rest }: IconProps) {
+  const iconName = normalizeIconName(name);
+  const LucideIcon = iconName ? icons[iconName] : undefined;
+
+  if (!LucideIcon) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.warn(`Icon "${name}" could not be found in lucide-react.`);
+    }
+    if (fallback) {
+      return (
+        <span className={cx('inline-flex items-center justify-center align-[0.125em]', className)}>
+          {fallback}
+        </span>
+      );
+    }
+    return null;
+  }
+
+  const ariaProps =
+    label != null && label.trim().length > 0
+      ? { role: 'img', 'aria-label': label }
+      : { 'aria-hidden': true };
+
+  const hasExplicitColor = className
+    ? className.split(/\s+/).some((token) =>
+        token.startsWith('text-') || token.startsWith('stroke-') || token.startsWith('fill-')
+      )
+    : false;
+
+  return (
+    <LucideIcon
+      {...rest}
+      size={size ?? '1em'}
+      {...ariaProps}
+      className={cx(
+        'inline-block h-[1em] w-[1em] align-[0.18em]',
+        !hasExplicitColor && 'text-inherit',
+        className
+      )}
+    />
+  );
 }
 
 function enhanceTableTree(node: React.ReactNode, opts: TableEnhanceOptions): React.ReactNode {
