@@ -539,6 +539,7 @@ function NumberedList(props: NumberedListProps) {
   const spacingClass = tight ? 'space-y-1' : 'space-y-2';
   const mergedClassName = [
     'pl-6 list-outside',
+    '[&_.mdx-indent]:ml-2 [&_.mdx-indent]:border-l [&_.mdx-indent]:border-gray-200 dark:[&_.mdx-indent]:border-gray-700/60',
     spacingClass,
     '[&>li]:mr-4',
     className,
@@ -557,7 +558,13 @@ function NumberedList(props: NumberedListProps) {
       className={mergedClassName}
       style={mergedStyle}
     >
-      {children}
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child as React.ReactElement, {
+              className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
+            })
+          : child
+      )}
     </ol>
   );
 }
@@ -575,6 +582,7 @@ function List(props: ListProps) {
   const spacingClass = tight ? 'space-y-1' : 'space-y-2';
   const mergedClassName = [
     'pl-6 list-outside',
+    '[&_.mdx-indent]:ml-2 [&_.mdx-indent]:border-l [&_.mdx-indent]:border-gray-200 dark:[&_.mdx-indent]:border-gray-700/60',
     spacingClass,
     '[&>li]:mr-4',
     className,
@@ -591,7 +599,13 @@ function List(props: ListProps) {
       className={mergedClassName}
       style={mergedStyle}
     >
-      {children}
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child)
+          ? React.cloneElement(child as React.ReactElement, {
+              className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
+            })
+          : child
+      )}
     </ul>
   );
 }
