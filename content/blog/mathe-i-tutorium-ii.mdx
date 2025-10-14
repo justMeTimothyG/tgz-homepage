@@ -242,7 +242,10 @@ Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum be
     Gib die Lösungsmenge der Gleichung $x^3 = 2x^2 + 8x$ an.
   </Task>
   <Hint>
-    Forme zur Normalform um und klammere anschließend $x$ aus.
+    Forme zur Normalform um, also alles auf eine Seite und $=0$ setzen. 
+  </Hint>
+  <Hint>
+    klammere anschließend $x$ aus. Satz des Nullproduktes und pq-Formel für das quadratische Polynom.
   </Hint>
   <Step>
     $$
@@ -271,23 +274,180 @@ Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum be
     Substituiere $z = x^2$, um eine quadratische Gleichung zu erhalten.
   </Hint>
   <Step>
+    In die Normalform umformen:
     $$
     \begin{align*}
     x^4 - 3x^2 + \tfrac{3}{4} &= -x^2 \\
     x^4 - 2x^2 + \tfrac{3}{4} &= 0 \\
+    \end{align*}
+    $$
+
+  </Step>
+  <Step>
+    Substitution $z = x^2$:
+    $$
+    \begin{align*}  
+    x^4 - 2x^2 + \tfrac{3}{4} &= 0 & & | x^2 = z\\
     z^2 - 2z + \tfrac{3}{4} &= 0
     \end{align*}
     $$
   </Step>
   <Step>
-    Mit der pq-Formel erhältst du $z_{1,2} = 1 \pm \tfrac{1}{2}$, also
-    $z_1 = \tfrac{3}{2}$ und $z_2 = \tfrac{1}{2}$. Resubstitution liefert vier reelle Lösungen.
+    Mit der pq-Formel erhältst du folgende Lösung: 
+    $$ 
+    \begin{align*}
+    z_{1,2} &= -\frac{p}{2} \pm \sqrt{ \left( \frac{p}{2} \right)^{2}-q } \\
+    &= -\frac{-2}{2} \pm \sqrt{ \left( \frac{-2}{2} \right)^{2}-\tfrac{3}{4} } \\
+    &= 1 \pm \sqrt{ \frac{4}{4} - \tfrac{3}{4} } \\
+    &= 1 \pm \sqrt{ \tfrac{1}{4} } \\
+    &= 1 \pm \tfrac{1}{2}
+    \end{align*}
+    $$
+    Das ergibt unsere Lösung für z. 
+    $z_{1,2} = 1 \pm \tfrac{1}{2}$, also
+    $z_1 = \tfrac{3}{2}$ und $z_2 = \tfrac{1}{2}$.
+  </Step>
+  <Step>
+    Rücksubstitution: 
+    $$
+      \begin{align*}
+      z &= x^2 & & |  \sqrt{ \{ \} } \\
+      x &= \pm \sqrt{z} \\
+      \end{align*}
+    $$
+    Somit ergeben sich für beide Werte von $z$ die folgenden Gleichungen:
+    $$
+    \begin{align*}
+    x_{1,2} &= \pm \sqrt{\frac{3}{2}} \\
+    x_{3,4} &= \pm \sqrt{\tfrac{1}{2}} \\
+    \\
+    \end{align*}
+    $$
   </Step>
   <Solution>
     $\mathbb{L} = \left\{-\sqrt{\tfrac{3}{2}}, -\sqrt{\tfrac{1}{2}}, \sqrt{\tfrac{1}{2}}, \sqrt{\tfrac{3}{2}}\right\}$.
   </Solution>
 </Exercise>
 
+## Wurzelgleichungen
+
+<Callout type="info" title="Wurzelgleichungen und die Probe">
+Beim Quadrieren können neue Lösungen entstehen, die nicht zur ursprünglichen Gleichung passen (sogenannte Scheinlösungen). Da das Quadrieren keine Äquivalenzumformung ist, ist es wichtig, die gefundenen Lösungen in die ursprüngliche Gleichung einzusetzen und zu überprüfen, ob sie tatsächlich gültig sind. Dies wird als **Probe** bezeichnet.
+Die Möglichen Lösungen der Kandidatenmenge werden in die ursprüngliche Gleichung eingesetzt und überprüft, ob beide Seiten übereinstimmen. Also Linksseitig und Rechtseitig separat berechnen und vergleichen.
+<br />
+Vorgehen: 
+1. Beide Seiten quadrieren (nicht äquivalent, daher $\implies$ statt $\iff$)
+2. Lösung(en) der quadratischen Gleichung bestimmen
+3. Jede Lösung in die ursprüngliche Gleichung einsetzen (Probe), linke und rechte Seite separat berechnen und vergleichen
+4. Nur die Lösungen, bei denen beide Seiten übereinstimmen, in die Lösungsmenge aufnehmen.
+</Callout>
+
+<Exercise title="4(1): Wurzelgleichung mit Probe" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      \sqrt{x^{2}-9} = x - 3
+    $$
+  </Task>
+  <Hint>
+  </Hint>
+  <Step>
+    Quadriere beide Seiten:
+    $$
+    \begin{align*}
+    && (\sqrt{x^{2}-9})^2 &= (x - 3)^2 && |\text{r.s. 2. Binom. Formel} \\
+    &\implies & x^{2}-9 &= x^{2} - 6x + 9 && | -x^2 \\
+    &\iff& -9 &= -6x + 9 && | -9 \\
+    &\iff& -6x &= -18  && | :-6\\
+    &\iff& x &= 3 \\
+    \end{align*}
+    $$
+    <br />
+    Hinweis: Quadrieren von beiden Seiten ist keine Äquivalenzumformung mehr, da durch das Quadrieren auch Lösungen entstehen können, die nicht zur ursprünglichen Gleichung passen (sogenannte Scheinlösungen). Daher ist es wichtig, die gefundenen Lösungen in die ursprüngliche Gleichung einzusetzen und zu überprüfen, ob sie tatsächlich gültig sind.
+    somit verwendet man nicht $\iff$ sondern $\implies$!
+  </Step>
+  <Step>
+    Damit ergibt dies eine Mögliche Lösung:
+    $$
+      \mathbb{L} = \{x = 3\}
+    $$
+    <br />
+    Nun prüfen wir die Lösung und führen die **Probe** durch. Hier wird die Linke Seite und die Rechte Seite separat voneinander berechnet und verglichen.
+    <br />
+    **Linke Seite:**
+    $$
+      \sqrt{3^{2}-9} = \sqrt{0} = 0
+    $$
+    **Rechte Seite:**
+    $$
+      3 - 3 = 0
+    $$
+    Da beide Seiten übereinstimmen, ist $x = 3$ eine gültige Lösung.
+    Damit ist die Lösungsmenge:
+    $$
+      \mathbb{L} = \{3\}
+    $$
+  </Step>
+  <Solution>
+    $$
+      \mathbb{L} = \{3\}
+    $$
+  </Solution>
+</Exercise>
+
+<Exercise title="4(2): Wurzelgleichung mit Probe" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      \sqrt{x^{2}-2} = x +1
+    $$
+  </Task>
+  <Hint>
+  </Hint>
+  <Step>
+    Quadriere beide Seiten:
+    $$
+    \begin{align*}
+    && \sqrt{x^{2}-2} &= x + 1  && | \{\} ^{2}\\
+    && (\sqrt{x^{2}-2})^2 &= (x + 1)^2 && |\text{r.s. 1. Binom. Formel} \\
+    &\implies & x^{2}-2 &= x^{2} + 2x + 1 && | -x^2 \\
+    &\iff& -2 &= 2x + 1 && | -1 \\
+    &\iff& 2x &= -3  && | :2\\
+    &\iff& x &= -\frac{3}{2} \\
+    \end{align*}
+    $$
+    <br />
+    Hinweis: Quadrieren von beiden Seiten ist keine Äquivalenzumformung mehr, da durch das Quadrieren auch Lösungen entstehen können, die nicht zur ursprünglichen Gleichung passen (sogenannte Scheinlösungen). Daher ist es wichtig, die gefundenen Lösungen in die ursprüngliche Gleichung einzusetzen und zu überprüfen, ob sie tatsächlich gültig sind.
+    somit verwendet man nicht $\iff$ sondern $\implies$!
+  </Step>
+  <Step>
+    Damit ergibt dies eine Mögliche Lösung:
+    $$
+      \mathbb{L} = \{x = -\frac{3}{2}\}
+    $$
+    <br />
+    Nun prüfen wir die Lösung und führen die **Probe** durch. Hier wird die Linke Seite und die Rechte Seite separat voneinander berechnet und verglichen.
+    <br />
+    **Linke Seite:**
+    $$
+      \sqrt{\left(-\frac{3}{2}\right)^{2}-2} = \sqrt{\frac{9}{4}-2} = \sqrt{\frac{9}{4}-\frac{8}{4}} = \sqrt{\frac{1}{4}} = \frac{1}{2}
+    $$
+    **Rechte Seite:**
+    $$
+      -\frac{3}{2} + 1 = -\frac{1}{2}
+    $$
+    Da beide Seiten nicht übereinstimmen, ist $x = -\frac{3}{2}$ keine gültige Lösung.
+    Damit ist die Lösungsmenge:
+    $$
+      \mathbb{L} = \emptyset
+    $$
+  </Step>
+  <Solution>
+    $$
+      \mathbb{L} = \emptyset
+    $$
+  </Solution>
+</Exercise>
 
 
 ## Betragsgleichungen
@@ -295,39 +455,217 @@ Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum be
 ### Lösungsschema für einfache Betragsgleichungen
 
 <Callout type="info" title="Systematisches Vorgehen">
-1. **Fallunterscheidung** nach Vorzeichen des Terms im Betrag
+1. **Fallunterscheidung** nach Vorzeichen des Terms im Betrag. Und somit zulässigen Bereich für jeden Fall bestimmen.
 2. **Kandidaten bestimmen** für jeden Fall
-3. **Zulässigkeitsbereich prüfen** für jeden Kandidaten
-4. **Vereinigung** aller gültigen Lösungen
+3. **Zulässigkeitsbereich prüfen**: Liegen Kandidaten im zulässigen Bereich?
+4. **Vereinigung** aller gültigen Lösungen zu einer Lösungsmenge.
 </Callout>
 
-<Exercise title="Betragsgleichung mit Fallunterscheidung" difficulty="medium">
+<Exercise title="4(3) Betragsgleichung mit Fallunterscheidung" difficulty="medium">
   <Task>
     Löse die Gleichung $|3x - 5| = 10 - 2x$.
   </Task>
   <Hint>
-    Unterscheide die Fälle $3x - 5 \geq 0$ und $3x - 5 < 0$.
+    Unterscheide die Fälle $3x - 5 \geq 0$ und $3x - 5 < 0$. Dies sind beide Fälle. Bestimme für jeden Fall den zulässigen Bereich und die Kandidaten. Prüfe anschließend, ob die Kandidaten im zulässigen Bereich liegen.
   </Hint>
   <Step>
-    **Fall 1:** $3x - 5 \geq 0 \Rightarrow x \geq \frac{5}{3}$
-    
-    $3x - 5 = 10 - 2x \Rightarrow 5x = 15 \Rightarrow x = 3$
-    
-    Da $3 \geq \frac{5}{3}$, ist $x = 3$ eine gültige Lösung.
+    Zunächst müssen die Fälle unterschieden werden:
+    <br />
+    **Fall 1:** $3x - 5 \geq 0$ <br /> 
+    Nach Umformung ergibt sich also: $\Rightarrow x \geq \frac{5}{3}$
+    <br />
+    **Fall 2:** $3x - 5 < 0$ <br />
+    Nach Umformung ergibt sich also: $\Rightarrow x < \frac{5}{3}$
+    <br />
+    Hiermit ergeben sich die zulässigen Bereiche für die Fälle.
+    $$
+      \mathbb{L}_{1\text{zul}} = [\frac{5}{3}, \infty)
+    $$
+    $$
+      \mathbb{L}_{2\text{zul}} = (-\infty, \frac{5}{3})
+    $$
   </Step>
   <Step>
-    **Fall 2:** $3x - 5 < 0 \Rightarrow x < \frac{5}{3}$
-    
-    $-(3x - 5) = 10 - 2x \Rightarrow -3x + 5 = 10 - 2x \Rightarrow x = -5$
-    
-    Da $-5 < \frac{5}{3}$, ist $x = -5$ eine gültige Lösung.
+    Nun bestimmen wir die Kandidaten für jeden Fall:
+    <br />
+    **Fall 1:** positiver Fall <br />
+    Da wir den Bereich einschränken können wir die Betragsstriche weglassen:
+    $$
+      \begin{align*}
+      3x - 5 &= 10 - 2x \\
+      5x &= 15 \\
+      x &= 3
+      \end{align*}
+    $$
+    Für den Fall 1 ergibt sich also der Kandidat $x = 3$.
+    $$
+      \mathbb{L}_{1\text{Kand}} = \{3\}
+    $$
+    <br />
+    **Fall 2:** negativer Fall <br />
+    Da wir den Bereich einschränken können wir die Betragsstriche weglassen, jedoch mit negativem Vorzeichen:
+    $$
+      \begin{align*}
+      -(3x - 5) &= 10 - 2x \\
+      -3x + 5 &= 10 - 2x \\
+      -x &= 5 \\
+      x &= -5
+      \end{align*}
+    $$
+    Für den Fall 2 ergibt sich also der Kandidat $x = -5$.
+    $$      
+      \mathbb{L}_{2\text{Kand}} = \{-5\}
+    $$
+  </Step>
+  <Step>
+    Nun prüfen wir die Kandidaten auf Gültigkeit, also ob sie im zulässigen Bereich liegen. Hierfür bildet man mathematisch die Schnittmenge der Kandidatenmenge mit der zulässigen Bereichsmenge.
+    <br />
+    **Fall 1:** positiver Fall <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1\text{Kand}} \cap \mathbb{L}_{1\text{zul}} \\
+      &= \{3\} \cap [\frac{5}{3}, \infty) \\
+      &= \{3\}
+      \end{align*}
+    $$
+    **Fall 2:** negativer Fall <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2\text{Kand}} \cap \mathbb{L}_{2\text{zul}} \\
+      &= \{-5\} \cap (-\infty, \frac{5}{3}) \\
+      &= \{-5\}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Nun fassen wir die gültigen Lösungen zusammen:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} = \{3\} \cup \{-5\} \\
+      &= \{-5, 3\}
+      \end{align*}
+    $$
   </Step>
   <Solution>
     Die Lösungsmenge ist $\mathbb{L} = \{-5, 3\}$.
   </Solution>
 </Exercise>
 
-### Doppelbetragsgleichungen
+<Exercise title="4(4) Betragsgleichung mit Fallunterscheidung" difficulty="medium">
+  <Task>
+    Löse die Gleichung $|2x +8| = x^2$.
+  </Task>
+  <Hint>
+    Unterscheide die Fälle $2x + 8 \geq 0$ und $2x + 8 < 0$. Dies sind beide Fälle. Bestimme für jeden Fall den zulässigen Bereich und die Kandidaten. Prüfe anschließend, ob die Kandidaten im zulässigen Bereich liegen.
+  </Hint>
+  <Step>
+    Zunächst müssen die Fälle unterschieden werden:
+    <br />
+    **Fall 1:** $2x + 8 \geq 0$ <br />
+    Nach Umformung ergibt sich also: $\Rightarrow x \geq -4$
+    <br />
+    **Fall 2:** $2x + 8 < 0$ <br />
+    Nach Umformung ergibt sich also: $\Rightarrow x < -4$
+    <br />
+    Hiermit ergeben sich die zulässigen Bereiche für die Fälle.
+    $$
+      \mathbb{L}_{1\text{zul}} = [-4, \infty)
+    $$
+    $$
+      \mathbb{L}_{2\text{zul}} = (-\infty, -4)
+    $$
+  </Step>
+  <Step>
+    Nun bestimmen wir die Kandidaten für jeden Fall:
+    <br />
+    **Fall 1:** positiver Fall <br />
+    Da wir den Bereich einschränken können wir die Betragsstriche weglassen:
+    $$
+      \begin{align*}
+      2x + 8 &= x^2 \\
+      x^2 - 2x - 8 &= 0 && | \text{pq Formel} \\
+      x_{1,2} &= -\frac{-2}{2} \pm \sqrt{(\frac{-2}{2})^2 - (-8) } \\
+      &= 1 \pm \sqrt{1 + 8} \\
+      &= 1 \pm \sqrt{9} \\
+      &= 1 \pm 3 \\
+      x_1 &= 4 \quad \text{oder} \quad x_2 = -2
+      \end{align*}
+    $$
+    Für den ersten Fall ergibt sich also erstmal folgende Kandidatenmenge:
+    $$
+      \mathbb{L}_{1\text{Kand}} = \{4; -2\}
+    $$
+    <br />
+    **Fall 2:** negativer Fall <br />
+    Da wir den Bereich einschränken können wir die Betragsstriche weglassen, jedoch mit negativem Vorzeichen:
+    $$
+      \begin{align*}
+      -(2x + 8) &= x^2 \\
+      -2x - 8 &= x^2 \\
+      x^2 + 2x + 8 &= 0 && | \text{pq Formel} \\
+      x_{1,2} &= -\frac{2}{2} \pm \sqrt{(\frac{2}{2})^2 - 8 } \\
+      &= -1 \pm \sqrt{1 - 8} \\
+      &= -1 \pm \sqrt{-7} && | \text{keine Reele Lösungen} \\
+      \end{align*}
+    $$
+    Für den zweiten Fall ergeben sich also keine Kandidaten. Die Kandidatenmenge ist leer.
+    $$
+      \mathbb{L}_{2\text{Kand}} = \emptyset
+    $$
+  </Step>
+  <Step>
+    Nun prüfen wir die Kandidaten auf Gültigkeit, also ob sie im zulässigen Bereich liegen. Hierfür bildet man mathematisch die Schnittmenge der Kandidatenmenge mit der zulässigen Bereichsmenge.
+    <br />
+    **Fall 1:** positiver Fall <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1\text{Kand}} \cap \mathbb{L}_{1\text{zul}} \\
+      &= \{4; -2\} \cap [-4, \infty) \\
+      &= \{4; -2\}
+      \end{align*}
+    $$
+    **Fall 2:** negativer Fall <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2\text{Kand}} \cap \mathbb{L}_{2\text{zul}} \\
+      &= \emptyset \cap (-\infty, -4) \\
+      &= \emptyset
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Nun fassen wir die gültigen Lösungen zusammen:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \\
+      &= \{4; -2\} \cup \emptyset \\
+      &= \{4; -2\}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{-5, 4\}$.
+  </Solution>
+</Exercise>
+
+## Doppelbetragsgleichungen
+
+<Callout type="info" title="Vorgehen beim Lösen von Doppelbetragsgleichungen">
+1. **Fallunterscheidung**: für beide Seiten die jeweiligen Fälle bilden. 
+  Hiervon muss man dann alle Kombinationsmöglichkeiten betrachten. (Da jede Seite zwei Fälle hat, ergeben sich insgesamt vier Fälle). Diese verbindet man mit UND-Verknüpfungen.
+  Beispiel: <br />
+  $$
+    \begin{align*}
+    \text{1. Term: positiv} \land \text{2. Term: positiv} \\
+    \text{1. Term: positiv} \land \text{2. Term: negativ} \\
+    \text{1. Term: negativ} \land \text{2. Term: positiv} \\
+    \text{1. Term: negativ} \land \text{2. Term: negativ} \\
+    \end{align*}
+  $$
+2. **Kandidaten bestimmen** für jeden Fall
+3. **Zulässigkeitsbereich prüfen**: Liegen Kandidaten im zulässigen Bereich?
+4. **Vereinigung** aller gültigen Lösungen zu einer Lösungsmenge.
+</Callout>
 
 <Exercise title="Gleichung mit zwei Beträgen" difficulty="hard">
   <Task>
@@ -336,29 +674,198 @@ Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum be
   <Hint>
     Bei zwei Beträgen musst du vier Fälle unterscheiden (alle Kombinationen der Vorzeichen).
   </Hint>
+  <Hint>
+    Kombiniere die Betragsterme (Vorzeichen) wie folgt: 
+    $$
+    \begin{align*}
+    \text{1. Term: positiv} \land \text{2. Term: positiv} \\
+    \text{1. Term: positiv} \land \text{2. Term: negativ} \\
+    \text{1. Term: negativ} \land \text{2. Term: positiv} \\
+    \text{1. Term: negativ} \land \text{2. Term: negativ} \\
+    \end{align*}
+    $$
+  </Hint>
+  <Hint>
+    Mit den Kombination die zulässigen Bereiche bestimmen. also $\mathbb{L}_{\text{zul}}$ für jeden Fall.
+  </Hint>
   <Step>
-    **Fall 1:** $2x - 4 \geq 0$ und $-x + 2 \geq 0$
-    $\Rightarrow x = 2$ (zulässiger Bereich)
-    
-    $2x - 4 - 1 = -x + 2 \Rightarrow x = \frac{7}{3}$
-    
-    Nicht im zulässigen Bereich!
+    Bilde von beiden Seiten die Fälle:
+    <br />
+    **1. Term** Linke Seite, positiver Fall <br />
+    $2x - 4 \geq 0$ $\Rightarrow x \geq 2$
+    <br />
+    **1. Term** Linke Seite, negativer Fall <br />
+    $2x - 4 < 0$ $\Rightarrow x < 2$
+    <br />
+    **2. Term** Rechte Seite, positiver Fall <br />
+    $-x + 2 \geq 0$ $\Rightarrow x \leq 2$
+    <br />
+    **2. Term** Rechte Seite, negativer Fall <br />
+    $-x + 2 < 0$ $\Rightarrow x > 2$
   </Step>
   <Step>
-    **Fall 2:** $2x - 4 < 0$ und $-x + 2 \geq 0$
-    $\Rightarrow x < 2$ (zulässiger Bereich)
-    
-    $-(2x - 4) - 1 = -x + 2 \Rightarrow x = 1$
-    
-    Gültige Lösung!
+    Nun kombinieren wir die Fälle nach dem Schema: 
+    $$
+    \begin{align*}
+    \text{Fall 1:} & \text{1. Term: positiv} \land \text{2. Term: positiv} \\
+    \text{Fall 2:} & \text{1. Term: positiv} \land \text{2. Term: negativ} \\
+    \text{Fall 3:} & \text{1. Term: negativ} \land \text{2. Term: positiv} \\
+    \text{Fall 4:} & \text{1. Term: negativ} \land \text{2. Term: negativ} \\
+    \end{align*}
+    $$
   </Step>
   <Step>
-    **Fall 3:** $2x - 4 \geq 0$ und $-x + 2 < 0$
-    $\Rightarrow x > 2$ (zulässiger Bereich)
-    
-    $2x - 4 - 1 = x - 2 \Rightarrow x = 3$
-    
-    Gültige Lösung!
+    Nun führen wir die Kombination durch: 
+    <br />
+    **Fall 1:** 1. Term positiv und 2. Term positiv: <br />
+    $$
+      \begin{align*}
+      && 2x - 4 &\geq 0 \land -x + 2 \geq 0 \\
+      & \iff & x &\geq 2 \land x &\leq 2 \\
+      & \iff & x &= 2
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 1 der zulässige Bereich $x = 2$. Und unsere zulässige Bereichsmenge:
+    $$
+      \mathbb{L}_{1\text{zul}} = \{2\}
+    $$  
+    <br />
+    **Fall 2:** 1. Term positiv und 2. Term negativ: <br />
+    $$
+      \begin{align*}
+      && 2x - 4 &\geq 0 \land -x + 2 < 0 \\
+      & \iff & x &\geq 2 \land x &> 2 \\
+      & \iff & x &> 2
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 2 der zulässige Bereich $x > 2$. Und unsere zulässige Bereichsmenge:
+    $$
+      \mathbb{L}_{2\text{zul}} = (2, \infty)
+    $$
+    <br />
+    **Fall 3:** 1. Term negativ und 2. Term positiv: <br />
+    $$
+      \begin{align*}
+      && 2x - 4 &< 0 \land -x + 2 \geq 0 \\
+      & \iff & x &< 2 \land x &\leq 2 \\
+      & \iff & x &< 2
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 3 der zulässige Bereich $x < 2$. Und unsere zulässige Bereichsmenge:
+    $$
+      \mathbb{L}_{3\text{zul}} = (-\infty, 2)
+    $$
+    <br />
+    **Fall 4:** 1. Term negativ und 2. Term negativ: <br />
+    $$
+      \begin{align*}
+      && 2x - 4 &< 0 \land -x + 2 < 0 \\
+      & \iff & x &< 2 \land x &> 2 \\
+      & \iff & \text{keine Lösung}
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 4 kein zulässiger Bereich. Und unsere zulässige Bereichsmenge:
+    $$
+      \mathbb{L}_{4\text{zul}} = \emptyset
+    $$
+  </Step>
+  <Step>
+    Wir fahren fort und bestimmen die möglichen Kandidaten für jeden Fall:
+    <br />
+    **Fall 1:** 1. Term positiv und 2. Term positiv: <br />
+    Da beide positiv sind, können wir die Betragsstriche weglassen:
+    $$
+      \begin{align*}
+      && 2x - 4 - 1 &= −x + 2 && | +x+4+1 \\
+      & \iff & 3x &= 7 \\
+      & \iff & x &= \frac{7}{3}
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 1 der Kandidat $x = \frac{7}{3}$. Und unsere Kandidatenmenge:
+    $$
+      \mathbb{L}_{1\text{Kand}} = \left\{\frac{7}{3}\right\}
+    $$
+    <br />
+    **Fall 2:** 1. Term positiv und 2. Term negativ: <br />
+    Da der erste positiv und der zweite negativ ist, können wir die Betragsstriche weglassen, jedoch mit negativem Vorzeichen für den zweiten Term:
+    $$
+      \begin{align*}
+      && 2x - 4 - 1 &= -(-x + 2)  \\
+      & \iff & 2x - 5 &= x - 2 && |+5-x\\
+      & \iff & x &= 3
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 2 der Kandidat $x = 3$. Und unsere Kandidatenmenge:
+    $$
+      \mathbb{L}_{2\text{Kand}} = \{3\}
+    $$
+    <br />
+    **Fall 3:** 1. Term negativ und 2. Term positiv: <br />
+    Da der erste negativ und der zweite positiv ist, können wir die Betragsstriche weglassen, jedoch mit negativem Vorzeichen für den ersten Term:
+    $$
+      \begin{align*}
+      && -(2x - 4) - 1 &= -x + 2  \\
+      & \iff & -2x + 4 - 1 &= -x + 2 && |+2x-2\\
+      & \iff & x &= 1
+      \end{align*}
+    $$
+    <br />
+    Somit ergibt sich für den Fall 3 der Kandidat $x = 1$. Und unsere Kandidatenmenge:
+    $$
+      \mathbb{L}_{3\text{Kand}} = \{1\}
+    $$
+    <br />
+    **Fall 4:** 1. Term negativ und 2. Term negativ: <br />
+    Da hier der zulässige Bereich leer ist, brauchen wir den Kandidaten nicht zu bestimmen.
+  </Step>
+  <Step>
+    Nun prüfen wir die Kandidaten auf Gültigkeit, also ob sie im zulässigen Bereich liegen. Hierfür bildet man mathematisch die Schnittmenge der Kandidatenmenge mit der zulässigen Bereichsmenge.
+    <br />
+    **Fall 1:** 1. Term positiv und 2. Term positiv: <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1\text{Kand}} \cap \mathbb{L}_{1\text{zul}} \\
+      &= \left\{\frac{7}{3}\right\} \cap \{2\} \\
+      &= \emptyset
+      \end{align*}
+    $$
+    **Fall 2:** 1. Term positiv und 2. Term negativ: <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2\text{Kand}} \cap \mathbb{L}_{2\text{zul}} \\
+      &= \{3\} \cap [2, \infty) \\
+      &= \{3\}
+      \end{align*}
+    $$
+    **Fall 3:** 1. Term negativ und 2. Term positiv: <br />
+    $$
+      \begin{align*}
+      \mathbb{L}_{3} &= \mathbb{L}_{3\text{Kand}} \cap \mathbb{L}_{3\text{zul}} \\
+      &= \{1\} \cap (-\infty, 2) \\
+      &= \{1\}
+      \end{align*}
+    $$  
+    **Fall 4:** 1. Term negativ und 2. Term negativ: <br />
+    Da hier der zulässige Bereich leer ist, brauchen wir den Kandidaten nicht zu prüfen. Die Lösungsmenge ist leer.
+    $$
+      \mathbb{L}_{4} = \emptyset
+    $$
+  </Step>
+  <Step>
+    Nun fassen wir die gültigen Lösungen zusammen:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \cup \mathbb{L}_{3} \cup \mathbb{L}_{4} \\
+      &= \emptyset \cup \{3\} \cup \{1\} \cup \emptyset \\
+      &= \{1, 3\}
+      \end{align*}
+    $$
   </Step>
   <Solution>
     Die Lösungsmenge ist $\mathbb{L} = \{1, 3\}$.
@@ -369,61 +876,521 @@ Dieses Tutorium behandelt die fundamentalen Konzepte von Infimum und Supremum be
 
 ### Grundoperationen
 
-<Callout type="info" title="Rechenregeln">
-Bei der Division komplexer Zahlen erweitert man mit der komplex Konjugierten des Nenners:
-
-$$\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c - di)} = \frac{(a + bi)(c - di)}{c^2 + d^2}$$
+<Callout type="info" title="Rechenregeln für komplexe Zahlen">
+**Addition**: <br /> 
+$$ 
+(a + bi) + (c + di) = (a + c) + (b + d)i 
+$$
+**Subtraktion**: <br />
+$$ 
+(a + bi) - (c + di) = (a - c) + (b - d)i 
+$$
+**Multiplikation**: <br />
+$$ 
+(a + bi)(c + di) = ac + adi + bci + bdi^2 = (ac - bd) + (ad + bc)i 
+$$
+**Division**: <br />
+Bei der Division komplexer Zahlen erweitert man mit der komplex Konjugierten. 
+Die Komplex konjugierte einer komplexen Zahl $z = a + bi$ ist definiert als $\overline{z} = a - bi$.
+<br />
+Damit ergibt sich für die Division:
+<br />
+$$
+\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c - di)} = \frac{(a + bi)(c - di)}{c^2 + d^2}
+$$
 </Callout>
 
-<Exercise title="Komplexe Arithmetik" difficulty="easy">
+
+<Exercise title="6(i) Komplexe Arithmetik" difficulty="easy">
   <Task>
-    Berechne für $z_1 = 7 + 14i$ und $z_2 = 1 + 7i$:
+    Berechne für 
+    $$
+    z_1 = 7 + 14i
+    $$ 
+    und 
+    $$
+    z_2 = 1 + 7i
+    $$
     Addition, Subtraktion, Multiplikation und Division.
   </Task>
   <Step>
-    Addition: $(7 + 14i) + (1 + 7i) = 8 + 21i$
-    
-    Subtraktion: $(7 + 14i) - (1 + 7i) = 6 + 7i$
+    Addition: 
+    $$
+    \begin{align*}
+    &= (7 + 14i) + (1 + 7i) \\
+    &= 8 + 21i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (7 + 14i) - (1 + 7i) \\
+    &= 6 + 7i
+    \end{align*}
+    $$
   </Step>
   <Step>
     Multiplikation: 
-    $$(7 + 14i)(1 + 7i) = 7 + 49i + 14i + 98i^2 = -91 + 63i$$
+    $$
+    \begin{align*}
+    &= (7 + 14i)(1 + 7i) \\
+    &= 7 + 49i + 14i + 98i^2 \\
+    &= -91 + 63i
+    \end{align*}
+    $$
   </Step>
   <Step>
     Division:
-    $$\frac{7 + 14i}{1 + 7i} = \frac{(7 + 14i)(1 - 7i)}{50} = \frac{105 - 35i}{50} = \frac{21}{10} - \frac{7}{10}i$$
+    $$
+    \begin{align*}
+    &= \frac{7 + 14i}{1+7i} &|\text{Komplex erweitern} \\
+    \\
+    &= \frac{(7+14i)\cdot (1-7i)}{(1+7i)\cdot (1-7i)} \\
+    \\
+    &= \frac{7+49i+14i-98i^{2}}{1-49i^{2}} \\
+    \\
+    &= \frac{105 - 35i}{50} \\
+    \\
+    &= \frac{21}{10} - \frac{35}{50}i &|\text{kürzen} \\
+    \\
+    &= \frac{21}{10} - \frac{7}{10}i
+    \end{align*}
+    $$
   </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 8 + 21i \\
+    &\text{Subtraktion: } 6 + 7i \\
+    &\text{Multiplikation: } -91 + 63i \\
+    &\text{Division: } \frac{21}{10} - \frac{7}{10}i \\
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+<Exercise title="6(ii)Komplexe Arithmetik" difficulty="easy">
+  <Task>
+    Berechne für 
+    $$
+    z_1 = 3i
+    $$ 
+    und 
+    $$
+    z_2 = 5i
+    $$
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    Addition: 
+    $$
+    \begin{align*}
+    &= (3i) + (5i) \\
+    &= 8i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (3i) - (5i) \\
+    &= -2i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$
+    \begin{align*}
+    &= (3i)(5i) \\
+    &= 15i^2 \\
+    &= -15
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Division:
+    $$
+    \begin{align*}
+    &= \frac{3i}{5i} \\
+    &= \frac{3}{5} &|\text{kürzen} \\
+    \\
+    &= 0,6
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 8i \\
+    &\text{Subtraktion: } -2i \\
+    &\text{Multiplikation: } -15 \\
+    &\text{Division: } 0,6 \\
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+<Exercise title="6(iii)Komplexe Arithmetik" difficulty="medium">
+  <Task>
+    Berechne für 
+    $$
+    z_1 = \frac{2}{i}
+    $$ 
+    und 
+    $$
+    z_2 = 1
+    $$
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    $z_1$ in Standardform bringen:
+    $$
+    \begin{align*}
+    z_1 &= \frac{2}{i} &|\text{Komplex erweitern} \\
+    \\
+    &= \frac{2}{i} \cdot \frac{i}{i} \\
+    \\
+    &= \frac{2i}{i^2} \\
+    \\
+    &= \frac{2i}{-1} \\
+    \\
+    &= -2i
+    \end{align*}
+    $$
+    Mit $z_1 = -2i$ lässt es sich etwas einfacher rechnen.
+  </Step>
+  <Step>
+    Addition: 
+    $$
+    \begin{align*}
+    &= (-2i) + (1) \\
+    &= 1 - 2i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (-2i) - (1) \\
+    &= -1 - 2i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$
+    \begin{align*}
+    &= (-2i)(1) \\
+    &= -2i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Division:
+    $$
+    \begin{align*}
+    &= \frac{-2i}{1} \\
+    &= -2i
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 1 - 2i \\
+    &\text{Subtraktion: } -1 - 2i \\
+    &\text{Multiplikation: } -2i \\
+    &\text{Division: } -2i \\
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+<Exercise title="6(iv)Komplexe Arithmetik" difficulty="easy">
+  <Task>
+    Berechne für 
+    $$
+    z_1 = 5
+    $$ 
+    und 
+    $$
+    z_2 = 2
+    $$
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    Addition: 
+    $$
+    \begin{align*}
+    &= (5) + (2) \\
+    &= 7
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (5) - (2) \\
+    &= 3
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$
+    \begin{align*}
+    &= (5)(2) \\
+    &= 10
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Division:
+    $$
+    \begin{align*}
+    &= \frac{5}{2} \\
+    &= 2,5
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 7 \\
+    &\text{Subtraktion: } 3 \\
+    &\text{Multiplikation: } 10 \\
+    &\text{Division: } 2,5 \\
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+<Exercise title="6(v)Komplexe Arithmetik" difficulty="easy">
+  <Task>
+    Berechne für 
+    $$
+    z_1 = 0
+    $$ 
+    und 
+    $$
+    z_2 = 2+3i
+    $$
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    Addition: 
+    $$
+    \begin{align*}
+    &= (0) + (2 + 3i) \\
+    &= 2 + 3i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (0) - (2 + 3i) \\
+    &= -2 - 3i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$
+    \begin{align*}
+    &= (0)(2 + 3i) \\
+    &= 0
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Division:
+    $$
+    \begin{align*}
+    &= \frac{0}{2 + 3i} \\
+    &= 0
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 2 + 3i \\
+    &\text{Subtraktion: } -2 - 3i \\
+    &\text{Multiplikation: } 0 \\
+    &\text{Division: } 0 \\
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+<Exercise title="6(vi)Komplexe Arithmetik" difficulty="easy">
+  <Task>
+    Berechne für 
+    $$
+    z_1 = i
+    $$ 
+    und 
+    $$
+    z_2 = i
+    $$
+    Addition, Subtraktion, Multiplikation und Division.
+  </Task>
+  <Step>
+    Addition: 
+    $$
+    \begin{align*}
+    &= (i) + (i) \\
+    &= 2i
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Subtraktion: 
+    $$
+    \begin{align*}
+    &= (i) - (i) \\
+    &= 0
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Multiplikation: 
+    $$
+    \begin{align*}
+    &= (i)(i) \\
+    &= i^2 \\
+    &= -1
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Division:
+    $$
+    \begin{align*}
+    &= \frac{i}{i} \\
+    &= 1
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Ergebnisse sind:
+    $$
+    \begin{align*}
+    &\text{Addition: } 2i \\
+    &\text{Subtraktion: } 0 \\
+    &\text{Multiplikation: } -1 \\
+    &\text{Division: } 1 \\
+    \end{align*}
+    $$
+  </Solution>
 </Exercise>
 
-### Quadratische Gleichungen im Komplexen
+## Verschiedene Gleichungen
+Beachte hier, dass du mittels komplexe Zahlen auch Gleichungen lösen kannst, die im reellen Zahlenraum keine Lösung haben. Es ergeben sich dann komplexe Lösungen.
 
-<Exercise title="Komplexe Nullstellen" difficulty="medium">
+<Exercise title="7(i) Komplexe Nullstellen" difficulty="medium">
   <Task>
-    Löse $z^2 + 4 = 0$ über $\mathbb{C}$.
+    Löse $z^2 + 4 = 0$.
   </Task>
+  <Step>
+    Umformen:
+    $$
+    z^2 = -4
+    $$
+  </Step>
+  <Step>
+    Wurzel ziehen:
+    $$
+    z = \pm \sqrt{-4}
+    $$
+  </Step>
+  <Step>
+    Mit $i = \sqrt{-1}$:
+    $$
+    z = \pm \sqrt{4 \cdot -1} = \pm 2\sqrt{-1} = \pm 2i
+    $$
+  </Step>
   <Solution>
-    $$z^2 = -4 \Rightarrow z = \pm 2i$$
-    
     Die Lösungsmenge ist $\mathbb{L} = \{2i, -2i\}$.
   </Solution>
 </Exercise>
 
-<Exercise title="Gleichung mit komplexen Koeffizienten" difficulty="hard">
+<Exercise title="7(ii) Komplexe Nullstellen" difficulty="medium">
+  <Task>
+    Löse $z^2 + 4z + 4 = 0$.
+  </Task>
+  <Step>
+    PQ Formel anwenden (Gleichung ist bereits in Normalform):
+    $$
+    \begin{align*}
+    z_{1,2} &= -\frac{4}{2} \pm \sqrt{\left(\frac{4}{2}\right)^2 - 4} \\
+    &= -2 \pm \sqrt{4 - 4} \\
+    &= -2 \pm \sqrt{0} \\
+    &= -2 \pm 0 \\
+    z_1 &= -2 \quad \text{oder} \quad z_2 = -2
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{-2\}$.
+  </Solution>
+</Exercise>
+<Exercise title="7(iii) Gleichung mit komplexen Koeffizienten" difficulty="medium">
+  <Task>
+    Löse $z^2 -4iz - 4 = 0$.
+  </Task>
+  <Step>
+    Anwenden der p-q-Formel für $p = -4i$ und $q = -4$:
+    $$
+    \begin{align*}
+    z_{1,2} &= \frac{4i}{2} \pm \sqrt{\left(\frac{-4i}{2}\right)^2 - (-4)} \\
+    &= 2i \pm \sqrt{(-2i)^2 + 4} \\
+    &= 2i \pm \sqrt{4i^2 + 4} \\
+    &= 2i \pm \sqrt{4(-1) + 4} \\
+    &= 2i \pm \sqrt{-4+4} \\
+    &= 2i \pm \sqrt{0} \\
+    &= 2i \pm 0 \\
+    &= 2i
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Lösungsmenge ist $\mathbb{L} = \{2i\}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="7(iv) Gleichung mit komplexen Koeffizienten" difficulty="hard">
   <Task>
     Löse $z^2 - iz + 6 = 0$.
   </Task>
   <Step>
     Mit der p-q-Formel für $p = -i$ und $q = 6$:
-    $$z_{1,2} = \frac{i}{2} \pm \sqrt{\frac{-1}{4} - 6}$$
-  </Step>
-  <Step>
-    $$z_{1,2} = \frac{i}{2} \pm \sqrt{-\frac{25}{4}} = \frac{i}{2} \pm \frac{5i}{2}$$
+    $$
+    \begin{align*}
+    z_{1,2} &= \frac{i}{2} \pm \sqrt{\left(\frac{-i}{2}\right)^2 - 6} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{-i^2}{4} - 6} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{1}{4}i^2 - 6} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{1}{4}(-1) - 6} \\
+    &= \frac{i}{2} \pm \sqrt{-\frac{1}{4} - 6} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{-1-24}{4}} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{-25}{4}} \\
+    &= \frac{i}{2} \pm \sqrt{\frac{25}{4}} \cdot i \\
+    &= \frac{i}{2} \pm \frac{5}{2}i
+    \end{align*}
+    $$
   </Step>
   <Solution>
-    $\mathbb{L} = \{3i, -2i\}$
+    Die Lösungsmenge ist $\mathbb{L} = \{3i, -2i\}$.
   </Solution>
 </Exercise>
-
 <PostPager
   prev={{ href: "/blog/mathe-i-tutorium-i", title: "Tutorium I - Grundlagen der Mathematik" }}
   next={{ href: "/blog/mathe-i-tutorium-iii", title: "Tutorium III - Gleichungen und Plots" }}
