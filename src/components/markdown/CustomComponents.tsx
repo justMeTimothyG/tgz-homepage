@@ -78,7 +78,7 @@ export function Icon({ name, label, fallback = null, className, size, ...rest }:
 
   if (!LucideIcon) {
     if (process.env.NODE_ENV !== 'production') {
-      console.warn(`Icon "${name}" could not be found in lucide-react.`);
+      console.error(`Icon "${name}" could not be found in lucide-react.`);
     }
     if (fallback) {
       return (
@@ -560,7 +560,7 @@ function NumberedList(props: NumberedListProps) {
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement, {
+          ? React.cloneElement(child as React.ReactElement<{ className?: string }>, {
               className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
             })
           : child
@@ -601,7 +601,7 @@ function List(props: ListProps) {
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement, {
+          ? React.cloneElement(child as React.ReactElement<{ className?: string }>, {
               className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
             })
           : child
