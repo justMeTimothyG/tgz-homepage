@@ -32,6 +32,7 @@ import {
   TAccount,
   TAccountLedger,
   Icon,
+  Quiz,
 } from '@/components/markdown/CustomComponents';
 import Exercise, { Hint as ExerciseHint, Solution as ExerciseSolution, Step as ExerciseStep, Task as ExerciseTask } from '@/components/markdown/Exercise';
 import QuadraticSolver from '@/components/markdown/QuadraticSolver';
@@ -77,6 +78,7 @@ export function getSiteMDXComponents(components: MDXComponents): MDXComponents {
     RevealableTable: withNotProse(RevealableTable),
     TAccount: withNotProse(TAccount),
     TAccountLedger: withNotProse(TAccountLedger),
+    Quiz: withNotProse(Quiz),
 
     Image: withNotProse(MdxImage),
     Lightbox: withNotProse(Lightbox),

@@ -39,10 +39,27 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: '03: Vertragsrecht und Wirksamkeitshindernisse',
       }),
+      getCollectionResource({
+        slug: '04-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '04: Stellvertretung, Einführung in das Schuldrecht',
+      }),
       {
         title: 'Weitere Vorlesungsnotizen folgen',
         variant: 'note',
       },
+    ],
+  },
+  {
+    key: 'generelles',
+    title: 'Generelles',
+    description: 'Allgemeine Informationen und Hinweise, die für die Veranstaltung relevant sind.',
+    resources: [
+      getCollectionResource({
+        slug: 'rechtliche-grundlagen-klausurhinweise',
+        source: 'lecture',
+        overrideTitle: 'Klausur Hinweise - Rechtliche Grundlagen WiSe 25/26',
+      }),
     ],
   },
   {

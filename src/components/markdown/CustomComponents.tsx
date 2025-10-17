@@ -11,6 +11,7 @@ import Download from './Download';
 import RevealableTable from './RevealableTable';
 import TAccount from './TAccount';
 import TAccountLedger from './TAccountLedger';
+import Quiz from './Quiz';
 
 // Utility: merge class names
 function cx(...parts: Array<string | false | null | undefined>) {
@@ -611,4 +612,18 @@ function List(props: ListProps) {
 }
 
 // Export calculator utilities for reuse
-export { GcdCalculator, LcmCalculator, GaussianElimination, PascalsTriangle, VennSets, Download, NumberedList, List, Table, RevealableTable, TAccount, TAccountLedger };
+export {
+  GcdCalculator,
+  LcmCalculator,
+  GaussianElimination,
+  PascalsTriangle,
+  VennSets,
+  Download,
+  NumberedList,
+  List,
+  Table,
+  RevealableTable,
+  TAccount,
+  TAccountLedger,
+  Quiz,
+};
