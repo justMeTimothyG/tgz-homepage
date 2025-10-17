@@ -509,7 +509,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   tight?: boolean;
 }
 
-type CSSPropertiesWithVars = React.CSSProperties & Record<string, string | number>;
+type CSSPropertiesWithVars = React.CSSProperties & Record<string, string | number | undefined>;
 
 const ListDepthContext = React.createContext(0);
 const DEFAULT_LIST_INDENT = '1.5rem';
