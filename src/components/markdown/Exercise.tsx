@@ -68,8 +68,8 @@ function toTaskItem(node: React.ReactElement, forceCompact: boolean): TaskItem {
 }
 
 export default function Exercise({
-  title = 'Aufgabe',
-  difficulty = 'medium',
+  title,
+  difficulty,
   children,
   className = '',
   compact = false,

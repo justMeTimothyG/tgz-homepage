@@ -509,6 +509,12 @@ export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   tight?: boolean;
 }
 
+type CSSPropertiesWithVars = React.CSSProperties & Record<string, string | number>;
+
+const ListDepthContext = React.createContext(0);
+const DEFAULT_LIST_INDENT = '1.5rem';
+const DEPTH_LINE_OFFSET = 'calc(-1 * var(--list-indent, 1.5rem) + 0.375rem)';
+
 function NumberedList(props: NumberedListProps) {
   const {
     variant = 'decimal',
@@ -537,36 +543,38 @@ function NumberedList(props: NumberedListProps) {
     'upper-roman': 'I',
   };
 
+  const parentDepth = React.useContext(ListDepthContext);
+  const currentDepth = parentDepth + 1;
+
+  const isRootLevel = currentDepth === 1;
   const spacingClass = tight ? 'space-y-1' : 'space-y-2';
   const mergedClassName = [
     'pl-6 list-outside',
-    '[&_.mdx-indent]:ml-2 [&_.mdx-indent]:border-l [&_.mdx-indent]:border-gray-200 dark:[&_.mdx-indent]:border-gray-700/60',
     spacingClass,
     '[&>li]:mr-4',
+    !isRootLevel && 'relative before:pointer-events-none before:content-[""] before:absolute before:top-0 before:bottom-0 before:border-l before:border-gray-200 dark:before:border-gray-700/60 before:left-[var(--list-line-offset)]',
     className,
   ].filter(Boolean).join(' ');
 
-  const mergedStyle: React.CSSProperties = {
+  const mergedStyle: CSSPropertiesWithVars = {
+    '--list-indent': DEFAULT_LIST_INDENT,
+    '--list-line-offset': DEPTH_LINE_OFFSET,
     listStyleType: listStyleTypeMap[variant],
     ...style,
   };
 
   return (
-    <ol
-      {...rest}
-      start={start}
-      type={olTypeAttr[variant]}
-      className={mergedClassName}
-      style={mergedStyle}
-    >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<{ className?: string }>, {
-              className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
-            })
-          : child
-      )}
-    </ol>
+    <ListDepthContext.Provider value={currentDepth}>
+      <ol
+        {...rest}
+        start={start}
+        type={olTypeAttr[variant]}
+        className={mergedClassName}
+        style={mergedStyle}
+      >
+        {children}
+      </ol>
+    </ListDepthContext.Provider>
   );
 }
 
@@ -580,34 +588,36 @@ function List(props: ListProps) {
     ...rest
   } = props;
 
+  const parentDepth = React.useContext(ListDepthContext);
+  const currentDepth = parentDepth + 1;
+
+  const isRootLevel = currentDepth === 1;
   const spacingClass = tight ? 'space-y-1' : 'space-y-2';
   const mergedClassName = [
     'pl-6 list-outside',
-    '[&_.mdx-indent]:ml-2 [&_.mdx-indent]:border-l [&_.mdx-indent]:border-gray-200 dark:[&_.mdx-indent]:border-gray-700/60',
     spacingClass,
     '[&>li]:mr-4',
+    !isRootLevel && 'relative before:pointer-events-none before:content-[""] before:absolute before:top-0 before:bottom-0 before:border-l before:border-gray-200 dark:before:border-gray-700/60 before:left-[var(--list-line-offset)]',
     className,
   ].filter(Boolean).join(' ');
 
-  const mergedStyle: React.CSSProperties = {
+  const mergedStyle: CSSPropertiesWithVars = {
+    '--list-indent': DEFAULT_LIST_INDENT,
+    '--list-line-offset': DEPTH_LINE_OFFSET,
     listStyleType: variant,
     ...style,
   };
 
   return (
-    <ul
-      {...rest}
-      className={mergedClassName}
-      style={mergedStyle}
-    >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child as React.ReactElement<{ className?: string }>, {
-              className: cx((child.props as { className?: string })?.className, 'mdx-indent'),
-            })
-          : child
-      )}
-    </ul>
+    <ListDepthContext.Provider value={currentDepth}>
+      <ul
+        {...rest}
+        className={mergedClassName}
+        style={mergedStyle}
+      >
+        {children}
+      </ul>
+    </ListDepthContext.Provider>
   );
 }
 

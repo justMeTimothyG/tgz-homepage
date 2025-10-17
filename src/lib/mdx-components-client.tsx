@@ -137,8 +137,8 @@ function collectExerciseContent(children: ReactNode, forceCompact: boolean) {
 }
 
 function ExercisePreview({
-  title = 'Aufgabe',
-  difficulty = 'medium',
+  title,
+  difficulty,
   children,
   className = '',
   compact = false,

@@ -10,8 +10,8 @@ export interface TaskItem {
 }
 
 export interface ExerciseContentProps {
-  title: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  title?: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
   className?: string;
   compact?: boolean;
   tasks: TaskItem[];
@@ -101,24 +101,28 @@ export default function ExerciseClient({
     setVisibleSteps(0);
   }, [tasks, hints, steps, solutions]);
 
-  const colors = difficultyColors[difficulty];
+  const colors = difficulty ? difficultyColors[difficulty] : undefined;
   const containerPadding = compact ? 'pt-4 pr-3 pb-3 pl-3' : 'p-6';
   const containerMargin = compact ? 'my-2' : 'my-6';
   const containerClasses = `group relative not-prose border border-gray-200 dark:border-gray-700 rounded-lg ${containerPadding} ${containerMargin} bg-white dark:bg-gray-800 ${className}`;
 
   return (
     <div className={containerClasses}>
-      {!compact && (
+      {!compact && (title || difficulty) && (
         <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <Pencil className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {title}
-            </h3>
-          </div>
-          <span className={`px-3 py-1 text-sm font-medium rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}>
-            {getDifficultyLabel(difficulty)}
-          </span>
+          {title && (
+            <div className="flex items-center gap-2">
+              <Pencil className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {title}
+              </h3>
+            </div>
+          )}
+          {difficulty && colors && (
+            <span className={`px-3 py-1 text-sm font-medium rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}>
+              {getDifficultyLabel(difficulty)}
+            </span>
+          )}
         </div>
       )}
 
