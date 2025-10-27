@@ -1,0 +1,337 @@
+---
+title: "Technische Physik - Tutorium 2: Arbeit, Energie und Leistung"
+date: 2025-10-15
+excerpt: "Übungsaufgaben zu kinetischer Energie, potentieller Energie, Wirkungsgrad und Leistungsberechnung"
+tags: ["physik", "mechanik", "arbeit"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-10-15
+---
+
+Dieses Tutorium knüpft an die ersten beiden Termine an und vertieft die Berechnung von Arbeit, Energie und Leistung in unterschiedlichen technischen Szenarien.
+
+## Mechanische Arbeit und Energie
+
+<Exercise title="Aufgabe 1: Güterzug und kinetische Energie" difficulty="easy">
+  <Task>
+    Ein Güterzug mit der Masse $m = 500\,000 \,\mathrm{kg}$ fährt mit $v = 50 \,\mathrm{\tfrac{km}{h}}$. Berechne die kinetische Energie des Zuges.
+  </Task>
+  <Hint>
+    Rechne die Geschwindigkeit in $\mathrm{\tfrac{m}{s}}$ um, bevor du die Formel $W_{\text{kin}} = \frac{1}{2} \, m \, v^{2}$ anwendest.
+  </Hint>
+  <Step>
+    Umrechnung der Geschwindigkeit:
+    $$
+      \begin{align*}
+      v &= 50 \,\mathrm{\tfrac{km}{h}} = 50 \cdot \frac{1000 \,\mathrm{m}}{3600 \,\mathrm{s}} \\
+      &= 13{,}89 \,\mathrm{\tfrac{m}{s}}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Einsetzen in die Energieformel:
+    $$
+      \begin{align*}
+      W_{\text{kin}} &= \frac{1}{2} \cdot 500\,000 \,\mathrm{kg} \cdot (13{,}89 \,\mathrm{\tfrac{m}{s}})^{2} \\
+      &= 4{,}82 \cdot 10^{7} \,\mathrm{J}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    In Megajoule dargestellt:
+    $$
+      W_{\text{kin}} = 48{,}2 \,\mathrm{MJ}
+    $$
+  </Step>
+  <Solution>
+    Der Zug besitzt eine kinetische Energie von rund $48{,}2 \,\mathrm{MJ}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2: Federarbeit einer Schraubenfeder" difficulty="easy">
+  <Task>
+    Eine Schraubenfeder hat eine Federsteifigkeit von $c = 600 \,\mathrm{\tfrac{N}{mm}}$ und wird um $s = 100 \,\mathrm{mm}$ zusammengedrückt. Wie groß ist die gespeicherte Federenergie?
+  </Task>
+  <Hint>
+    Bringe $c$ in $\mathrm{\tfrac{N}{m}}$ und $s$ in Meter, bevor du $W_{f} = \frac{1}{2} \, c \, s^{2}$ berechnest.
+    Bzw. Wenn du das nicht tust, musst du darauf achten, dass die Einheiten konsistent sind und sich ggf. kürzen. 
+  </Hint>
+  <Step>
+    Einheitentransformation:
+    $$
+      \begin{align*}
+      c &= 600 \,\mathrm{\tfrac{N}{mm}} = 600 \cdot 1000 \,\mathrm{\tfrac{N}{m}} = 600\,000 \,\mathrm{\tfrac{N}{m}} \\
+      s &= 100 \,\mathrm{mm} = 0{,}10 \,\mathrm{m}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Einsetzen in die Formel:
+    $$
+      \begin{align*}
+      W_{f} &= \frac{1}{2} \cdot 600\,000 \,\mathrm{\tfrac{N}{m}} \cdot (0{,}10 \,\mathrm{m})^{2} \\
+      &= 3{,}0 \cdot 10^{3} \,\mathrm{J}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Feder speichert $3{,}0 \,\mathrm{kJ}$ an Energie.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3: Leistung einer Wasserturbine" difficulty="medium">
+  <Task>
+    Eine Turbine wird von einem Volumenstrom $V = 0{,}3 \,\mathrm{\tfrac{m^{3}}{s}}$ gespeist. Das Wasser fällt um $h = 5{,}5 \,\mathrm{m}$. Welche Leistung überträgt das Wasser auf die Turbine? (Dichte des Wassers $= 1000 \,\mathrm{\tfrac{kg}{m^{3}}}$)
+  </Task>
+  <Hint>
+    Bestimme zuerst den Massenstrom $\dot{m} = \rho \cdot V$ und nutze dann $P = \dot{m} \cdot g \cdot h$.
+  </Hint>
+  <Step>
+    Massenstrom:
+    $$
+      \begin{align*}
+      \dot{m} &= 1000 \,\mathrm{\tfrac{kg}{m^{3}}} \cdot 0{,}3 \,\mathrm{\tfrac{m^{3}}{s}} \\
+      &= 300 \,\mathrm{\tfrac{kg}{s}}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Leistung durch Höhenenergie:
+    $$
+      \begin{align*}
+      P &= \dot{m} \cdot g \cdot h \\
+      &= 300 \,\mathrm{\tfrac{kg}{s}} \cdot 9{,}81 \,\mathrm{\tfrac{m}{s^{2}}} \cdot 5{,}5 \,\mathrm{m} \\
+      &= 1{,}62 \cdot 10^{4} \,\mathrm{W}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Turbine nimmt eine Leistung von etwa $16{,}2 \,\mathrm{kW}$ auf.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 4: Arbeit am beschleunigten Schienenfahrzeug" difficulty="medium">
+  <Task>
+    Ein Schienenfahrzeug mit Gewicht $F_{G} = 210 \,\mathrm{kN}$ fährt eine Strecke von $s = 100 \,\mathrm{m}$ eine Steigung von $2\%$ hinauf und wird dabei von $0$ auf $v = 50 \,\mathrm{\tfrac{km}{h}}$ beschleunigt. Die Fahrwiderstandsziffer beträgt $\mu_{F} = 0{,}03$. Berechne
+    <br />
+    a) die Hubarbeit,
+    <br />
+    b) die Reibungsarbeit,
+    <br />
+    c) die Beschleunigungsarbeit,
+    <br />
+    d) die Gesamtarbeit.
+  </Task>
+  <Hint>
+    Für die Steigung gilt $\sin(\alpha) \approx \tan(\alpha) = \frac{2}{100}$. Berechne zunächst die Höhenänderung und die Normalkraft.
+  </Hint>
+  <Step>
+    **Teil a)** Höhengewinn über die Steigung:
+    $$
+      \begin{align*}
+      h &= s \cdot \sin\left(\arctan\left(\frac{2}{100}\right)\right) \approx 1{,}9996 \,\mathrm{m} \\
+      W_{h} &= F_{G} \cdot h = 210 \,\mathrm{kN} \cdot 1{,}9996 \,\mathrm{m} \approx 420 \,\mathrm{kNm}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil b)** Normalkraft und Reibungsarbeit:
+    $$
+      \begin{align*}
+      F_{N} &= F_{G} \cdot \cos\left(\arctan\left(\frac{2}{100}\right)\right) \approx 209{,}98 \,\mathrm{kN} \\
+      W_{F} &= \mu_{F} \cdot F_{N} \cdot s \approx 0{,}03 \cdot 209{,}98 \,\mathrm{kN} \cdot 100 \,\mathrm{m} \approx 630 \,\mathrm{kNm}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil c)** Beschleunigungsarbeit (kinetische Energie):
+    $$
+      \begin{align*}
+      v &= 50 \,\mathrm{\tfrac{km}{h}} = 13{,}89 \,\mathrm{\tfrac{m}{s}} \\
+      W_{\text{kin}} &= \frac{F_{G}}{2g} \cdot v^{2} = \frac{210\,000 \,\mathrm{N}}{2 \cdot 9{,}81 \,\mathrm{\tfrac{m}{s^{2}}}} \cdot (13{,}89 \,\mathrm{\tfrac{m}{s}})^{2} \\
+      &\approx 2{,}06 \cdot 10^{6} \,\mathrm{J} = 2{,}06 \,\mathrm{MJ}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil d)** Gesamtarbeit:
+    $$
+      \begin{align*}
+      W_{\text{ges}} &= W_{h} + W_{F} + W_{\text{kin}} \\
+      &\approx 0{,}420 \,\mathrm{MJ} + 0{,}630 \,\mathrm{MJ} + 2{,}06 \,\mathrm{MJ} \\
+      &\approx 3{,}11 \,\mathrm{MJ}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Teilarbeiten betragen $W_{h} \approx 420 \,\mathrm{kNm}$, $W_{F} \approx 630 \,\mathrm{kNm}$ und $W_{\text{kin}} \approx 2{,}06 \,\mathrm{MNm}$; zusammen ergeben sie $W_{\text{ges}} \approx 3{,}11 \,\mathrm{MNm}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 5: Fallender Bär einer Ramme" difficulty="medium">
+  <Task>
+    Eine Ramme besitzt eine Fallmasse (Bär) mit $m = 500 \,\mathrm{kg}$, die aus $h = 4{,}0 \,\mathrm{m}$ Höhe fällt. Zwischen Bär und Führungsschiene wirkt eine konstante Reibungskraft $F_{R} = 400 \,\mathrm{N}$. Berechne
+    <br />
+    a) die potentielle Energie,
+    <br />
+    b) die Reibungsarbeit,
+    <br />
+    c) die Auftreffgeschwindigkeit.
+  </Task>
+  <Hint>
+    Die kinetische Energie beim Aufprall ist die Differenz aus potentieller Energie und Reibungsarbeit.
+  </Hint>
+  <Step>
+    Potentielle Energie:
+    $$
+      W_{\text{pot}} = m \cdot g \cdot h = 500 \,\mathrm{kg} \cdot 9{,}81 \,\mathrm{\tfrac{m}{s^{2}}} \cdot 4{,}0 \,\mathrm{m} = 19{,}6 \,\mathrm{kJ}
+    $$
+  </Step>
+  <Step>
+    Reibungsarbeit:
+    $$
+      W_{R} = F_{R} \cdot s = 400 \,\mathrm{N} \cdot 4{,}0 \,\mathrm{m} = 1{,}6 \,\mathrm{kJ}
+    $$
+  </Step>
+  <Step>
+    Kinetische Energie und Geschwindigkeit:
+    $$
+      \begin{align*}
+      W_{\text{kin}} &= W_{\text{pot}} - W_{R} = 18{,}0 \,\mathrm{kJ} \\
+      \frac{1}{2} \, m \, v^{2} &= 18{,}0 \cdot 10^{3} \,\mathrm{J} \\
+      v &= \sqrt{\frac{2 \cdot 18{,}0 \cdot 10^{3} \,\mathrm{J}}{500 \,\mathrm{kg}}} \approx 8{,}49 \,\mathrm{\tfrac{m}{s}}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Der Bär besitzt eine potentielle Energie von $19{,}6 \,\mathrm{kJ}$, es werden $1{,}6 \,\mathrm{kJ}$ durch Reibung dissipiert und er trifft mit $v \approx 8{,}5 \,\mathrm{\tfrac{m}{s}}$ auf.
+  </Solution>
+</Exercise>
+
+## Wirkungsgrad und Leistung
+
+<Exercise title="Aufgabe 6: Gesamtwirkungsgrad einer Maschinenkette" difficulty="easy">
+  <Task>
+    Drei hintereinandergeschaltete Aggregate besitzen Wirkungsgrade von $\eta_{1} = 0{,}70$, $\eta_{2} = 0{,}90$ und $\eta_{3} = 0{,}65$. Bestimme den Gesamtwirkungsgrad in Prozent.
+  </Task>
+  <Hint>
+    Multipliziere die Einzelwirkungsgrade und konvertiere das Ergebnis in Prozent.
+  </Hint>
+  <Step>
+    $$
+      \begin{align*}
+      \eta_{\text{ges}} &= \eta_{1} \cdot \eta_{2} \cdot \eta_{3} \\
+      &= 0{,}70 \cdot 0{,}90 \cdot 0{,}65 \\
+      &= 0{,}4095
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Der Gesamtwirkungsgrad beträgt $\eta_{\text{ges}} = 40{,}95\%$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7: Verschiebegeschwindigkeit eines Aggregats" difficulty="easy">
+  <Task>
+    Ein Verschiebeaggregat liefert bei einer Leistung von $P = 12 \,\mathrm{kW}$ eine konstante Kraft von $F = 5 \,\mathrm{kN}$. Welche Verschiebegeschwindigkeit wird erreicht?
+  </Task>
+  <Hint>
+    Beginne mit der Formel für die Leistung: $P = \tfrac{W}{t}$. Also Arbeit pro Zeit.
+    Setze dann für Arbeit ein. 
+  </Hint>
+  <Hint>
+    Setzt du für Arbeit $W = F \cdot s$ ein, so erhältst du $P = \tfrac{F \cdot s}{t}$.<br />
+    So erhälst du den Bruch $s/t$. <br />
+    Dieser Bruch ist die Definition der Geschwindigkeit $v$.
+  </Hint>
+  <Hint>
+    In kurz: Nutze $P = F \cdot v$ und löse nach $v$ auf.
+  </Hint>
+  <Step>
+    $$
+    \begin{align*}
+    P &= \frac{W}{t}  &  & | W = F\cdot s \\
+    &= F \cdot \frac{s}{t} &  & | \frac{s}{t} = v \\
+    P &= F \cdot v \\
+    v &= \frac{P}{F} \\
+    &= \frac{12 \,\mathrm{\frac{kNm}{s}} }{5 \,\mathrm{kN} }  \\
+    &= 2,4 \,\mathrm{\frac{m}{s}} 
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Verschiebegeschwindigkeit beträgt $v = 2{,}4 \,\mathrm{\tfrac{m}{s}}$ (entspricht $8{,}64 \,\mathrm{\tfrac{km}{h}}$).
+  </Solution>
+</Exercise>
+
+## Anwendung: Bergzeitfahren der Tour de France
+
+<Exercise title="Aufgabe 8: Analyse des Bergzeitfahrens" difficulty="medium">
+  <Task>
+    ![Diagramm über die Steigungen der Strecke von Bourg-d'Oisans nach L'Alpe d'Huez](/api/images/physik-1/tut-02-0001.jpg)
+    Beim Bergzeitfahren von Bourg-d'Oisans nach L'Alpe d'Huez (Streckenlänge $15{,}5 \,\mathrm{km}$, Höhengewinn $1{,}130 \,\mathrm{m}$) sollen folgende Größen bestimmt werden:
+    <br />
+    a) mittlere Steigung über die gesamte Strecke,
+    <br />
+    b) Hubarbeit für einen Fahrer mit $m = 80 \,\mathrm{kg}$,
+    <br />
+    c) mittlere Leistung nur für die Hubarbeit bei den Fahrzeiten $t_{\text{Armstrong}} = 39 \,\mathrm{min}\,41 \,\mathrm{s}$ und $t_{\text{Ullrich}} = 40 \,\mathrm{min}\,42 \,\mathrm{s}$,
+    <br />
+    d) prozentualer Leistungsvergleich,
+    <br />
+    e) mittlere Fahrgeschwindigkeit entlang der tatsächlichen Strecke.
+  </Task>
+  <Hint>
+    Für Teil a) vergleiche das gewichtete Gefälle (Gesamthöhengewinn / Strecke) mit dem einfachen arithmetischen Mittel der Teilsteigungen.
+  </Hint>
+  <Step>
+    **Teil a)** Mittlere Steigung:
+    $$
+      \bar{\alpha} = \frac{1850 \,\mathrm{m} - 720 \,\mathrm{m}}{15\,500 \,\mathrm{m}} = 0{,}0723 = 7{,}23\%
+    $$
+    Das arithmetische Mittel der sechs Abschnittssteigungen
+    $
+      (1{,}3\%, 9{,}32\%, 8{,}15\%, 7{,}86\%, 8{,}83\%, 5{,}67\%)
+    $
+    ergibt $6{,}88\%$, da alle Abschnitte gleich gewichtet werden. Die Diskrepanz entsteht, weil die langen und steilen Passagen beim einfachen Mittel nicht stärker ins Gewicht fallen.
+  </Step>
+  <Step>
+    **Teil b)** Hubarbeit:
+    $$
+      \begin{align*}
+      W_{H} &= m \cdot g \cdot \Delta h \\
+      &= 80 \,\mathrm{kg} \cdot 9{,}81 \,\mathrm{\tfrac{m}{s^{2}}} \cdot 1{,}130 \,\mathrm{m} \\
+      &= 8{,}87 \cdot 10^{5} \,\mathrm{J} = 886{,}8 \,\mathrm{kJ}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil c)** Mittlere Leistung ausschließlich für die Hubarbeit:
+    $$
+      \begin{align*}
+      P_{\text{Armstrong}} &= \frac{886{,}8 \cdot 10^{3} \,\mathrm{J}}{39 \cdot 60 \,\mathrm{s} + 41 \,\mathrm{s}} \approx 372 \,\mathrm{W} \\
+      P_{\text{Ullrich}} &= \frac{886{,}8 \cdot 10^{3} \,\mathrm{J}}{40 \cdot 60 \,\mathrm{s} + 42 \,\mathrm{s}} \approx 363 \,\mathrm{W}
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teil d)** Relative Mehrleistung:
+    $$
+      \Delta P = \frac{P_{\text{Armstrong}} - P_{\text{Ullrich}}}{P_{\text{Ullrich}}} = \frac{372 - 363}{363} \approx 0{,}0256 = 2{,}56\%
+    $$
+  </Step>
+  <Step>
+    **Teil e)** Tatsächliche Streckenlänge (Hypotenuse) und mittlere Geschwindigkeit:
+    $$
+      \begin{align*}
+      s_{\text{real}} &= \sqrt{(15{,}5 \cdot 10^{3} \,\mathrm{m})^{2} + (1{,}130 \,\mathrm{m})^{2}} \approx 15\,541 \,\mathrm{m} \\
+      \bar{v}_{\text{Armstrong}} &= \frac{15\,541 \,\mathrm{m}}{2\,381 \,\mathrm{s}} \approx 6{,}53 \,\mathrm{\tfrac{m}{s}} = 23{,}5 \,\mathrm{\tfrac{km}{h}} \\
+      \bar{v}_{\text{Ullrich}} &= \frac{15\,541 \,\mathrm{m}}{2\,442 \,\mathrm{s}} \approx 6{,}36 \,\mathrm{\tfrac{m}{s}} = 22{,}9 \,\mathrm{\tfrac{km}{h}}
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Die Gesamtsteigung beträgt $7{,}23\%$, die Hubarbeit $886{,}8 \,\mathrm{kJ}$. Armstrong leistet dafür rund $372 \,\mathrm{W}$, Ullrich $363 \,\mathrm{W}$; Armstrong liegt damit $2{,}56\%$ über Ullrich. Die mittleren Geschwindigkeiten betragen $23{,}5 \,\mathrm{\tfrac{km}{h}}$ bzw. $22{,}9 \,\mathrm{\tfrac{km}{h}}$.
+  </Solution>
+</Exercise>
+
