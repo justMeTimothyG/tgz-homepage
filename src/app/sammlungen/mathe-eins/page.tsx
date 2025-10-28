@@ -88,6 +88,7 @@ const pageSections: SectionConfig[] = [
     resources: [
       getCollectionResource('mathe-i-tutorium-i'),
       getCollectionResource('mathe-i-tutorium-ii'),
+      getCollectionResource('mathe-i-tutorium-iii'),
     ],
   },
   {

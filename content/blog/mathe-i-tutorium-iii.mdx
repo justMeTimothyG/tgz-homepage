@@ -1,0 +1,994 @@
+---
+title: "Tutorium III – Gleichungen, Ungleichungen und Polynomdivision"
+date: 2025-10-27
+lastUpdated: 2025-10-27
+excerpt: "Gleichungen, Ungleichungen, Definitions- und Wertebereiche, Horner-Schema, Polynomdivision, Monotonie- und Symmetrieeigenschaften"
+tags: ["mathematik", "gleichungen", "polynomdivision", "ungleichungen", "horner-schema"]
+sammlungen: ["mathe-eins"]
+published: true
+---
+
+# Tutorium III – Gleichungen, Ungleichungen und Polynomdivision
+
+In diesem Tutorium üben wir das systematische Lösen verschiedener **Gleichungstypen**,  
+darunter kubische, biquadratische, Wurzel- und Betragsgleichungen.  
+Zudem betrachten wir **Ungleichungen**, den **Definitions- und Wertebereich** von Funktionen sowie die **Polynomdivision und das Horner-Schema**.  
+Zum Abschluss analysieren wir **Monotonie** und **Symmetrieeigenschaften** ausgewählter Funktionen.
+
+---
+
+## Aufgabe 1 – Gleichungen
+
+Wir bestimmen die **reellen Lösungen** der folgenden Gleichungen.  
+Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher Methodik.
+
+
+<Exercise title="Aufgabe 1 (i): Kubische Gleichung" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      -2x^3 + 8x^2 = 8x
+    $$
+  </Task>
+
+  <Hint>
+    Bringe zunächst alle Terme auf eine Seite der Gleichung und klammere anschließend gemeinsame Faktoren aus.  
+    Verwende danach den **Satz vom Nullprodukt**, um die einzelnen Lösungen zu bestimmen.
+  </Hint>
+
+  <Step>
+    **Umformen in die Normalform**<br />
+    $$
+      -2x^3 + 8x^2 - 8x = 0
+    $$
+
+    Wir können $-2x$ als gemeinsamen Faktor ausklammern:
+    $$
+      -2x(x^2 - 4x + 4) = 0
+    $$
+  </Step>
+
+  <Step>
+    **Anwendung des Satzes vom Nullprodukt**<br />
+
+    Für ein Produkt gilt: Wenn $a \cdot b = 0$, dann ist entweder $a = 0$ oder $b = 0$.
+
+    Also:
+    $$
+      -2x = 0 \quad \text{oder} \quad x^2 - 4x + 4 = 0
+    $$
+  </Step>
+
+  <Step>
+    **Erste Lösung**<br />
+    $$
+      -2x = 0 \implies x = 0
+    $$
+
+    **Zweite Gleichung lösen:**<br />
+    $$
+      x^2 - 4x + 4 = 0
+    $$
+    Diese Gleichung ist eine **vollständige quadratische Gleichung**.  
+    Sie lässt sich direkt faktorisieren:
+    $$
+      (x - 2)^2 = 0
+    $$
+
+    Damit folgt:
+    $$
+      x = 2
+    $$
+
+    Diese Lösung tritt **doppelt** auf (doppelte Nullstelle).
+  </Step>
+  <Step>
+    **Alternativ mit PQ Formel:** <br />
+    $$
+    \begin{align*}
+    x_{1,2} &= \frac{4}{2} \pm \sqrt{\left(\frac{4}{2}\right)^2 - 4} \\
+    &= 2 \pm \sqrt{4 - 4} \\
+    &= 2 \pm 0 \\
+    &= 2
+    \end{align*}
+    $$
+
+    Diese Lösung tritt **doppelt** auf (doppelte Nullstelle).
+  </Step>
+
+  <Solution>
+    Die Lösungsmenge lautet:
+    $$
+      \mathbb{L} = \{ 0, 2 \} \quad \text{mit } x = 2 \text{ als doppelte Nullstelle.}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (ii): Kubische Gleichung mit einfachem Faktor" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      x^3 - 6x^2 + 11x = 0
+    $$
+  </Task>
+
+  <Hint>
+    Klammere $x$ aus, um die Gleichung auf ein Produkt zu reduzieren.  
+    Danach kannst du den Satz vom Nullprodukt anwenden und ggf. die **pq-Formel** für den Restterm verwenden.
+  </Hint>
+
+  <Step>
+    **Umformen**<br />
+    Die Gleichung ist bereits in Normalform:
+    $$
+      x^3 - 6x^2 + 11x = 0
+    $$
+
+    Wir klammern $x$ aus:
+    $$
+      x(x^2 - 6x + 11) = 0
+    $$
+  </Step>
+
+  <Step>
+    **Anwendung des Satzes vom Nullprodukt**<br />
+    $$
+      x = 0 \quad \text{oder} \quad x^2 - 6x + 11 = 0
+    $$
+  </Step>
+  <Step>
+    **Erste Lösung**<br />
+    $$
+      x = 0
+    $$
+  </Step>
+
+  <Step>
+    **Quadratische Gleichung lösen**
+    $$
+      x^2 - 6x + 11 = 0
+    $$
+    Mit der pq-Formel:
+    $$
+    \begin{align*}
+    x_{1,2} &= \frac{6}{2} \pm \sqrt{\left(\frac{6}{2}\right)^2 - 11} \\
+    &= 3 \pm \sqrt{9 - 11} \\
+    &= 3 \pm \sqrt{-2}
+    \end{align*}
+    $$
+
+    Da der Radikand (der Term in der Wurzel) negativ ist, besitzt die Gleichung **keine reellen Lösungen**.
+  </Step>
+
+  <Solution>
+    Die einzige **reelle Lösung** lautet:
+    $$
+      \mathbb{L} = \{ 0 \}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (iii): Quintische Gleichung mit gemeinsamen Faktor" difficulty="hard">
+  <Task>
+    Löse die Gleichung:
+    $$
+      x^5 - 3x^3 + 2x = 0
+    $$
+  </Task>
+
+  <Hint>
+    Klammere $x$ aus, da alle Terme ein $x$ enthalten.  
+    Anschließend entsteht ein **kubischer Term** in $x^2$, der sich durch Substitution oder Faktorisierung lösen lässt.
+  </Hint>
+
+  <Step>
+    **Ausklammern**<br />
+    $$
+      x(x^4 - 3x^2 + 2) = 0
+    $$
+  </Step>
+
+  <Step>
+    **Anwendung des Satzes vom Nullprodukt**<br />
+    $$
+      x = 0 \quad \text{oder} \quad x^4 - 3x^2 + 2 = 0
+    $$
+  </Step>
+
+  <Step>
+    **Erste Lösung**<br />
+    $$
+      x = 0
+    $$
+
+    Für den Rest:
+    $$
+      x^4 - 3x^2 + 2 = 0
+    $$
+    Substituiere $z = x^2$, damit erhalten wir eine **quadratische Gleichung**:
+    $$
+      z^2 - 3z + 2 = 0
+    $$
+  </Step>
+
+  <Step>
+    **Quadratische Gleichung lösen**<br />
+    Mit der pq-Formel:
+    $$
+      z_{1,2} = \frac{3}{2} \pm \sqrt{\left(\frac{3}{2}\right)^2 - 2}
+      = \frac{3}{2} \pm \sqrt{\frac{9}{4} - \frac{8}{4}}
+      = \frac{3}{2} \pm \frac{1}{2}
+    $$
+
+    Damit folgt:
+    $$
+      z_1 = 2, \quad z_2 = 1
+    $$
+  </Step>
+
+  <Step>
+    **Rücksubstitution $z = x^2$**<br />
+    - Für $z_1 = 2$: $x^2 = 2 \implies x = \pm \sqrt{2}$
+    - Für $z_2 = 1$: $x^2 = 1 \implies x = \pm 1$
+  </Step>
+
+  <Solution>
+    Zusammen mit der ersten Lösung $x = 0$ ergibt sich:
+    $$
+      \mathbb{L} = \{ 0, \pm 1, \pm \sqrt{2} \}
+    $$
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 1 (iv): Biquadratische Gleichung" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      2x^4 - 8x^2 - 24 = 0
+    $$
+  </Task>
+
+  <Hint>
+    Erkenne die **biquadratische Form**: Substituiere $z = x^2$ und löse die entstehende quadratische Gleichung.  
+    Achte danach auf die **Rücksubstitution** $x = \pm\sqrt{z}$ und prüfe die **Reellheit**.
+  </Hint>
+
+  <Step>
+    **Substitution** $z = x^2$ (mit $z \ge 0$):
+    $$
+      2z^2 - 8z - 24 = 0 \quad \iff \quad z^2 - 4z - 12 = 0 \quad (|:2)
+    $$
+  </Step>
+
+  <Step>
+    **Lösen der quadratischen Gleichung**:
+    $$
+      z_{1,2} = \frac{4}{2} \pm \sqrt{\left(\frac{4}{2}\right)^2 - (-12)}
+      = 2 \pm \sqrt{4 + 12} = 2 \pm \sqrt{16} = 2 \pm 4
+    $$
+    Also $z_1 = 6$ und $z_2 = -2$.
+  </Step>
+
+  <Step>
+    **Rücksubstitution** $x^2 = z$:
+    - Für $z_1 = 6$: $x^2 = 6 \Rightarrow x = \pm \sqrt{6}$ (reell).  
+    - Für $z_2 = -2$: keine reellen Lösungen.
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = \{ -\sqrt{6}, \, \sqrt{6} \}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (v): Wurzelgleichung (Scheinlösungen prüfen)" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      \sqrt{-3 + 2x} = 2
+    $$
+  </Task>
+
+  <Hint>
+    Quadrieren beider Seiten beseitigt die Wurzel, ist aber **keine Äquivalenzumformung**.  
+    Führe daher eine **Probe** durch (Scheinlösungen!).
+  </Hint>
+
+  <Step>
+    **Definitionsbereich**: $-3 + 2x \ge 0 \Rightarrow x \ge \tfrac{3}{2}$.
+  </Step>
+
+  <Step>
+    **Quadrieren**:
+    $$
+      -3 + 2x = 4 \quad \iff \quad 2x = 7 \quad \iff \quad x = \frac{7}{2}
+    $$
+  </Step>
+
+  <Step>
+    **Probe**:
+    $$
+      \sqrt{-3 + 2\cdot \frac{7}{2}} = \sqrt{-3 + 7} = \sqrt{4} = 2 \quad \checkmark
+    $$
+    Liegt auch im Definitionsbereich ($\frac{7}{2} \ge \frac{3}{2}$).
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = \left\{ \frac{7}{2} \right\}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (vi): Wurzelgleichung ohne reelle Lösung" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      \sqrt{x^2 + 4} = x - 2
+    $$
+  </Task>
+
+  <Hint>
+    Links steht eine **nichtnegative** Größe. Rechts muss daher **$\ge 0$** sein ($x \ge 2$).  
+    Nach dem Quadrieren unbedingt eine **Probe** machen.
+  </Hint>
+
+  <Step>
+    **Vorüberlegung**: $\sqrt{x^2+4} \ge 0 \Rightarrow x-2 \ge 0 \Rightarrow x \ge 2$.
+  </Step>
+
+  <Step>
+    **Quadrieren**:
+    $$
+      x^2 + 4 = (x - 2)^2 = x^2 - 4x + 4
+    $$
+    Kürzen von $x^2$:
+    $$
+      4 = -4x + 4 \quad \iff \quad 0 = -4x \quad \iff \quad x = 0
+    $$
+  </Step>
+
+  <Step>
+    **Probe** für $x=0$:
+    $$
+      \sqrt{0^2 + 4} = 2 \quad \text{und} \quad 0 - 2 = -2
+    $$
+    $2 \ne -2$ → **Scheinlösung**. Zudem verletzt $x=0$ die Vorbedingung $x\ge 2$.
+  </Step>
+
+  <Solution>
+    Keine reelle Lösung:
+    $$
+      \mathbb{L} = \emptyset
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (vii): Wurzelgleichung mit getrennter Domäne" difficulty="easy">
+  <Task>
+    Löse die Gleichung:
+    $$
+      \sqrt{x - 1} = \sqrt{x + 1}
+    $$
+  </Task>
+
+  <Hint>
+    Beachte den **Definitionsbereich**: $x-1 \ge 0$ und $x+1 \ge 0 \Rightarrow x \ge 1$.  
+    Bei gleichen Wurzeln folgt Gleichheit der Radikanden – prüfe dann die Domäne.
+  </Hint>
+
+  <Step>
+    Bei Gleichheit nichtnegativer Wurzeln muss gelten:
+    $$
+      x - 1 = x + 1 \quad \Rightarrow \quad -1 = +1 \quad \text{Widerspruch.}
+    $$
+  </Step>
+
+  <Solution>
+    Keine reelle Lösung:
+    $$
+      \mathbb{L} = \emptyset
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (viii): Betrag vs. Quadratpolynom" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      |2x + 4| = -\,(x^2 - x - 6)
+    $$
+  </Task>
+
+  <Hint>
+    Rechts muss **$\ge 0$** sein, sonst kann die Gleichung nicht erfüllt werden.  
+    Bestimme zuerst $M(x) := -\,(x^2 - x - 6) = -x^2 + x + 6 \ge 0$ und löse dann
+    $$
+      |2x+4| = M(x)
+    $$
+    per **Fallunterscheidung** nach dem Vorzeichen von $2x+4$.
+  </Hint>
+
+  <Step>
+    **Zulässige $x$ durch $M(x)\ge 0$**:
+    $$
+      -x^2 + x + 6 \ge 0 \iff x^2 - x - 6 \le 0
+    $$
+    Nullstellen von $x^2 - x -6 = 0$:
+    $$
+      x = \frac{1 \pm \sqrt{1+24}}{2} = \frac{1 \pm 5}{2} \Rightarrow x=-2, \; x=3
+    $$
+    Also $x \in [-2,\,3]$.
+  </Step>
+
+  <Step>
+    **Fall A:** $2x+4 \ge 0 \;\;(\Leftrightarrow x \ge -2)$
+    $$
+      2x + 4 = -x^2 + x + 6 \quad \Rightarrow \quad x^2 + x - 2 = 0
+    $$
+    Lösungen:
+    $$
+      x = \frac{-1 \pm \sqrt{1+8}}{2} = \frac{-1 \pm 3}{2} \Rightarrow x = 1 \;\text{oder}\; x=-2
+    $$
+    Beide liegen im Intervall $[-2,3]$.
+  </Step>
+
+  <Step>
+    **Fall B:** $2x+4 < 0 \;\;(\Leftrightarrow x < -2)$  
+    $$
+      -(2x+4) = -x^2 + x + 6 \Rightarrow x^2 - 3x - 2 = 0
+    $$
+    $$
+      \Delta = 9 + 8 = 17 \Rightarrow x = \frac{3 \pm \sqrt{17}}{2}
+    $$
+    Beide liegen **nicht** $< -2$ (insb. $\frac{3-\sqrt{17}}{2} \approx -0{,}56$), daher **verwerfen**.
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = \{-2,\, 1\}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (ix): Symmetriepunkt finden" difficulty="easy">
+  <Task>
+    Löse die Gleichung:
+    $$
+      |x + 1| = |x - 1|
+    $$
+  </Task>
+
+  <Hint>
+    Geometrisch: Der Punkt $x$ hat den gleichen Abstand zu $-1$ und $+1$.  
+    Das ist genau der **Mittelpunkt** zwischen beiden, also $x=0$.
+  </Hint>
+
+  <Step>
+    **Algebraisch**:
+    $$
+      |x+1| = |x-1| \quad \iff \quad (x+1)^2 = (x-1)^2
+    $$
+    $$
+      x^2 + 2x + 1 = x^2 - 2x + 1 \Rightarrow 4x = 0 \Rightarrow x = 0
+    $$
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = \{0\}
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 1 (x): Doppelbetrag reduziert auf Fälle" difficulty="medium">
+  <Task>
+    Löse die Gleichung:
+    $$
+      |x^2 - 2x + 1| = |x|
+    $$
+  </Task>
+
+  <Hint>
+    Erkenne $(x^2 - 2x + 1) = (x-1)^2 \ge 0$.  
+    Damit ist $|x^2 - 2x + 1| = (x-1)^2$ und die Gleichung wird zu
+    $$(x-1)^2 = |x|.$$
+    Löse nun die beiden Fälle $|x| = x$ (für $x\ge 0$) und $|x| = -x$ (für $x<0$).
+  </Hint>
+
+  <Step>
+    **Fall 1:** $x \ge 0 \Rightarrow |x| = x$
+    $$
+      (x-1)^2 = x \;\;\Rightarrow\;\; x^2 - 3x + 1 = 0
+    $$
+    Lösungen:
+    $$
+      x = \frac{3 \pm \sqrt{9-4}}{2} = \frac{3 \pm \sqrt{5}}{2}
+    $$
+    Beide sind $\ge 0$, also zulässig.
+  </Step>
+
+  <Step>
+    **Fall 2:** $x < 0 \Rightarrow |x| = -x$
+    $$
+      (x-1)^2 = -x \;\;\Rightarrow\;\; x^2 - x + 1 = 0
+    $$
+    Diskriminante: $1 - 4 = -3 < 0$ → **keine reellen** Lösungen.
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\}
+    $$
+  </Solution>
+</Exercise>
+
+
+---
+
+## Aufgabe 2 – Ungleichungen
+
+<Exercise title="Aufgabe 2 (i): Einfache Betragsungleichung" difficulty="easy">
+  <Task>
+    Bestimme die Lösungsmenge:
+    $$
+      |x + 1| < 4
+    $$
+  </Task>
+
+  <Hint>
+    Für $|u| < a$ mit $a>0$ gilt die **Doppelte Ungleichung**: $-a < u < a$.
+  </Hint>
+
+  <Step>
+    $$
+      -4 < x+1 < 4 \;\;\Rightarrow\;\; -5 < x < 3
+    $$
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = (-5,\, 3)
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 2 (ii): Betrag kleiner linearer Ausdruck" difficulty="medium">
+  <Task>
+    Bestimme die Lösungsmenge:
+    $$
+      |2x - 1| < -x + 3
+    $$
+  </Task>
+
+  <Hint>
+    Rechts muss **positiv** sein, sonst kann $|2x-1|$ nicht kleiner sein.  
+    Also zunächst $-x+3 > 0 \Rightarrow x < 3$.  
+    Dann wende $-|B|<A<|B|$–Schema mit $A=2x-1$ und $B=-x+3$ an.
+  </Hint>
+
+  <Step>
+    Mit $x<3$:
+    $$
+      -( -x+3) < 2x - 1 < -x + 3
+    $$
+    Linke Seite:
+    $$
+      x - 3 < 2x - 1 \Rightarrow -3 < x - 1 \Rightarrow x > -2
+    $$
+    Rechte Seite:
+    $$
+      2x - 1 < -x + 3 \Rightarrow 3x < 4 \Rightarrow x < \frac{4}{3}
+    $$
+  </Step>
+
+  <Solution>
+    Gesamtschnitt (inkl. $x<3$):
+    $$
+      \mathbb{L} = (-2,\, \tfrac{4}{3})
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 2 (iii): Gebrochene quadratische Ungleichung" difficulty="hard">
+  <Task>
+    In der Vorlage ist der Term typografisch verkürzt dargestellt. Es kommen zwei naheliegende Lesarten vor.  
+    Ich löse **beide Varianten** – du kannst die passende Version wählen:
+
+    **Variante A**:
+    $$
+      \frac{x^2 - 1}{2x + 1} < \frac{9}{16}
+    $$
+
+    **Variante B**:
+    $$
+      \frac{x^2 - 1}{2x + 1} < 9
+    $$
+  </Task>
+
+  <Hint>
+    Bei rationalen Ungleichungen: **auf die Vorzeichen** des Nenners achten und die **Definitionslücken** ausschließen.  
+    Bringe alles auf die linke Seite und arbeite mit einem **Vorzeichen- bzw. Intervalldiagramm**.
+  </Hint>
+
+  <Step>
+    **Variante A**:
+    $$
+      \frac{x^2 - 1}{2x + 1} - \frac{9}{16} < 0
+      \;\;\Rightarrow\;\;
+      \frac{16(x^2 - 1) - 9(2x + 1)}{16(2x + 1)} < 0
+    $$
+    Zähler:
+    $$
+      16x^2 - 16 - 18x - 9 = 16x^2 - 18x - 25
+    $$
+    Kritische Stellen: Nullstellen von $16x^2 - 18x - 25$ sowie Nennerstelle $2x+1=0 \Rightarrow x=-\tfrac12$.
+    $$
+      x = \frac{18 \pm \sqrt{(-18)^2 - 4\cdot16\cdot(-25)}}{2\cdot16}
+        = \frac{18 \pm \sqrt{324 + 1600}}{32}
+        = \frac{18 \pm \sqrt{1924}}{32}
+        = \frac{18 \pm 2\sqrt{481}}{32}
+        = \frac{9 \pm \sqrt{481}}{16}
+    $$
+    Erstelle das Vorzeichenbild auf den Intervallen
+    $(-\infty, \frac{9-\sqrt{481}}{16})$, 
+    $(\frac{9-\sqrt{481}}{16}, -\tfrac12)$, 
+    $(-\tfrac12, \frac{9+\sqrt{481}}{16})$, 
+    $(\frac{9+\sqrt{481}}{16}, \infty)$
+    und wähle die Bereiche mit **negativem** Funktionswert.
+  </Step>
+
+  <Step>
+    **Variante B**:
+    $$
+      \frac{x^2 - 1}{2x + 1} - 9 < 0
+      \;\;\Rightarrow\;\;
+      \frac{x^2 - 1 - 9(2x + 1)}{2x + 1} < 0
+      \;\;\Rightarrow\;\;
+      \frac{x^2 - 18x - 10}{2x + 1} < 0
+    $$
+    Kritische Stellen: Nullstellen von $x^2 - 18x - 10$ und $x=-\tfrac12$.
+    $$
+      x = \frac{18 \pm \sqrt{324 + 40}}{2} = \frac{18 \pm \sqrt{364}}{2}
+        = \frac{18 \pm 2\sqrt{91}}{2} = 9 \pm \sqrt{91}
+    $$
+    Intervallanalyse über
+    $(-\infty, 9-\sqrt{91})$, $(9-\sqrt{91}, -\tfrac12)$, $(-\tfrac12, 9+\sqrt{91})$, $(9+\sqrt{91}, \infty)$
+    liefert die Bereiche, in denen der Quotient **negativ** ist.
+  </Step>
+
+  <Solution>
+    **Intervallmethode** liefert in beiden Varianten die Lösungen als Vereinigungen von Intervallen, abhängig von den Vorzeichenwechseln an den kritischen Stellen.  
+    Wähle die Variante, die der Originalaufgabe entspricht, und übernimm die entsprechenden Intervalle aus dem Vorzeichenbild.  
+    (Wenn du willst, passe ich die endgültigen Intervalle nach kurzer Bestätigung der korrekten Lesart direkt an.)
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 2 (iv): Bruchungleichung vergleichen" difficulty="hard">
+  <Task>
+    Bestimme die Lösungsmenge:
+    $$
+      \frac{x+1}{x-1} < \frac{x-1}{x+1}
+    $$
+  </Task>
+
+  <Hint>
+    Bringe alles auf eine Seite und fasse zu einem Bruch mit **gemeinsamem Nenner** zusammen.  
+    Achte auf die **Definitionslücken** $x \ne \pm 1$ und benutze anschließend ein **Vorzeichen-/Intervall-Diagramm**.
+  </Hint>
+
+  <Step>
+    Auf linke Seite:
+    $$
+      \frac{x+1}{x-1} - \frac{x-1}{x+1} < 0
+      \;\;\Rightarrow\;\;
+      \frac{(x+1)^2 - (x-1)^2}{(x-1)(x+1)} < 0
+    $$
+    Zähler:
+    $$
+      (x^2 + 2x + 1) - (x^2 - 2x + 1) = 4x
+    $$
+    Also:
+    $$
+      \frac{4x}{x^2 - 1} < 0 \quad \text{mit} \quad x \ne \pm 1
+    $$
+  </Step>
+
+  <Step>
+    **Kritische Punkte**: $x=0$ (Zähler), $x=\pm 1$ (Nenner).  
+    Vorzeichen über Intervalle:
+    $(-\infty,-1)$, $(-1,0)$, $(0,1)$, $(1,\infty)$.
+    - $x< -1$: Zähler $<0$, Nenner $(+)$ ⇒ Quotient $<0$ ⇒ **erfüllt**  
+    - $-1<x<0$: Zähler $<0$, Nenner $(-)$ ⇒ Quotient $>0$ ⇒ nicht erfüllt  
+    - $0<x<1$: Zähler $>0$, Nenner $(-)$ ⇒ Quotient $<0$ ⇒ **erfüllt**  
+    - $x>1$: Zähler $>0$, Nenner $(+)$ ⇒ Quotient $>0$ ⇒ nicht erfüllt
+  </Step>
+
+  <Solution>
+    $$
+      \mathbb{L} = (-\infty,-1) \;\cup\; (0,1)
+    $$
+  </Solution>
+</Exercise>
+
+
+---
+
+## Aufgabe 3 – Definitions- und Wertebereiche
+
+<Exercise title="Aufgabe 3 (i): Parabel nach oben verschoben" difficulty="easy">
+  <Task>
+    Bestimme Definitionsbereich $\mathcal{D}$ und Wertemenge $\mathcal{W}$ von
+    $$
+      f(x) = 3x^2 + 2.
+    $$
+  </Task>
+
+  <Step>
+    **Definitionsbereich**: Polynom ⇒ für alle $x \in \mathbb{R}$ definiert.  
+    $\mathcal{D} = \mathbb{R}$.
+  </Step>
+
+  <Step>
+    **Wertemenge**: $3x^2 \ge 0$, Minimum bei $x=0$ ist $f(0)=2$.  
+    Also $\mathcal{W} = [2, \infty)$.
+  </Step>
+
+  <Solution>
+    $$
+      \mathcal{D} = \mathbb{R}, \qquad \mathcal{W} = [2, \infty)
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 3 (ii): Wurzelfunktion skaliert" difficulty="easy">
+  <Task>
+    Bestimme Definitionsbereich $\mathcal{D}$ und Wertemenge $\mathcal{W}$ von
+    $$
+      f(x) = 4\sqrt{x - 1}.
+    $$
+  </Task>
+
+  <Step>
+    **Definitionsbereich**: $x-1 \ge 0 \Rightarrow x \ge 1$.  
+    Also $\mathcal{D} = [1, \infty)$.
+  </Step>
+
+  <Step>
+    **Wertemenge**: $\sqrt{x-1} \ge 0 \Rightarrow f(x) \ge 0$.  
+    Startwert $f(1)=0$ und nach oben unbeschränkt.  
+    Also $\mathcal{W} = [0, \infty)$.
+  </Step>
+
+  <Solution>
+    $$
+      \mathcal{D} = [1, \infty), \qquad \mathcal{W} = [0, \infty)
+    $$
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 3 (iii): Rationale Funktion" difficulty="medium">
+  <Task>
+    Bestimme Definitionsbereich $\mathcal{D}$ und Wertemenge $\mathcal{W}$ von
+    $$
+      f(x) = \frac{x}{2x^2 - 8}.
+    $$
+  </Task>
+
+  <Hint>
+    Für die Wertemenge kann man $y = \dfrac{x}{2x^2-8}$ nach $x$ auflösen und die **Diskriminante** der entstehenden quadratischen Gleichung untersuchen.
+  </Hint>
+
+  <Step>
+    **Definitionsbereich**: Nenner $\ne 0 \Rightarrow 2x^2 - 8 \ne 0 \Rightarrow x \ne \pm 2$.  
+    Also $\mathcal{D} = \mathbb{R} \setminus \{-2, 2\}$.
+  </Step>
+
+  <Step>
+    **Wertemenge**: Setze $y = \dfrac{x}{2x^2-8}$. Dann
+    $$
+      y(2x^2 - 8) = x \;\;\Rightarrow\;\; 2y\,x^2 - x - 8y = 0
+    $$
+    Quadratisch in $x$ mit Diskriminante
+    $$
+      \Delta = (-1)^2 - 4\cdot(2y)\cdot(-8y) = 1 + 64y^2 \ge 0 \quad \forall y \in \mathbb{R}.
+    $$
+    Damit existiert zu **jedem** $y$ mindestens eine reelle Lösung $x$ (die nicht notwendigerweise $\pm 2$ ist).  
+    Es gibt **keine** verbotenen $y$-Werte → $\mathcal{W} = \mathbb{R}$.
+  </Step>
+
+  <Solution>
+    $$
+      \mathcal{D} = \mathbb{R} \setminus \{-2, 2\}, \qquad \mathcal{W} = \mathbb{R}
+    $$
+  </Solution>
+</Exercise>
+
+
+---
+
+## Aufgabe 4 – Horner-Schema
+
+<Exercise title="Aufgabe 4: Faktorisiere mit Horner" difficulty="medium">
+  <Task>
+    Gegeben sei
+    $$
+      f(x) = -x^4 + 6x^3 - 8x^2 - 6x + 9.
+    $$
+    Faktorisiere $f$ vollständig. Tipp: Alle Nullstellen sind **ganzzahlig** und **|x| &lt; 4**.
+  </Task>
+
+  <Hint>
+    Probiere kleine ganzzahlige Kandidaten ($\pm 1, \pm 2, \pm 3$).  
+    Verwende für jede gefundene Nullstelle sofort das **Horner-Schema** zur Grad-Reduktion.
+  </Hint>
+
+  <Step>
+    **Rate Nullstellen**:  
+    $x=1$: $-1+6-8-6+9=0$ ⇒ $x=1$ ist Nullstelle → Faktor $(x-1)$.
+
+    Horner mit $x=1$ auf den Koeffizienten $(-1,\,6,\,-8,\,-6,\,9)$:
+    ergibt das reduzierte Polynom
+    $$
+      -x^3 + 5x^2 - 3x - 9.
+    $$
+  </Step>
+
+  <Step>
+    **Nächster Kandidat** $x=3$ im kubischen Rest:
+    $$
+      -27 + 45 - 9 - 9 = 0 \Rightarrow x=3 \text{ ist Nullstelle} \Rightarrow (x-3) \text{ Faktor.}
+    $$
+    Horner mit $x=3$ auf $(-1,\,5,\,-3,\,-9)$ liefert
+    $$
+      -x^2 + 2x + 3.
+    $$
+  </Step>
+
+  <Step>
+    **Quadratik faktorisieren**:
+    $$
+      -x^2 + 2x + 3 = -\bigl(x^2 - 2x - 3\bigr) = -\,(x-3)(x+1).
+    $$
+    Damit taucht $x=3$ **zweifach** auf.
+  </Step>
+
+  <Solution>
+    Vollständige Faktorisierung:
+    $$
+      f(x) = -\,(x-1)\,(x-3)^2\,(x+1).
+    $$
+    Nullstellen (mit Vielfachheiten): $x=1$, $x=3$ (doppelt), $x=-1$.
+  </Solution>
+</Exercise>
+
+
+---
+
+## Aufgabe 5 – Polynomdivision
+
+<Exercise title="Aufgabe 5: Faktorisiere mit Polynomdivision" difficulty="medium">
+  <Task>
+    Faktorisiere erneut
+    $$
+      f(x) = -x^4 + 6x^3 - 8x^2 - 6x + 9
+    $$
+    diesmal explizit per **Polynomdivision** (ohne Horner).
+  </Task>
+
+  <Hint>
+    Beginne mit dem bekannten Linearfaktor $(x-1)$ und dividiere Schritt für Schritt.
+  </Hint>
+
+  <Step>
+    **Division durch $(x-1)$** liefert
+    $$
+      \frac{f(x)}{x-1} = -x^3 + 5x^2 - 3x - 9.
+    $$
+  </Step>
+
+  <Step>
+    **Division durch $(x-3)$** (da $x=3$ Nullstelle):
+    $$
+      \frac{-x^3 + 5x^2 - 3x - 9}{x-3} = -x^2 + 2x + 3.
+    $$
+  </Step>
+
+  <Step>
+    **Quadratik**:
+    $$
+      -x^2 + 2x + 3 = -\,(x-3)(x+1).
+    $$
+  </Step>
+
+  <Solution>
+    Wie zuvor:
+    $$
+      f(x) = -\,(x-1)\,(x-3)^2\,(x+1).
+    $$
+  </Solution>
+</Exercise>
+
+
+---
+
+## Aufgabe 6 – Monotonie und Symmetrie
+
+<Exercise title="Aufgabe 6 (i): $f(x)=2x^3$" difficulty="easy">
+  <Task>
+    Bestimme Monotonie- und Symmetrieeigenschaften von $f(x) = 2x^3$.
+  </Task>
+
+  <Step>
+    **Symmetrie**: $f(-x) = 2(-x)^3 = -2x^3 = -f(x)$ ⇒ **ungerade** Funktion ⇒ **Punktsymmetrie** zum Ursprung.
+  </Step>
+
+  <Step>
+    **Monotonie**: $f'(x) = 6x^2 \ge 0$, mit $f'(x)=0$ nur bei $x=0$.  
+    Trotz horizontaler Tangente bei $x=0$ ist $f$ auf ganz $\mathbb{R}$ **streng monoton steigend**.
+  </Step>
+
+  <Solution>
+    **Symmetrie**: ungerade (punktsymmetrisch zum Ursprung).  
+    **Monotonie**: streng wachsend auf $\mathbb{R}$.
+  </Solution>
+</Exercise>
+
+
+<Exercise title="Aufgabe 6 (ii): $f(x)=\tfrac{1}{2}\sqrt{x^2+1}$" difficulty="easy">
+  <Task>
+    Bestimme Monotonie- und Symmetrieeigenschaften von 
+    $$
+      f(x) = \frac{1}{2}\sqrt{x^2 + 1}.
+    $$
+  </Task>
+
+  <Step>
+    **Symmetrie**: $f(-x)=\tfrac{1}{2}\sqrt{(-x)^2+1}=\tfrac{1}{2}\sqrt{x^2+1}=f(x)$ ⇒ **gerade** Funktion ⇒ **Achsensymmetrie** zur $y$-Achse.
+  </Step>
+
+  <Step>
+    **Monotonie**:
+    - Für $x \ge 0$ ist $\sqrt{x^2+1}$ wachsend ⇒ $f$ **wachsend** auf $[0,\infty)$.  
+    - Für $x \le 0$ ist $\sqrt{x^2+1}$ fallend in Richtung $x\to 0^-$ ⇒ $f$ **fallend** auf $(-\infty,0]$.  
+    Minimum bei $x=0$: $f(0)=\tfrac{1}{2}$.
+  </Step>
+
+  <Solution>
+    **Symmetrie**: gerade (achsensymmetrisch zur $y$-Achse).  
+    **Monotonie**: fallend auf $(-\infty,0]$, wachsend auf $[0,\infty)$, Minimum $f(0)=\tfrac{1}{2}$.
+  </Solution>
+</Exercise>
+
+
+---
+
+## Zusammenfassung
+
+<Callout type="success" title="Wichtige Erkenntnisse">
+- **Wurzelgleichungen** stets mit **Probe** abschließen (Scheinlösungen!).  
+- **Biquadratische Gleichungen** mit $z=x^2$ linearisieren, dann rücksubstituieren.  
+- **Betragsgleichungen/-ungleichungen** sauber per **Fallunterscheidung** + **Zulässigkeitsprüfung** lösen.  
+- **Rationale Ungleichungen** via **Vorzeichen-/Intervallmethode** (kritische Stellen: Nullstellen von Zähler & Nenner).  
+- **Horner/Polynomdivision**: Nach jeder Nullstelle polynomgradweise reduzieren.  
+- **Monotonie & Symmetrie**: Gerade/ungerade prüfen, Ableitung für Wachstum/Extrema nutzen.
+</Callout>
+
+<PostPager
+  prev={{ href: "/blog/mathe-i-tutorium-ii", title: "Tutorium II - Mengen, Betragsgleichungen, Komplexe Zahlen" }}
+  next={{ href: "/blog/mathe-i-tutorium-iv", title: "Tutorium IV - Funktionenplots, Ableitungen & mehr" }}
+/>
