@@ -305,16 +305,37 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   <Step>
     **Quadrieren**:
     $$
-      -3 + 2x = 4 \quad \iff \quad 2x = 7 \quad \iff \quad x = \frac{7}{2}
+      \begin{align*}
+      && -3 + 2x &= 4 \\
+      &\iff& \quad 2x &= 7 \\
+      &\iff& \quad x &= \frac{7}{2}
+      \end{align*}
     $$
   </Step>
 
   <Step>
-    **Probe**:
+    **Probe**: Beide Seiten separat prüfen <br />
+    
     $$
-      \sqrt{-3 + 2\cdot \frac{7}{2}} = \sqrt{-3 + 7} = \sqrt{4} = 2 \quad \checkmark
+    \begin{align*}
+      \text{LHS} &= \sqrt{-3 + 2\cdot \frac{7}{2}} \\
+      &= \sqrt{-3 + 7} \\
+      &= \sqrt{4} \\
+      &= 2 \\
+      \\
+      \text{RHS} &= 2
+    \end{align*}
     $$
+    Beide Seiten sind gleich (LHS = RHS = 2).<br />
+
     Liegt auch im Definitionsbereich ($\frac{7}{2} \ge \frac{3}{2}$).
+  </Step>
+  <Step>
+    **Prüfen, ob die Lösung im Definitionsbereich liegt**:<br />
+    $$
+      x = \frac{7}{2} \ge \frac{3}{2} \quad \text{(erfüllt die Bedingung)}
+    $$
+    Damit ist die Lösung gültig.
   </Step>
 
   <Solution>
@@ -339,17 +360,22 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   </Hint>
 
   <Step>
-    **Vorüberlegung**: $\sqrt{x^2+4} \ge 0 \Rightarrow x-2 \ge 0 \Rightarrow x \ge 2$.
+    **Vorüberlegung**: Links ist immer größer gleich Null, und somit muss die rechte Seite ebenfalls $\ge 0$ sein:
+    $$
+    \Rightarrow x-2 \ge 0 \Rightarrow x \ge 2.
+    $$
   </Step>
 
   <Step>
     **Quadrieren**:
     $$
-      x^2 + 4 = (x - 2)^2 = x^2 - 4x + 4
-    $$
-    Kürzen von $x^2$:
-    $$
-      4 = -4x + 4 \quad \iff \quad 0 = -4x \quad \iff \quad x = 0
+      \begin{align*}
+      && x^2 + 4 &= (x - 2)^2 \\
+      && x^2 + 4 &= x^2 - 4x + 4 && | -x^2\\
+      &\iff& \quad 4 &= -4x + 4 &&| -4\\
+      &\iff& \quad 0 &= -4x &&|:-4 \\
+      &\iff& \quad x &= 0
+      \end{align*}
     $$
   </Step>
 
@@ -358,7 +384,9 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
     $$
       \sqrt{0^2 + 4} = 2 \quad \text{und} \quad 0 - 2 = -2
     $$
-    $2 \ne -2$ → **Scheinlösung**. Zudem verletzt $x=0$ die Vorbedingung $x\ge 2$.
+    $2 \ne -2$ → **Scheinlösung**. 
+    <br />
+    Zudem verletzt $x=0$ die Vorbedingung $x\ge 2$.
   </Step>
 
   <Solution>
@@ -378,15 +406,19 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
     $$
   </Task>
 
-  <Hint>
-    Beachte den **Definitionsbereich**: $x-1 \ge 0$ und $x+1 \ge 0 \Rightarrow x \ge 1$.  
-    Bei gleichen Wurzeln folgt Gleichheit der Radikanden – prüfe dann die Domäne.
-  </Hint>
-
   <Step>
-    Bei Gleichheit nichtnegativer Wurzeln muss gelten:
+    Beide Seiten müssen größer gleich Null sein. <br />
+    Links: $x - 1 \ge 0 \Rightarrow x \ge 1$ <br />
+    Rechts: $x + 1 \ge 0 \Rightarrow x \ge -1$ <br />
+    Insgesamt also $x \ge 1$.
+  </Step>
+  <Step>
+    **Quadrieren**:
     $$
-      x - 1 = x + 1 \quad \Rightarrow \quad -1 = +1 \quad \text{Widerspruch.}
+      \begin{align*}
+      && x - 1 &= x + 1 \\
+      &\Rightarrow&  -1 &= +1 \quad \text{Widerspruch.}
+      \end{align*}
     $$
   </Step>
 
@@ -399,7 +431,7 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 </Exercise>
 
 
-<Exercise title="Aufgabe 1 (viii): Betrag vs. Quadratpolynom" difficulty="medium">
+<Exercise title="Aufgabe 1 (viii): Betrag und Quadratpolynom" difficulty="medium">
   <Task>
     Löse die Gleichung:
     $$
@@ -408,49 +440,123 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   </Task>
 
   <Hint>
-    Rechts muss **$\ge 0$** sein, sonst kann die Gleichung nicht erfüllt werden.  
-    Bestimme zuerst $M(x) := -\,(x^2 - x - 6) = -x^2 + x + 6 \ge 0$ und löse dann
-    $$
-      |2x+4| = M(x)
-    $$
-    per **Fallunterscheidung** nach dem Vorzeichen von $2x+4$.
+    Fälle Bilden und zulässige Lösungsmengen bestimmen und mit Kandidaten vergleichen. 
   </Hint>
 
   <Step>
-    **Zulässige $x$ durch $M(x)\ge 0$**:
+    **Fall 1: 2x + 4 ≥ 0**
     $$
-      -x^2 + x + 6 \ge 0 \iff x^2 - x - 6 \le 0
+      \begin{align*}
+      && 2x + 4 &\ge 0 &&| -4\\
+      && 2x &\ge -4 &&| :2\\
+      && x &\ge -2
+      \end{align*}
     $$
-    Nullstellen von $x^2 - x -6 = 0$:
+    Daraus ergibt sich der Definitionsbereich für diesen Fall.
     $$
-      x = \frac{1 \pm \sqrt{1+24}}{2} = \frac{1 \pm 5}{2} \Rightarrow x=-2, \; x=3
+      \mathbb{L}_{1,zul} = [-2, \infty)
     $$
-    Also $x \in [-2,\,3]$.
+  </Step>
+  <Step>
+    **Fall 2: 2x + 4 < 0**
+    $$
+      \begin{align*}
+      && 2x + 4 &< 0 &&| -4\\
+      && 2x &< -4 &&| :2\\
+      && x &< -2
+      \end{align*}
+    $$
+    Daraus ergibt sich der Definitionsbereich für diesen Fall.
+    $$
+      \mathbb{L}_{2,zul} = (-\infty, -2)
+    $$
+  </Step>
+  <Step>
+    Bestimmung möglicher **Kandidaten** für Lösungen der Fälle:<br />
+    Da erster Fall positiv ist fallen die Betragsstriche weg.
+    $$
+      \begin{align*}
+      && 2x + 4 &= -\,(x^2 - x - 6)\\
+      &\iff& 2x + 4 &= -x^2 + x + 6 &&| -2x ; -4\\
+      &\iff& 0 &= -x^2 - x + 2 &&|\cdot -1\\
+      &\iff& 0 &= x^2 + x - 2
+      \end{align*}
+    $$
+    Lösen mittels PQ Formel: 
+    $$
+      \begin{align*}
+      x_{1,2} &= \frac{-1}{2} \pm \sqrt{\left(\frac{1}{2}\right)^2 - (-2)} \\
+      &= \frac{-1}{2} \pm \sqrt{\frac{1}{4} + \frac{8}{4}} \\
+      &= \frac{-1}{2} \pm \sqrt{\frac{9}{4}} \\
+      &= \frac{-1}{2} \pm \frac{3}{2} \\
+      \end{align*}
+    $$
+    Also:
+    $$
+      \begin{align*}
+      \mathbb{L}_{1,kand} &= \left\{ \frac{-1 + 3}{2}, \frac{-1 - 3}{2} \right\} \\
+      &= \left\{ 1, -2 \right\}
+      \end{align*}
+    $$
+  </Step>
+  
+  <Step>
+    Prüfen des Zweiten Falls: Negativer Fall (mit -1 Multiplizieren)
+    $$
+      \begin{align*}
+      && -(2x + 4) &= -\,(x^2 - x - 6)\\
+      &\iff& -2x - 4 &= -x^2 + x + 6 &&| +2x ; +4\\
+      &\iff& 0 &= -x^2 + 3x + 10 &&|\cdot -1\\
+      &\iff& 0 &= x^2 - 3x - 10
+      \end{align*}
+    $$
+    Lösen mittels PQ Formel:
+    $$
+      \begin{align*}
+      x_{1,2} &= \frac{3}{2} \pm \sqrt{\left(\frac{-3}{2}\right)^2 - (-10)} \\
+      &= \frac{3}{2} \pm \sqrt{\frac{9}{4} + \frac{40}{4}} \\
+      &= \frac{3}{2} \pm \sqrt{\frac{49}{4}} \\
+      &= \frac{3}{2} \pm \frac{7}{2} \\
+      \end{align*}
+    $$
+    Also:
+    $$
+      \begin{align*}
+      \mathbb{L}_{2,kand} &= \left\{ \frac{3 + 7}{2}, \frac{3 - 7}{2} \right\} \\
+      &= \left\{ 5, -2 \right\}
+      \end{align*}
+    $$
   </Step>
 
   <Step>
-    **Fall A:** $2x+4 \ge 0 \;\;(\Leftrightarrow x \ge -2)$
+    Prüfen, ob die Kandidaten in den jeweiligen Definitionsbereichen liegen. Also die Schnittmenge beider Lösungsmengen:<br />
+    **Fall 1:**
     $$
-      2x + 4 = -x^2 + x + 6 \quad \Rightarrow \quad x^2 + x - 2 = 0
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1,zul} \cap \mathbb{L}_{1,kand} \\
+      &= [-2, \infty) \cap \left\{ 1, -2 \right\} \\
+      &= \left\{ 1, -2 \right\} \\
+      \end{align*}
     $$
-    Lösungen:
+    **Fall 2:**
     $$
-      x = \frac{-1 \pm \sqrt{1+8}}{2} = \frac{-1 \pm 3}{2} \Rightarrow x = 1 \;\text{oder}\; x=-2
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2,zul} \cap \mathbb{L}_{2,kand} \\
+      &= (-\infty, -2) \cap \left\{ 5, -2 \right\} \\
+      &= \emptyset \\
+      \end{align*}
     $$
-    Beide liegen im Intervall $[-2,3]$.
   </Step>
-
   <Step>
-    **Fall B:** $2x+4 < 0 \;\;(\Leftrightarrow x < -2)$  
+    Zusammenfassung der Lösungen aus beiden Fällen, also die Vereinigung:
     $$
-      -(2x+4) = -x^2 + x + 6 \Rightarrow x^2 - 3x - 2 = 0
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \\
+      &= \{1, -2\} \cup \emptyset \\
+      &= \{1, -2\}
+      \end{align*}
     $$
-    $$
-      \Delta = 9 + 8 = 17 \Rightarrow x = \frac{3 \pm \sqrt{17}}{2}
-    $$
-    Beide liegen **nicht** $< -2$ (insb. $\frac{3-\sqrt{17}}{2} \approx -0{,}56$), daher **verwerfen**.
   </Step>
-
   <Solution>
     $$
       \mathbb{L} = \{-2,\, 1\}
@@ -459,26 +565,39 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 </Exercise>
 
 
-<Exercise title="Aufgabe 1 (ix): Symmetriepunkt finden" difficulty="easy">
+<Exercise title="Aufgabe 1 (ix)" difficulty="easy">
   <Task>
     Löse die Gleichung:
     $$
       |x + 1| = |x - 1|
     $$
   </Task>
-
   <Hint>
-    Geometrisch: Der Punkt $x$ hat den gleichen Abstand zu $-1$ und $+1$.  
-    Das ist genau der **Mittelpunkt** zwischen beiden, also $x=0$.
+    Durch das Quadrieren beider Seiten ändert sich die Gleichung nicht, da beide Seiten stets positiv sind.
+    Es gilt zunächst:
+    $$
+      |A| = |B| \iff A^2 = B^2
+    $$
   </Hint>
-
   <Step>
     **Algebraisch**:
     $$
-      |x+1| = |x-1| \quad \iff \quad (x+1)^2 = (x-1)^2
+      \begin{align*}
+      && |x + 1| &= |x - 1| \\
+      &\iff& (x + 1)^2 &= (x - 1)^2 \\
+      &\iff& x^2 + 2x + 1 &= x^2 - 2x + 1 &&| -x^2; -1; +2x\\
+      &\iff& 4x &= 0 &&| :4\\
+      &\iff& x &= 0
+      \end{align*}
     $$
+  </Step>
+  <Step>
+    **Prüfen der Lösung**:
     $$
-      x^2 + 2x + 1 = x^2 - 2x + 1 \Rightarrow 4x = 0 \Rightarrow x = 0
+      \begin{align*}
+      |0 + 1| &= |0 - 1| \\
+      1 &= 1 \quad \checkmark
+      \end{align*}
     $$
   </Step>
 
@@ -490,7 +609,7 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 </Exercise>
 
 
-<Exercise title="Aufgabe 1 (x): Doppelbetrag reduziert auf Fälle" difficulty="medium">
+<Exercise title="Aufgabe 1 (x): Doppelbetrag" difficulty="medium">
   <Task>
     Löse die Gleichung:
     $$
@@ -499,35 +618,102 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   </Task>
 
   <Hint>
+    Betrachte die linke Seite. Sind die Betragsstriche notwendig?
+  </Hint>
+  <Hint>
     Erkenne $(x^2 - 2x + 1) = (x-1)^2 \ge 0$.  
-    Damit ist $|x^2 - 2x + 1| = (x-1)^2$ und die Gleichung wird zu
-    $$(x-1)^2 = |x|.$$
-    Löse nun die beiden Fälle $|x| = x$ (für $x\ge 0$) und $|x| = -x$ (für $x<0$).
+    Somit kannst du die linken Betragsstiche weglassen und normal Vorgehen wie bei einer Betragsgleichung.
   </Hint>
 
   <Step>
+    Reduziere die Komplexität der Gleichung, da links immer positiv ist, auch ohne die Betragsstriche und vereinfache mittels Binomischer Formel:
+    $$
+      (x-1)^2 = |x|
+    $$
+  </Step>
+  <Step>
+    Fälle bilden für den Betrag auf der rechten Seite:
+
+    **Fall 1:** 
+    $$
+      x \ge 0 \Rightarrow \mathbb{L}_{1,zul} = [0, \infty)
+    $$
+    **Fall 2:**
+    $$
+      x < 0 \Rightarrow \mathbb{L}_{2,zul} = (-\infty, 0)
+    $$
+  </Step>
+  <Step>
+    Kandidaten für beide Fälle bestimmen:<br />
     **Fall 1:** $x \ge 0 \Rightarrow |x| = x$
     $$
-      (x-1)^2 = x \;\;\Rightarrow\;\; x^2 - 3x + 1 = 0
+      \begin{align*}
+      && (x-1)^2 &= x \\
+      &\iff& x^2 - 2x + 1 &= x &&| -x\\
+      &\iff& x^2 - 3x + 1 &= 0 && | \text{(pq-Formel)}\\
+      &\iff& x_{1,2} &= \frac{3}{2} \pm \sqrt{\left(\frac{3}{2}\right)^2 - 1} \\
+      &\iff& x_{1,2} &= \frac{3}{2} \pm \sqrt{\frac{9}{4} - \frac{4}{4}} \\
+      &\iff& x_{1,2} &= \frac{3}{2} \pm \sqrt{\frac{5}{4}} \\
+      &\iff& x_{1,2} &= \frac{3}{2} \pm \frac{\sqrt{5}}{2}
+      \end{align*}
     $$
-    Lösungen:
+    Also folgende Kandidaten:
     $$
-      x = \frac{3 \pm \sqrt{9-4}}{2} = \frac{3 \pm \sqrt{5}}{2}
+      \mathbb{L}_{1,kand} = \left\{ \frac{3 \pm \sqrt{5}}{2} \right\}
     $$
-    Beide sind $\ge 0$, also zulässig.
+    **Fall 2:** $x < 0 \Rightarrow |x| = -x$
+    $$
+      \begin{align*}
+      && (x-1)^2 &= -x \\
+      &\iff& x^2 - 2x + 1 &= -x &&| +x\\
+      &\iff& x^2 - x + 1 &= 0 && | \text{(pq-Formel)}\\
+      &\iff& x_{1,2} &= \frac{1}{2} \pm \sqrt{\left(\frac{-1}{2}\right)^2 - 1} \\
+      &\iff& x_{1,2} &= \frac{1}{2} \pm \sqrt{\frac{1}{4} - \frac{4}{4}} \\
+      &\iff& x_{1,2} &= \frac{1}{2} \pm \sqrt{\frac{-3}{4}} 
+      \end{align*}
+    $$
+    Da der Radikand negativ ist, gibt es **keine reellen Lösungen**.<br />
+    Also folgende Kandidaten:
+    $$
+      \mathbb{L}_{2,kand} = \emptyset
+    $$
   </Step>
 
   <Step>
-    **Fall 2:** $x < 0 \Rightarrow |x| = -x$
+    Prüfen, ob die Kandidaten in den jeweiligen Definitionsbereichen liegen. Also die Schnittmenge beider Lösungsmengen:<br />
+    **Fall 1:**
     $$
-      (x-1)^2 = -x \;\;\Rightarrow\;\; x^2 - x + 1 = 0
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1,zul} \cap \mathbb{L}_{1,kand} \\
+      &= [0, \infty) \cap \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\} \\
+      &= \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\} \\
+      \end{align*}
     $$
-    Diskriminante: $1 - 4 = -3 < 0$ → **keine reellen** Lösungen.
+    Da für den zweiten Fall keine Kandidaten existieren, ist die Schnittmenge leer:<br />
+    **Fall 2:**
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2,zul} \cap \mathbb{L}_{2,kand} \\
+      &= (-\infty, 0) \cap \emptyset \\
+      &= \emptyset \\
+      \end{align*}
+    $$
+  </Step>
+
+  <Step>
+    Die Gesamtlösung ergibt sich aus der Vereinigung beider Fälle:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \\
+      &= \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\} \cup \emptyset \\
+      &= \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\}
+      \end{align*}
+    $$
   </Step>
 
   <Solution>
     $$
-      \mathbb{L} = \left\{ \frac{3 - \sqrt{5}}{2}, \; \frac{3 + \sqrt{5}}{2} \right\}
+      \mathbb{L} = \left\{ \frac{3 \pm \sqrt{5}}{2} \right\}
     $$
   </Solution>
 </Exercise>
@@ -546,12 +732,91 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   </Task>
 
   <Hint>
+    Hier kannst du normale eine Betragsgleichung lösen. Nur musst du hier die Ungleichung berücksichtigen in der Hinsicht, dass ein Invervall entsteht und nicht nur einzelne Punkte.
+  </Hint>
+  <Hint>
+    Kurzlösung: <br />
     Für $|u| < a$ mit $a>0$ gilt die **Doppelte Ungleichung**: $-a < u < a$.
   </Hint>
-
   <Step>
+    Kurzlösung anwenden:
     $$
       -4 < x+1 < 4 \;\;\Rightarrow\;\; -5 < x < 3
+    $$
+  </Step>
+  <Step>
+    Normales Vorgehen mit Fallbildung:<br />
+    **Fall 1:** <br />
+    $$
+      x + 1 \ge 0 \Rightarrow x \ge -1
+    $$
+    Somit haben wir folgende Definitionsmenge für diesen Fall:
+    $$
+      \mathbb{L}_{1,zul} = [-1, \infty)
+    $$
+    **Fall 2:** <br />
+    $$
+      x + 1 < 0 \Rightarrow x < -1
+    $$
+    Somit haben wir folgende Definitionsmenge für diesen Fall:
+    $$
+      \mathbb{L}_{2,zul} = (-\infty, -1)
+    $$
+  </Step>
+  <Step>
+    Bestimmung möglicher **Kandidaten** für Lösungen der Fälle:<br />
+    **Fall 1:** Positiver Fall (Betragsstriche weg):
+    $$
+      \begin{align*}
+      && x + 1 &< 4 \\
+      &\iff& x &< 3
+      \end{align*}
+    $$
+    Also Kandidatenmenge:
+    $$
+      \mathbb{L}_{1,kand} = (-\infty, 3)
+    $$
+    **Fall 2:** Negativer Fall (Betragsstriche mit -1 multipliziert):
+    $$
+      \begin{align*}
+      && -(x + 1) &< 4 \\
+      &\iff& -x - 1 &< 4 &&| +1\\
+      &\iff& -x &< 5 &&| \cdot -1\\
+      &\iff& x &> -5
+      \end{align*}
+    $$
+    Also Kandidatenmenge:
+    $$
+      \mathbb{L}_{2,kand} = (-5, \infty)
+    $$
+  </Step>
+  <Step>
+    Prüfen, ob die Kandidaten in den jeweiligen Definitionsbereichen liegen. Also die Schnittmenge beider Lösungsmengen:<br />
+    **Fall 1:**
+    $$
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1,zul} \cap \mathbb{L}_{1,kand} \\
+      &= [-1, \infty) \cap (-\infty, 3) \\
+      &= [-1, 3)
+      \end{align*}
+    $$
+    **Fall 2:**
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2,zul} \cap \mathbb{L}_{2,kand} \\
+      &= (-\infty, -1) \cap (-5, \infty) \\
+      &= (-5, -1)
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Die Gesamtlösung ergibt sich aus der Vereinigung beider Fälle:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \\
+      &= [-1, 3) \cup (-5, -1) \\
+      &= (-5, 3)
+      \end{align*}
     $$
   </Step>
 
@@ -563,37 +828,92 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 </Exercise>
 
 
-<Exercise title="Aufgabe 2 (ii): Betrag kleiner linearer Ausdruck" difficulty="medium">
+<Exercise title="Aufgabe 2 (ii)" difficulty="medium">
   <Task>
     Bestimme die Lösungsmenge:
     $$
       |2x - 1| < -x + 3
     $$
   </Task>
-
-  <Hint>
-    Rechts muss **positiv** sein, sonst kann $|2x-1|$ nicht kleiner sein.  
-    Also zunächst $-x+3 > 0 \Rightarrow x < 3$.  
-    Dann wende $-|B|<A<|B|$–Schema mit $A=2x-1$ und $B=-x+3$ an.
-  </Hint>
-
   <Step>
-    Mit $x<3$:
+    Fälle bilden für den Betrag auf der linken Seite:
+    **Fall 1:** <br />
     $$
-      -( -x+3) < 2x - 1 < -x + 3
+      2x - 1 \ge 0 \Rightarrow x \ge \tfrac{1}{2}
     $$
-    Linke Seite:
+    Somit haben wir folgende Definitionsmenge für diesen Fall:
     $$
-      x - 3 < 2x - 1 \Rightarrow -3 < x - 1 \Rightarrow x > -2
+      \mathbb{L}_{1,zul} = [\tfrac{1}{2}, \infty)
     $$
-    Rechte Seite:
+    **Fall 2:** <br />
     $$
-      2x - 1 < -x + 3 \Rightarrow 3x < 4 \Rightarrow x < \frac{4}{3}
+      2x - 1 < 0 \Rightarrow x < \tfrac{1}{2}
+    $$
+    Somit haben wir folgende Definitionsmenge für diesen Fall:
+    $$
+      \mathbb{L}_{2,zul} = (-\infty, \tfrac{1}{2})
+    $$  
+  </Step>
+  <Step>
+    Bestimmung möglicher **Kandidaten** für Lösungen der Fälle:<br />
+    **Fall 1:** Positiver Fall (Betragsstriche weg):
+    $$
+      \begin{align*}
+      && 2x - 1 &< -x + 3 \\
+      &\iff& 3x &< 4 &&| :3\\
+      &\iff& x &< \tfrac{4}{3}
+      \end{align*}
+    $$
+    Also Kandidatenmenge:
+    $$
+      \mathbb{L}_{1,kand} = (-\infty, \tfrac{4}{3})
+    $$
+    **Fall 2:** Negativer Fall (Betragsstriche mit -1 multipliziert):
+    $$
+      \begin{align*}
+      && -(2x - 1) &< -x + 3 \\
+      &\iff& -2x + 1 &< -x + 3 &&| +2x; -3\\
+      &\iff& 1 - 3 &< x \\
+      &\iff& -2 &< x \\
+      &\iff& x &> -2
+      \end{align*}
+    $$
+    Also Kandidatenmenge:
+    $$
+      \mathbb{L}_{2,kand} = (-2, \infty)
+    $$
+  </Step>
+  <Step>
+    Prüfen, ob die Kandidaten in den jeweiligen Definitionsbereichen liegen. Also die Schnittmenge beider Lösungsmengen:<br />
+    **Fall 1:**
+    $$
+      \begin{align*}
+      \mathbb{L}_{1} &= \mathbb{L}_{1,zul} \cap \mathbb{L}_{1,kand} \\
+      &= [\tfrac{1}{2}, \infty) \cap (-\infty, \tfrac{4}{3}) \\
+      &= [\tfrac{1}{2}, \tfrac{4}{3})
+      \end{align*}
+    $$
+    **Fall 2:**
+    $$
+      \begin{align*}
+      \mathbb{L}_{2} &= \mathbb{L}_{2,zul} \cap \mathbb{L}_{2,kand} \\
+      &= (-\infty, \tfrac{1}{2}) \cap (-2, \infty) \\
+      &= (-2, \tfrac{1}{2})
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Die Gesamtlösung ergibt sich aus der Vereinigung beider Fälle:
+    $$
+      \begin{align*}
+      \mathbb{L} &= \mathbb{L}_{1} \cup \mathbb{L}_{2} \\
+      &= [\tfrac{1}{2}, \tfrac{4}{3}) \cup (-2, \tfrac{1}{2}) \\
+      &= (-2, \tfrac{4}{3})
+      \end{align*}
     $$
   </Step>
 
   <Solution>
-    Gesamtschnitt (inkl. $x<3$):
     $$
       \mathbb{L} = (-2,\, \tfrac{4}{3})
     $$
@@ -603,75 +923,13 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
 <Exercise title="Aufgabe 2 (iii): Gebrochene quadratische Ungleichung" difficulty="hard">
   <Task>
-    In der Vorlage ist der Term typografisch verkürzt dargestellt. Es kommen zwei naheliegende Lesarten vor.  
-    Ich löse **beide Varianten** – du kannst die passende Version wählen:
-
-    **Variante A**:
+    Bestimme die Lösungsmenge:
     $$
       \frac{x^2 - 1}{2x + 1} < \frac{9}{16}
     $$
-
-    **Variante B**:
-    $$
-      \frac{x^2 - 1}{2x + 1} < 9
-    $$
   </Task>
-
-  <Hint>
-    Bei rationalen Ungleichungen: **auf die Vorzeichen** des Nenners achten und die **Definitionslücken** ausschließen.  
-    Bringe alles auf die linke Seite und arbeite mit einem **Vorzeichen- bzw. Intervalldiagramm**.
-  </Hint>
-
-  <Step>
-    **Variante A**:
-    $$
-      \frac{x^2 - 1}{2x + 1} - \frac{9}{16} < 0
-      \;\;\Rightarrow\;\;
-      \frac{16(x^2 - 1) - 9(2x + 1)}{16(2x + 1)} < 0
-    $$
-    Zähler:
-    $$
-      16x^2 - 16 - 18x - 9 = 16x^2 - 18x - 25
-    $$
-    Kritische Stellen: Nullstellen von $16x^2 - 18x - 25$ sowie Nennerstelle $2x+1=0 \Rightarrow x=-\tfrac12$.
-    $$
-      x = \frac{18 \pm \sqrt{(-18)^2 - 4\cdot16\cdot(-25)}}{2\cdot16}
-        = \frac{18 \pm \sqrt{324 + 1600}}{32}
-        = \frac{18 \pm \sqrt{1924}}{32}
-        = \frac{18 \pm 2\sqrt{481}}{32}
-        = \frac{9 \pm \sqrt{481}}{16}
-    $$
-    Erstelle das Vorzeichenbild auf den Intervallen
-    $(-\infty, \frac{9-\sqrt{481}}{16})$, 
-    $(\frac{9-\sqrt{481}}{16}, -\tfrac12)$, 
-    $(-\tfrac12, \frac{9+\sqrt{481}}{16})$, 
-    $(\frac{9+\sqrt{481}}{16}, \infty)$
-    und wähle die Bereiche mit **negativem** Funktionswert.
-  </Step>
-
-  <Step>
-    **Variante B**:
-    $$
-      \frac{x^2 - 1}{2x + 1} - 9 < 0
-      \;\;\Rightarrow\;\;
-      \frac{x^2 - 1 - 9(2x + 1)}{2x + 1} < 0
-      \;\;\Rightarrow\;\;
-      \frac{x^2 - 18x - 10}{2x + 1} < 0
-    $$
-    Kritische Stellen: Nullstellen von $x^2 - 18x - 10$ und $x=-\tfrac12$.
-    $$
-      x = \frac{18 \pm \sqrt{324 + 40}}{2} = \frac{18 \pm \sqrt{364}}{2}
-        = \frac{18 \pm 2\sqrt{91}}{2} = 9 \pm \sqrt{91}
-    $$
-    Intervallanalyse über
-    $(-\infty, 9-\sqrt{91})$, $(9-\sqrt{91}, -\tfrac12)$, $(-\tfrac12, 9+\sqrt{91})$, $(9+\sqrt{91}, \infty)$
-    liefert die Bereiche, in denen der Quotient **negativ** ist.
-  </Step>
-
   <Solution>
-    **Intervallmethode** liefert in beiden Varianten die Lösungen als Vereinigungen von Intervallen, abhängig von den Vorzeichenwechseln an den kritischen Stellen.  
-    Wähle die Variante, die der Originalaufgabe entspricht, und übernimm die entsprechenden Intervalle aus dem Vorzeichenbild.  
-    (Wenn du willst, passe ich die endgültigen Intervalle nach kurzer Bestätigung der korrekten Lesart direkt an.)
+    Die Art Aufgabe ist zunächst erstmal nicht klausurrelevant. 
   </Solution>
 </Exercise>
 
@@ -686,7 +944,7 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
   <Hint>
     Bringe alles auf eine Seite und fasse zu einem Bruch mit **gemeinsamem Nenner** zusammen.  
-    Achte auf die **Definitionslücken** $x \ne \pm 1$ und benutze anschließend ein **Vorzeichen-/Intervall-Diagramm**.
+    Achte auf die **Definitionslücken** $x \ne \pm 1$.
   </Hint>
 
   <Step>
@@ -708,14 +966,71 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
   <Step>
     **Kritische Punkte**: $x=0$ (Zähler), $x=\pm 1$ (Nenner).  
-    Vorzeichen über Intervalle:
-    $(-\infty,-1)$, $(-1,0)$, $(0,1)$, $(1,\infty)$.
-    - $x< -1$: Zähler $<0$, Nenner $(+)$ ⇒ Quotient $<0$ ⇒ **erfüllt**  
-    - $-1<x<0$: Zähler $<0$, Nenner $(-)$ ⇒ Quotient $>0$ ⇒ nicht erfüllt  
-    - $0<x<1$: Zähler $>0$, Nenner $(-)$ ⇒ Quotient $<0$ ⇒ **erfüllt**  
-    - $x>1$: Zähler $>0$, Nenner $(+)$ ⇒ Quotient $>0$ ⇒ nicht erfüllt
+    Vorzeichen über Intervalle:<br />
+    $(-\infty,-1)$, $(-1,0)$, $(0,1)$, $(1,\infty)$.<br />
   </Step>
-
+  <Step>
+    Prüfen jedes Intervall:<br />
+    **Intervall 1:** $(-\infty, -1) \rightarrow x < -1$:
+    $$
+      \begin{align*}
+      \text{Zähler:} &< 0 \\
+      \text{Nenner:} &> 0 \\
+      \text{Quotient:}& \frac{(-)}{(+)} < 0
+      \end{align*}
+    $$
+    Ist erfüllt. Also gehört $(-\infty, -1)$ zur Lösungsmenge.<br />
+  </Step>
+  <Step>
+    **Intervall 2:** $(-1, 0) \rightarrow -1 < x < 0$:
+    $$
+      \begin{align*}
+      \text{Zähler:} &< 0 \\
+      \text{Nenner:} &< 0 \\
+      \text{Quotient:}& \frac{(-)}{(-)} > 0
+      \end{align*}
+    $$
+    Nicht erfüllt.<br />
+  </Step>
+  <Step>
+    **Intervall 3:** $(0, 1) \rightarrow 0 < x < 1$:
+    $$
+      \begin{align*}
+      \text{Zähler:} &> 0 \\
+      \text{Nenner:} &< 0 \\
+      \text{Quotient:}& \frac{(+)}{(-)} < 0
+      \end{align*}
+    $$
+    Ist erfüllt. Also gehört $(0, 1)$ zur Lösungsmenge.<br />
+  </Step>
+  <Step>
+    **Intervall 4:** $(1, \infty) \rightarrow x > 1$:
+    $$
+      \begin{align*}
+      \text{Zähler:} &> 0 \\
+      \text{Nenner:} &> 0 \\
+      \text{Quotient:}& \frac{(+)}{(+)} > 0
+      \end{align*}
+    $$
+    Nicht erfüllt.<br />
+  </Step>
+  <Step>
+    Zusammenfassung:
+    $$
+      \begin{align*}
+      &\text{Intervall } (-\infty, -1): &\text{erfüllt} \\
+      &\text{Intervall } (-1, 0): &\text{nicht erfüllt} \\
+      &\text{Intervall } (0, 1): &\text{erfüllt} \\
+      &\text{Intervall } (1, \infty): &\text{nicht erfüllt} \\
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Somit ist die Lösungsmenge:
+    $$
+      \mathbb{L} = (-\infty, -1) \cup (0, 1)
+    $$
+  </Step>
   <Solution>
     $$
       \mathbb{L} = (-\infty,-1) \;\cup\; (0,1)
