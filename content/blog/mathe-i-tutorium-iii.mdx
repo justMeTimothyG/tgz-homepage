@@ -723,6 +723,18 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
 ## Aufgabe 2 – Ungleichungen
 
+<Callout type="info" title="Hinweise zum Umgang mit Ungleichungen">
+  Generell kann man mit Ungleichungen genau so umgehen wie mit Gleichungen.  
+  Allerdings gibt es einige Besonderheiten zu beachten:
+  - Beim **Multiplizieren oder Dividieren mit einer negativen Zahl** muss die Ungleichung umgedreht werden.  
+    Beispiel: Aus $a < b$ folgt durch Multiplikation mit $-1$ die Ungleichung $-a > -b$.
+  - Beim **Quadrieren** beider Seiten ist Vorsicht geboten, da dies keine Äquivalenzumformung ist.  
+    Es können sich zusätzliche Lösungen ergeben, die die ursprüngliche Ungleichung nicht erfüllen.  
+    Daher ist es wichtig, die Lösungen am Ende zu überprüfen.
+  - Bei **Betragsungleichungen** muss man ebenfalls Fälle bilden, ähnlich wie bei Betragsgleichungen.  
+    Dabei wird der Betrag durch zwei separate Ungleichungen ersetzt, die jeweils den positiven und negativen Fall abdecken.
+</Callout>
+
 <Exercise title="Aufgabe 2 (i): Einfache Betragsungleichung" difficulty="easy">
   <Task>
     Bestimme die Lösungsmenge:
@@ -1138,6 +1150,20 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
 ## Aufgabe 4 – Horner-Schema
 
+<Callout type="info" title="Horner-Schema">
+  Das **Horner-Schema** ist eine effiziente Methode zur Auswertung und Faktorisierung von Polynomen.  
+  Es reduziert den Rechenaufwand, indem es die Potenzen von $x$ vermeidet und stattdessen sukzessive Multiplikationen und Additionen verwendet.  
+  Es ist besonders nützlich, wenn man Nullstellen eines Polynoms finden oder das Polynom in Linearfaktoren zerlegen möchte.
+  Vorgehen: <br />
+  1. Schreibe die Koeffizienten des Polynoms in eine Zeile. Fülle fehlende Grade mit 0 auf. <br />
+  2. Wähle einen Kandidaten $c$ für eine Nullstelle. <br />
+  3. Schreibe die erste Zahl (Koeffizient des höchsten Grades) in die untere Zeile. <br />
+  4. Wenn du zur nächsten Spalte gehst, multipliziere den Wert unter dem Strich mit dem Kandidaten und übertrage das Ergebnis in die nächste Spalte in die zweite Zeile. Addiere die Zahlen übereinander. <br />
+  5. Wiederhole Schritt 4 für alle Spalten. <br />
+  6. Der letzte Wert in der unteren Zeile ist der Rest. Wenn dieser 0 ist, ist $c$ eine Nullstelle. Die anderen Werte in der unteren Zeile sind die Koeffizienten des reduzierten Polynoms. <br />
+  7. Wiederhole den Prozess mit dem reduzierten Polynom, bis das Polynom vollständig faktorisiert ist.
+</Callout>
+
 <Exercise title="Aufgabe 4: Faktorisiere mit Horner" difficulty="medium">
   <Task>
     Gegeben sei
@@ -1151,37 +1177,78 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
     Probiere kleine ganzzahlige Kandidaten ($\pm 1, \pm 2, \pm 3$).  
     Verwende für jede gefundene Nullstelle sofort das **Horner-Schema** zur Grad-Reduktion.
   </Hint>
+  <Hint>
+    **Horner-Schema**: <br />
+    Schreibe die Koeffizienten des Polynoms in eine Zeile. <br />
+    Wähle einen Kandidaten $c$ für eine Nullstelle. <br />
+    Schreibe die erste Zahl (Koeffizient des höchsten Grades) in die untere Zeile. <br />
+    Wenn du zur nächsten Spalte gehst, multipliziere den Wert unter dem Strich mit dem Kandidaten und übertrage das Ergebnis in die nächste Spalte in die zweite Zeile. Addiere die Zahlen übereinander.
+  </Hint>
 
   <Step>
-    **Rate Nullstellen**:  
-    $x=1$: $-1+6-8-6+9=0$ ⇒ $x=1$ ist Nullstelle → Faktor $(x-1)$.
+    **Rate Nullstellen**: <br />
 
-    Horner mit $x=1$ auf den Koeffizienten $(-1,\,6,\,-8,\,-6,\,9)$:
-    ergibt das reduzierte Polynom
+    Möglich wäre hier: $x=1$.<br />
+    $$
+      \begin{matrix}
+        & -1 & 6 & -8 & -6 & 9 \\
+        &   & -1 & 5 & -3 & -9 \\
+        \hline
+        &-1 & 5 & -3 & -9 & 0 \\
+      \end{matrix}
+    $$
+
+    Der Rest ist somit Null und $x=1$ ist eine Nullstelle. Die unterste Zeile des Hornerschemas mit $x=1$ ergibt das reduzierte Polynom mit den Koeffizienten $(-1,\,5,\,-3,\,-9)$. <br />
+    Korrekt notiert ist also:
     $$
       -x^3 + 5x^2 - 3x - 9.
     $$
   </Step>
 
   <Step>
-    **Nächster Kandidat** $x=3$ im kubischen Rest:
+    **Rate wieder Nullstellen**: <br />
+    Möglich wäre hier: $x=3$.<br />
     $$
-      -27 + 45 - 9 - 9 = 0 \Rightarrow x=3 \text{ ist Nullstelle} \Rightarrow (x-3) \text{ Faktor.}
+      \begin{matrix}
+        & -1 & 5 & -3 & -9 \\
+        &   & -3 & 6 & 9 \\
+        \hline
+        &-1 & 2 & 3 & 0 \\
+      \end{matrix}
     $$
-    Horner mit $x=3$ auf $(-1,\,5,\,-3,\,-9)$ liefert
+    Der Rest ist somit Null und $x=3$ ist eine Nullstelle. Die unterste Zeile des Hornerschemas mit $x=3$ ergibt das reduzierte Polynom mit den Koeffizienten $(-1,\,2,\,3)$. <br />
+    Korrekt notiert ist also:
     $$
       -x^2 + 2x + 3.
     $$
   </Step>
-
   <Step>
-    **Quadratik faktorisieren**:
+    **Rate wieder Nullstellen**: <br />
+    Möglich wäre hier: $x=3$.<br />
     $$
-      -x^2 + 2x + 3 = -\bigl(x^2 - 2x - 3\bigr) = -\,(x-3)(x+1).
+      \begin{matrix}
+        & -1 & 2 & 3 \\
+        &   & -3 & -3 \\
+        \hline
+        &-1 & -1 & 0 \\
+      \end{matrix}
     $$
-    Damit taucht $x=3$ **zweifach** auf.
+    Der Rest ist somit Null und $x=3$ ist eine Nullstelle. Die unterste Zeile des Hornerschemas mit $x=3$ ergibt das reduzierte Polynom mit den Koeffizienten $(-1,\, -1)$. <br />
+    Korrekt notiert ist also:
+    $$
+      -x - 1.
+    $$
   </Step>
-
+  <Step>
+    **Letzte Nullstelle**: <br />
+    Setze $-x - 1 = 0 \Rightarrow x = -1$.
+  </Step>
+  <Step>
+    Das Polynom wurde vollständig in Linearfaktoren zerlegt. Jede Nullstelle ist ein Faktor: <br />
+    $$
+      f(x) = -\,(x-1)\,(x-3)\,(x-3)\,(x+1).
+    $$
+  </Step>
   <Solution>
     Vollständige Faktorisierung:
     $$
@@ -1202,15 +1269,28 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
     $$
       f(x) = -x^4 + 6x^3 - 8x^2 - 6x + 9
     $$
-    diesmal explizit per **Polynomdivision** (ohne Horner).
+    diesmal explizit per **Polynomdivision**.
   </Task>
 
   <Hint>
-    Beginne mit dem bekannten Linearfaktor $(x-1)$ und dividiere Schritt für Schritt.
+    Es ist identisch mit der vorherigen Aufgabe, nur mit anderem Vorgehen. Beginne mit dem bekannten Linearfaktor $(x-1)$ und dividiere Schritt für Schritt.
   </Hint>
-
   <Step>
-    **Division durch $(x-1)$** liefert
+    **Division durch $(x-1)$**:
+    $$
+      \begin{array}{rrrrrrrrr}
+        -x^4 & +6x^3 & -8x^2 & -6x & +9 & : & (x-1) & = & -x^3+5x^2-3x-9 \\
+        -(-x^4 & +x^3) &  \\
+         & 5x^3 & -8x^2    \\
+         & -(5x^3 & -5x^2) \\
+          &       & -3x^2 & -6x \\
+          &       & -(-3x^2 & +3x) \\
+          &       &        & -9x & +9 \\
+          &       &        & -(-9x & +9) \\
+          &       &        &      & 0 \\
+      \end{array}
+    $$
+    Das reduzierte Polynom ist:
     $$
       \frac{f(x)}{x-1} = -x^3 + 5x^2 - 3x - 9.
     $$
@@ -1219,14 +1299,46 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   <Step>
     **Division durch $(x-3)$** (da $x=3$ Nullstelle):
     $$
+      \begin{array}{rrrrrrrr}
+        -x^3 & +5x^2 & -3x & -9 & : & (x-3) & = & -x^2 + 2x + 3 \\
+        -(-x^3 & +3x^2) &  \\
+         & 2x^2 & -3x    \\
+         & -(2x^2 & -6x) \\
+          &       & 3x & -9 \\
+          &       & -(3x & +9) \\
+          &       &      & 0 \\
+      \end{array}
+    $$
+    Das reduzierte Polynom ist:
+    $$
       \frac{-x^3 + 5x^2 - 3x - 9}{x-3} = -x^2 + 2x + 3.
     $$
   </Step>
 
   <Step>
-    **Quadratik**:
+    **Division durch $(x-3)$** (da $x=3$ Nullstelle):
     $$
-      -x^2 + 2x + 3 = -\,(x-3)(x+1).
+      \begin{array}{rrrrrrrrr}
+        -x^2 & +2x & +3 & : & (x-3) & = & -x - 1 \\
+        -(-x^2 & +3x) &  \\
+         & -x & +3    \\
+         & -(-x & +3) \\
+          &      & 0 \\
+      \end{array}
+    $$
+    Das reduzierte Polynom ist:
+    $$
+      \frac{-x^2 + 2x + 3}{x-3} = -x - 1.
+    $$
+  </Step>
+  <Step>
+    **Letzte Nullstelle**: <br />
+    Setze $-x - 1 = 0 \Rightarrow x = -1$.
+  </Step>
+  <Step>
+    Das Polynom wurde vollständig in Linearfaktoren zerlegt. Jede Nullstelle ist ein Faktor: <br />
+    $$
+      f(x) = -\,(x-1)\,(x-3)\,(x-3)\,(x+1).
     $$
   </Step>
 
@@ -1243,28 +1355,53 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
 
 ## Aufgabe 6 – Monotonie und Symmetrie
 
-<Exercise title="Aufgabe 6 (i): $f(x)=2x^3$" difficulty="easy">
+<Callout type="info" title="Hinweise zu Monotonie und Symmetrie">
+- **Symmetrie**: <br />
+  Prüfe, ob $f(-x) = f(x)$ (gerade Funktion, achsensymmetrisch zur $y$-Achse) oder $f(-x) = -f(x)$ (ungerade Funktion, punktsymmetrisch zum Ursprung).<br />
+- **Monotonie**: <br />
+  Bestimme die erste Ableitung $f'(x)$. <br />
+  - Wenn $f'(x) > 0$ für alle $x$ im Definitionsbereich, dann ist $f$ streng monoton steigend. <br />
+  - Wenn $f'(x) < 0$ für alle $x$ im Definitionsbereich, dann ist $f$ streng monoton fallend. <br />
+  - Wenn $f'(x)$ das Vorzeichen wechselt, dann hat $f$ lokale Extremstellen (Maxima/Minima) an den Stellen, wo $f'(x) = 0$.
+</Callout>
+
+<Exercise title="Aufgabe 6 (i)" difficulty="easy">
   <Task>
     Bestimme Monotonie- und Symmetrieeigenschaften von $f(x) = 2x^3$.
   </Task>
 
   <Step>
-    **Symmetrie**: $f(-x) = 2(-x)^3 = -2x^3 = -f(x)$ ⇒ **ungerade** Funktion ⇒ **Punktsymmetrie** zum Ursprung.
+    **Symmetrie**: <br />
+    Wir prüfen die Bedingung für ungerade Funktionen:<br />
+    $$
+      \begin{align*}
+      f(-x) &= 2(-x)^3 \\
+            &= 2(-x^3) \\
+            &= -2x^3 \\
+            &= -f(x)
+      \end{align*}
+    $$
+    Somit gilt:<br />
+    $f(-x) = -f(x)$ ⇒ **ungerade** Funktion ⇒ **Punktsymmetrie** zum Ursprung.
   </Step>
 
   <Step>
-    **Monotonie**: $f'(x) = 6x^2 \ge 0$, mit $f'(x)=0$ nur bei $x=0$.  
-    Trotz horizontaler Tangente bei $x=0$ ist $f$ auf ganz $\mathbb{R}$ **streng monoton steigend**.
+    **Monotonie**: <br />
+    Ableitung berechnen:
+    $$
+      f'(x) = \frac{d}{dx}(2x^3) = 6x^2.
+    $$
+    $x^2$ ist die Parabel und immer $\ge 0$. Somit ist $f(x)$ **streng monoton steigend** auf $\mathbb{R}$.
   </Step>
 
   <Solution>
-    **Symmetrie**: ungerade (punktsymmetrisch zum Ursprung).  
-    **Monotonie**: streng wachsend auf $\mathbb{R}$.
+    **Symmetrie**: ungerade (punktsymmetrisch zum Ursprung).
+    **Monotonie**: streng monoton steigend.
   </Solution>
 </Exercise>
 
 
-<Exercise title="Aufgabe 6 (ii): $f(x)=\tfrac{1}{2}\sqrt{x^2+1}$" difficulty="easy">
+<Exercise title="Aufgabe 6 (ii)" difficulty="easy">
   <Task>
     Bestimme Monotonie- und Symmetrieeigenschaften von 
     $$
@@ -1273,14 +1410,28 @@ Jede Teilaufgabe behandelt einen eigenen Typ von Gleichung mit unterschiedlicher
   </Task>
 
   <Step>
-    **Symmetrie**: $f(-x)=\tfrac{1}{2}\sqrt{(-x)^2+1}=\tfrac{1}{2}\sqrt{x^2+1}=f(x)$ ⇒ **gerade** Funktion ⇒ **Achsensymmetrie** zur $y$-Achse.
+    **Symmetrie**:
+    $$
+      \begin{align*}
+      f(-x) &= \frac{1}{2}\sqrt{(-x)^2 + 1} \\
+            &= \frac{1}{2}\sqrt{x^2 + 1} \\
+            &= f(x)
+      \end{align*}
+    $$
+    Somit gilt:<br />
+    $f(-x) = f(x)$ ⇒ **gerade** Funktion ⇒ **Achsensymmetrie** zur $y$-Achse.
   </Step>
 
   <Step>
     **Monotonie**:
-    - Für $x \ge 0$ ist $\sqrt{x^2+1}$ wachsend ⇒ $f$ **wachsend** auf $[0,\infty)$.  
-    - Für $x \le 0$ ist $\sqrt{x^2+1}$ fallend in Richtung $x\to 0^-$ ⇒ $f$ **fallend** auf $(-\infty,0]$.  
-    Minimum bei $x=0$: $f(0)=\tfrac{1}{2}$.
+    Ableitung berechnen:
+    $$
+      f'(x) = \frac{1}{2} \cdot \frac{1}{2\sqrt{x^2 + 1}} \cdot 2x = \frac{x}{2\sqrt{x^2 + 1}}.
+    $$
+    - Für $x < 0$: $f'(x) = \frac{(-)}{(+)} = f'(x) < 0$ ⇒ fallend auf $(-\infty, 0)$.<br />
+    - Für $x = 0$: $f'(0) = 0$ ⇒ mögliche Extremstelle.<br />
+    - Für $x > 0$: $f'(x) = \frac{(+)}{(+)} = f'(x) > 0$ ⇒ wachsend auf $(0, \infty)$.<br />
+    Somit hat $f$ ein **Minimum** bei $x=0$ mit $f(0) = \tfrac{1}{2}$.
   </Step>
 
   <Solution>
