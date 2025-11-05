@@ -1,0 +1,785 @@
+---
+title: "Mathe I – Tutorium 4 (Interaktiv)"
+description: "Interaktive, ausführliche Lösungen mit Schritt-für-Schritt-Umformungen in Align-Blöcken. Themen: Definitionsbereich mit Wurzeln, Produkt-/Scheitelpunktsform, gebrochen-rationale Funktionen, Grad↔Bogenmaß, Termumformungen, Einheiten, Trigonometrie, Standardwerte sin/cos."
+---
+
+## Definitionsbereich bei Wurzel-Ausdrücken
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li>**Ziel:** Finde alle $x$, für die der Ausdruck unter der Wurzel (der **Radikand**) *nicht negativ* ist.</li>
+    <li>**Regel:** Für reelle Zahlen gilt: $\sqrt{\;\cdot\;}$ ist nur definiert, wenn der Radikand *nicht negativ* ist.</li>
+    <li>**Vorgehen:** Setze den Radikanden *nicht negativ*, löse die entstehende Ungleichung (oft über Beträge oder Fallunterscheidung), und formuliere den Definitionsbereich.</li>
+    <li>**Typische Fehler:** Aus $a^2 \ge b^2$ folgt *nicht* $a \ge \pm b$. Korrekt ist der Weg über den Betrag: $a^2 \ge b^2 \iff |a| \ge |b|$.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 1">
+  <Task>
+    Bestimme den maximalen Definitionsbereich von
+    $f(x) = \sqrt{(2x-4)^2 - 1}$.
+  </Task>
+
+  <Hint>
+      Setze den Radikanden $\ge 0$.
+  </Hint>
+  <Hint>
+      Nutze $ (2x-4)^2 \ge 1 \iff |2x-4| \ge 1$ und löse die Betragsungleichung.
+  </Hint>
+
+  <Step>
+    Radikand betrachten und Betragsungleichung aufstellen: <br /> 
+    Radikand $\ge 0$: <br />
+    $$
+    \begin{align*}
+    &\Longleftrightarrow&& (2x-4)^2 - 1 \;\ge\; 0 \\
+    & \Longleftrightarrow&& (2x-4)^2 \;\ge\; 1 && | \text{(da } y^2\ge 1 \iff |y|\ge 1\text{)} \\
+    & \Longleftrightarrow&& |\,2x-4\,| \;\ge\; 1 && \\
+    \end{align*}
+    $$
+    Betragsungleichung lösen: $|\,2x-4\,| \ge 1$ <br />
+    Erster Fall: $2x-4 \ge 1$ <br />
+    $$
+    \begin{align*}
+    & \Longleftrightarrow&& 2x-4 \ge 1 &&| +4 :2\\
+    & \Longleftrightarrow&& x \ge \tfrac{5}{2}\\
+    \end{align*}
+    $$
+    Zweiter Fall: $-(2x-4) \ge 1 \iff 2x-4 \le -1$ <br />
+    $$
+    \begin{align*}
+    & \Longleftrightarrow&& 2x-4 \le -1 &&| +4 :2\\
+    & \Longleftrightarrow&& x \le \tfrac{3}{2}\\ 
+    \end{align*}
+    $$
+    Diese beiden Ungleichungen lassen sich als Lösungsmenge zusammenfassen: <br />
+    $$
+    \begin{align*}
+    \mathcal{D} &= (-\infty,\tfrac{3}{2}] \cup [\tfrac{5}{2},\infty). 
+    \end{align*}
+    $$
+  </Step>
+
+  <Solution>
+    $$
+    \begin{align*}
+\mathcal{D}_f \;=\; (-\infty,\tfrac{3}{2}] \,\cup\, [\tfrac{5}{2},\infty).
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+---
+
+## Quadratische Funktionen (Produktform & Scheitelpunktsform)
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li><b>Produktform:</b> Faktorisiere $f(x)=ax^2+bx+c$ zu $a(x-x_1)(x-x_2)$ über Nullstellen (raten, p‑q‑Formel, Mitternachtsformel).</li>
+    <li><b>Scheitelpunktsform:</b> Ergänze quadratisch: $f(x)=a(x-h)^2+k$; der Scheitel ist $S=(h,k)$.</li>
+    <li><b>Kontrolle:</b> Ausmultiplizieren muss wieder das Start‑Polynom ergeben.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 2 (i)">
+  <Task>
+    Bringe $f(x)=x^2+6x+5$ in Produktform und Scheitelpunktsform.
+  </Task>
+
+  <Hint>
+    Schau die den oberen Hinweis an. hier eignet sich die PQ Formel für die Nullstellen.
+  </Hint>
+
+  <Step>
+    Produktform bestimmen durch bestimmen der Nullstellen: <br />
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{6}{2} \pm \sqrt{\left(\frac{6}{2}\right)^2 - 5} \\
+    &= -3 \pm \sqrt{9 - 5} \\
+    &= -3 \pm 2 \\
+    \end{align*}
+    $$
+    Somit sind unsere Nullstellen $x_1 = -1$ und $x_2 = -5$. <br />
+
+    Die Produktform sieht dann wie folgt aus: <br />
+    $$
+    f(x)= (x+1)(x+5).
+    $$
+  </Step>
+  <Step>
+    Scheitelpunktsform bestimmen durch quadratisches Ergänzen: <br />
+    Hier betrachten wir zunächst den Ausdruck $x^2 + 6x$ und ignorieren die $+5$ für den Moment. <br />
+    Die Zweite Binomische Formel lautet: $(a+b)^2 = a^2 + 2ab + b^2$. <br />
+    Somit wissen wir das $6x$ unser $2ab$ ist. und somit unser $b = 3$ ist. <br />
+    Nun können wir quadratisch ergänzen: <br />
+    $$
+    \begin{align*}
+x^2 + 6x + 5 &= (x^2 + 6x + 9) -9 + 5\\
+&= (x + 3)^2 - 4
+    \end{align*}
+    $$
+    Somit ist die Scheitelpunktsform: <br />
+    $$
+    f(x) = (x + 3)^2 - 4
+    $$
+    und der Scheitelpunkt $S = (-3, -4)$.
+  </Step>
+
+  <Solution>
+    <List>
+      <li>Produktform: $(x+1)(x+5)$</li>
+      <li>Scheitelpunktsform: $(x+3)^2-4$ mit $S=(-3,-4)$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 2 (ii)">
+  <Task>
+    Bringe $f(x)=-x^2+3x+4$ in Produktform und Scheitelpunktsform.
+  </Task>
+
+  <Hint>
+    Schau dir den Hinweis nochmal genau an: Ziehe den Faktor -1 vor die Klammer. Die Quadratische Funktion sollte wenn möglich alleine in Normalform stehen.
+  </Hint>
+
+  <Step>
+    Funktion zunächst erstmal so ausklammern, dass sie in Normalform vorliegt: <br />
+    $$
+    \begin{align*}
+    f(x) &= -x^2 + 3x + 4 \\
+    &= -\big(x^2 - 3x - 4\big) \\
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Produktform bestimmen durch bestimmen der Nullstellen der Quadratischen Funktion: <br />
+    $$
+    \begin{align*}
+    x_{1,2} &= -\frac{-3}{2} \pm \sqrt{\left(\frac{-3}{2}\right)^2 - (-4)} \\
+    &= \frac{3}{2} \pm \sqrt{\frac{9}{4} + 4} \\
+    &= \frac{3}{2} \pm \sqrt{\frac{9}{4} + \frac{16}{4}} \\
+    &= \frac{3}{2} \pm \sqrt{\frac{25}{4}} \\
+    &= \frac{3}{2} \pm \frac{5}{2} \\
+    \end{align*}
+    $$
+    Somit sind unsere Nullstellen $x_1 = 4$ und $x_2 = -1$. <br />
+    Die Produktform sieht dann wie folgt aus: <br />
+    $$
+    f(x)= -\,(x-4)(x+1).
+    $$
+  </Step>
+  <Step>
+    Scheitelpunktsform bestimmen durch quadratisches Ergänzen: <br />
+    Hier betrachten wir wieder die Quadratische Funktion $x^2 - 3x$ und ignorieren das vorangestellte $-$ und der Konstante $4$ für den Moment. <br />
+    Wir ergänzen quadratisch: $-3 = -2b$ somit ist $b = \frac{3}{2}$. <br />
+    $$
+    \begin{align*}
+    -(x^2 - 3x + 4) &= -\big(x^2 - 3x + \left(\frac{3}{2}\right)^2 - \left(\frac{3}{2}\right)^2 - 4\big) \\
+    &= -\Big[\big(x - \tfrac{3}{2}\big)^2 - \big(\tfrac{3}{2}\big)^2 - 4\Big] \\
+    &= -\big(x - \tfrac{3}{2}\big)^2 + \tfrac{9}{4} + 4 \\
+    &= -\big(x - \tfrac{3}{2}\big)^2 + \tfrac{25}{4} \\
+    \end{align*}
+    $$
+    Somit ist die Scheitelpunktsform: <br />
+    $$
+    f(x) = -\,(x-\tfrac{3}{2})^2 + \tfrac{25}{4}
+    $$
+    und der Scheitelpunkt $S = \left(\tfrac{3}{2}, \tfrac{25}{4}\right)$.
+  </Step>
+
+  <Solution>
+    <List>
+      <li>Produktform: $-\,(x-4)(x+1)$</li>
+      <li>Scheitelpunktsform: $-\,(x-\tfrac{3}{2})^2 + \tfrac{25}{4}$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Gebrochen‑rationale Funktionen (Faktorisieren, Lücken, Pole, Asymptoten)
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li>**Faktorisieren:** Zähler und Nenner getrennt (Horner, p‑q‑Formel, Gruppieren).</li>
+    <li>**Definitionsbereich:** Alle reellen $x$, für die der Nenner $\neq 0$ ist.</li>
+    <li>**Hebbare Lücke:** Gemeinsamer Faktor in Zähler und Nenner (nach Kürzen bleibt eine „Lochstelle“).</li>
+    <li>**Polstelle:** Nenner $=0$ nach dem Kürzen (nicht aufgehoben) → Singulärität.</li>
+    <li>**Asymptoten:** Gradvergleich oder Polynomdivision (horizontale/schiefe Asymptote).</li>
+  </List>
+</Callout>
+<Callout type="warning" title="Sehr wichtig und Klausurrelevant!" />
+
+<Exercise title="Aufgabe 3 (1)">
+  <Task>
+    Untersuche
+    $$
+      f(x)=\frac{2x^3-x^2-2x+1}{-x^4+6x^3-8x^2-6x+9}
+    $$
+    bezüglich Faktorisierung, Definitionsbereich, hebbarer Lücken, Nullstellen, Polstellen und Verhalten für $|x|\to\infty$.
+  </Task>
+
+  <Hint>
+    <List>
+      <li>Suche leichte Nullstellen ($\pm1,\pm\frac12,\pm3\ldots$).</li>
+      <li>Prüfe gemeinsame Faktoren und kürze.</li>
+      <li>$\deg$ Zähler $=3$, $\deg$ Nenner $=4$ → $f(x)\to 0$ für $|x|\to\infty$.</li>
+    </List>
+  </Hint>
+
+  <Step>
+    $$
+    \begin{align*}
+    \text{Zähler: }2x^3-x^2-2x+1
+    &= (2x^3-2x) + (-x^2+1) \\
+    &= 2x(x^2-1) - (x^2-1) \\
+    &= (x^2-1)\,(2x-1) \\
+    &= (x-1)(x+1)\,(2x-1).
+    \end{align*}
+    $$
+
+    $$
+    \begin{align*}
+    \text{Nenner: }-x^4+6x^3-8x^2-6x+9
+    &= -\big(x^4-6x^3+8x^2+6x-9\big) \\
+    &\stackrel{\text{Proberechnung}}{=} -\,(x-1)(x+1)(x-3)^2.
+    \end{align*}
+    $$
+
+    $$
+    \begin{align*}
+    f(x)
+    &= \frac{(x-1)(x+1)(2x-1)}{-\,(x-1)(x+1)(x-3)^2} \\
+    &= -\,\frac{2x-1}{(x-3)^2} \quad \text{für } x\neq -1,1,3.
+    \end{align*}
+    $$
+  </Step>
+
+  <Solution>
+    <List>
+      <li>**Definitionsbereich:** $\mathcal{D}=\mathbb{R}\setminus\{-1,1,3\}$.</li>
+      <li>**Hebbare Lücken:** bei $x=\pm1$ (gemeinsame Faktoren wurden gekürzt).</li>
+      <li>**Polstelle:** bei $x=3$ (Doppelpol, da $(x-3)^2$ im Nenner verbleibt).</li>
+      <li>**Nullstellen:** $2x-1=0 \Rightarrow x=\tfrac12$ (liegt im Definitionsbereich).</li>
+      <li>**Verhalten für $|x|\to\infty$:** $\deg$ Zähler $<\deg$ Nenner, daher $f(x)\to 0$.</li>
+    </List>
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3 (2)">
+  <Task>
+    Untersuche
+    $$
+      g(x)=\frac{3x^3-9x^2-3x+9}{2x^2+8x+6}
+    $$
+    wie in Aufgabe 3 (1) und bestimme zusätzlich die schiefe Asymptote.
+  </Task>
+
+  <Hint>
+    <List>
+      <li>Faktorisieren, kürzen, dann Polynomdivision (weil $\deg$ Zähler $>\deg$ Nenner).</li>
+    </List>
+  </Hint>
+
+  <Step>
+    $$
+    \begin{align*}
+    \text{Zähler: }3x^3-9x^2-3x+9
+    &= 3(x^3-3x^2 - x + 3) \\
+    &= 3\big[(x^3-3x^2) + (-x+3)\big] \\
+    &= 3\big[x^2(x-3) - 1(x-3)\big] \\
+    &= 3(x-3)(x^2-1) \\
+    &= 3(x-3)(x-1)(x+1).
+    \end{align*}
+    $$
+
+    $$
+    \begin{align*}
+    \text{Nenner: }2x^2+8x+6
+    &= 2(x^2+4x+3) \\
+    &= 2(x+1)(x+3).
+    \end{align*}
+    $$
+
+    $$
+    \begin{align*}
+    g(x)
+    &= \frac{3(x-3)(x-1)(x+1)}{2(x+1)(x+3)} \\
+    &= \frac{3(x-3)(x-1)}{2(x+3)} \quad \text{für } x\neq -1,-3.
+    \end{align*}
+    $$
+
+    Polynomdivision (schiefe Asymptote): <br />
+    $$
+    \begin{align*}
+\frac{3(x-3)(x-1)}{2(x+3)}
+= \frac{3(x^2-4x+3)}{2(x+3)}
+= \frac{3}{2}\cdot\frac{x^2-4x+3}{x+3}.
+    \end{align*}
+    $$
+
+    $$
+    \begin{align*}
+    \frac{x^2-4x+3}{x+3}
+    &= x-7 + \frac{24}{x+3} \\
+    \Rightarrow\quad g(x)
+    &= \frac{3}{2}\left(x-7 + \frac{24}{x+3}\right)
+    = \frac{3}{2}x - \frac{21}{2} + \frac{36}{x+3}.
+    \end{align*}
+    $$
+
+Schiefe Asymptote: $y=\dfrac{3}{2}x - \dfrac{21}{2}$.
+  </Step>
+
+  <Solution>
+    <List>
+      <li><b>Definitionsbereich:</b> $\mathbb{R}\setminus\{-1,-3\}$</li>
+      <li><b>Hebbare Lücke:</b> bei $x=-1$ (Faktor gekürzt)</li>
+      <li><b>Polstelle:</b> bei $x=-3$</li>
+      <li><b>Nullstellen:</b> $x=1,\,3$</li>
+      <li><b>Schiefe Asymptote:</b> $y=\dfrac{3}{2}x - \dfrac{21}{2}$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Grad ↔ Bogenmaß
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li><b>Grundlage:</b> Eine ganze Umdrehung entspricht $360^\circ = 2\pi$ (Bogenmaß).</li>
+    <li><b>Umrechnung:</b> $\alpha_{\text{rad}} = \alpha_{\text{deg}}\cdot \dfrac{2\pi}{360^\circ}=\alpha_{\text{deg}}\cdot \dfrac{\pi}{180^\circ}$ und umgekehrt.</li>
+    <li><b>Heuristik:</b> Viertelkreis $90^\circ=\frac{\pi}{2}$, Halbkreis $180^\circ=\pi$, Dreiviertel $270^\circ=\frac{3\pi}{2}$.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 4">
+  <Task>
+    Rechne um: 
+    <NumberedList variant="lower-alpha">
+      <li>$120^\circ$ in Bogenmaß</li>
+      <li>$270^\circ$ in Bogenmaß</li>
+      <li>$\tfrac{11\pi}{2}$ in Grad</li>
+      <li>$\tfrac{5}{6}\pi$ in Grad</li>
+    </NumberedList>
+  </Task>
+  <Step>
+    **Teilaufgabe (a):** <br />
+    $$
+    \begin{align*}
+    120^\circ \cdot \frac{\pi}{180^\circ} &= \frac{120\pi}{180} \\
+    &= \frac{2\pi}{3}.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (b):** <br />
+    $$
+    \begin{align*}
+    270^\circ \cdot \frac{\pi}{180^\circ} &= \frac{270\pi}{180} \\
+    &= \frac{3\pi}{2}.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (c):** <br />
+    $$
+    \begin{align*}
+    \tfrac{11\pi}{2} \cdot \frac{180^\circ}{\pi} &= 11\cdot \frac{180^\circ}{2} \\
+    &= 990^\circ.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (d):** <br />
+    $$
+    \begin{align*}
+    \tfrac{5}{6}\pi \cdot \frac{180^\circ}{\pi} &= \tfrac{5}{6}\cdot 180^\circ \\
+    &= 150^\circ.
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    <List>
+      <li>$120^\circ \mapsto \tfrac{2\pi}{3}$</li>
+      <li>$270^\circ \mapsto \tfrac{3\pi}{2}$</li>
+      <li>$\tfrac{11\pi}{2} \mapsto 990^\circ$</li>
+      <li>$\tfrac{5}{6}\pi \mapsto 150^\circ$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Termumformungen (richtig/falsch) mit Begründung
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li>Prüfe Regeln: Wurzel- und Potenzgesetze, Bruchregeln, Betragseigenschaften.</li>
+    <li>Gegenbeispiel‑Strategie: Wenn unsicher, setze einfache Zahlen ein (z. B. $a=1,b=4$).</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 5">
+  <Task>
+    Beurteile und begründe kurz:
+    <NumberedList variant="roman">
+      <li>$\sqrt{4+b}=2+\sqrt{b}$</li>
+      <li>$\sqrt{9b}=3\sqrt{b}$</li>
+      <li>$(4a+16)^2 = 16(a+4)^2$</li>
+      <li>$\frac{1}{a}+\frac{1}{b}=\frac{1}{a+b}$</li>
+      <li>$\frac{1}{3}+\frac{1}{2}=\frac{1}{5}$</li>
+      <li>$(x+y)^{-1}=x^{-1}+y^{-1}$</li>
+      <li>$-2x+6=8 \Longleftrightarrow x+3=-4$</li>
+      <li>$4x^2+12xy+9y^2=(2x+3y)^2$</li>
+      <li>$|\,2x+16\,|=2|x+8|$</li>
+      <li>$|\,-4a+8\,|= -4|\,4a-8\,|$</li>
+    </NumberedList>
+  </Task>
+
+  <Step>
+    **Teilaufgabe (a):** <br />
+    $$
+    \begin{align*}
+    \sqrt{4+b}&=2+\sqrt{b} && | \text{(im Allgemeinen falsch)}\\
+    \end{align*}
+    $$
+    Begründung: Für $b=5$: <br />
+    $$
+    \sqrt{4+5}=2+\sqrt{5} \quad \text{(falsch, da } \sqrt{9}=3 \text{ und } 2+\sqrt{5} \text{ nicht gleich sind)}.
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (b):** <br />
+    $$
+    \begin{align*}
+    \sqrt{9b}&=3\sqrt{b} && | \text{(gilt für } b\ge 0\text{)}\\
+    &= \sqrt{9}\sqrt{b}\\
+    &= 3\sqrt{b}.
+    \end{align*}
+    $$
+    Begründung: Für $b=5$: <br />
+    $$
+    \sqrt{9\cdot 5}=3\sqrt{5} \quad \text{(richtig, da } \sqrt{45}=3\sqrt{5}).
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (c):** <br />
+    $$
+    \begin{align*}
+    (4a+16)^2 &= \big(4(a+4)\big)^2 && | \text{(richtig)}\\
+    &= 16(a+4)^2.
+    \end{align*}
+    $$
+    Begründung: Ausmultiplizieren ergibt wieder den Ausgangsausdruck.
+  </Step>
+  <Step>
+    **Teilaufgabe (d):** <br />
+    $$
+    \begin{align*}
+    \frac{1}{a}+\frac{1}{b}&=\frac{a+b}{ab} && | \text{(falsch, außer Spezialfällen)}\\
+    &\neq \frac{1}{a+b}.
+    \end{align*}
+    $$
+    Begründung: Für $a=1$, $b=1$: <br />
+    $$
+    \frac{1}{1}+\frac{1}{1}=\frac{2}{1} \quad \text{(falsch, da } 2 \neq 1).
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (e):** <br />
+    $$
+    \begin{align*}
+    \frac{1}{3}+\frac{1}{2}&=\frac{5}{6} && | \text{(falsch)}\\
+    &\neq \frac{1}{5}.
+    \end{align*}
+    $$
+    Begründung: $\frac{1}{3}+\frac{1}{2}=\frac{5}{6}$, aber $\frac{5}{6}\neq \frac{1}{5}$.
+  </Step>
+  <Step>
+    **Teilaufgabe (f):** <br />
+    $$
+    \begin{align*}
+    (x+y)^{-1}&=\frac{1}{x+y} && | \text{(falsch)}\\
+    &\neq x^{-1}+y^{-1}.
+    \end{align*}
+    $$
+    Begründung: Für $x=1$, $y=1$: <br />
+    $$
+    (1+1)^{-1}=\frac{1}{2} \quad \text{(falsch, da } 1^{-1}+1^{-1}=2 \neq \frac{1}{2}).
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (g):** <br />
+    $$
+    \begin{align*}
+    -2x+6&=8 && | \\
+    \Longleftrightarrow\quad -2x&=2 && | -6\\
+    \Longleftrightarrow\quad x&=-1.\\
+    \end{align*}
+    $$
+    Begründung: Die Aussage $x+3=-4$ wäre $x=-7$ (falsch).
+  </Step>
+  <Step>
+    **Teilaufgabe (h):** <br />
+    $$
+    \begin{align*}
+    (2x+3y)^2&=4x^2+12xy+9y^2 && | \text{(richtig; binomische Formel)}.\\
+    \end{align*}
+    $$
+    Begründung: Ausmultiplizieren ergibt wieder den Ausgangsausdruck.
+  </Step>
+  <Step>
+    **Teilaufgabe (i):** <br />
+    $$
+    \begin{align*}
+    |\,2x+16\,|&=|2||x+8| && | \text{(richtig; Faktorregel für Beträge)}.\\
+    &=2|x+8|.
+    \end{align*}
+    $$
+    Begründung: Für $x=-10$: <br />
+    $$
+    |\,2\cdot(-10)+16\,|=| -20 + 16 | = | -4 | = 4 \quad \text{und} \quad 2| -10 + 8 | = 2| -2 | = 4.
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (j):** <br />
+    $$
+    \begin{align*}
+    |\,-4a+8\,|&=|\,4(-a+2)\,| && | \\
+    &=4|\,a-2\,| && | \\
+    &\neq -4|\,4a-8\,| && | \text{(links $\ge 0$, rechts $\le 0$)}.\\
+    \end{align*}
+    $$
+    Begründung: Für $a=0$: <br />
+    $$
+    |\,-4\cdot0+8\,|=|8|=8 \quad \text{und} \quad -4|\,4\cdot0-8\,|=-4| -8 | = -32.
+    $$
+  </Step>
+  <Solution>
+    <List>
+      <li>(a) falsch</li>
+      <li>(b) richtig (für $b\ge 0$)</li>
+      <li>(c) richtig</li>
+      <li>(d) falsch</li>
+      <li>(e) falsch</li>
+      <li>(f) falsch</li>
+      <li>(g) falsch (korrekt ist $x=-1$)</li>
+      <li>(h) richtig</li>
+      <li>(i) richtig</li>
+      <li>(j) falsch</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Einheitenrechnen
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li><b>Präfixe:</b> kilo $=10^3$, Mega $=10^6$, centi $=10^{-2}$, etc.</li>
+    <li><b>Definitionen:</b> $1\,\mathrm{bar}=10^5\,\mathrm{Pa}=10\,\mathrm{N/cm^2}$; $1\,\mathrm{L}=1\,\mathrm{dm^3}$.</li>
+    <li><b>Strategie:</b> Schrittweise in Basiseinheiten umrechnen, dann ggf. wieder zusammensetzen.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 6">
+  <Task>
+    Rechne um: 
+    <NumberedList variant="lower-alpha">
+      <li>$1\,\mathrm{km}$ in m</li>
+      <li>$21\,\mathrm{MPa}$ in $\mathrm{N/m^2}$ und bar</li>
+      <li>$70\,\mathrm{km/h}$ in m/s</li>
+      <li>$1\,\mathrm{m^3}$ in $\mathrm{dm^3}$ und L</li>
+      <li>$20^\circ\mathrm{C}$ in K</li>
+      <li>$1\,\mathrm{Ws}$ in kWh</li>
+      <li>$70{,}3\,\mathrm{ha}$ in $\mathrm{km^2}$</li>
+    </NumberedList>
+  </Task>
+
+  <Step>
+    **Teilaufgabe (a):** <br />
+    $$
+    \begin{align*}
+    1 km &= 1 \cdot 10^3 m \\
+    &= 1000 m
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (b):** <br />
+    $$
+    \begin{align*}
+    21 MPa &= 21 \cdot 10^6 N/m^2 \\
+    &= 2{,}1 \cdot 10^7 N/m^2 \\
+    &= 210 bar
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (c):** <br />
+    $$
+    \begin{align*}
+    70 km/h &= \frac{70 \cdot 1000 m}{3600 s} \\
+    &\approx 19{,}44 m/s
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (d):** <br />
+    $$
+    \begin{align*}
+    1 m^3 &= 1000 dm^3 \\
+    &= 1000 L
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (e):** <br />
+    $$
+    \begin{align*}
+    20^\circ\mathrm{C} &= 20 + 273{,}15 = 293{,}15\,\mathrm{K}.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (f):** <br />
+    $$
+    \begin{align*}
+    1\,\mathrm{Ws} &= \frac{1}{3600}\,\mathrm{Wh}=\frac{1}{3{,}6\cdot 10^6}\,\mathrm{kWh}\approx 2{,}78\cdot 10^{-7}\,\mathrm{kWh}.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    **Teilaufgabe (g):** <br />
+    $$
+    \begin{align*}
+    1\,\mathrm{ha} &= 10^4\,\mathrm{m^2}=10^{-2}\,\mathrm{km^2} \\
+    \Rightarrow\quad 70{,}3\,\mathrm{ha} &= 0{,}703\,\mathrm{km^2}.
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+  </Step>
+  <Solution>
+    <List>
+      <li>(i) $1000\,\mathrm{m}$</li>
+      <li>(ii) $2{,}1\cdot 10^7\,\mathrm{N/m^2}=210\,\mathrm{bar}$</li>
+      <li>(iii) $\approx 19{,}44\,\mathrm{m/s}$</li>
+      <li>(iv) $1000\,\mathrm{dm^3}=1000\,\mathrm{L}$</li>
+      <li>(v) $293{,}15\,\mathrm{K}$</li>
+      <li>(vi) $\approx 2{,}78\cdot 10^{-7}\,\mathrm{kWh}$</li>
+      <li>(vii) $0{,}703\,\mathrm{km^2}$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Trigonometrie: Sinus & Tangens in Anwendungen
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li><b>Sinus:</b> $\sin(\alpha)=\frac{\text{Gegenkathete}}{\text{Hypotenuse}}\Rightarrow$ Höhe $h=c\sin\alpha$.</li>
+    <li><b>Tangens:</b> $\tan(\alpha)=\frac{\text{Gegenkathete}}{\text{Ankathete}}=\frac{dy}{dx}\Rightarrow$ Steigung in $\%$ ist $\tan(\alpha)\cdot 100\%$.</li>
+    <li><b>Winkel aus Steigung:</b> $\alpha=\arctan(m)$ bei Steigung $m=f'(x)$.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 7 (1)">
+  <Task>Gegeben $\alpha=30^\circ$ und Hypotenuse $c$. Bestimme die Höhe $h(c)$.</Task>
+  <Step>
+    $$
+    \begin{align*}
+\sin(30^\circ) &= \frac{h}{c} \;\Longrightarrow\; h = c\cdot \sin(30^\circ) = \frac{1}{2}c.
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    <List>
+      <li>$h(c)=\dfrac{c}{2}$</li>
+    </List>
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7 (2)">
+  <Task>Eine Straße hat Neigungswinkel $8^\circ$. Wie groß ist die Steigung in Prozent?</Task>
+  <Step>
+    $$
+    \begin{align*}
+\text{Steigung} &= \tan(8^\circ)\cdot 100\% \approx 0{,}1405\cdot 100\% \approx 14{,}05\%.
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    <List>
+      <li>Die Straßensteigung beträgt $\approx 14{,}05\%$.</li>
+    </List>
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7 (3)">
+  <Task>
+    Gegeben
+    $$
+      f(x)=\tfrac{13}{240}x^5-\tfrac{17}{24}x^4+\tfrac{157}{48}x^3-\tfrac{151}{24}x^2+\tfrac{187}{40}x.
+    $$
+    Bestimme $f'(x)$ und erkläre, wie man aus $f'(x)$ die Steilheit $\alpha(x)$ in Grad berechnet.
+  </Task>
+
+  <Step>
+    $$
+    \begin{align*}
+f'(x) &= \tfrac{13}{48}x^4-\tfrac{17}{6}x^3+\tfrac{157}{16}x^2-\tfrac{151}{12}x+\tfrac{187}{40}.\\[6pt]
+\alpha(x) &= \arctan\!\big(f'(x)\big)\;\; \text{(in Radiant)}\\
+\alpha_{\text{deg}}(x) &= \arctan\!\big(f'(x)\big)\cdot \frac{180^\circ}{\pi}.
+    \end{align*}
+    $$
+  </Step>
+
+  <Solution>
+    <List>
+      <li>Ableitung wie oben.</li>
+      <li>Winkelverlauf über $\alpha_{\text{deg}}(x)=\arctan(f'(x))\cdot \dfrac{180^\circ}{\pi}$.</li>
+    </List>
+  </Solution>
+</Exercise>
+
+---
+
+## Standardwerte von $\sin$ und $\cos$
+
+<Callout type="info" title="Einführung & Vorgehen">
+  <List>
+    <li>Präge dir für $\alpha=0^\circ,30^\circ,45^\circ,60^\circ,90^\circ,\dots$ die Werte ein.</li>
+    <li>Merkschema: Für $\sin$ die Folge $\frac{\sqrt{k}}{2}$ mit $k=0,1,2,3,4$ (aufsteigend), für $\cos$ die gleiche Folge (absteigend).</li>
+    <li>Vorzeichenwechsel in den Quadranten beachten.</li>
+  </List>
+</Callout>
+
+<Exercise title="Aufgabe 8">
+  <Task>Vervollständige die Standardwerte-Tabelle.</Task>
+
+  <Solution>
+<Table lines="rows">
+  <thead>
+    <tr>
+      <th>$\alpha_{\text{deg}}$</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th><th>120°</th><th>135°</th><th>150°</th><th>180°</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$\alpha_{\text{rad}}$</td><td>0</td><td>$\tfrac{\pi}{6}$</td><td>$\tfrac{\pi}{4}$</td><td>$\tfrac{\pi}{3}$</td><td>$\tfrac{\pi}{2}$</td><td>$\tfrac{2\pi}{3}$</td><td>$\tfrac{3\pi}{4}$</td><td>$\tfrac{5\pi}{6}$</td><td>$\pi$</td>
+    </tr>
+    <tr>
+      <td>$\sin$</td><td>0</td><td>$\tfrac{1}{2}$</td><td>$\tfrac{\sqrt{2}}{2}$</td><td>$\tfrac{\sqrt{3}}{2}$</td><td>1</td><td>$\tfrac{\sqrt{3}}{2}$</td><td>$\tfrac{\sqrt{2}}{2}$</td><td>$\tfrac{1}{2}$</td><td>0</td>
+    </tr>
+    <tr>
+      <td>$\cos$</td><td>1</td><td>$\tfrac{\sqrt{3}}{2}$</td><td>$\tfrac{\sqrt{2}}{2}$</td><td>$\tfrac{1}{2}$</td><td>0</td><td>$-\tfrac{1}{2}$</td><td>$-\tfrac{\sqrt{2}}{2}$</td><td>$-\tfrac{\sqrt{3}}{2}$</td><td>-1</td>
+    </tr>
+  </tbody>
+</Table>
+  </Solution>
+</Exercise>
