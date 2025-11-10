@@ -8,7 +8,8 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
-RUN npm ci && npm cache clean --force
+# Ensure devDependencies (like TypeScript for next.config.ts) are available during the build
+RUN npm ci --include=dev && npm cache clean --force
 
 # Rebuild the source code only when needed
 FROM base AS builder
