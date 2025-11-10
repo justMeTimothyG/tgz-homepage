@@ -1,0 +1,338 @@
+---
+title: "Technische Physik - Tutorium 3: Rotationsbewegungen und Leistung"
+date: 2025-11-05
+excerpt: "Leistungs- und Energiebilanzen am Bremsdynamometer, bei Wellen und rotierenden Scheiben"
+tags: ["physik", "mechanik", "rotation"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-11-05
+---
+
+## Bremsdynamometer und Wirkungsgrad
+
+<Exercise title="Aufgabe 1: Leistung am Bremsdynamometer" difficulty="medium">
+  <Task>
+    An einer Arbeitsspindel einer Fräsmaschine hängt ein Bremsdynamometer. Die Gewichtskraft des Hebelgewichtes beträgt $F_{G} = 735 \,\mathrm{N}$, der wirksame Hebelarm $r = 2{,}2 \,\mathrm{m}$. Die Drehzahl liegt bei $n = 90 \,\mathrm{min^{-1}}$ und der Antriebsmotor liefert $P_{a} = 22 \,\mathrm{kW}$. Berechne
+    <br />
+    a) die abgegebene Nutzleistung $P_{n}$,
+    <br />
+    b) den Wirkungsgrad des Antriebs.
+  </Task>
+  <Hint>
+    Stelle dir das Bremsdynamometer als Kraft am Hebel vor. Daraus folgt unmittelbar das Drehmoment $M = F \cdot r$. Die Winkelgeschwindigkeit erhältst du über $\omega = 2\pi \cdot \frac{n}{60}$.
+  </Hint>
+  <Hint>
+    Die Nutzleistung ergibt sich zu $P_{n} = M \cdot \omega$. Vergleiche anschließend $P_{n}$ mit der Motorleistung $P_{a}$, um den Wirkungsgrad $\eta = \frac{P_{n}}{P_{a}}$ zu erhalten.
+  </Hint>
+  <Step>
+    **Teilaufgabe a:** 
+    $$
+      \begin{align*}
+      P &= F \cdot v  &  & | v = 2 \cdot \pi\cdot r \cdot n \\
+        P &= F \cdot 2 \cdot \pi \cdot r \cdot n \\
+        &= 735 \,\mathrm{N} \cdot 2 \cdot \pi \cdot 2,2 \,\mathrm{m} \cdot 90 \,\mathrm{\frac{1}{60 \,\mathrm{s} }}   \\
+        &= 15,239 \,\mathrm{kW} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Wirkungsgrad:
+    $$
+      \eta = \frac{15{,}2 \,\mathrm{kW}}{22 \,\mathrm{kW}} = 0{,}693 \approx 69{,}3 \%
+    $$
+  </Step>
+  <Solution>
+    Das Bremsdynamometer zeigt eine Nutzleistung von rund $15{,}2 \,\mathrm{kW}$ und der Antrieb erreicht damit einen Wirkungsgrad von $69{,}3 \%$.
+  </Solution>
+</Exercise>
+
+## Drehzahl und Drehmoment von Wellen
+
+<Exercise title="Aufgabe 2: Gesuchte Wellendrehzahl" difficulty="easy">
+  <Task>
+    Eine Welle gibt eine Leistung von $P = 6 \,\mathrm{kW}$ ab. Bei einem gemessenen Drehmoment von $M = 40 \,\mathrm{Nm}$ ist die Drehzahl unbekannt. Bestimme $n$.
+  </Task>
+  <Hint>
+    Nutze $P = M \cdot \omega$ und $\omega = 2\pi \cdot \frac{n}{60}$. Stelle nach $n$ um.
+  </Hint>
+  <Step>
+    Berechnung der Winkelgeschwindigkeit:
+    $$
+    \begin{align*}
+    P &= M \cdot \omega  &  & | \omega = 2 \cdot \pi \cdot n \\
+    &= M \cdot  2 \cdot  \pi \cdot n  &  & |: M:2:\pi\\
+    n &= \frac{P}{M \cdot 2 \cdot \pi} \\
+    &= 23,87 \,\mathrm{\frac{1}{s}}  \\
+    &= 1432,39 \,\mathrm{min^{-1}} 
+    \end{align*}
+    $$
+  </Step>
+
+  <Solution>
+    Die Welle dreht mit $n = 1.432,39 \,\mathrm{min^{-1}}$.
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 3: Drehmoment aus Leistung" difficulty="easy">
+  <Task>
+    Eine Welle mit $n = 105 \,\mathrm{min^{-1}}$ überträgt $P = 64 \,\mathrm{kW}$. Bestimme das Drehmoment.
+  </Task>
+  <Hint>
+    Verwende erneut $P = M \cdot \omega$. Achte auf die Umrechnung der Drehzahl.
+  </Hint>
+  <Step>
+    Umrechnung und Drehmoment:
+    $$
+      \begin{align*}
+      P &= M \cdot \omega  &  & | \omega = 2 \cdot \pi \cdot n \\
+        &= M \cdot  2 \cdot  \pi \cdot n  &  & |: M:2:\pi\\
+        n &= \frac{P}{M \cdot 2 \cdot \pi} \\
+        &= 23,87 \,\mathrm{\frac{1}{s}}  \\
+        &= 1432,39 \,\mathrm{min^{-1}} 
+      \end{align*}
+    $$
+  </Step>
+  <Solution>
+    Das Drehmoment der Welle beträgt $M \approx 5{,}82 \,\mathrm{kNm}$.
+  </Solution>
+</Exercise>
+
+## Winkel- und Umfangsgeschwindigkeiten
+
+<Exercise title="Aufgabe 4: Winkel- und Umfangsgeschwindigkeit" difficulty="easy">
+  <Task>
+    Verwende die Werte aus Aufgabe 3 ($n = 105 \,\mathrm{min^{-1}}$) und berechne
+    <br />
+    a) die Winkelgeschwindigkeit $\omega$,
+    <br />
+    b) die Umfangsgeschwindigkeit $v_{u}$ für einen Wellendurchmesser von $d = 100 \,\mathrm{mm}$.
+  </Task>
+  <Hint>
+    Für Teil a) reicht die bekannte Beziehung $\omega = 2\pi \cdot n$. Die Umfangsgeschwindigkeit folgt aus $v_{u} = \omega \cdot r$ mit $r = \frac{d}{2}$.
+  </Hint>
+  <Step>
+    Winkelgeschwindigkeit:
+    $$
+    \begin{align*}
+    \omega &= 2\pi \cdot n \\
+    &= 2 \pi \cdot 105 \,\mathrm{\frac{1}{60s}}  \\
+    &= 11 \,\mathrm{\frac{1}{s}} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Umfangsgeschwindigkeit bei $r = 0{,}05 \,\mathrm{m}$:
+    $$
+    \begin{align*}
+    v_{u} &= \omega \cdot r \\
+    &= 11 \,\mathrm{\frac{1}{s}}\cdot 50 \cdot 10^{-3} \,\mathrm{m}   \\
+    &= 0,55 \,\mathrm{\frac{m}{s}}  \\
+    &= 550 \,\mathrm{\frac{mm}{s}} 
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    $$
+    \begin{align*}
+    \omega &= 11{,}0 \,\mathrm{\tfrac{rad}{s}} \\
+    \\
+    v_{u} &= 0{,}55 \,\mathrm{\tfrac{m}{s}} \\
+     &= 550 \,\mathrm{\tfrac{mm}{s}}.
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+## Beschleunigte Drehbewegungen
+
+<Exercise title="Aufgabe 5: Winkelbeschleunigung, Winkelweg und Tangentialbeschleunigung" difficulty="medium">
+  <Task>
+    Eine Welle läuft in $t = 3 \,\mathrm{s}$ aus dem Stillstand auf $n = 1{,}000 \,\mathrm{min^{-1}}$ hoch. Bestimme
+    <br />
+    a) die Winkelbeschleunigung $\alpha$,
+    <br />
+    b) den dabei durchlaufenen Winkel $\varphi$,
+    <br />
+    c) die Tangentialbeschleunigung $a_{t}$ an der Oberfläche einer Welle mit Durchmesser $d = 30 \,\mathrm{mm}$.
+  </Task>
+  <Hint>
+    Lege dir zuerst die End-Winkelgeschwindigkeit fest: $\omega = 2\pi \cdot \frac{n}{60}$. Für gleichmäßig beschleunigte Bewegung gilt $\omega = \alpha \cdot t$ und $\varphi = \frac{1}{2} \alpha t^{2}$.
+  </Hint>
+  <Hint>
+    Die Tangentialbeschleunigung steht direkt mit der Winkelbeschleunigung in Beziehung: $a_{t} = r \cdot \alpha$.
+  </Hint>
+  <Step>
+    Winkelbeschleunigung:
+    $$
+      \begin{align*}
+      \omega &= \alpha \cdot t &  & |:t \\
+      \alpha &= \frac{\omega}{t} \\
+      &= \frac{2\pi\cdot n}{t} \\
+      &= \frac{2\pi \cdot 1000\,\mathrm{\frac{1}{60s}} }{3\,\mathrm{s} } \\
+      &= 34,91 \,\mathrm{\frac{1}{s^{2}}} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Durchlaufener Winkel:
+    $$
+    \begin{align*}
+    \phi &=\omega_{0} \cdot t + \frac{1}{2} \,\mathrm{\alpha}\cdot t^{2}   &  & | \omega_{0} = 0\\
+    &= \frac{1}{2} \,\mathrm{\alpha}\cdot t^{2} \\
+    &= \frac{34,91 \,\mathrm{\frac{1}{s^{2}}} }{2}\cdot (3\,\mathrm{s} )^{2} \\
+    &= 157,1  
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Tangentialbeschleunigung bei $r = 0{,}015 \,\mathrm{m}$:
+    $$
+    \begin{align*}
+    \alpha &= \frac{\Delta v_{u}}{\Delta t} &  & | v_{u_{0}} = t_{0} = 0 \\
+    &=  \frac{v_{u}}{t}  &  & | v_{u} = \pi \cdot d\cdot n\\
+    &= \frac{\pi \cdot d \cdot n}{t } \\
+    &= \frac{\pi \cdot 30 \cdot \,\mathrm{10^{-3}m}\cdot 1000 \,\mathrm{\frac{1}{60 s}}  }{3\,\mathrm{s} } \\
+    &= 0,524 \,\mathrm{\frac{m}{s}} 
+    \end{align*}
+    $$
+  </Step>
+  <Solution>
+    $$
+    \begin{align*}
+    \alpha &= 34{,}9 \,\mathrm{\tfrac{rad}{s^{2}}} \\
+    \\
+    \varphi &\approx 157 \,\mathrm{rad} \\
+    \\
+    a_{t} &= 0{,}52 \,\mathrm{\tfrac{m}{s^{2}}} 
+    \end{align*}
+    $$
+  </Solution>
+</Exercise>
+
+## Rotationsenergie und gespeicherte Arbeit
+
+<Exercise title="Aufgabe 6: Energiebedarf eines Elektromotors" difficulty="medium">
+  <Task>
+    Ein Elektromotor dreht mit $n = 700 \,\mathrm{min-1}$. Auf dem Typenschild ist das Trägheitsmoment mit $J = 17,5 \,\mathrm{kgm^{2}}$ angegeben. Welche elektrische Energie in kWh muss dem Motor bis zum Erreichen dieser Drehzahl zugeführt werden?
+  </Task>
+  <Hint>
+    Die gespeicherte Rotationsenergie lautet $W_{\text{rot}} = \frac{1}{2} J \omega^{2}$. Betrachte die Einheiten genau. Was genau sind kWh und was sind Joule?
+  </Hint>
+  <Step>
+    Rotationsenergie:
+    $$
+      \begin{align*}
+      W_{rot} &= \frac{J}{2}\cdot \omega ^{2} \\
+        &= \frac{17,5 \,\mathrm{kgm^{2}} }{2}\cdot \left( 2 \pi \cdot 700 \,\mathrm{\frac{1}{60s}}  \right)^{2} \\
+        &= 47.017,7 \,\mathrm{Nm} 
+      \end{align*}
+    $$
+  </Step>
+  <Step>
+    Schauen wir uns zunächst die Einheiten an. betrachtet man die Einheit $\,\mathrm{kWh}$ so erkennt man das $W : \left[ \,\mathrm{\frac{Nm}{s}} \right]$  ist. also Wäre die Einheit dann die gleiche mit jeweils einer zeiteinheit geteilt und einer anderen Zeiteinheit multipliziert. 
+
+    Ich kann also die Einheit $Nm$ mit $\frac{s}{s}$ ergänzen und umschreiben: 
+    $$
+    \begin{align*}
+    \,\mathrm{\left[ Nm \cdot \frac{s}{s} = \frac{Nm}{s}\cdot s  = W \cdot s = Ws\right]} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+  Ich habe also somit $47,02 \,\mathrm{kWs}$. Gesucht sind aber $\,\mathrm{kWh}$ ich muss also nur noch den Faktor der Stunde berücksichtigen. Ich weiß dass: 
+
+    $$
+    \begin{align*}
+    \,\mathrm{[1h = 60 min = 60 \cdot 60 \,\mathrm{s} = 3.600 \,\mathrm{s}  ]}  \\
+    \,\mathrm{1s = \frac{1}{3600}h} 
+    \end{align*}
+    $$
+    Dies kann ich in die Einheiten dann somit einsetzen: 
+
+    $$
+    \begin{align*}
+    &  &  & 47,02 \,\mathrm{kW \cdot \frac{1}{3600}h}  \\
+    & =  &  & 0,013\,\mathrm{kWh} 
+    \end{align*}
+    $$
+
+  </Step>
+  <Solution>
+    Es müssen rund $0{,}013 \,\mathrm{kWh}$ an Energie aufgebracht werden (Verluste wie Kupfer- oder Luftwiderstand sind nicht berücksichtigt).
+  </Solution>
+</Exercise>
+
+<Exercise title="Aufgabe 7: Beschleunigungsleistung einer Kreisscheibe" difficulty="medium">
+  <Task>
+    Eine Kreisscheibe mit der Dichte $\rho = 7,8 \,\mathrm{kg/dm^{3}}$ hat einen Durchmesser von $500 \,\mathrm{mm}$ und eine Dicke von $100 \,\mathrm{mm}$. Welche Beschleunigungsleistung ist erforderlich, wenn die Scheibe aus dem Zustand der Ruhe in $t = 2\,\mathrm{s}$ auf eine Drehzahl $n = 300 \,\mathrm{min^{-1}}$ gebracht wird? Welches Arbeitsvermögen besitzt dann die Scheibe?
+  </Task>
+  <Hint>
+    Rechne die Dichte auf $\mathrm{\tfrac{kg}{mm^{3}}}$ um.
+  </Hint>
+  <Hint>
+    Bestimme die Masse $m = \rho \cdot V$ eines Zylinders.
+  </Hint>
+  <Hint>
+    Berechne das Trägheitsmoment $J = \frac{1}{2} m r^{2}$
+  </Hint>
+  <Hint>
+    Nutze $W_{\text{rot}} = \frac{1}{2} J \omega^{2}$ und $P = \frac{W_{\text{rot}}}{t}$.
+  </Hint>
+  <Step>
+    Zunächst rechne ich erstmal die Dichte in eine geeignete Einheit um: 
+$$
+\begin{align*}
+\rho &= 7,8 \,\mathrm{\frac{kg}{dm^{3}}}  \\
+&= 7,8 \,\mathrm{\frac{kg}{(10^{2}mm)^{3}}}  \\
+&= 7,8 \,\mathrm{\frac{kg}{10 ^{6}mm^{3}}} \\
+&= 7,8 \cdot 10^{-6} \,\mathrm{\frac{kg}{mm^{3}}} 
+\end{align*}
+$$
+  </Step>
+  <Step>
+  Zunächst berechnen wir erstmal die Masse: 
+$$
+\begin{align*}
+m &= V \cdot \rho \\
+&= \pi\cdot r^{2}\cdot h\cdot \rho \\
+&= \pi \cdot (250 \,\mathrm{mm} )^{2}\cdot 100\,\mathrm{mm} \cdot 7,8\cdot 10^{-6} \,\mathrm{\frac{kg}{mm^{3}}}  \\
+&= 153,15 \,\mathrm{kg}  
+\end{align*}
+$$
+  </Step>
+  <Step>
+  Berechnen des Trägheitsmoments eines Kreiszylinders: 
+    $$
+    \begin{align*}
+    J &= \frac{m}{2} \cdot r^{2} \\
+    &= \frac{153,15 \,\mathrm{kg} }{2} \cdot (250\cdot 10^{-3}\,\mathrm{m} )^{2} \\
+    &= 4,79 \,\mathrm{kgm^{2}} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Hiermit lässt sich die Drehenergie berechnen mittels: 
+    $$
+    \begin{align*}
+    W_{rot} &= \frac{J}{2}\cdot \omega ^{2} \\
+    &= \frac{4,79 \,\mathrm{kgm^{2}}}{2} \cdot (2\pi\cdot n)^{2} \\
+    &= \frac{4,79 \,\mathrm{kgm^{2}}}{2} \cdot \left( 2\pi\cdot 300 \cdot\,\mathrm{\frac{1}{60s}}  \right)^{2} \\
+    &= 2.363,77 \,\mathrm{\frac{kgm^{2}}{s^{2}}}  \\
+    &= 2,36 \,\mathrm{kNm} 
+    \end{align*}
+    $$
+  </Step>
+  <Step>
+    Die Leistung ist Arbeit pro Zeit: 
+    $$
+    \begin{align*}
+    P &= \frac{W_{rot}}{t} \\
+    &= \frac{2,36 \,\mathrm{kNm}}{2\,\mathrm{s} }  \\
+    &= 1,18 \,\mathrm{kW} 
+    \end{align*}    
+    $$
+  </Step>
+  <Solution>
+    Die Scheibe benötigt eine Beschleunigungsleistung von $1{,}18 \,\mathrm{kW}$. Nach dem Hochlauf speichert sie $W_{\text{rot}} \approx 2{,}36 \,\mathrm{kJ}$ an Rotationsenergie.
+  </Solution>
+</Exercise>
