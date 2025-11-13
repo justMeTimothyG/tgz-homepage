@@ -70,6 +70,12 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: 'Klausur Hinweise - Rechtliche Grundlagen WiSe 25/26',
       }),
+      getCollectionResource({
+        slug: 'rechtliche-grundlagen-quiz',
+        source: 'lecture',
+        overrideTitle: 'Quiz: Wissensfragen zu Rechtliche Grundlagen',
+        overrideDescription: 'Teste dein Wissen mit diesem interaktiven Quiz zu den Grundlagen des Rechts. Quasi eine kleine Prüfungsvorbereitung!',
+      }),
     ],
   },
   {
