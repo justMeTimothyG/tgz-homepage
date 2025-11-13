@@ -44,6 +44,16 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: '04: Stellvertretung, Einführung in das Schuldrecht',
       }),
+      getCollectionResource({
+        slug: '05-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '05: Rechtliche Grundlagen - Fortführung Schuldverhältnis',
+      }),
+      getCollectionResource({
+        slug: '06-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '06: Fallbearbeitung - Schadensersatz und Leistungsstörungen',
+      }),
       {
         title: 'Weitere Vorlesungsnotizen folgen',
         variant: 'note',
