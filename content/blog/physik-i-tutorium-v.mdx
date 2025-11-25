@@ -1,0 +1,259 @@
+---
+title: "Technische Physik - Tutorium V: Fluide"
+date: 2025-11-05
+excerpt: "In dieser Ausgabe des Tutoriums zur Technischen Physik behandeln wir das Thema Fluide und die zugehörigen physikalischen Prinzipien und Berechnungen."
+tags: ["physik", "mechanik", "fluide"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-11-25
+---
+
+
+## Aufgabe 1
+<Exercise title="Aufgabe 1" difficulty="medium">
+<Task>
+Auf einer gleicharmigen Balkenwaage befindet sich auf der einen Seite ein Gefäß, welches mit $h = 0,5 \,\mathrm{m}$ Wasser gefüllt ist. Wie hoch muss ein gleiches Gefäß auf der anderen Seite mit Quecksilber ($\rho = 13.546 \,\mathrm{\frac{kg}{m^{3}}}$) gefüllt werden, damit sich die Waage im Gleichgewicht befindet?
+</Task>
+<Hint>
+Welches Gleichgewicht muss hier herrschen? 
+</Hint>
+<Hint>
+Der Druck am Boden des Wassers muss gleich dem Druck am Boden des Quecksilbers sein.
+</Hint>
+<Step>
+Hier muss der Druck von Wasser das gleiche sein wie das vom Quecksilber: 
+$$
+\begin{align}
+p_{Wasser} &= p_{Quecksilber} \\
+h_{w}\cdot \rho_{w} \cdot \cancel{ g } &= h_{Q} \cdot p_{Q}\cdot \cancel{ g } &  & | :p_{Q} \\
+h_{Q} &= \frac{h_{w}\cdot \rho_{w}}{p_{Q}} \\
+&= \frac{0,5\,\mathrm{m}\cdot 1.000\,\mathrm{\frac{kg}{m^{3}}}  }{13.546\,\mathrm{\frac{kg}{m^{3}}} } \\
+&= 3,7 \,\mathrm{cm} 
+\end{align}
+$$
+</Step>
+<Solution>
+Die höhe des Quecksilbers muss $3,7 \,\mathrm{cm}$ betragen.
+</Solution>
+</Exercise>
+
+## Aufgabe 2
+<Exercise title="Aufgabe 2" difficulty="medium">
+<Task>
+Eine Flüssigkeitsleitung überwindet einen Höhenunterschied von $Δ h = 17\,\mathrm{m}$. Die Leitung ist mit Wasser gefüllt und an der tiefsten Stelle wird ein Druck von 8 bar gemessen. Wie groß ist der Druck $p_{0}$ an der obersten Stelle der Rohrleitung ($\rho = 1 \,\mathrm{\frac{kg}{dm^{3}}}$)?
+</Task>
+<Hint>
+</Hint>
+<Step>
+Denn Druck oben berechnen:
+$$
+\begin{align*}
+p_{oben} &= h\cdot \rho\cdot g \\
+&= 17\,\mathrm{m} \cdot 1.000 \,\mathrm{\frac{kg}{m^{3}}} \cdot 9,81 \,\mathrm{\frac{m}{s^{3}}}  \\
+&= 166.770 \,\mathrm{Pa} \\
+&= 1,67 \,\mathrm{bar}  
+\end{align*}
+$$
+</Step>
+<Step>
+Dadurch kann man die Differenz im Druck berechnen: 
+
+$$
+\begin{align*}
+p &= p_{unten}-p_{oben} \\
+&= 8 \,\mathrm{bar} - 1,67 \,\mathrm{bar}  \\
+&= 6,33\,\mathrm{bar} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Der Druck an der obersten Stelle der Rohrleitung beträgt $6,33\,\mathrm{bar}$.
+</Solution>
+</Exercise>
+
+
+## Aufgabe 3
+<Exercise title="Aufgabe 3" difficulty="medium">
+<Task>
+Der Pumpenkolben einer hydraulischen Presse hat eine Fläche von $A = 2,5 \,\mathrm{cm^{2}}$ und es wirkt auf ihn eine Kraft von $F = 800 \,\mathrm{N}$. Welcher Druck wird in der Hydraulikflüssigkeit erzeugt?
+</Task>
+<Hint>
+Verwende die Formel für den Druck:
+$$
+p = \frac{F}{A}
+$$
+</Hint>
+<Step>
+Den Druck berechnen mit der Formel:
+$$
+\begin{align*}
+p &= \frac{F}{A} \\
+&= \frac{800\,\mathrm{N} }{2,5\cdot (10^{-2}\,\mathrm{m} )^{2}} \\
+&= \frac{800\,\mathrm{N} }{2,5 \cdot 10^{-4}\,\mathrm{m^{2}} } \\
+&= 3.200.000 \,\mathrm{Pa} \\
+&= 32\,\mathrm{bar}  
+\end{align*}
+$$
+</Step>
+<Solution>
+Der erzeugte Druck in der Hydraulikflüssigkeit beträgt $32\,\mathrm{bar}$.
+</Solution>
+</Exercise>
+
+
+## Aufgabe 4
+<Exercise title="Aufgabe 4" difficulty="medium">
+<Task>
+Bei offenen Kernexplosionen haben die Stoßwellen noch in einigen Kilometern vom Explosionszentrum entfernt Drucksteigerungen von einigen bar zur Folge. Noch 100 km Entfernung ist mit Drucksteigerung von „nur“ 2% zu rechnen. Wie groß ist dort die dadurch entstehende Druckkraft auf ein Fenster mit der Größe von 1,2 x 1,5 m und zwar bei einem Ausgangsdruck von 1 bar?
+</Task>
+<Hint>
+Verwende die Formel für die Kraft:
+$$
+F = p \cdot A
+$$
+</Hint>
+<Step>
+Die Kraft berechnen:
+$$
+\begin{align*}
+F &= p \cdot A \\
+&= p\cdot 0,02 \cdot a\cdot b \\
+&= 1 \cdot 10^{5}\,\mathrm{Pa}\cdot 0,02\cdot 1,2\,\mathrm{m}  \cdot 1,5 \,\mathrm{m}  \\
+&= 3.600 \,\mathrm{N} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Die Druckkraft auf das Fenster beträgt $3.600 \,\mathrm{N}$.
+</Solution>
+</Exercise>
+
+
+## Aufgabe 5
+<Exercise title="Aufgabe 5" difficulty="medium">
+<Task>
+Ein Stausee hat einen Wasserstand $h = 36,7 \,\mathrm{m}$. Welcher absolute Druck herrscht am Fußpunkt der Mauer, wenn der Luftdruck $p_{amb} = 1,02 \,\mathrm{bar}$ beträgt?
+</Task>
+<Hint>
+Verwende die Formel für den Druck:
+$$
+p = h \cdot \rho \cdot g
+$$
+</Hint>
+<Hint>
+Der absolute Druck ist die Summe aus dem durch die Wassersäule erzeugten Druck und dem Umgebungsdruck.
+$$
+p_{abs} = p_{W} + p_{amb}
+$$
+</Hint>
+<Step>
+Zunächst rechnen wir den Druck aus, der durch den Wasserstand verursacht wird. 
+$$
+\begin{align*}
+P_{W} &= h \cdot \rho \cdot g \\
+&= 36,7 \,\mathrm{m} \cdot 1.000 \,\mathrm{\frac{kg}{m^{3}}}  \cdot 9,81 \,\mathrm{\frac{m}{s^{3}}}  \\
+&= 360.027\,\mathrm{Pa} = 3,6 \,\mathrm{bar}   \\
+\end{align*}
+$$
+</Step>
+<Step>
+Der Absolute Druck der entsteht ist die Summe des Druck mit dem Ambientedruck
+$$
+\begin{align*}
+P_{abs} &= p_{W}+  p_{amb} \\
+&= 3,6 \,\mathrm{bar} + 1,02 \,\mathrm{bar}   \\
+&= 4,62 \,\mathrm{bar} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Der absolute Druck am Fußpunkt der Mauer beträgt $4,62 \,\mathrm{bar}$.
+</Solution>
+</Exercise>
+
+## Aufgabe 6
+<Exercise title="Aufgabe 6" difficulty="medium">
+<Task>
+Behälter für extrem hohe Drücke werden aus Gründen der Festigkeit meist kugelförmig gebaut. Wie groß ist die Kraft, mit der zwei kugelförmige Stahlhalbkugeln (innen hohl) zusammengepresst werden, wenn die Eintauchtiefe in der Tiefsee $h = 10.000 \,\mathrm{m}$ ist und wenn der Kugelaußendurchmesser $d = 1 \,\mathrm{m}$ beträgt? Die Dichte des salzigen Meerwassers wird mit $\rho = 1,03 \,\mathrm{\frac{kg}{dm^{3}}}$ angenommen (Innendruck vernachlässigen).
+</Task>
+<Hint>
+Verwende die Formel für die Kraft:
+$$
+F = p \cdot A
+$$
+</Hint>
+<Step>
+Die Kraft berechnen:
+$$
+\begin{align*}
+F &= p \cdot A  &  & | p = h \cdot \rho\cdot g\\
+&= h \cdot \rho \cdot g \cdot A &  & | A = \pi r^{2} \\
+&= h \cdot \rho \cdot g \cdot \pi r^{2} \\
+&= 10.000\,\mathrm{m}\cdot 1.000\,\mathrm{\frac{kg}{m^{3}}}  \cdot 9,81 \,\mathrm{\frac{m}{s^{3}}} \cdot \pi \cdot (0,5 \,\mathrm{m})^{2}  \\
+&= 77.047.559,83 \\
+&= 77,05 \,\mathrm{MN} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Die Kraft, mit der die beiden Halbkugeeln zusammengepresst werden, beträgt $77,05 \,\mathrm{MN}$.
+</Solution>
+</Exercise>
+
+
+
+## Aufgabe 7
+<Exercise title="Aufgabe 7" difficulty="medium">
+<Task>
+In einem mit einem Kolben verschlossenen Gefäß befinden sich $m = 1,293 \,\mathrm{kg}$ Luft. Das Volumen beträgt $V_1 = 1 \,\mathrm{m^{3}}$ und der absolute Druck ist $p_{1} = 1,013 \,\mathrm{bar}$. Berechnen Sie den Druck $p_{2}$, wenn das Volumen auf $V_{2} = 0,1 \,\mathrm{m^{3}}$ verkleinert wird und wenn $T = \text{konstant}$ ist.
+</Task>
+<Hint>
+Verwende das Gesetz von Boyle-Mariotte für isotherme Zustandsänderungen:
+$$
+p_{1} \cdot V_{1} = p_{2} \cdot V_{2}
+$$
+</Hint>
+<Step>
+Dies lässt sich einfach mit dem Verhältnis zwischen Druck und Volumen berechnen:
+$$
+\begin{align*}
+p_{1} \cdot V_{1} &= p_{2} \cdot V_{2}  &  & | :V_{2}\\
+p_{2}&= \frac{p_{1}\cdot V_{1}}{V_{2}} \\
+&= \frac{1,013 \,\mathrm{bar}\cdot 1\,\mathrm{m^{3}}  }{0,1\,\mathrm{m^{3}} } \\
+&= 10,13 \,\mathrm{bar} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Der Druck $p_{2}$ beträgt $10,13 \,\mathrm{bar}$.
+</Solution>
+</Exercise>
+
+## Aufgabe 8
+<Exercise title="Aufgabe 8" difficulty="medium">
+<Task>
+Berechnen Sie mit Hilfe der barometrischen Höhenformel den atmosphärischen Druck bei 130 km Höhe.
+</Task>
+<Hint>
+Verwende die barometrische Höhenformel:
+$$
+p_{amb} = \frac{p_{0}}{10^{h/h'}}
+$$
+Dabei ist $h'$ die sogenannte Skalenhöhe und beträgt für die Erdatmosphäre $h' = 18.400 \,\mathrm{m}$. Sie ist die Höhe, in der der Luftdruck um den Faktor 10 abnimmt.
+</Hint>
+<Step>
+Der Druck in 130 km Höhe berechnet sich wie folgt:
+$$
+\begin{align*}
+p_{amb} &= \frac{p_{0}}{10^{h/h'}} \\
+&= \frac{1013 \,\mathrm{hPa} }{10^{\frac{130.000\,\mathrm{m} }{18.400\,\mathrm{m} }}} \\
+&= 0,000086 \,\mathrm{hPa} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Der atmosphärische Druck bei 130 km Höhe beträgt $0,000086 \,\mathrm{hPa}$.
+</Solution>
+</Exercise>
+
+

@@ -1,0 +1,392 @@
+---
+title: "Technische Physik - Tutorium iv"
+date: 2025-11-05
+excerpt: ""
+tags: ["physik", "mechanik", ""]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-11-25
+---
+## Aufgabe 1
+<Exercise title="Aufgabe 1" difficulty="medium">
+<Task>
+Ein Auto braucht $22 \,\mathrm{s}$, um aus dem Stand auf 80 km/h zu kommen.
+<NumberedList variant="lower-alpha">
+<li>Welche Kraft müsste der Motor bei konstanter Beschleunigung aufbringen, wenn die Masse 900 kg beträgt?</li>
+
+<li>Wie groß ist die durchschnittliche Beschleunigungsleistung in den ersten 10 s.?</li>
+
+<li>Wie groß ist die momentane Beschleunigungsleistung</li>
+    <NumberedList variant="lower-roman">
+	<li>Nach 4 s.?</li>
+	<li>Nach 10 s.?</li>
+    </NumberedList>
+</NumberedList>
+</Task>
+<Step>
+**Teilaufgabe a**:<br />
+Wenn eine Konstante Beschleunigung herrschen soll, kann folgende Annahme getätigt werden:
+$$
+\begin{align*}
+F &= m \cdot a  &  & | a = \frac{v}{t} \\
+&= m \cdot \frac{v}{t} \\
+&= 900\,\mathrm{ kg}  \cdot \frac{22,22 \,\mathrm{\frac{m}{s}} }{22\,\mathrm{s} } \\
+&= 909,09 \,\mathrm{N} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**:<br />
+durchschnittliche Beschleunigungsleistung in den ersten $10 \,\mathrm{s}$
+$$
+\begin{align*}
+P \cdot t = W &= \frac{1}{2}\cdot m \cdot v^{2}  &  & | v = \frac{v}{t_{ges}} \cdot t \\
+&= \frac{1}{2}\cdot 900\,\mathrm{kg} \cdot \left( \frac{22,22\,\mathrm{\frac{m}{s}} }{22\,\mathrm{s} }\cdot 10\,\mathrm{s}  \right)^{2} \\
+&= 45.904,5 \,\mathrm{Nm}   &  & | : t = 10 \,\mathrm{s}  \\
+P &= 4.590,45\,\mathrm{W}  \\
+&= 4,59 \,\mathrm{kW} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe c**: 
+Funktion aufstellen, um Momentane Leistung darzustellen.
+$$
+\begin{align*}
+P(t) &= F \cdot v  &  & | v = a \cdot t \\
+&= F \cdot a \cdot t 
+\end{align*}
+$$
+</Step>
+<Step>
+Einsetzen für $t = 4\,\mathrm{s}$
+$$
+\begin{align*}
+P(4\,\mathrm{s} ) &= 909,09 \,\mathrm{N} \cdot \left( \frac{22,22 \,\mathrm{\frac{m}{s}} }{22\,\mathrm{s} }  \right) \cdot 4\,\mathrm{s} \\
+ &= 3672,72 \,\mathrm{W} 
+\end{align*}
+$$
+Einsetzen für $t = 10\,\mathrm{s}$
+
+$$
+\begin{align*}
+P(10\,\mathrm{s} ) &= 909,09 \,\mathrm{N} \cdot \left( \frac{22,22 \,\mathrm{\frac{m}{s}} }{22\,\mathrm{s} }  \right) \cdot 10\,\mathrm{s} \\
+ &= 9181,809 \,\mathrm{W} 
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Die Kraft, die der Motor bei konstanter Beschleunigung aufbringen müsste, beträgt $909,09 \,\mathrm{N}$.
+<br /><br />
+**Teilaufgabe b**:<br />
+Die durchschnittliche Beschleunigungsleistung in den ersten 10 s beträgt $4,59 \,\mathrm{kW}$.
+<br /><br />
+**Teilaufgabe c**:<br />
+Die momentane Beschleunigungsleistung nach 4 s beträgt $3.672,72 \,\mathrm{W}$ und nach 10 s beträgt sie $9.181,81 \,\mathrm{W}$.
+</Solution>
+</Exercise>
+
+## Aufgabe 2
+<Exercise title="Aufgabe 2" difficulty="medium">
+<Task>
+An einer eigens für den Zweck von Containerverladungen konstruierten verstellbaren schiefen Ebene wird festgestellt, dass bei einem Neigungswinkel $\alpha = 15,5°$ ein Container mit dem Gewicht $F_{G} = 1500 \,\mathrm{N}$ gleichförmig, d.h. mit konstanter Geschwindigkeit, abwärts gleitet. 
+<NumberedList variant="lower-alpha">
+<li>Wie groß ist die Reibungszahl $\mu$? </li>
+<li>Wie groß muss eine Kraft F parallel zur schiefen Ebene sein, wenn der Container bei einem Neigungswinkel $\alpha = 30°$ nach oben gezogen wird.</li>
+</NumberedList>
+</Task>
+<Step>
+**Teilaufgabe a**: <br />
+Hier muss ein Gleichgewicht aufgestellt werden. wo die Gleitreibung gerade so überwunden wird und so keine zusätzliche Kraft in die Beschleunigung kommt.<br />
+Es muss also herrschen:
+$$
+\begin{align*}
+F_{R} &= F_{H} \\
+\mu \cdot F_{N} &= F_{G} \cdot \sin(\alpha)  &  & | F_{N} = F_{G}\cdot \cos(\alpha) \\
+\mu \cdot \cancel{ F_{G} }\cdot \cos(\alpha) &= \cancel{ F_{G} }\cdot \sin(\alpha)  &  & | :\cos(\alpha)\\
+\mu &= \frac{\sin(\alpha)}{\cos(\alpha)}= \tan(\alpha) \\
+&= 0,2773 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**: <br />
+Hier muss sowohl die $F_{H}$ als auch $F_{R}$ überwunden werden. somit muss herrschen. 
+$$
+\begin{align*}
+F_{H}+F_{R} &< F_{Zug} \\
+F_{G}\cdot (\mu \cdot \cos(\alpha)+\sin(\alpha))&< F_{Zug} \\
+1500\,\mathrm{N}\cdot (0,2773\cdot \cos(30°)+ \sin(30°)) &<F_{Zug} \\
+1.110,22 \,\mathrm{N} &< F_{Zug} 
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Die Reibungszahl $\mu$ beträgt $0,2773$.
+<br /><br />
+**Teilaufgabe b**:<br />
+Es muss also eine Kraft aufgewendet werden, die größer ist als $1.110,22\,\mathrm{N}$
+</Solution>
+</Exercise>
+
+## Aufgabe 3
+<Exercise title="Aufgabe 3" difficulty="medium">
+<Task>
+Eine Kurbel mit dem Kurbelradius $r = 0,5 \,\mathrm{m}$ gemäß Skizze wird von einer Person mit einer Handkraft $F_{H} = 250 \,\mathrm{N}$ $i = 80$-mal herumgedreht.
+<NumberedList variant="lower-alpha">
+<li>Wie groß ist das auf die Kurbel übertragene Drehmoment?</li>
+
+<li>Welche Arbeit wurde dabei verrichtet?</li>
+
+<li>Wie sieht das dazugehörige F,s-Diagramm aus?</li>
+</NumberedList>
+</Task>
+<Step>
+**Teilaufgabe a**: <br />
+Moment ausrechnen. Hier wirkt die Handkraft immer tangential. 
+$$
+\begin{align*}
+M &= F_{H}\cdot r \\
+&= 250 \,\mathrm{N} \cdot 0,5 \,\mathrm{m}   \\
+&= 125 \,\mathrm{Nm} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**:<br />
+Arbeit berechnen. Zunächst muss die Strecke berechnen werden, die zurückgelegt wird.
+$$
+\begin{align*}
+s &= U \cdot 80 \\
+&= 2\pi \cdot r \cdot 80 \\
+&= 2\pi \cdot 0,5 \,\mathrm{m} \cdot 80 \\
+&= 251,33 \,\mathrm{m} \quad (=80\pi)
+\end{align*}
+$$
+</Step>
+<Step>
+Arbeit berechnen: 
+$$
+\begin{align*}
+W &= F \cdot s \\
+&= 250 \,\mathrm{N}\cdot 80\pi \,\mathrm{m}   \\
+&= 62.831,85 \,\mathrm{Nm} \quad (20.000\pi) 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe c**:
+Das F,s-Diagramm sieht wie folgt aus:
+![F-S Diagram](/api/images/physik-i-tutorium-v-f-s-diagramm.png)
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Das auf die Kurbel übertragene Drehmoment beträgt $125 \,\mathrm{Nm}$.
+<br /><br />
+**Teilaufgabe b**:<br />
+Die verrichtete Arbeit beträgt $62.831,85 \,\mathrm{Nm}$.
+<br /><br />
+**Teilaufgabe c**:<br />
+Das F,s-Diagramm ist oben dargestellt.
+</Solution>
+</Exercise>
+
+
+## Aufgabe 4
+<Exercise title="Aufgabe 4" difficulty="medium">
+<Task>
+Ein Körper mit der Masse $m = 50 \,\mathrm{kg}$ fällt $6\,\mathrm{m}$ frei herab. 
+<NumberedList variant="lower-alpha">
+<li>Berechnen Sie die Endgeschwindigkeit $v_{t}$</li>
+<li>Und die dadurch vorhandene kinetische Energie des Körpers.</li>
+</NumberedList>
+</Task>
+<Step>
+**Teilaufgabe a**: <br />
+Freier Fall. Endgeschwindigkeit berechnen. Zunächst erstmal die Fallzeit berechnen: 
+$$
+\begin{align*}
+h &= \frac{g}{2}\cdot t^{2} \\
+t &= \sqrt{ \frac{2h}{g} } \\
+&= \sqrt{ \frac{2\cdot 6\,\mathrm{m} }{9,81 \,\mathrm{\frac{m}{s^{2}}} } } \\
+&= 1,1060\,\mathrm{s} 
+\end{align*}
+$$
+</Step>
+<Step>
+Hiermit können wir die Endgeschwindigkeit berechnen: 
+$$
+\begin{align*}
+v &= g \cdot t \\
+&= 9,81 \,\mathrm{\frac{m}{s^{2}}}  \cdot 1,106 \,\mathrm{s}  \\
+&= 10,85 \,\mathrm{\frac{m}{s}} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**: <br />
+Kinetische Energie berechnen:
+$$
+\begin{align*}
+W_{kin} &= \frac{1}{2}m \cdot v^{2} \\
+&= 25\,\mathrm{kg}\cdot \left( 10,85 \,\mathrm{\frac{m}{s^{2}}}  \right) ^{2} \\
+&= 2.943,0625 \,\mathrm{Nm} \\
+&= 2,94 \,\mathrm{kNm} 
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Die Endgeschwindigkeit $v_{t}$ beträgt $10,85 \,\mathrm{\frac{m}{s}}$.
+<br /><br />
+**Teilaufgabe b**:<br />
+Die kinetische Energie des Körpers beträgt $2,94 \,\mathrm{kNm}$.
+</Solution>
+</Exercise>
+
+## Aufgabe 5
+<Exercise title="Aufgabe 5" difficulty="medium">
+<Task>
+Bei einer Kreisbewegung sei $m = 2 \,\mathrm{kg}$, $r = 80 \,\mathrm{cm}$ und es finden 12 Umdrehungen in 8 s statt.
+<br />
+Berechnen Sie:
+<NumberedList variant="lower-alpha">
+<li>Frequenz</li>
+<li>Periodendauer</li>
+<li>Winkelgeschwindigkeit</li>
+<li>Umfangsgeschwindigkeit</li>
+<li>Zentripetalbeschleunigung</li>
+<li>Zentrifugalkraft</li>
+</NumberedList>
+</Task>
+<Step>
+**Teilaufgabe a**: Frequenz
+$$
+\begin{align*}
+f &= \frac{1}{T} \\
+&= \frac{12}{8 \,\mathrm{s} } \\
+&= 1,5 \,\mathrm{Hz} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**: Periodendauer
+$$
+\begin{align*}
+T &= \frac{1}{f} \\
+&= \frac{1}{1,5} \\
+&= \frac{2}{3} = 0,6666 \,\mathrm{s} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe c**: Winkelgeschwindigkeit
+$$
+\begin{align*}
+\omega &= 2\pi \cdot n &  & |n = f \\
+&= 2\pi \cdot 1,5 \,\mathrm{s^{-1}} \\
+&= 9,4248 \,\mathrm{s^{-1}}  \quad (=3\pi \,\mathrm{s^{-1}} )
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe d**: Umfangsgeschwindigkeit
+$$
+\begin{align*}
+v_{u} &= 2\pi\cdot r\cdot n  &  & | n = f\\
+&= 2\pi \cdot 80 \cdot 10^{-2}\,\mathrm{m} \cdot 1,5 \,\mathrm{s^{-1}}  \\
+&= 7,54 \,\mathrm{\frac{m}{s}} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe e**: Zentripetalbeschleunigung
+$$
+\begin{align*}
+a_{z} &= \frac{v_{u}^{2}}{r} \\
+&= \frac{\left( 7,54\,\mathrm{\frac{m}{s}}  \right)^{2}}{80 \cdot 10^{-2}\,\mathrm{m} } \\
+&= 71,0645\,\mathrm{\frac{m}{s^{2}}} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe f**: Zentrifugalkraft
+$$
+\begin{align*}
+F_{z} &= m \cdot \frac{v_{u}^{2}}{r} \\
+&= 2\,\mathrm{kg} \cdot \frac{7,54 \,\mathrm{\frac{m}{s}} }{80\cdot 10^{-2} \,\mathrm{m} } \\
+&= 18,85 \,\mathrm{N} 
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Die Frequenz beträgt $1,5 \,\mathrm{Hz}$.
+<br /><br />
+**Teilaufgabe b**:<br />
+Die Periodendauer beträgt $0,6666 \,\mathrm{s}$.
+<br /><br />
+**Teilaufgabe c**:<br />
+Die Winkelgeschwindigkeit beträgt $9,4248 \,\mathrm{s^{-1}}$.
+<br /><br />
+**Teilaufgabe d**:<br />
+Die Umfangsgeschwindigkeit beträgt $7,54 \,\mathrm{\frac{m}{s}}$.
+<br /><br />
+**Teilaufgabe e**:<br />
+Die Zentripetalbeschleunigung beträgt $71,0645\,\mathrm{\frac{m}{s^{2}}}$.
+<br /><br />
+**Teilaufgabe f**:<br />
+Die Zentrifugalkraft beträgt $18,85 \,\mathrm{N}$.
+</Solution>
+</Exercise>
+## Aufgabe 6 
+<Exercise title="Aufgabe 6" difficulty="medium">
+<Task>
+Für die nebenstehend abgebildete Scheibe mit Kurbelzapfen sind folgende Angaben zu berechnen. 
+![Diagram Aufgabe 6](/api/images/physik-i-tutorium-iv-aufgabe-6.png)
+<br />
+Angaben zusammenfassen: <br />
+<List>
+<li>Werkstoff Stahl: $\rho = 7,85 \,\mathrm{\frac{kg}{dm^{3}}}$</li>
+<li>D = $100\,\mathrm{mm}$</li>
+<li>d = $20 \,\mathrm{mm}$</li>
+<li>$l_{1} = 20 \,\mathrm{mm}$</li>
+<li>$l_{2} = 30 \,\mathrm{mm}$</li>
+<li>$r = 30 \,\mathrm{mm}$</li>
+</List>
+<br />
+Berechnen Sie: <br />
+<NumberedList variant="lower-alpha">
+<li>Das Gesamtträgheitsmoment $J$, bezogen auf die Achse x-x</li>
+<li>$m_{red }$ bezogen auf den Durchmesser $D$.</li>
+<li>Trägheitsradius $i$</li>
+</NumberedList>
+</Task>
+<Step>
+
+**Teilaufgabe a**:
+Einzelträgheiten berechnen
+
+
+**Teilaufgabe c**: Trägheitsradius berechnen: 
+
+$$
+\begin{align*}
+i &= \frac{r}{\sqrt{ 2 }} \\
+&= 
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**:<br />
+Das Gesamtträgheitsmoment $J$, bezogen auf die Achse x-x beträgt ...
+<br /><br />
+**Teilaufgabe b**:<br />
+$m_{red }$ bezogen auf den Durchmesser $D$ beträgt ...
+<br /><br />
+**Teilaufgabe c**:<br />
+Der Trägheitsradius $i$ beträgt ...
+</Solution>
+</Exercise>
