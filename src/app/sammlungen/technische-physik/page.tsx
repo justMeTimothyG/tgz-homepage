@@ -31,6 +31,7 @@ const pageSections: SectionConfig[] = [
       getCollectionResource('physik-i-tutorium-iii', 'Tutorium III: Rotationsbewegungen und Leistung'),
       getCollectionResource('physik-i-tutorium-iv', 'Tutorium IV: Kreisbewegungen und Gravitation'),
       getCollectionResource('physik-i-tutorium-v', 'Tutorium V: Fluide'),
+      getCollectionResource('physik-i-tutorium-vi', 'Tutorium VI: Hydraulik und Auftrieb'),
       {
         title: 'Weitere Übungen folgen',
         variant: 'note',

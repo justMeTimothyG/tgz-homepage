@@ -1,0 +1,286 @@
+---
+title: "Technische Physik - Tutorium VI: Hydraulik und Auftrieb"
+date: 2025-12-01
+excerpt: "In dieser Ausgabe des Tutoriums zur Technischen Physik behandeln wir das Thema Hydraulik und Auftrieb sowie die zugehörigen physikalischen Prinzipien und Berechnungen."
+tags: ["physik", "mechanik", "hydraulik", "auftrieb"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-12-01
+---
+
+## Aufgabe 1
+<Exercise title="Aufgabe 1" difficulty="medium">
+<Task>
+Eine hydraulische Hebebühne hat einen Lastkolben mit dem Durchmesser $D = 250 \,\mathrm{mm}$. Es lässt sich damit eine Last von $F'= 30\,\mathrm{kN}$ heben. Der Tauchkolben hat einen Durchmesser von $d = 20\,\mathrm{mm}$ und einen Hub $s_{2} = 50 \,\mathrm{mm}$. Bestimmen Sie bei $\eta = 60\%$
+<NumberedList variant="lower-alpha">
+  <li>die erforderliche Kraft $F_{a}$ am Pumpenkolben,</li>
+  <li>die Anzahl $z$ der Kolbenhübe, wenn die Last $F'$ um den Weg $s_{ges} = 200\,\mathrm{mm}$ gehoben wird.</li>
+</NumberedList>
+</Task>
+<Hint>
+Verwende die Formel für den Druck:
+$$
+p = \frac{F}{A}
+$$
+und beachte, dass der Druck in beiden Kolben gleich ist:
+$$
+p_{1} = p_{2}
+$$
+</Hint>
+<Step>
+**Teilaufgabe a**: Die erforderliche Kraft $F_{a}$ am Pumpenkolben berechnen.
+$$
+\begin{align*}
+F_{a} &= F_{b} \cdot \frac{D^{2}}{d^{2}}  &  & | F_{b} = F_{kolben}\cdot \eta\\
+&=  F_{kolben} \cdot \eta\cdot \frac{D^{2}}{d^{2}}  &  & | \cdot \frac{d^{2}}{D^{2}} : \eta\\
+F_{kolben}&= \frac{F_{a}}{\eta}\cdot \frac{d^{2}}{D^{2}} \\
+&= 320\,\mathrm{N} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**: Zurückgelegte Strecke pro Hub
+$$
+\begin{align*}
+\frac{s_{1}}{s_{2}} &= \frac{d^{2}}{D^{2}} \\
+s_{1}&= \frac{d^{2}}{D^{2}}\cdot s_{2} \\
+&= \frac{(20\,\mathrm{mm} )^{2}}{(250\,\mathrm{mm} )^{2}}\cdot 50\,\mathrm{mm}  \\
+&= 0,32\,\mathrm{mm} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe c**: Anzahl der Kolbenhübe $z$ berechnen.
+$$
+\begin{align*}
+z &= \frac{s_{ges}}{s_{1}}  &  & | s_{1} = \frac{d^{2}}{D^{2}}\cdot s_{2}\\
+&= \frac{200\,\mathrm{mm}}{0,32 \,\mathrm{mm} }  \\
+&= 625
+\end{align*}
+$$
+</Step>
+<Solution>
+Die erforderliche Kraft $F_{a}$ am Pumpenkolben beträgt $320\,\mathrm{N}$ und die Anzahl der Kolbenhübe $z$ beträgt $625$.
+</Solution>
+</Exercise>
+
+## Aufgabe 2
+<Exercise title="Aufgabe 2" difficulty="medium">
+<Task>
+<Image 
+      src="/api/images/physik-1/tut-06-0001.jpg" 
+      alt="Druckaufbau"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
+In einem Wasserbehälter wird die konstante Füllhöhe $h = 3,2 \,\mathrm{m}$ entsprechend nebenstehender Zeichnung geregelt.
+
+<NumberedList variant="lower-alpha">
+  <li>Berechnen Sie die erforderliche Gewichtskraft $F_{G}$ bei $d = 100 \,\mathrm{mm}$, $l_{1} = 80 \,\mathrm{mm}$ und $l_{2} = 420 \,\mathrm{mm}$.</li>
+  <li>Warum kann der Luftdruck vernachlässigt werden?</li>
+</NumberedList>
+<div className="clear-both" />
+</Task>
+<Hint>
+Verwende die Formel für den Druck:
+$$
+p = \rho \cdot h \cdot g
+$$
+und beachte, dass die Gewichtskraft $F_{G}$ durch das Verhältnis der Hebelarme $l_{1}$ und $l_{2}$ gegeben ist:
+$$
+F_{G} = \frac{F \cdot l_{1}}{l_{2}}
+$$
+</Hint>
+<Step>
+**Teilaufgabe a**: Zunächst müssen wir erstmal den Druck $p$ berechnen, der auf die Fläche $A$ wirkt.
+$$
+\begin{align*}
+p &= \rho \cdot h\cdot g \\
+&= 1000\,\mathrm{\frac{kg}{m^{3}}} \cdot 3,2 \,\mathrm{m} \cdot 9,81 \,\mathrm{\frac{m}{s^{2}}} \\
+&= 31.392 \,\mathrm{Pa}  
+\end{align*}
+$$
+</Step>
+<Step>
+Mit diesem Druck können wir die Kraft berechnen, die wirken muss, damit der Behälter geschlossen bleibt.
+$$
+\begin{align*}
+p &= \frac{F}{A}  &  & | \cdot A\\
+F &= p \cdot A  &  & | A = \pi r^{2}  \\
+&= 31392 \,\mathrm{Pa}\cdot \pi\cdot (0,05\,\mathrm{m} )^{2}  \\
+&= 246,55 \,\mathrm{N} 
+\end{align*}
+$$
+</Step>
+<Step>
+Mit dieser Kraft können wir über die Hebelarme, die Gewichtskraft $F_{G}$ berechnen, damit hier wieder das Gleichgewicht herrscht.: 
+$$
+\begin{align*}
+F\cdot l_{1} &= F_{G}\cdot l_{2} \\
+F_{G}&=\frac{F\cdot l_{1}}{l_{2}}  \\
+&= \frac{246,55\,\mathrm{N}\cdot 80 \,\mathrm{mm}  }{420 \,\mathrm{mm} } \\
+&= 46,96 \,\mathrm{N} \\
+&= 47 \,\mathrm{N}  
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**: <br />
+Die Druckkraft auf die Flüssigkeit im Behälter wirkt ebenso auf $F_{G}$. Sodass beide Kräfte sich aufheben. Sie werden auf beiden Seiten addiert in der Gleichung und können somit vernachlässigt werden.
+$$
+\begin{align*}
+p_{Flüssigkeit} + p_{Luft} &= F_{G} + p_{Luft} \\
+p_{Flüssigkeit} &= F_{G} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Die erforderliche Gewichtskraft $F_{G}$ beträgt $47 \,\mathrm{N}$. Der Luftdruck kann vernachlässigt werden, da er auf beiden Seiten der Gleichung wirkt und sich somit aufhebt.
+</Solution>
+</Exercise>
+
+## Aufgabe 3
+<Exercise title="Aufgabe 3" difficulty="medium">
+<Task>
+Ein Schwimmbecken mit den Maßen $l = 10 \,\mathrm{m}$, $b = 6 \,\mathrm{m}$ ist bis $h_{1} = 1,5 \,\mathrm{m}$ mit Wasser ($\rho = 1,0 \,\mathrm{\frac{kg}{dm^{3}}}$) gefüllt. Auf welche Höhe $h_{2}$ steigt das Wasser, wenn 10 Personen mit einer durchschnittlichen Masse von je $m = 75 \,\mathrm{kg}$ im Becken vollständig untergetaucht schwimmen?
+</Task>
+<Hint>
+Berechne zunächst die Gesamtmasse des Wassers und der Personen im Becken. Verwende dann die Formel für das Volumen, um die neue Höhe des Wassers zu bestimmen:
+$$
+V = l \cdot b \cdot h
+$$
+</Hint>
+<Step>
+Zunächst die Masse des Wassers im Pool berechnen:
+$$
+\begin{align*}
+m_{pool} &= l \cdot b \cdot h \cdot \rho \\
+&= 10 \,\mathrm{m} \cdot 6 \,\mathrm{m} \cdot 1,5 \,\mathrm{m} \cdot 1.000 \,\mathrm{\frac{kg}{m^{3}}}     \\
+&= 90.000 \,\mathrm{kg} 
+\end{align*}
+$$
+</Step>
+<Step>
+Nun die Masse der Personen berechnen:
+$$
+\begin{align*}
+m_{personen} &= 10 \cdot 75 \,\mathrm{kg} \\
+&= 750 \,\mathrm{kg}
+\end{align*}
+$$
+</Step>
+<Step>
+Die Gesamtmasse ist also $90.750 \,\mathrm{kg}$
+<br />
+Somit ergibt sich die Höhe durch: 
+$$
+\begin{align*}
+m_{ges} &= l \cdot b \cdot h_{ges} \cdot \rho  &  & | :l : b : \rho\\ \\
+h_{ges} &= \frac{m_{ges}}{l\cdot b\cdot \rho} \\
+&= \frac{90.750 \,\mathrm{kg} }{10\,\mathrm{m}\cdot 6\,\mathrm{m} \cdot 1.000\,\mathrm{\frac{kg}{m^{3}}}  } \\
+&= 1,5125 \,\mathrm{m} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Die Höhe des Wassers im Becken steigt auf $h_{2} = 1,5125 \,\mathrm{m}$.
+</Solution>
+</Exercise>
+
+## Aufgabe 4
+<Exercise title="Aufgabe 4" difficulty="medium">
+<Task>
+Eine Badeplattform aus Holz der Dichte $\rho_{\mathrm{rmH}}=0,60 \,\mathrm{\frac{g}{cm^{3}}}$ ist 5,0 m lang, 4,0 m breit und 35 cm hoch.
+<NumberedList variant="lower-alpha">
+  <li>Berechne, wie viele Zentimeter (in der Höhe) die Plattform aus dem Wasser ragt, wenn niemand auf ihr steht (das Gewicht der Aluminiumleiter kann vernachlässigt werden).</li>
+  <li>Nun sitzen Kinder auf der Plattform. Bestimme die Masse, die die Kinder zusammen haben dürfen, damit die Plattform gerade vollständig in das Wasser eintaucht.</li>
+</NumberedList>
+</Task>
+<Hint>
+Verwende das Prinzip des Auftriebs:
+$$
+F_{A} = F_{G}
+$$
+</Hint>
+<Step>
+Zunächst müssen wir die Dichte der Plattform in $\mathrm{\frac{kg}{m^{3}}}$ umrechnen:
+$$
+\begin{align*}
+\rho_{rmH} &= 0,6 \,\mathrm{\frac{10^{-3}kg}{(10^{-2}m)^{3}}}  \\
+&= 600 \,\mathrm{\frac{kg}{m^{3}}} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe a**: Es muss gelten:
+$$
+\begin{align*}
+F_{A} &= F_{G} \\
+\cancel{ l } \cdot \cancel{ b } \cdot \Delta h \cdot \rho_{W}\cdot \cancel{ g } &= \rho_{rmH}\cdot \cancel{ l }\cdot \cancel{ b }\cdot h\cdot \cancel{ g } &  & | : \rho_{W} \\
+\Delta h &= \frac{\rho_{rmH}\cdot h}{\rho_{W}}  &  & | \Delta h = h - h' \\
+h - h' &= \frac{\rho_{rmH}\cdot h}{\rho_{W}}  &  & | -h \cdot -1 \\
+h' &= \left( \frac{\rho_{rmH}\cdot h}{\rho_{W}}-h \right) \cdot -1 \\
+&= \left( \frac{600\,\mathrm{\frac{kg}{m^{3}}} \cdot 0,35\,\mathrm{m} }{1.000\,\mathrm{\frac{kg}{m^{3}}} }-0,35\,\mathrm{m}  \right)\cdot -1 \\
+&= 0,14 \,\mathrm{m} 
+\end{align*}
+$$
+</Step>
+<Step>
+**Teilaufgabe b**:
+$$
+\begin{align*}
+F_{A} &= F_{G} \\
+l \cdot b \cdot h \cdot \rho_{W}\cdot \cancel{ g } &= l \cdot b \cdot h \cdot \rho_{rmH} \cdot \cancel{ g } + \Delta m \cdot \cancel{ g }  &  & | - (l\cdot b\cdot h \cdot \rho_{rmH}) \\
+l \cdot b \cdot h \cdot (\rho_{W}- \rho_{rmH})&= \Delta m \\
+\Delta m &= 5 \,\mathrm{m}\cdot 4\,\mathrm{m}  \cdot 0,35\,\mathrm{m} \cdot \left( 1.000 \,\mathrm{\frac{kg}{m^{3}}}  - 600 \,\mathrm{\frac{kg}{m^{3}}} \right) \\
+&= 2.800 \,\mathrm{kg}
+\end{align*}
+$$
+</Step>
+<Solution>
+**Teilaufgabe a**: Die Plattform ragt $0,14 \,\mathrm{m}$ aus dem Wasser. <br />
+**Teilaufgabe b**: Die Kinder dürfen zusammen eine Masse von $2.800 \,\mathrm{kg}$ haben, damit die Plattform vollständig eintaucht.
+</Solution>
+</Exercise>
+
+## Aufgabe 5
+<Exercise title="Aufgabe 5" difficulty="medium">
+<Task>
+<Image 
+      src="/api/images/physik-1/tut-06-0002.jpg" 
+      alt="Druckaufbau"
+      width={250}
+      height={186}
+      className="my-4 float-right ml-4"
+    />
+Ein U-Rohr hat auf der Seite X die Querschnittsfläche $A_x = 1,50 \,\mathrm{cm^{2}}$ und auf der Seite Y die Querschnittsfläche $A_y = 2,50 \,\mathrm{cm^{2}}$. Es ist teilweise mit Quecksilber ($ρHg=13,6 \,\mathrm{\frac{g}{cm^{3}}}$) gefüllt.
+<br />
+Berechne, wie hoch das Quecksilber auf der Seite Y ansteigt, wenn auf der Seite X ein Volumen von $V_{W} = 30,0 \,\mathrm{cm^{3}}$ Wasser eingefüllt wird.
+<div className="clear-both" />
+</Task>
+<Hint>
+Verwende das Prinzip des hydrostatischen Gleichgewichts:
+$$
+p_{x} = p_{y}
+$$
+</Hint>
+<Step>
+Zunächst müssen wir feststellen, dass beide Drücke auf beiden Seiten gleich sein sollte. 
+Wir können zunächst ab dem Level von Quecksilber eine neue Linie ziehen. Hier müssen beide Drücke gleich sein.
+$$
+\begin{align*}
+p_{x} &= p_{y} \\
+\frac{V_{W}\cdot \rho_{W}\cdot g}{A_{x}}+p_{Luft} &= h_{Hg} \cdot \rho_{Hg}\cdot g+p_{Luft}  &  & | \text{kürzen} \\
+\frac{V_{W}\cdot \rho_{W}\cdot \cancel{ g }}{A_{x}}+p_{Luft} &= h_{Hg} \cdot \rho_{Hg}\cdot \cancel{ g }+\cancel{ p_{Luft} } \\
+\frac{V_{W}}{A_{x}}\cdot \rho_{W} &= h_{Hg}\cdot \rho_{Hg} &  &  | :{\rho_{Hg}} \\
+h_{Hg} &= \frac{V_{W}\cdot \rho_{W}}{A_{x}\cdot \rho_{Hg}} \\
+&= \frac{30 \,\mathrm{cm^{3}}\cdot 1\,\mathrm{\frac{10^{3}g}{( 10^{1}cm)^{3}}}  }{1,5 \,\mathrm{cm^{2}}\cdot 13,6 \,\mathrm{\frac{g}{cm^{3}}}  } \\
+&= 1,47 \,\mathrm{cm} 
+\end{align*}
+$$
+</Step>
+<Solution>
+Das Quecksilber steigt auf der Seite Y um $1,47 \,\mathrm{cm}$ an.
+</Solution>
+</Exercise>
