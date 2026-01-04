@@ -1,0 +1,185 @@
+---
+title: "Technische Physik - Tutorium VII: Hydraulik und Auftrieb"
+date: 2025-12-01
+excerpt: "In dieser Ausgabe des Tutoriums zur Technischen Physik behandeln wir das Thema Hydraulik und Auftrieb sowie die zugehörigen physikalischen Prinzipien und Berechnungen."
+tags: ["physik", "mechanik", "hydraulik", "auftrieb"]
+sammlungen: ["technische-physik"]
+published: true
+lastUpdated: 2025-12-01
+---
+
+## Aufgabe 1
+<Exercise title="Aufgabe 1" difficulty="medium">
+<Task>
+Der Querschnitt einer Heißluftleitung beträgt $800 \,\mathrm{cm^{2}}$ und die mittlere Strömungsgeschwindigkeit der Luft beträgt $10 \,\mathrm{\frac{m}{s}}$. Welche Abmessungen muss ein Luftkanal mit quadratischem Querschnitt haben, wenn die Luftgeschwindigkeit um 25% gesteigert werden soll?
+</Task>
+<Hint>
+Wie verändert sich der Querschnitt bei geänderter Geschwindigkeit, wenn der Volumenstrom konstant bleibt?
+</Hint>
+<Hint>
+Da der Volumenstrom konstant bleibt, gilt:
+$$
+\dot{V} =  = konstant
+$$
+</Hint>
+<Step>
+$$
+$$
+\begin{align*}
+\dot{V}_{neu} &= \dot{V}_{alt} \\
+\dot{V} &= A \cdot v \cdot 1,25  &  & | :v : 1,25 \\
+A &= \frac{\dot{V}}{v\cdot 1,25} \\
+&= \frac{800 \,\mathrm{cm^{2}} \cdot 10 \cdot 10^{2}\,\mathrm{\frac{cm}{s}}  }{10\cdot 10^{2}\,\mathrm{\frac{cm}{s}} \cdot 1,25} \\
+&= 640 \,\mathrm{cm^{2}} 
+\end{align*}
+$$
+
+## Aufgabe 2
+In einem Windkanal mit dem inneren Querschnittsabmessungen $300 \,\mathrm{mm} \times 300 \,\mathrm{mm}$ strömt die Luft mit einer Geschwindigkeit $v = 6 \,\mathrm{\frac{m}{s}}$. Die Temperatur beträgt $20 °C$ und der Luftdruck ist $p = 1,2 \,\mathrm{bar}$. Bei diesem Druck und dieser Temperatur beträgt die Luftdichte $\rho = 1,4 \,\mathrm{\frac{kg}{m^{3}}}$. Der Luftkanal wird mit einem Reduzierstück auf die Querschnittsabmessungen $150 \,\mathrm{mm} \times 150 \,\mathrm{mm}$ reduziert, und es wird angenommen, dass dabei die Luftdichte konstant bleibt. Berechnen Sie:
+
+a) die Strömungsgeschwindigkeit $v$ im reduzierten Querschnitt
+
+b) den Druck mit reduziertem Querschnitt
+
+**Teilaufgabe a**:
+$$
+\begin{align*}
+\dot{V}_{1} &= \dot{V}_{2} \\
+A_{1} \cdot v_{1} &= A_{2} \cdot v_{2}  &  & | :A_{2} \\
+v_{2} &= \frac{A_{1}\cdot v_{1}}{A_{2}} \\
+&= \frac{(300\,\mathrm{mm}  \cdot 300\,\mathrm{mm} )\cdot 6 \,\mathrm{\frac{m}{s}}  }{(150\,\mathrm{mm}  \cdot 150 \,\mathrm{mm} )} \\
+&= 24 \,\mathrm{\frac{m}{s}} 
+\end{align*}
+$$
+
+**Teilaufgabe b**:
+$$
+\begin{align*}
+p_{1} + \frac{\rho}{2}\cdot v_{1}^{2}&= p_{2} +  \frac{\rho}{2}\cdot v_{2}^{2}   &  & | - \frac{\rho}{2}\cdot v_{2}^{2}\\
+p_{2} &= p_{1} + \frac{\rho}{2}\cdot v_{1}^{2} - \frac{\rho}{2}\cdot v_{2}^{2} \\
+&= 120.000 \,\mathrm{Pa} + \frac{1,4\,\mathrm{\frac{kg}{m^{3}}} }{2}\cdot \left( 6\,\mathrm{\frac{m}{s}} \right)^{2}  - \frac{1,4 \,\mathrm{\frac{kg}{m^{3}}} }{2}\cdot (24 \,\mathrm{\frac{m}{s}})^{2}  \\
+&= 120.000\,\mathrm{Pa} + 25,2 \,\mathrm{Pa}   - 403,2 \,\mathrm{Pa}  \\
+&= 119.622 \,\mathrm{Pa} = 1,2 \,\mathrm{bar} 
+\end{align*}
+$$
+
+## Aufgabe 3 
+Beim Eintauchen eines Prandtl’schen Staurohres in einem Fluss stellt sich entsprechend der Fließgeschwindigkeit $\Delta h = 30 \,\mathrm{cm}$ ein. Wie groß ist die Fließgeschwindigkeit des Wassers?
+
+$$
+\begin{align*}
+v &= \sqrt{ 2 \cdot g\cdot \Delta h } \\
+&= \sqrt{ 2 \cdot 9,81 \,\mathrm{\frac{m}{s^{2}}}  \cdot  0,3 \,\mathrm{m} } \\
+&= 2,43 \,\mathrm{\frac{m}{s}} 
+\end{align*}
+$$
+
+## Aufgabe 4
+Ein Wasserhahn liefert einen Volumenstrom $\dot{V} = 6 \,\mathrm{\frac{l}{min}}$ .Der angeschlossene Gartenschlauch hat einen Innendurchmesser $d_{1} = 18\,\mathrm{mm}$, die Düse einen Querschnitt von $d_{2} = 5,0\,\mathrm{mm}$.
+
+a) Berechne den Massenstrom im Gartenschlauch.
+
+b) Berechne die Geschwindigkeit des Wassers im Gartenschlauch.
+
+c) Berechne die Geschwindigkeit des Wassers an der Düse.
+
+**Vorbereitung**: Umrechnung des Volumenstroms in eine geeignete Einheit: 
+
+$$
+6 \,\mathrm{\frac{l}{min}} = 6 \,\mathrm{\frac{dm^{3}}{60 \,\mathrm{s} }} = 0,1 \,\mathrm{\frac{dm^{3}}{s}} = 0,1 \,\mathrm{\frac{(\cdot 10^{2}mm)^{3}}{s}} = 100.000 \,\mathrm{\frac{mm^{3}}{s}} 
+$$
+
+**Teilaufgabe a**:
+
+$$
+\begin{align*}
+\dot{m} &= \dot{V}\cdot \rho \\
+&= 0,1 \,\mathrm{\frac{dm^{3}}{s}} \cdot 1 \,\mathrm{\frac{kg}{dm^{3}}}   \\
+&= 0,1 \,\mathrm{\frac{kg}{s}} 
+\end{align*}
+$$
+
+**Teilaufgabe b**:
+$$
+\begin{align*}
+\dot{V} &= A \cdot v &  & | :A \\
+v &= \frac{\dot{V}}{A} \\
+&= \frac{100.000 \,\mathrm{\frac{mm^{3}}{s}} }{\pi \cdot \frac{(18\,\mathrm{mm})^{2}}{4} } \\
+&= 392,98 \,\mathrm{\frac{mm}{s}}  \\
+&= 0,39298 \,\mathrm{\frac{m}{s}}
+\end{align*}
+$$
+**Teilaufgabe c**:
+$$
+\begin{align*}
+\dot{V} &= A \cdot v &  & | :A \\
+v &= \frac{\dot{V}}{A} \\
+&= \frac{100.000 \,\mathrm{\frac{mm^{3}}{s}} }{\pi \cdot \frac{(5\,\mathrm{mm})^{2}}{4} } \\
+&= 5.092,958 \,\mathrm{\frac{mm}{s}}  \\
+&= 5,09 \,\mathrm{\frac{m}{s}}
+\end{align*}
+$$
+
+## Aufgabe 5
+Mit einem VENTURI-Rohr mit den Rohrdurchmessern $d_{1} = 30 \,\mathrm{mm}$ und $d_{2} = 20 \,\mathrm{mm}$ wird in einem Luftstrom eine Druckdifferenz von $\Delta p = 200 \,\mathrm{Pa}$ gemessen. $\rho = 1,2 \,\mathrm{\frac{kg}{m^{3}}}$.
+
+Berechne die Strömungsgeschwindigkeit $v_{1}$.
+
+![[CleanShot 2025-12-08 at 11.21.53@2x.jpg]]
+
+$$
+\begin{align*}
+\dot{V} &= \text{konstant} \\
+A_{1} \cdot v_{1} &= A_{2} \cdot v_{2}  \\
+v_{2} &= \frac{d_{1}^{2}}{d_{2}^{2}}\cdot v_{1} \\
+\end{align*}
+$$
+
+Somit haben wir eine Formel für die zweite Geschwindigkeit. Jedoch müssen wir die anderen Werte noch verarbeiten. Hierfür verwenden wir die Bernoulli pormel. Und zwar die Druckgleichung bei konstanter Höhe. hier gilt:
+
+$$
+p + \frac{\rho}{2}\cdot v^{2} = \text{konstant}
+$$
+
+Also können wir folgendes formulieren: 
+
+$$
+\begin{align*}
+p_{1} + \frac{\rho}{2}\cdot v_{1}^{2} &= p_{2} + \frac{\rho}{2}\cdot v_{2}^{2}  &  & | -p_{2} -\left( \frac{\rho}{2}\cdot v_{1}^{1}  \right)\\
+\overbrace{ p_{1} -p_{2} }^{ \Delta p } &= \frac{\rho}{2}\cdot (v_{2}^{2}-v_{1}^{2}) &  & | v_{2} = \frac{d_{1}^{2}}{d_{2}^{2}}\cdot v_{1} \\
+\Delta p&= \frac{\rho}{2}\cdot \left(\left(\frac{d_{1}^{2}}{d_{2}^{2}}\cdot v_{1}\right)^{2}-v_{1}^{2}\right) \\
+&= \frac{\rho}{2}\cdot \left( \left( \frac{(30\,\mathrm{mm} )^{2}}{(20\,\mathrm{mm} )^{2}}\cdot v_{1} \right)^{2} - v_{1}^{2}\right) \\
+&= \frac{\rho}{2}\cdot \left( \left( \frac{9}{4} \cdot v_{1} \right)^{2} - v_{1}^{2} \right) \\
+&= \frac{\rho}{2}\cdot \left( \frac{81}{16}\cdot v_{1}^{2}- \frac{16}{16}\cdot v_{1}^{2} \right) \\
+&= \frac{\rho}{2}\cdot  \frac{65}{16} \cdot v_{1}^{2} &  & | \cdot 16 \cdot 2 :65 :\rho \sqrt{ \{  \} } \\
+v_{1}&= \sqrt{ \frac{\Delta p\cdot 32}{65\cdot \rho} } \\
+&= \sqrt{ \frac{200\,\mathrm{Pa} \cdot 32 }{65 \cdot 1,2 \,\mathrm{\frac{kg}{m^{3}}} } } \\
+&= 9,0582 \,\mathrm{\frac{m}{s}}
+\end{align*}
+$$
+
+
+## Aufgabe 6
+In einer Rohrleitung mit einem Innendurchmesser von $d = 20 \,\mathrm{mm}$ strömt das Wasser mit einer Geschwindigkeit $v = 2,0 \,\mathrm{\frac{m}{s}}$. Bei einer Wassertemperatur von $\theta = 20\,\mathrm{°C}$ kann mit einer kinematischen Viskosität $\nu = 1,01 * 10^{-6} \,\mathrm{\frac{m^{2}}{s}}$ gerechnet werden. Aktuell herrscht eine turbulente Strömung.
+
+a) Welchen Innendurchmesser benötigt das Rohr, damit eine laminare Strömung vorliegt, wenn die Strömungsgeschwindigkeit gleichbleibt?
+
+$$
+\begin{align*}
+2320 &= \frac{v \cdot d}{\nu}  &  & | \cdot \nu :v\\
+d &= \frac{2320\cdot \nu}{v} \\
+&= 1,1716 \cdot 10^{-3}\,\mathrm{m}
+\end{align*}
+$$
+
+b) Wie groß ist für diesen Fall der Volumenstrom? ($v = v_{\text{krit}'}$)
+
+$$
+\begin{align*}
+\dot{V} &= A \cdot v \\
+&= 2\pi\cdot \frac{(1,1716\cdot 10^{-3}\,\mathrm{m} )^{2}}{4}\cdot 2\,\mathrm{\frac{m}{s}}  \\
+&= 4,31 \cdot 10^{-6} \,\mathrm{\,\mathrm{\frac{m^{3}}{s}} }  \\
+&= 4,31 \cdot 10^{-6} \,\mathrm{\frac{(\cdot 10^{2}cm)^{3}}{s}}  \\
+&= 4,31 \,\mathrm{\frac{cm^{3}}{s}} 
+\end{align*}
+$$
