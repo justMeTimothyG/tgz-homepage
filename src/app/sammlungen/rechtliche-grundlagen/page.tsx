@@ -76,6 +76,12 @@ const pageSections: SectionConfig[] = [
         overrideTitle: 'Quiz: Wissensfragen zu Rechtliche Grundlagen',
         overrideDescription: 'Teste dein Wissen mit diesem interaktiven Quiz zu den Grundlagen des Rechts. Quasi eine kleine Prüfungsvorbereitung!',
       }),
+      getCollectionResource({
+        slug: 'rechtliche-grundlagen-faelle',
+        source: 'lecture',
+        overrideTitle: 'Fälle aus der Vorlesung',
+        overrideDescription: 'Zusammenstellung der in der Vorlesung besprochenen Fälle - Teilweise mit Ausformulierungen oder Lösungsskizzen',
+      }),
     ],
   },
   {
