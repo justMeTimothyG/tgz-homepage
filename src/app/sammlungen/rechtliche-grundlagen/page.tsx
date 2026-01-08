@@ -54,6 +54,26 @@ const pageSections: SectionConfig[] = [
         source: 'lecture',
         overrideTitle: '06: Fallbearbeitung - Schadensersatz und Leistungsstörungen',
       }),
+      getCollectionResource({
+        slug: '07-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '07: Vertragstypen und gesetzliche Schuldverhältnisse',
+      }),
+      getCollectionResource({
+        slug: '08-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '08: Handelsgesetzbuch (HGB)',
+      }),
+      getCollectionResource({
+        slug: '09-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '09: Gesellschaftsrecht',
+      }),
+      getCollectionResource({
+        slug: '10-rechtliche-grundlagen',
+        source: 'lecture',
+        overrideTitle: '10: Gesellschaftsrecht (Fortsetzung)',
+      }),
       {
         title: 'Weitere Vorlesungsnotizen folgen',
         variant: 'note',
