@@ -102,6 +102,12 @@ const pageSections: SectionConfig[] = [
         overrideTitle: 'Fälle aus der Vorlesung',
         overrideDescription: 'Zusammenstellung der in der Vorlesung besprochenen Fälle - Teilweise mit Ausformulierungen oder Lösungsskizzen',
       }),
+      getCollectionResource({
+        slug: 'rechtliche-grundlagen-schemata',
+        source: 'lecture',
+        overrideTitle: 'Prüfungsschemata für die Klausur',
+        overrideDescription: 'Zusammenstellung aller relevanten Prüfungsschemata für die rechtlichen Grundlagen Klausur.',
+      }),
     ],
   },
   {
