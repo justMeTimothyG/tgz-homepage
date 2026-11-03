@@ -2,6 +2,14 @@
 
 A modern, static **Next.js 15** personal website featuring file-based blog management with MDX, mathematical expressions, and interactive components. Built for educational content and optimized for performance.
 
+## Goal
+
+My personal website: a place for educational content (maths and engineering tutoring notes) and for documenting my projects. Built as a static site so it is fast, cheap to host and has a minimal attack surface: no database, no API routes, content lives in version-controlled MDX files.
+
+## Stack
+
+Next.js 15 (App Router, static generation), React 19, TypeScript (strict), Tailwind CSS 4, MDX with KaTeX, Docker, Hetzner Object Storage for assets.
+
 ## 🚀 Features
 
 - **Static Site Generation (SSG)** - Pre-rendered pages for optimal performance
