@@ -2,9 +2,13 @@
 
 A modern, static **Next.js 15** personal website featuring file-based blog management with MDX, mathematical expressions, and interactive components. Built for educational content and optimized for performance.
 
+**Live:** https://tluedtke.de
+
+![Homepage of tluedtke.de](docs/images/homepage.jpg)
+
 ## Goal
 
-My personal website: a place for educational content (maths and engineering tutoring notes) and for documenting my projects. Built as a static site so it is fast, cheap to host and has a minimal attack surface: no database, no API routes, content lives in version-controlled MDX files.
+My personal website, built around the idea of learning in the open: study notes, project write-ups and progress documented as they happen. It is a static site so it stays fast, cheap to host and has a minimal attack surface: no database, no API routes, content lives in version-controlled MDX files.
 
 ## Stack
 
